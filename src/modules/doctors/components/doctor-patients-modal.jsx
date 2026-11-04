@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { CustomSelect } from "@/components/ui/custom-select";
 import {
   X,
   Users,
@@ -204,15 +205,12 @@ export function DoctorPatientsModal({ doctor, isOpen, onClose, onPatientCountCha
                 className="text-xs h-8"
                 required
               />
-              <select
+              <CustomSelect
                 value={newPatient.gender}
-                onChange={(e) => setNewPatient({ ...newPatient, gender: e.target.value })}
-                className="h-8 rounded-md border border-line bg-surface px-2 text-xs text-content-primary focus:outline-none"
-              >
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
+                onChange={(val) => setNewPatient({ ...newPatient, gender: val })}
+                options={["Male", "Female", "Other"]}
+                size="sm"
+              />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <Input

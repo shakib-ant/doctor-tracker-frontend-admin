@@ -4,6 +4,7 @@ import React from "react";
 import { Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { CustomSelect } from "@/components/ui/custom-select";
 import { COMMON_CONDITIONS, PATIENT_STATUSES } from "../utils/patientUtils";
 
 export function PatientFilterBar({
@@ -20,6 +21,16 @@ export function PatientFilterBar({
   onClearFilters,
   hasActiveFilters,
 }) {
+  const conditionOptions = COMMON_CONDITIONS.map((c) => ({
+    value: c,
+    label: c === "All" ? "All Conditions" : c,
+  }));
+
+  const statusOptions = PATIENT_STATUSES.map((s) => ({
+    value: s,
+    label: s === "All" ? "All Care Statuses" : s,
+  }));
+
   return (
     <div className="space-y-3">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -35,34 +46,24 @@ export function PatientFilterBar({
           />
         </div>
 
-        {/* Condition Filter */}
+        {/* Custom Condition Select */}
         <div>
-          <select
+          <CustomSelect
             value={conditionFilter}
-            onChange={(e) => onConditionChange(e.target.value)}
-            className="h-9 w-full rounded-md border border-line bg-surface px-3 text-xs text-content-primary focus:outline-none focus:ring-2 focus:ring-medical-blue"
-          >
-            {COMMON_CONDITIONS.map((c) => (
-              <option key={c} value={c}>
-                {c === "All" ? "All Conditions" : c}
-              </option>
-            ))}
-          </select>
+            onChange={onConditionChange}
+            options={conditionOptions}
+            placeholder="Select Diagnosis..."
+          />
         </div>
 
-        {/* Status Filter */}
+        {/* Custom Status Select */}
         <div>
-          <select
+          <CustomSelect
             value={statusFilter}
-            onChange={(e) => onStatusChange(e.target.value)}
-            className="h-9 w-full rounded-md border border-line bg-surface px-3 text-xs text-content-primary focus:outline-none focus:ring-2 focus:ring-medical-blue"
-          >
-            {PATIENT_STATUSES.map((s) => (
-              <option key={s} value={s}>
-                {s === "All" ? "All Care Statuses" : s}
-              </option>
-            ))}
-          </select>
+            onChange={onStatusChange}
+            options={statusOptions}
+            placeholder="Select Status..."
+          />
         </div>
 
         {/* Date Filters Container */}

@@ -3,7 +3,14 @@
 import React from "react";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { CustomSelect } from "@/components/ui/custom-select";
 import { SPECIALTIES } from "../utils/doctorUtils";
+
+const STATUS_OPTIONS = [
+  { value: "all", label: "All Statuses" },
+  { value: "active", label: "Active Only" },
+  { value: "archived", label: "Archived Only" },
+];
 
 export function DoctorFilterBar({
   searchQuery,
@@ -15,7 +22,7 @@ export function DoctorFilterBar({
 }) {
   return (
     <div className="space-y-3">
-      {/* Top row: search & status dropdown */}
+      {/* Top row: search & custom status dropdown */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="relative w-full sm:w-72">
           <Search className="absolute left-3 top-2.5 h-4 w-4 text-content-disabled" />
@@ -28,16 +35,13 @@ export function DoctorFilterBar({
           />
         </div>
 
-        <div className="flex items-center gap-2">
-          <select
+        <div className="w-full sm:w-44">
+          <CustomSelect
             value={statusFilter}
-            onChange={(e) => onStatusChange(e.target.value)}
-            className="h-9 rounded-md border border-line bg-surface px-3 text-xs text-content-primary focus:outline-none focus:ring-2 focus:ring-medical-blue"
-          >
-            <option value="all">All Status</option>
-            <option value="active">Active Only</option>
-            <option value="archived">Archived Only</option>
-          </select>
+            onChange={onStatusChange}
+            options={STATUS_OPTIONS}
+            placeholder="Filter Status..."
+          />
         </div>
       </div>
 

@@ -3,10 +3,17 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { CustomSelect } from "@/components/ui/custom-select";
 import { X, Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
 import { createPatient, updatePatient } from "@/services/patientService";
 import { fetchDoctors } from "@/services/doctorService";
 import { COMMON_CONDITIONS, PATIENT_STATUSES, validatePatientForm } from "../utils/patientUtils";
+
+const GENDER_OPTIONS = [
+  { value: "Male", label: "Male" },
+  { value: "Female", label: "Female" },
+  { value: "Other", label: "Other" },
+];
 
 export function PatientModal({ patient, isOpen, onClose, onSuccess }) {
   const isEditing = !!patient;
@@ -89,6 +96,13 @@ export function PatientModal({ patient, isOpen, onClose, onSuccess }) {
     }
   };
 
+  const handleSelectField = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: null }));
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setApiError(null);
@@ -133,6 +147,16 @@ export function PatientModal({ patient, isOpen, onClose, onSuccess }) {
       setIsSubmitting(false);
     }
   };
+
+  const doctorOptions = doctorsList.map((doc) => ({
+    value: doc._id,
+    label: `${doc.name} (${doc.specialization})`,
+  }));
+
+  const statusOptions = PATIENT_STATUSES.filter((s) => s !== "All").map((s) => ({
+    value: s,
+    label: s,
+  }));
 
   return (
     <div
@@ -217,16 +241,11 @@ export function PatientModal({ patient, isOpen, onClose, onSuccess }) {
                 <label className="block text-xs font-medium text-content-secondary mb-1">
                   Gender
                 </label>
-                <select
-                  name="gender"
+                <CustomSelect
                   value={formData.gender}
-                  onChange={handleChange}
-                  className="h-9 w-full rounded-md border border-line bg-surface px-3 text-xs text-content-primary focus:outline-none focus:ring-2 focus:ring-medical-blue"
-                >
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Other">Other</option>
-                </select>
+                  onChange={(val) => handleSelectField("gender", val)}
+                  options={GENDER_OPTIONS}
+                />
               </div>
 
               <div>
@@ -270,21 +289,13 @@ export function PatientModal({ patient, isOpen, onClose, onSuccess }) {
                 <label className="block text-xs font-medium text-content-secondary mb-1">
                   Assigned Doctor <span className="text-red-400">*</span>
                 </label>
-                <select
-                  name="doctor"
+                <CustomSelect
                   value={formData.doctor}
-                  onChange={handleChange}
-                  className={`h-9 w-full rounded-md border bg-surface px-3 text-xs text-content-primary focus:outline-none focus:ring-2 focus:ring-medical-blue ${
-                    errors.doctor ? "border-red-500" : "border-line"
-                  }`}
-                >
-                  <option value="">Select Doctor...</option>
-                  {doctorsList.map((doc) => (
-                    <option key={doc._id} value={doc._id}>
-                      {doc.name} ({doc.specialization})
-                    </option>
-                  ))}
-                </select>
+                  onChange={(val) => handleSelectField("doctor", val)}
+                  options={doctorOptions}
+                  placeholder="Assign Medical Specialist..."
+                  buttonClassName={errors.doctor ? "border-red-500" : ""}
+                />
                 {errors.doctor && (
                   <p className="text-[11px] text-red-400 mt-1">{errors.doctor}</p>
                 )}
@@ -297,18 +308,11 @@ export function PatientModal({ patient, isOpen, onClose, onSuccess }) {
                 <label className="block text-xs font-medium text-content-secondary mb-1">
                   Care Status
                 </label>
-                <select
-                  name="status"
+                <CustomSelect
                   value={formData.status}
-                  onChange={handleChange}
-                  className="h-9 w-full rounded-md border border-line bg-surface px-3 text-xs text-content-primary focus:outline-none focus:ring-2 focus:ring-medical-blue"
-                >
-                  {PATIENT_STATUSES.filter((s) => s !== "All").map((s) => (
-                    <option key={s} value={s}>
-                      {s}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(val) => handleSelectField("status", val)}
+                  options={statusOptions}
+                />
               </div>
 
               <div>
@@ -374,4 +378,3 @@ export function PatientModal({ patient, isOpen, onClose, onSuccess }) {
     </div>
   );
 }
-
