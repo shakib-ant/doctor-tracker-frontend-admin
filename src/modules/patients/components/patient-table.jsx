@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Edit2, Trash2, Users, Calendar, Plus } from "lucide-react";
 import { getStatusBadgeVariant, formatDate } from "../utils/patientUtils";
 
@@ -38,47 +39,56 @@ export function PatientTable({
         <TableBody>
           {isLoading ? (
             Array.from({ length: 6 }).map((_, i) => (
-              <TableRow key={i} className="animate-pulse">
+              <TableRow key={i}>
                 <TableCell>
-                  <div className="h-5 w-32 bg-surface-elevated rounded" />
+                  <div className="space-y-1.5">
+                    <Skeleton className="h-4 w-32" />
+                    <Skeleton className="h-3 w-20" />
+                  </div>
                 </TableCell>
                 <TableCell>
-                  <div className="h-5 w-20 bg-surface-elevated rounded" />
+                  <Skeleton className="h-4 w-16" />
                 </TableCell>
                 <TableCell>
-                  <div className="h-5 w-28 bg-surface-elevated rounded" />
+                  <Skeleton className="h-5 w-24 rounded-full" />
                 </TableCell>
                 <TableCell>
-                  <div className="h-5 w-36 bg-surface-elevated rounded" />
+                  <div className="space-y-1.5">
+                    <Skeleton className="h-4 w-28" />
+                    <Skeleton className="h-3 w-36" />
+                  </div>
                 </TableCell>
                 <TableCell>
-                  <div className="h-5 w-24 bg-surface-elevated rounded" />
+                  <Skeleton className="h-4 w-20" />
                 </TableCell>
                 <TableCell>
-                  <div className="h-5 w-16 bg-surface-elevated rounded" />
+                  <Skeleton className="h-5 w-16 rounded-full" />
                 </TableCell>
                 <TableCell className="text-right">
-                  <div className="h-7 w-16 bg-surface-elevated rounded ml-auto" />
+                  <div className="flex justify-end gap-1.5">
+                    <Skeleton className="h-7 w-7 rounded-md" />
+                    <Skeleton className="h-7 w-7 rounded-md" />
+                  </div>
                 </TableCell>
               </TableRow>
             ))
           ) : patients.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={7} className="text-center py-12">
+              <TableCell colSpan={7} className="text-center py-14">
                 <div className="flex flex-col items-center justify-center max-w-sm mx-auto space-y-3">
-                  <div className="p-3 rounded-full bg-surface-elevated text-content-muted border border-line">
+                  <div className="p-3.5 rounded-full bg-surface-elevated text-content-muted border border-line shadow-xs">
                     <Users className="w-6 h-6" />
                   </div>
-                  <div>
-                    <p className="font-manrope text-base font-semibold text-content-primary">
+                  <div className="space-y-1">
+                    <p className="font-manrope text-base font-bold text-content-primary">
                       No patient records found
                     </p>
-                    <p className="text-xs text-content-secondary mt-1">
+                    <p className="text-xs text-content-secondary">
                       No patients match your current filter or date range.
                     </p>
                   </div>
                   {onAddNew && (
-                    <Button variant="default" size="sm" onClick={onAddNew}>
+                    <Button variant="default" size="sm" onClick={onAddNew} className="mt-2">
                       <Plus className="w-3.5 h-3.5 mr-1.5" />
                       Register Patient
                     </Button>
@@ -177,4 +187,3 @@ export function PatientTable({
     </div>
   );
 }
-

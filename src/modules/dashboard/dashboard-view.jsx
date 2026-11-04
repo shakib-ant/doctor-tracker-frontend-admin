@@ -42,31 +42,32 @@ export function DashboardView() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-1">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 pb-2 border-b border-line/50">
         <div>
-          <h2 className="font-manrope text-2xl md:text-3xl font-bold tracking-tight text-content-primary">
-            Clinical Operations Overview
+          <h2 className="font-manrope text-2xl md:text-3xl font-extrabold tracking-tight text-content-primary">
+            Healthcare Operations Overview
           </h2>
-          <p className="text-sm text-content-secondary mt-1">
-            Real-time analytics for medical staff roster and patient tracking.
+          <p className="text-xs md:text-sm text-content-secondary mt-1.5 leading-relaxed">
+            Real-time analytics for medical staff roster and patient tracking across hospital chambers.
           </p>
         </div>
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-3">
           <Button
             variant="secondary"
             size="sm"
             onClick={loadData}
             disabled={isLoading}
+            className="h-9 px-3.5"
           >
             <RefreshCw
-              className={`w-3.5 h-3.5 mr-1.5 ${isLoading ? "animate-spin" : ""}`}
+              className={`w-3.5 h-3.5 mr-2 ${isLoading ? "animate-spin" : ""}`}
             />
             Refresh Data
           </Button>
           <Link href="/doctors">
-            <Button variant="default" size="sm">
+            <Button variant="default" size="sm" className="h-9 px-4">
               Manage Doctors
               <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
             </Button>
@@ -76,7 +77,7 @@ export function DashboardView() {
 
       {/* Error state */}
       {error && (
-        <div className="p-4 rounded-lg bg-red-950/40 border border-red-800 text-red-200 text-xs flex items-center justify-between">
+        <div className="p-4 rounded-xl bg-red-950/40 border border-red-800 text-red-200 text-xs flex items-center justify-between shadow-sm">
           <span>{error}</span>
           <Button
             variant="outline"
@@ -89,8 +90,8 @@ export function DashboardView() {
         </div>
       )}
 
-      {/* 4 Stat Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* 4 Stat Cards with Generous Breathing Room */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
         <StatCard
           title="Total Doctors"
           value={summary.totalDoctors}
@@ -125,8 +126,8 @@ export function DashboardView() {
         />
       </div>
 
-      {/* Charts Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      {/* Charts Grid with Generous Gap */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-7">
         <PatientsPerDoctorChart
           data={analytics?.patientsPerDoctor || []}
           isLoading={isLoading}
@@ -137,8 +138,8 @@ export function DashboardView() {
         />
       </div>
 
-      {/* Condition & Status Breakdown */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+      {/* Condition & Status Breakdown with Generous Gap */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-7">
         <div className="lg:col-span-2">
           <ConditionDistributionCard
             conditions={analytics?.conditionDistribution || []}
@@ -147,24 +148,24 @@ export function DashboardView() {
             isLoading={isLoading}
           />
         </div>
-        <div className="flex flex-col justify-between p-6 rounded-lg bg-surface border border-line">
-          <div>
-            <h3 className="font-manrope text-base font-semibold text-content-primary mb-2">
-              Fast Navigation
+        <div className="flex flex-col justify-between p-6 rounded-xl bg-surface border border-line shadow-sm space-y-6">
+          <div className="space-y-3">
+            <h3 className="font-manrope text-base font-bold text-content-primary">
+              Administrative Quick Actions
             </h3>
-            <p className="text-xs text-content-secondary leading-relaxed mb-4">
-              Access the dedicated doctor registry or review patient charts with complete filtering and pagination.
+            <p className="text-xs text-content-secondary leading-relaxed">
+              Access the clinical specialist registry or review patient charts with complete multi-criteria search, date filters, and nested patient assignment.
             </p>
           </div>
-          <div className="space-y-2 pt-2">
+          <div className="space-y-3 pt-2">
             <Link href="/doctors" className="block">
-              <Button variant="secondary" size="sm" className="w-full justify-between">
+              <Button variant="secondary" size="sm" className="w-full justify-between h-9 text-xs">
                 <span>Doctor Registry</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5 text-medical-blue" />
               </Button>
             </Link>
             <Link href="/patients" className="block">
-              <Button variant="default" size="sm" className="w-full justify-between">
+              <Button variant="default" size="sm" className="w-full justify-between h-9 text-xs">
                 <span>Patient Records</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Button>
@@ -175,4 +176,3 @@ export function DashboardView() {
     </div>
   );
 }
-

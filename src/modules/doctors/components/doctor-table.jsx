@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Users, Eye, Stethoscope, Plus } from "lucide-react";
 import { getDoctorInitials } from "../utils/doctorUtils";
 
@@ -40,50 +41,66 @@ export function DoctorTable({
         <TableBody>
           {isLoading ? (
             Array.from({ length: 6 }).map((_, i) => (
-              <TableRow key={i} className="animate-pulse">
+              <TableRow key={i}>
                 <TableCell>
-                  <div className="h-5 w-36 bg-surface-elevated rounded" />
+                  <div className="flex items-center gap-2.5">
+                    <Skeleton className="w-8 h-8 rounded-full shrink-0" />
+                    <div className="space-y-1.5">
+                      <Skeleton className="h-4 w-28" />
+                      <Skeleton className="h-3 w-20" />
+                    </div>
+                  </div>
                 </TableCell>
                 <TableCell>
-                  <div className="h-5 w-24 bg-surface-elevated rounded" />
+                  <Skeleton className="h-5 w-20 rounded-full" />
                 </TableCell>
                 <TableCell>
-                  <div className="h-5 w-28 bg-surface-elevated rounded" />
+                  <Skeleton className="h-4 w-28" />
                 </TableCell>
                 <TableCell>
-                  <div className="h-5 w-28 bg-surface-elevated rounded" />
+                  <div className="space-y-1">
+                    <Skeleton className="h-3.5 w-24" />
+                    <Skeleton className="h-3 w-20" />
+                  </div>
                 </TableCell>
                 <TableCell>
-                  <div className="h-5 w-14 bg-surface-elevated rounded" />
+                  <Skeleton className="h-4 w-12" />
                 </TableCell>
                 <TableCell>
-                  <div className="h-5 w-20 bg-surface-elevated rounded" />
+                  <div className="flex gap-1">
+                    <Skeleton className="h-4 w-6 rounded" />
+                    <Skeleton className="h-4 w-6 rounded" />
+                    <Skeleton className="h-4 w-6 rounded" />
+                  </div>
                 </TableCell>
                 <TableCell>
-                  <div className="h-5 w-16 bg-surface-elevated rounded" />
+                  <Skeleton className="h-5 w-16 rounded-full" />
                 </TableCell>
                 <TableCell className="text-right">
-                  <div className="h-7 w-24 bg-surface-elevated rounded ml-auto" />
+                  <div className="flex justify-end gap-1.5">
+                    <Skeleton className="h-7 w-16 rounded-md" />
+                    <Skeleton className="h-7 w-7 rounded-md" />
+                  </div>
                 </TableCell>
               </TableRow>
             ))
           ) : doctors.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={8} className="text-center py-12">
+              <TableCell colSpan={8} className="text-center py-14">
                 <div className="flex flex-col items-center justify-center max-w-sm mx-auto space-y-3">
-                  <div className="p-3 rounded-full bg-surface-elevated text-content-muted border border-line">
+                  <div className="p-3.5 rounded-full bg-surface-elevated text-content-muted border border-line shadow-xs">
                     <Stethoscope className="w-6 h-6" />
                   </div>
-                  <div>
-                    <p className="font-manrope text-base font-semibold text-content-primary">
+                  <div className="space-y-1">
+                    <p className="font-manrope text-base font-bold text-content-primary">
                       No doctors found
                     </p>
-                    <p className="text-xs text-content-secondary mt-1">
-                      No doctor records match your criteria.
+                    <p className="text-xs text-content-secondary">
+                      No doctor records match your current criteria.
                     </p>
                   </div>
                   {onAddNew && (
-                    <Button variant="default" size="sm" onClick={onAddNew}>
+                    <Button variant="default" size="sm" onClick={onAddNew} className="mt-2">
                       <Plus className="w-3.5 h-3.5 mr-1.5" />
                       Add New Doctor
                     </Button>
@@ -180,7 +197,7 @@ export function DoctorTable({
                       variant="secondary"
                       size="sm"
                       onClick={() => onViewPatients(doc)}
-                      className="h-7 px-2 text-xs"
+                      className="h-7 px-2.5 text-xs"
                       title="View & manage assigned patients"
                     >
                       <Users className="w-3.5 h-3.5 mr-1 text-medical-sage" />
@@ -205,4 +222,3 @@ export function DoctorTable({
     </div>
   );
 }
-

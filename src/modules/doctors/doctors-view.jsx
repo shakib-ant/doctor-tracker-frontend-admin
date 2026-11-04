@@ -93,26 +93,27 @@ export function DoctorsView() {
   };
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-7">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-1">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 pb-2 border-b border-line/50">
         <div>
-          <h2 className="font-manrope text-2xl md:text-3xl font-bold tracking-tight text-content-primary">
+          <h2 className="font-manrope text-2xl md:text-3xl font-extrabold tracking-tight text-content-primary">
             Doctor Registry & Management
           </h2>
-          <p className="text-sm text-content-secondary mt-1">
+          <p className="text-xs md:text-sm text-content-secondary mt-1.5 leading-relaxed">
             Register USA specialists, manage clinical assignments, and review patient rosters.
           </p>
         </div>
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-3">
           <Button
             variant="secondary"
             size="sm"
             onClick={() => loadDoctors(pagination.page)}
             disabled={isLoading}
+            className="h-9 px-3.5"
           >
             <RefreshCw
-              className={`w-3.5 h-3.5 mr-1.5 ${isLoading ? "animate-spin" : ""}`}
+              className={`w-3.5 h-3.5 mr-2 ${isLoading ? "animate-spin" : ""}`}
             />
             Refresh
           </Button>
@@ -120,6 +121,7 @@ export function DoctorsView() {
             variant="default"
             size="sm"
             onClick={() => setIsAddModalOpen(true)}
+            className="h-9 px-4"
           >
             <Plus className="w-4 h-4 mr-1.5" />
             Add New Doctor
@@ -128,12 +130,14 @@ export function DoctorsView() {
       </div>
 
       {/* Main Card */}
-      <Card>
-        <CardHeader className="pb-3">
-          <CardTitle>Registered Medical Specialists</CardTitle>
-          <CardDescription>
-            Search, filter by clinical specialty, or click &ldquo;Patients&rdquo; to view and manage assigned cases.
-          </CardDescription>
+      <Card className="shadow-sm">
+        <CardHeader className="pb-4 space-y-4">
+          <div className="space-y-1">
+            <CardTitle>Registered Medical Specialists</CardTitle>
+            <CardDescription>
+              Search, filter by clinical specialty, or click &ldquo;Patients&rdquo; to view and manage assigned cases.
+            </CardDescription>
+          </div>
 
           <DoctorFilterBar
             searchQuery={searchQuery}

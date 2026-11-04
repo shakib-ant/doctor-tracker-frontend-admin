@@ -2,31 +2,40 @@
 
 import React from "react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Users } from "lucide-react";
 
 export function PatientsPerDoctorChart({ data = [], isLoading = false }) {
   const maxPatients = Math.max(...data.map((d) => d.patientCount || 0), 1);
 
   return (
-    <Card className="h-full flex flex-col">
-      <CardHeader className="pb-3">
+    <Card className="h-full flex flex-col shadow-sm">
+      <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
-          <div>
-            <CardTitle className="text-base md:text-lg flex items-center gap-2">
-              <Users className="w-4 h-4 text-medical-blue" />
+          <div className="space-y-1">
+            <CardTitle className="text-base md:text-lg flex items-center gap-2.5">
+              <div className="p-1.5 rounded-md bg-medical-blue/15 text-medical-blue">
+                <Users className="w-4 h-4" />
+              </div>
               Patients per Doctor
             </CardTitle>
-            <CardDescription className="text-xs text-content-secondary mt-0.5">
-              Workload distribution across medical staff
+            <CardDescription className="text-xs text-content-secondary">
+              Clinical workload distribution across verified medical specialists
             </CardDescription>
           </div>
         </div>
       </CardHeader>
       <CardContent className="flex-1 flex flex-col justify-center">
         {isLoading ? (
-          <div className="space-y-3 py-4 animate-pulse">
+          <div className="space-y-4 py-3">
             {Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className="h-7 bg-surface-elevated rounded w-full" />
+              <div key={i} className="space-y-2">
+                <div className="flex justify-between">
+                  <Skeleton className="h-4 w-36" />
+                  <Skeleton className="h-4 w-16" />
+                </div>
+                <Skeleton className="h-2 w-full rounded-full" />
+              </div>
             ))}
           </div>
         ) : data.length === 0 ? (
@@ -34,28 +43,28 @@ export function PatientsPerDoctorChart({ data = [], isLoading = false }) {
             No doctor assignment data available yet.
           </div>
         ) : (
-          <div className="space-y-3 py-2">
+          <div className="space-y-4 py-2">
             {data.map((item) => {
               const pct = Math.round((item.patientCount / maxPatients) * 100);
               return (
-                <div key={item.doctorId || item.name} className="space-y-1">
+                <div key={item.doctorId || item.name} className="space-y-1.5">
                   <div className="flex items-center justify-between text-xs">
-                    <div className="flex items-center gap-2 truncate max-w-[240px]">
-                      <span className="font-medium text-content-primary truncate">
+                    <div className="flex items-center gap-2 truncate max-w-[260px]">
+                      <span className="font-semibold text-content-primary truncate">
                         {item.name}
                       </span>
-                      <span className="text-[10px] text-content-muted truncate hidden sm:inline">
-                        ({item.specialization})
+                      <span className="text-[11px] text-content-muted truncate hidden sm:inline">
+                        &bull; {item.specialization}
                       </span>
                     </div>
-                    <span className="font-semibold text-content-primary shrink-0">
+                    <span className="font-bold text-content-primary shrink-0 text-xs">
                       {item.patientCount} {item.patientCount === 1 ? "patient" : "patients"}
                     </span>
                   </div>
-                  <div className="w-full bg-surface-elevated rounded-full h-2 overflow-hidden border border-line/60">
+                  <div className="w-full bg-surface-elevated rounded-full h-2.5 overflow-hidden border border-line/60">
                     <div
-                      className="bg-medical-blue h-2 rounded-full transition-all duration-500 ease-out"
-                      style={{ width: `${Math.max(pct, 5)}%` }}
+                      className="bg-medical-blue h-2.5 rounded-full transition-all duration-700 ease-out shadow-xs"
+                      style={{ width: `${Math.max(pct, 6)}%` }}
                     />
                   </div>
                 </div>
@@ -67,4 +76,3 @@ export function PatientsPerDoctorChart({ data = [], isLoading = false }) {
     </Card>
   );
 }
-

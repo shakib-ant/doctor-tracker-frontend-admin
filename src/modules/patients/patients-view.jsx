@@ -97,26 +97,27 @@ export function PatientsView() {
     Boolean(endDate);
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-7">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-1">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 pb-2 border-b border-line/50">
         <div>
-          <h2 className="font-manrope text-2xl md:text-3xl font-bold tracking-tight text-content-primary">
+          <h2 className="font-manrope text-2xl md:text-3xl font-extrabold tracking-tight text-content-primary">
             Patient Management
           </h2>
-          <p className="text-sm text-content-secondary mt-1">
-            Track patient admissions, medical diagnoses, and assigned clinical specialists.
+          <p className="text-xs md:text-sm text-content-secondary mt-1.5 leading-relaxed">
+            Track patient admissions, medical diagnoses, and assigned clinical specialists across departments.
           </p>
         </div>
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-3">
           <Button
             variant="secondary"
             size="sm"
             onClick={() => loadPatients(pagination.page)}
             disabled={isLoading}
+            className="h-9 px-3.5"
           >
             <RefreshCw
-              className={`w-3.5 h-3.5 mr-1.5 ${isLoading ? "animate-spin" : ""}`}
+              className={`w-3.5 h-3.5 mr-2 ${isLoading ? "animate-spin" : ""}`}
             />
             Refresh
           </Button>
@@ -124,6 +125,7 @@ export function PatientsView() {
             variant="default"
             size="sm"
             onClick={() => setModalState({ isOpen: true, patient: null })}
+            className="h-9 px-4"
           >
             <Plus className="w-4 h-4 mr-1.5" />
             Register Patient
@@ -132,12 +134,14 @@ export function PatientsView() {
       </div>
 
       {/* Main Card */}
-      <Card>
-        <CardHeader className="pb-3">
-          <CardTitle>Registered Patient Records</CardTitle>
-          <CardDescription>
-            Search by patient name or condition, filter by date range, and update clinical status.
-          </CardDescription>
+      <Card className="shadow-sm">
+        <CardHeader className="pb-4 space-y-4">
+          <div className="space-y-1">
+            <CardTitle>Registered Patient Records</CardTitle>
+            <CardDescription>
+              Search by patient name or condition, filter by date range, and update clinical status.
+            </CardDescription>
+          </div>
 
           <PatientFilterBar
             searchQuery={searchQuery}
