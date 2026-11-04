@@ -1,12 +1,19 @@
-import { Inter } from "next/font/google";
+import { Inter, Manrope } from "next/font/google";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600"],
+  display: "swap",
 });
 
-// provide you all fonts, make sure to add variable properly and add that on tailwindcss.config. to use on  tailwindcss.config.js: inter: 'var(--font-inter)', (line no: 12)
-const fontList = [inter];
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+  weight: ["600", "700"],
+  display: "swap",
+});
+
+const fontList = [inter, manrope];
 
 export const fontVariables = fontList.map((font) => font.variable).join(" ");

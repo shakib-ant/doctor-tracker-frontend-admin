@@ -1,13 +1,10 @@
 import { fontVariables } from "@/fonts/index";
-import { Env } from "@/utils/env";
 import "./globals.css";
 import RootWrapper from "./root-provider";
 
-
-
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body className={fontVariables}>
         <RootWrapper>{children}</RootWrapper>
       </body>
@@ -15,16 +12,10 @@ export default function RootLayout({ children }) {
   );
 }
 
-
 export const metadata = {
   title: {
-    default: "Next Starter",
-    template: "%s | Next Starter",
+    default: "Doctor Tracker — Healthcare Administration",
+    template: "%s | Doctor Tracker",
   },
-  description: "Starter Templates", 
-  openGraph: {
-    url: Env.site_url,
-    images: [{ url: `${Env.site_url}og.jpg`, alt: "Next Starter" }],
-  },
+  description: "Doctor Tracker — Modern Dark Healthcare Dashboard",
 };
-

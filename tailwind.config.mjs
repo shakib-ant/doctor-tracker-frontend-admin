@@ -9,7 +9,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        inter: 'var(--font-inter)',
+        inter: ['var(--font-inter)', 'sans-serif'],
+        manrope: ['var(--font-manrope)', 'sans-serif'],
       },
       colors: {
         background: 'hsl(var(--background))',
@@ -45,18 +46,34 @@ export default {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
-        chart: {
-          1: 'hsl(var(--chart-1))',
-          2: 'hsl(var(--chart-2))',
-          3: 'hsl(var(--chart-3))',
-          4: 'hsl(var(--chart-4))',
-          5: 'hsl(var(--chart-5))',
+        // Direct design system token mappings
+        canvas: '#111923',
+        surface: {
+          DEFAULT: '#1B2733',
+          elevated: '#22313F',
+          hover: '#293B4B',
+          selected: '#253946',
         },
+        medical: {
+          blue: '#89B4CE',
+          sage: '#86A8A1',
+        },
+        content: {
+          primary: '#E8EEF2',
+          secondary: '#B5C5D1',
+          muted: '#93A6B5',
+          disabled: '#7D8D9A',
+        },
+        line: '#324454',
       },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+      },
+      transitionDuration: {
+        DEFAULT: '150ms',
+        smooth: '200ms',
       },
     },
   },
