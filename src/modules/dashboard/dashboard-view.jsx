@@ -82,14 +82,27 @@ export function DashboardView() {
             <ShieldAlert className="w-4 h-4 text-red-400 shrink-0" />
             <span>{error}</span>
           </div>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={loadData}
-            className="h-7 text-xs border-red-700 text-red-200"
-          >
-            Retry
-          </Button>
+          <div className="flex items-center gap-2">
+            {error.includes("401") && (
+              <Link href="/login">
+                <Button
+                  variant="default"
+                  size="sm"
+                  className="h-7 text-xs bg-red-700 hover:bg-red-600 text-white"
+                >
+                  Log In
+                </Button>
+              </Link>
+            )}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={loadData}
+              className="h-7 text-xs border-red-700 text-red-200 hover:bg-red-900/30"
+            >
+              Retry
+            </Button>
+          </div>
         </div>
       )}
 

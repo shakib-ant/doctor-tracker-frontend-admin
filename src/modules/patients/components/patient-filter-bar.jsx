@@ -5,6 +5,7 @@ import { Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { CustomSelect } from "@/components/ui/custom-select";
+import { CustomDatePicker } from "@/components/ui/custom-date-picker";
 import { COMMON_CONDITIONS, PATIENT_STATUSES } from "../utils/patientUtils";
 
 export function PatientFilterBar({
@@ -69,22 +70,21 @@ export function PatientFilterBar({
         {/* Date Filters Container */}
         <div className="flex items-center gap-1.5">
           <div className="relative flex-1">
-            <Input
-              type="date"
+            <CustomDatePicker
               value={startDate}
-              onChange={(e) => onStartDateChange(e.target.value)}
-              className="text-xs px-2.5 h-9 text-content-secondary"
-              title="Start Admission Date"
+              onChange={onStartDateChange}
+              placeholder="From date"
+              className="w-full"
             />
           </div>
           <span className="text-content-muted text-xs">&ndash;</span>
           <div className="relative flex-1">
-            <Input
-              type="date"
+            <CustomDatePicker
               value={endDate}
-              onChange={(e) => onEndDateChange(e.target.value)}
-              className="text-xs px-2.5 h-9 text-content-secondary"
-              title="End Admission Date"
+              onChange={onEndDateChange}
+              placeholder="To date"
+              align="right"
+              className="w-full"
             />
           </div>
           {hasActiveFilters && (

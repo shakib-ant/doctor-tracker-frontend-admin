@@ -89,12 +89,12 @@ export function CustomSelect({
       {isOpen && (
         <div
           className={cn(
-            "absolute z-50 mt-1 max-h-60 w-full overflow-y-auto rounded-lg border border-line bg-surface/95 p-1 shadow-2xl backdrop-blur-md animate-in fade-in-50 zoom-in-95 duration-100",
+            "absolute z-50 mt-1.5 max-h-60 w-full overflow-y-auto no-scrollbar rounded-lg border border-line bg-surface/98 p-1.5 shadow-2xl backdrop-blur-md animate-in fade-in-50 zoom-in-95 duration-100 flex flex-col gap-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
             menuClassName
           )}
         >
           {normalizedOptions.length === 0 ? (
-            <div className="p-2 text-center text-xs text-content-muted">
+            <div className="p-2.5 text-center text-xs text-content-muted">
               No options available
             </div>
           ) : (
@@ -106,9 +106,9 @@ export function CustomSelect({
                   type="button"
                   onClick={() => handleSelect(opt.value)}
                   className={cn(
-                    "flex w-full items-center justify-between rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors duration-100 text-left",
+                    "flex w-full items-center justify-between rounded-md px-3 py-2 text-xs font-medium transition-all duration-150 text-left cursor-pointer",
                     isSelected
-                      ? "bg-medical-blue/15 text-medical-blue font-semibold"
+                      ? "bg-medical-blue/20 text-medical-blue font-semibold ring-1 ring-medical-blue/30 shadow-xs"
                       : "text-content-secondary hover:bg-surface-hover hover:text-content-primary"
                   )}
                 >

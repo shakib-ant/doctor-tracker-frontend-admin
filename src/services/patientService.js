@@ -33,6 +33,12 @@ export const fetchPatients = async ({
   });
 
   const data = await res.json().catch(() => ({}));
+  if (res.status === 401) {
+    if (typeof window !== "undefined") {
+      window.location.href = "/login";
+    }
+    throw new Error("Session expired or unauthorized (HTTP 401). Redirecting to login...");
+  }
   if (!res.ok) {
     throw new Error(data.message || `Failed to fetch patients (HTTP ${res.status})`);
   }

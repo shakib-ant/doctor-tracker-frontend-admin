@@ -66,14 +66,14 @@ export function Sidebar({ className, onClose }) {
               href={item.href}
               onClick={onClose}
               className={cn(
-                "group relative flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors duration-150",
+                "group relative flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-all duration-200",
                 isActive
                   ? "bg-surface-selected text-content-primary font-semibold"
                   : "text-content-secondary hover:bg-surface-hover hover:text-content-primary"
               )}
             >
               {isActive && (
-                <span className="absolute left-0 top-1.5 bottom-1.5 w-1 rounded-r-full bg-medical-blue" />
+                <span className="absolute left-0 top-1.5 bottom-1.5 w-1 rounded-r-full bg-medical-blue transition-all duration-200" />
               )}
               <Icon
                 className={cn(

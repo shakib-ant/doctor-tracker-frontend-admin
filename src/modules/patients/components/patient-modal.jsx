@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CustomSelect } from "@/components/ui/custom-select";
+import { CustomDatePicker } from "@/components/ui/custom-date-picker";
 import { X, Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
 import { createPatient, updatePatient } from "@/services/patientService";
 import { fetchDoctors } from "@/services/doctorService";
@@ -319,11 +320,13 @@ export function PatientModal({ patient, isOpen, onClose, onSuccess }) {
                 <label className="block text-xs font-medium text-content-secondary mb-1">
                   Admission / Visit Date
                 </label>
-                <Input
-                  type="date"
-                  name="admissionDate"
+                <CustomDatePicker
                   value={formData.admissionDate}
-                  onChange={handleChange}
+                  onChange={(val) =>
+                    setFormData((prev) => ({ ...prev, admissionDate: val }))
+                  }
+                  placeholder="Select admission date"
+                  className="w-full"
                 />
               </div>
             </div>

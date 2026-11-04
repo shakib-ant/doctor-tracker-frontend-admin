@@ -10,14 +10,30 @@ import { getAuthToken } from "@/utils/auth";
 
 export function DashboardLayout({ children, title }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isAuthorized, setIsAuthorized] = useState(() => {
+    if (typeof window === "undefined") return true;
+    return !!getAuthToken();
+  });
   const router = useRouter();
 
   useEffect(() => {
     const token = getAuthToken();
     if (!token && typeof window !== "undefined") {
-      router.push("/login");
+      setIsAuthorized(false);
+      router.replace("/login");
+    } else {
+      setIsAuthorized(true);
     }
   }, [router]);
+
+  if (!isAuthorized) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-canvas text-content-secondary gap-3">
+        <div className="w-8 h-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+        <span className="text-xs font-medium">Verifying authorization...</span>
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen bg-canvas text-content-primary">
@@ -61,8 +77,10 @@ export function DashboardLayout({ children, title }) {
           onMenuClick={() => setSidebarOpen(true)}
           title={title}
         />
-        <main className="flex-1 p-4 md:p-8 overflow-y-auto">
-          <div className="max-w-7xl mx-auto space-y-6">{children}</div>
+        <main className="flex-1 p-4 md:p-6 lg:p-8 overflow-y-auto">
+          <div className="max-w-[1700px] w-full mx-auto space-y-6 transition-all duration-300 animate-in fade-in-50">
+            {children}
+          </div>
         </main>
       </div>
     </div>
