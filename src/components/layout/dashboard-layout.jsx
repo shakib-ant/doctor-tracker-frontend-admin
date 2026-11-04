@@ -36,7 +36,7 @@ export function DashboardLayout({ children, title }) {
   }
 
   return (
-    <div className="flex min-h-screen bg-canvas text-content-primary">
+    <div className="flex min-h-screen bg-canvas text-content-primary no-scrollbar">
       {/* Desktop Sidebar */}
       <div className="hidden lg:block lg:w-64 lg:shrink-0">
         <div className="fixed inset-y-0 left-0 w-64 z-30">
@@ -54,19 +54,19 @@ export function DashboardLayout({ children, title }) {
           />
 
           {/* Drawer Panel - 100% Full width on mobile */}
-          <div className="fixed inset-0 flex w-full flex-col bg-surface shadow-2xl z-50 animate-in slide-in-from-left duration-250">
+          <div className="fixed inset-0 flex w-full flex-col bg-surface shadow-2xl z-50 animate-in slide-in-from-left duration-250 no-scrollbar">
             <Sidebar onClose={() => setSidebarOpen(false)} />
           </div>
         </div>
       )}
 
       {/* Main Content Area */}
-      <div className="flex flex-col flex-1 min-w-0 w-full max-w-full overflow-x-hidden">
+      <div className="flex flex-col flex-1 min-w-0 w-full max-w-full overflow-x-hidden no-scrollbar">
         <Navbar
           onMenuClick={() => setSidebarOpen(true)}
           title={title}
         />
-        <main className="flex-1 w-full max-w-full p-[calc((16/375)*100vw)] lg:p-[calc((32/1920)*100vw)]">
+        <main className="flex-1 w-full max-w-full p-[calc((16/375)*100vw)] lg:p-[calc((32/1920)*100vw)] no-scrollbar">
           <div className="max-w-[1700px] w-full mx-auto space-y-[calc((16/375)*100vw)] lg:space-y-[calc((24/1920)*100vw)] transition-all duration-300 animate-in fade-in-50">
             {children}
           </div>

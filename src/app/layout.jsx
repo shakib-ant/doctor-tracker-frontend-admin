@@ -4,8 +4,8 @@ import RootWrapper from "./root-provider";
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="dark">
-      <body className={fontVariables}>
+    <html lang="en" className="dark no-scrollbar">
+      <body className={`${fontVariables} no-scrollbar`}>
         <RootWrapper>{children}</RootWrapper>
       </body>
     </html>

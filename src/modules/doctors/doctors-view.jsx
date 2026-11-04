@@ -181,6 +181,7 @@ export function DoctorsView() {
               onViewPatients={(doc) => {
                 setPatientsModalDoctor(doc);
               }}
+              onToggleArchive={handleToggleArchive}
               onAddNew={() => setIsAddModalOpen(true)}
             />
           </div>

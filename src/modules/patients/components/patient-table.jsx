@@ -26,7 +26,7 @@ export function PatientTable({
   onAddNew,
 }) {
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
       <Table>
         <TableHeader>
           <TableRow>
@@ -167,13 +167,13 @@ export function PatientTable({
                 </TableCell>
 
                 {/* Actions: Direct Quick Actions + Real-world Clinical Action Menu */}
-                <TableCell className="text-right whitespace-nowrap">
-                  <div className="flex items-center justify-end gap-1 sm:gap-1.5">
+                <TableCell className="text-right whitespace-nowrap pr-3 sm:pr-4">
+                  <div className="flex items-center justify-end gap-2.5 sm:gap-2">
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => onViewDetails && onViewDetails(p)}
-                      className="h-6.5 px-1.5 sm:px-2 text-[10px] sm:text-xs text-medical-blue hover:bg-surface-hover"
+                      className="h-7 px-2 sm:px-2.5 text-[10px] sm:text-xs text-medical-blue hover:bg-surface-hover"
                       title="View clinical chart"
                     >
                       <Eye className="w-3.5 h-3.5 mr-1" />

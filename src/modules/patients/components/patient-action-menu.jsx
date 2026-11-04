@@ -11,6 +11,7 @@ import {
   ArchiveRestore,
   ChevronRight,
   Check,
+  Download,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -123,6 +124,22 @@ export function PatientActionMenu({
     printWindow.document.close();
   };
 
+  const handleExportData = () => {
+    setIsOpen(false);
+    const dataStr =
+      "data:text/json;charset=utf-8," +
+      encodeURIComponent(JSON.stringify(patient, null, 2));
+    const downloadAnchor = document.createElement("a");
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute(
+      "download",
+      `Patient_${patient.name.replace(/\s+/g, "_")}_Dossier.json`
+    );
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+  };
+
   return (
     <div ref={menuRef} className="relative inline-block text-left select-none">
       <Button
@@ -220,6 +237,16 @@ export function PatientActionMenu({
             <span>Print Clinical Record</span>
           </button>
 
+          {/* Export Medical Dossier */}
+          <button
+            type="button"
+            onClick={handleExportData}
+            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-content-primary hover:bg-surface-elevated text-left transition-colors cursor-pointer"
+          >
+            <Download className="w-3.5 h-3.5 text-content-secondary" />
+            <span>Export Patient Dossier</span>
+          </button>
+
           <div className="my-1 border-t border-line/60" />
 
           {/* Archive / Unarchive */}
@@ -252,3 +279,4 @@ export function PatientActionMenu({
     </div>
   );
 }
+

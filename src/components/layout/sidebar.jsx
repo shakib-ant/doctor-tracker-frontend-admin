@@ -37,16 +37,16 @@ export function Sidebar({ className, onClose }) {
       )}
     >
       {/* Brand Header */}
-      <div className="flex items-center justify-between h-16 px-5 border-b border-line shrink-0">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center w-8 h-8 rounded-md bg-medical-blue/15 border border-medical-blue/30 text-medical-blue">
+      <div className="flex items-center justify-between h-[calc((56/375)*100vw)] lg:h-[calc((64/1920)*100vw)] px-[calc((18/375)*100vw)] lg:px-[calc((24/1920)*100vw)] border-b border-line shrink-0">
+        <div className="flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)]">
+          <div className="flex items-center justify-center w-[calc((32/375)*100vw)] h-[calc((32/375)*100vw)] lg:w-[calc((34/1920)*100vw)] lg:h-[calc((34/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] bg-medical-blue/15 border border-medical-blue/30 text-medical-blue">
             <Activity className="w-4 h-4 stroke-[2.5]" />
           </div>
           <div className="flex flex-col">
-            <span className="font-manrope font-bold text-base tracking-tight text-content-primary">
+            <span className="font-manrope font-bold text-[calc((15/375)*100vw)] lg:text-[calc((16/1920)*100vw)] tracking-tight text-content-primary">
               Doctor Tracker
             </span>
-            <span className="text-[11px] font-medium text-content-secondary tracking-wide uppercase">
+            <span className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] font-medium text-content-secondary tracking-wide uppercase">
               Administration
             </span>
           </div>
@@ -66,8 +66,8 @@ export function Sidebar({ className, onClose }) {
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-4 py-5 space-y-1.5 overflow-y-auto">
-        <div className="px-3 pb-2 text-[10px] font-semibold text-content-disabled uppercase tracking-wider">
+      <nav className="flex-1 px-[calc((14/375)*100vw)] lg:px-[calc((16/1920)*100vw)] py-[calc((16/375)*100vw)] lg:py-[calc((20/1920)*100vw)] space-y-[calc((4/375)*100vw)] lg:space-y-[calc((6/1920)*100vw)] overflow-y-auto no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+        <div className="px-3 pb-2 text-[calc((9/375)*100vw)] lg:text-[calc((10/1920)*100vw)] font-semibold text-content-disabled uppercase tracking-wider">
           Main Navigation
         </div>
         {navigationItems.map((item) => {
@@ -82,7 +82,7 @@ export function Sidebar({ className, onClose }) {
               href={item.href}
               onClick={onClose}
               className={cn(
-                "group relative flex items-center gap-3 px-3.5 py-3 rounded-lg text-sm font-medium transition-all duration-200",
+                "group relative flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] py-[calc((10/375)*100vw)] lg:py-[calc((10/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] text-[calc((13/375)*100vw)] lg:text-[calc((13/1920)*100vw)] font-medium transition-all duration-200",
                 isActive
                   ? "bg-surface-selected text-content-primary font-semibold"
                   : "text-content-secondary hover:bg-surface-hover hover:text-content-primary"
@@ -133,19 +133,19 @@ export function Sidebar({ className, onClose }) {
         </div>
       )}
 
-      {/* System Status Footer */}
-      <div className="p-3.5 mx-3 mb-4 rounded-xl border border-line bg-surface-elevated/40 shrink-0">
+      {/* System Status Footer (with clearance for Next.js dev badge) */}
+      <div className="p-[calc((12/375)*100vw)] lg:p-[calc((14/1920)*100vw)] mx-[calc((12/375)*100vw)] lg:mx-[calc((12/1920)*100vw)] mb-12 sm:mb-14 rounded-[calc((12/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] border border-line bg-surface-elevated/40 shrink-0">
         <div className="flex items-center gap-2">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-medical-sage opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-medical-sage"></span>
           </span>
-          <span className="text-xs font-semibold text-content-primary">
-            MongoDB Atlas Cluster
+          <span className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-semibold text-content-primary">
+            Hospital Cloud Network
           </span>
         </div>
-        <p className="mt-1 text-[11px] text-content-secondary leading-tight">
-          Live Sync &bull; 511 Clinical Records
+        <p className="mt-1 text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-secondary leading-tight">
+          HIPAA Secured &bull; 511 Clinical Records
         </p>
       </div>
     </aside>

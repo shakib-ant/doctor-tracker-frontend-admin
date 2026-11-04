@@ -4,11 +4,12 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Plus, RefreshCw, ChevronLeft, ChevronRight, AlertCircle } from "lucide-react";
-import { fetchPatients } from "@/services/patientService";
+import { fetchPatients, updatePatient } from "@/services/patientService";
 import { PatientFilterBar } from "./components/patient-filter-bar";
 import { PatientTable } from "./components/patient-table";
 import { PatientModal } from "./components/patient-modal";
 import { PatientDeleteDialog } from "./components/patient-delete-dialog";
+import { PatientDetailModal } from "./components/patient-detail-modal";
 
 export function PatientsView() {
   const [patients, setPatients] = useState([]);
@@ -27,9 +28,11 @@ export function PatientsView() {
   const [statusFilter, setStatusFilter] = useState("All");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [archivedFilter, setArchivedFilter] = useState("active"); // "active" | "archived" | "all"
 
   const [modalState, setModalState] = useState({ isOpen: false, patient: null });
   const [deleteDialogState, setDeleteDialogState] = useState({ isOpen: false, patient: null });
+  const [detailPatient, setDetailPatient] = useState(null);
 
   useEffect(() => {
     const t = setTimeout(() => setDebouncedSearch(searchQuery), 350);
@@ -49,6 +52,7 @@ export function PatientsView() {
           status: statusFilter,
           startDate,
           endDate,
+          archived: archivedFilter,
         });
 
         setPatients(response.data || []);
@@ -68,7 +72,7 @@ export function PatientsView() {
         setIsLoading(false);
       }
     },
-    [debouncedSearch, conditionFilter, statusFilter, startDate, endDate]
+    [debouncedSearch, conditionFilter, statusFilter, startDate, endDate, archivedFilter]
   );
 
   useEffect(() => {
@@ -81,12 +85,22 @@ export function PatientsView() {
     }
   };
 
+  const handleStatusChange = async (patient, nextStatus) => {
+    try {
+      await updatePatient(patient._id, { status: nextStatus });
+      loadPatients(pagination.page);
+    } catch (err) {
+      alert(err.message || "Failed to update patient care status");
+    }
+  };
+
   const handleClearFilters = () => {
     setSearchQuery("");
     setConditionFilter("All");
     setStatusFilter("All");
     setStartDate("");
     setEndDate("");
+    setArchivedFilter("active");
   };
 
   const hasActiveFilters =
@@ -94,7 +108,8 @@ export function PatientsView() {
     conditionFilter !== "All" ||
     statusFilter !== "All" ||
     Boolean(startDate) ||
-    Boolean(endDate);
+    Boolean(endDate) ||
+    archivedFilter !== "active";
 
   return (
     <div className="space-y-[calc((16/375)*100vw)] lg:space-y-[calc((24/1920)*100vw)]">
@@ -156,6 +171,8 @@ export function PatientsView() {
             onStartDateChange={setStartDate}
             endDate={endDate}
             onEndDateChange={setEndDate}
+            archivedFilter={archivedFilter}
+            onArchivedChange={setArchivedFilter}
             onClearFilters={handleClearFilters}
             hasActiveFilters={hasActiveFilters}
           />
@@ -186,6 +203,8 @@ export function PatientsView() {
               isLoading={isLoading}
               onEdit={(p) => setModalState({ isOpen: true, patient: p })}
               onDelete={(p) => setDeleteDialogState({ isOpen: true, patient: p })}
+              onViewDetails={(p) => setDetailPatient(p)}
+              onStatusChange={handleStatusChange}
               onAddNew={() => setModalState({ isOpen: true, patient: null })}
             />
           </div>
@@ -247,12 +266,21 @@ export function PatientsView() {
         onSuccess={() => loadPatients(pagination.page)}
       />
 
-      {/* Delete Confirmation Dialog */}
+      {/* Delete / Archive Confirmation Dialog */}
       <PatientDeleteDialog
         patient={deleteDialogState.patient}
         isOpen={deleteDialogState.isOpen}
         onClose={() => setDeleteDialogState({ isOpen: false, patient: null })}
         onSuccess={() => loadPatients(pagination.page)}
+      />
+
+      {/* Patient Clinical Dossier Detail Modal */}
+      <PatientDetailModal
+        patient={detailPatient}
+        isOpen={!!detailPatient}
+        onClose={() => setDetailPatient(null)}
+        onEdit={(p) => setModalState({ isOpen: true, patient: p })}
+        onArchive={(p) => setDeleteDialogState({ isOpen: true, patient: p })}
       />
     </div>
   );

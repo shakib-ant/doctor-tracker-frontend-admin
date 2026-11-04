@@ -127,7 +127,10 @@ export function CustomDatePicker({
     });
   };
 
-  const heightClass = size === "sm" ? "h-8 text-xs" : "h-9 text-xs";
+  const heightClass =
+    size === "sm"
+      ? "h-[calc((32/375)*100vw)] lg:h-[calc((34/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)]"
+      : "h-[calc((38/375)*100vw)] lg:h-[calc((40/1920)*100vw)] text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)]";
 
   const today = new Date();
   const isToday = (day) =>
@@ -154,7 +157,7 @@ export function CustomDatePicker({
         disabled={disabled}
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          "w-full flex items-center justify-between gap-2 rounded-md border border-line bg-surface px-3 text-content-primary shadow-xs transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-medical-blue hover:border-[#384A5C] cursor-pointer",
+          "w-full flex items-center justify-between gap-[calc((6/375)*100vw)] lg:gap-[calc((8/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] border border-line bg-surface px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] text-content-primary shadow-xs transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-medical-blue hover:border-[#384A5C] cursor-pointer",
           heightClass,
           disabled && "opacity-50 cursor-not-allowed",
           isOpen && "border-medical-blue ring-1 ring-medical-blue",

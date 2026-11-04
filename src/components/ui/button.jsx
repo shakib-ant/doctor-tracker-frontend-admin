@@ -5,7 +5,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-medical-blue focus-visible:ring-offset-2 focus-visible:ring-offset-canvas disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.99] [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 select-none",
+  "inline-flex items-center justify-center gap-[calc((6/375)*100vw)] lg:gap-[calc((8/1920)*100vw)] whitespace-nowrap rounded-[calc((7/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-medical-blue focus-visible:ring-offset-2 focus-visible:ring-offset-canvas disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.99] [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 select-none",
   {
     variants: {
       variant: {
@@ -23,10 +23,11 @@ const buttonVariants = cva(
         sage: "bg-medical-sage text-canvas font-semibold shadow-xs hover:bg-[#97B8B1]",
       },
       size: {
-        default: "h-9 px-4 text-xs font-semibold leading-none",
-        sm: "h-8 px-3 text-xs leading-none",
-        lg: "h-10 px-5 text-sm leading-none",
-        icon: "h-8 w-8 p-0 shrink-0",
+        default:
+          "h-[calc((36/375)*100vw)] lg:h-[calc((38/1920)*100vw)] px-[calc((14/375)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-semibold leading-none",
+        sm: "h-[calc((30/375)*100vw)] lg:h-[calc((32/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] leading-none",
+        lg: "h-[calc((40/375)*100vw)] lg:h-[calc((44/1920)*100vw)] px-[calc((18/375)*100vw)] lg:px-[calc((20/1920)*100vw)] text-[calc((13/375)*100vw)] lg:text-[calc((14/1920)*100vw)] leading-none",
+        icon: "h-[calc((32/375)*100vw)] w-[calc((32/375)*100vw)] lg:h-[calc((34/1920)*100vw)] lg:w-[calc((34/1920)*100vw)] p-0 shrink-0",
       },
     },
     defaultVariants: {

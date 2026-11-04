@@ -76,7 +76,7 @@ export function StatCard({
 
   if (isLoading) {
     return (
-      <Card className="p-[clamp(1rem,calc(0.85rem+0.5vw),1.35rem)] space-y-3">
+      <Card className="p-[calc((14/375)*100vw)] lg:p-[calc((20/1920)*100vw)] space-y-[calc((10/375)*100vw)] lg:space-y-[calc((12/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((16/1920)*100vw)]">
         <div className="flex items-center justify-between">
           <Skeleton className="h-4 w-24" />
           <Skeleton className="h-8 w-8 rounded-lg" />
@@ -90,16 +90,16 @@ export function StatCard({
   }
 
   return (
-    <Card className="transition-colors duration-200 hover:border-medical-blue/60 hover:bg-surface-hover/20 hover:shadow-md">
-      <CardHeader className="flex flex-row items-center justify-between p-[clamp(1rem,calc(0.85rem+0.5vw),1.35rem)] pb-2">
-        <CardTitle className="text-[clamp(0.7rem,calc(0.675rem+0.15vw),0.8rem)] font-medium text-content-secondary">
+    <Card className="transition-colors duration-200 hover:border-medical-blue/60 hover:bg-surface-hover/20 hover:shadow-md rounded-[calc((12/375)*100vw)] lg:rounded-[calc((16/1920)*100vw)]">
+      <CardHeader className="flex flex-row items-center justify-between p-[calc((14/375)*100vw)] lg:p-[calc((20/1920)*100vw)] pb-2">
+        <CardTitle className="text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)] font-medium text-content-secondary">
           {title}
         </CardTitle>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-[calc((6/375)*100vw)] lg:gap-[calc((8/1920)*100vw)]">
           {tag && (
             <span
               className={cn(
-                "text-[10px] font-semibold px-2 py-0.5 rounded-full border tracking-wide",
+                "text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] font-semibold px-[calc((8/375)*100vw)] lg:px-[calc((10/1920)*100vw)] py-0.5 rounded-full border tracking-wide",
                 tagColorMap[badgeColor] || tagColorMap.blue
               )}
             >
@@ -108,7 +108,7 @@ export function StatCard({
           )}
           <div
             className={cn(
-              "p-1.5 rounded-lg transition-transform duration-200 shrink-0",
+              "p-[calc((6/375)*100vw)] lg:p-[calc((8/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] transition-transform duration-200 shrink-0",
               colorMap[badgeColor] || colorMap.blue
             )}
           >
@@ -116,11 +116,11 @@ export function StatCard({
           </div>
         </div>
       </CardHeader>
-      <CardContent className="p-[clamp(1rem,calc(0.85rem+0.5vw),1.35rem)] pt-0 space-y-1.5">
-        <div className="font-manrope text-[clamp(1.4rem,calc(1.2rem+0.8vw),2.15rem)] font-extrabold text-content-primary tracking-tight">
+      <CardContent className="p-[calc((14/375)*100vw)] lg:p-[calc((20/1920)*100vw)] pt-0 space-y-[calc((6/375)*100vw)] lg:space-y-[calc((8/1920)*100vw)]">
+        <div className="font-manrope text-[calc((24/375)*100vw)] lg:text-[calc((32/1920)*100vw)] font-extrabold text-content-primary tracking-tight">
           <AnimatedCounter value={value} />
         </div>
-        <p className="flex items-center gap-1.5 text-[clamp(0.6875rem,calc(0.65rem+0.12vw),0.78rem)] text-content-secondary">
+        <p className="flex items-center gap-1.5 text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] text-content-secondary">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-medical-sage shrink-0 animate-pulse" />
           <span className="truncate">{subtitle}</span>
         </p>

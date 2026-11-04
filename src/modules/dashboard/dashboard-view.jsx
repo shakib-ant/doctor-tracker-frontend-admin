@@ -193,7 +193,7 @@ export function DashboardView() {
 
         {/* Clinical Department & Ward Capacity Telemetry */}
         <Card className="flex flex-col justify-between transition-colors duration-200 hover:border-medical-blue/40">
-          <CardHeader className="p-6 pb-4 border-b border-line/60">
+          <CardHeader className="p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pb-4 border-b border-line/60">
             <div className="space-y-1">
               <CardTitle className="flex items-center gap-2">
                 <div className="p-1.5 rounded-md bg-medical-blue/15 text-medical-blue">
@@ -206,7 +206,7 @@ export function DashboardView() {
               </CardDescription>
             </div>
           </CardHeader>
-          <CardContent className="p-6 pt-5 flex-1 flex flex-col justify-between space-y-4">
+          <CardContent className="p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pt-5 flex-1 flex flex-col justify-between space-y-4">
             <div className="space-y-3">
               {/* Critical Triage Alert Pill */}
               <div className="p-3 rounded-xl bg-red-950/30 border border-red-800/60 flex items-center justify-between">

@@ -13,7 +13,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Users, Eye, Stethoscope, Plus } from "lucide-react";
+import { Users, Eye, Stethoscope, Plus, Archive, ArchiveRestore } from "lucide-react";
 import { getDoctorInitials } from "../utils/doctorUtils";
 
 export function DoctorTable({
@@ -21,10 +21,11 @@ export function DoctorTable({
   isLoading = false,
   onViewDetails,
   onViewPatients,
+  onToggleArchive,
   onAddNew,
 }) {
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
       <Table>
         <TableHeader>
           <TableRow>
@@ -197,13 +198,13 @@ export function DoctorTable({
                 </TableCell>
 
                 {/* Actions */}
-                <TableCell className="text-right whitespace-nowrap">
-                  <div className="flex items-center justify-end gap-1 sm:gap-1.5">
+                <TableCell className="text-right whitespace-nowrap pr-3 sm:pr-4">
+                  <div className="flex items-center justify-end gap-2.5 sm:gap-2">
                     <Button
                       variant="secondary"
                       size="sm"
                       onClick={() => onViewPatients(doc)}
-                      className="h-6 sm:h-7 px-1.5 sm:px-2.5 text-[10px] sm:text-xs"
+                      className="h-6.5 sm:h-7 px-2 sm:px-2.5 text-[10px] sm:text-xs"
                       title="View & manage assigned patients"
                     >
                       <Users className="w-3 h-3 sm:w-3.5 sm:h-3.5 mr-1 text-medical-sage" />
@@ -213,11 +214,31 @@ export function DoctorTable({
                       variant="ghost"
                       size="sm"
                       onClick={() => onViewDetails(doc)}
-                      className="h-6 sm:h-7 px-1.5 sm:px-2 text-[10px] sm:text-xs"
+                      className="h-6.5 sm:h-7 px-2 sm:px-2 text-[10px] sm:text-xs text-medical-blue hover:bg-surface-hover"
                       title="View doctor profile"
                     >
-                      <Eye className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-medical-blue" />
+                      <Eye className="w-3 h-3 sm:w-3.5 sm:h-3.5 mr-1" />
+                      Profile
                     </Button>
+                    {onToggleArchive && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => onToggleArchive(doc._id, !doc.isActive)}
+                        className={`h-6.5 sm:h-7 px-2 sm:px-2 text-[10px] sm:text-xs transition-colors ${
+                          doc.isActive
+                            ? "text-content-muted hover:text-amber-400 hover:bg-amber-950/30"
+                            : "text-medical-sage hover:bg-medical-sage/20"
+                        }`}
+                        title={doc.isActive ? "Archive specialist" : "Restore specialist"}
+                      >
+                        {doc.isActive ? (
+                          <Archive className="w-3.5 h-3.5" />
+                        ) : (
+                          <ArchiveRestore className="w-3.5 h-3.5" />
+                        )}
+                      </Button>
+                    )}
                   </div>
                 </TableCell>
               </TableRow>

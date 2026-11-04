@@ -38,7 +38,7 @@ export function ConditionDistributionCard({
 }) {
   return (
     <Card className="h-full flex flex-col transition-colors duration-200 hover:border-medical-blue/40">
-      <CardHeader className="p-6 pb-4 border-b border-line/60">
+      <CardHeader className="p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pb-4 border-b border-line/60">
         <div className="space-y-1">
           <CardTitle className="flex items-center gap-2">
             <div className="p-1.5 rounded-md bg-medical-blue/15 text-medical-blue">
@@ -51,7 +51,7 @@ export function ConditionDistributionCard({
           </CardDescription>
         </div>
       </CardHeader>
-      <CardContent className="space-y-5 p-6 pt-5">
+      <CardContent className="space-y-5 p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pt-5">
         {isLoading ? (
           <div className="space-y-3.5 py-2">
             {Array.from({ length: 4 }).map((_, i) => (
