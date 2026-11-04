@@ -18,7 +18,7 @@ function AnimatedCounter({ value }) {
 
     let startTime = null;
     let animationFrame;
-    const duration = 1000;
+    const duration = 2000;
 
     const animate = (currentTime) => {
       if (!startTime) startTime = currentTime;

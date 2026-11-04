@@ -29,14 +29,14 @@ export function DoctorTable({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Doctor</TableHead>
-            <TableHead>Specialization</TableHead>
-            <TableHead>Hospital / Chamber</TableHead>
-            <TableHead>Contact</TableHead>
-            <TableHead>Fee</TableHead>
-            <TableHead>Available Days</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
+            <TableHead className="text-xs sm:text-sm font-semibold">Doctor</TableHead>
+            <TableHead className="text-xs sm:text-sm font-semibold">Specialization</TableHead>
+            <TableHead className="text-xs sm:text-sm font-semibold">Hospital / Chamber</TableHead>
+            <TableHead className="text-xs sm:text-sm font-semibold">Contact</TableHead>
+            <TableHead className="text-xs sm:text-sm font-semibold">Fee</TableHead>
+            <TableHead className="text-xs sm:text-sm font-semibold">Available Days</TableHead>
+            <TableHead className="text-xs sm:text-sm font-semibold">Status</TableHead>
+            <TableHead className="text-right text-xs sm:text-sm font-semibold">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -93,17 +93,17 @@ export function DoctorTable({
                     <Stethoscope className="w-6 h-6" />
                   </div>
                   <div className="space-y-1">
-                    <p className="font-manrope text-base font-bold text-content-primary">
+                    <p className="font-manrope text-base sm:text-lg font-bold text-content-primary">
                       No doctors found
                     </p>
-                    <p className="text-xs text-content-secondary">
+                    <p className="text-xs sm:text-sm text-content-secondary">
                       No doctor records match your current criteria.
                     </p>
                   </div>
                   {onAddNew && (
                     <Button variant="default" size="sm" onClick={onAddNew} className="mt-2">
                       <Plus className="w-3.5 h-3.5 mr-1.5" />
-                      Add New Doctor
+                      Add Specialist
                     </Button>
                   )}
                 </div>
@@ -116,7 +116,7 @@ export function DoctorTable({
                 <TableCell className="font-medium text-content-primary">
                   <div className="flex items-center gap-2 sm:gap-2.5">
                     {doc.image ? (
-                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden border border-line shrink-0 relative bg-surface-elevated">
+                      <div className="w-8 h-8 rounded-full overflow-hidden border border-line shrink-0 relative bg-surface-elevated">
                         <Image
                           src={doc.image}
                           alt={doc.name}
@@ -126,15 +126,15 @@ export function DoctorTable({
                         />
                       </div>
                     ) : (
-                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-medical-blue/20 text-medical-blue flex items-center justify-center font-manrope font-bold text-[9px] sm:text-xs shrink-0 border border-medical-blue/30">
+                      <div className="w-8 h-8 rounded-full bg-medical-blue/20 text-medical-blue flex items-center justify-center font-manrope font-bold text-xs shrink-0 border border-medical-blue/30">
                         {getDoctorInitials(doc.name)}
                       </div>
                     )}
                     <div>
-                      <div className="text-[11px] sm:text-sm font-semibold text-content-primary whitespace-nowrap">
+                      <div className="text-xs sm:text-sm font-semibold text-content-primary whitespace-nowrap">
                         {doc.name}
                       </div>
-                      <div className="text-[9px] sm:text-[11px] text-content-muted truncate max-w-[130px] sm:max-w-[170px]">
+                      <div className="text-[11px] sm:text-xs text-content-muted truncate max-w-[140px] sm:max-w-[180px] mt-0.5">
                         {doc.qualifications || doc.designation || "Physician"}
                       </div>
                     </div>
@@ -143,81 +143,81 @@ export function DoctorTable({
 
                 {/* Specialization */}
                 <TableCell>
-                  <Badge variant="default" className="text-[9px] sm:text-xs px-1.5 sm:px-2 py-0.5 whitespace-nowrap">
+                  <Badge variant="default" className="text-xs px-2 py-0.5 whitespace-nowrap">
                     {doc.specialization}
                   </Badge>
                 </TableCell>
 
                 {/* Hospital */}
-                <TableCell className="text-[10px] sm:text-xs text-content-secondary whitespace-nowrap">
+                <TableCell className="text-xs sm:text-sm text-content-secondary whitespace-nowrap">
                   {doc.hospital || "Not assigned"}
                 </TableCell>
 
                 {/* Contact */}
-                <TableCell className="text-[10px] sm:text-xs text-content-secondary whitespace-nowrap">
+                <TableCell className="text-xs sm:text-sm text-content-secondary whitespace-nowrap">
                   <div>{doc.phone || "--"}</div>
-                  <div className="text-[9px] sm:text-[10px] text-content-muted truncate max-w-[110px] sm:max-w-[140px]">
+                  <div className="text-[11px] sm:text-xs text-content-muted truncate max-w-[120px] sm:max-w-[150px] mt-0.5">
                     {doc.email || ""}
                   </div>
                 </TableCell>
 
                 {/* Fee */}
                 <TableCell className="whitespace-nowrap">
-                  <div className="text-[10px] sm:text-xs font-semibold text-content-primary font-manrope">
+                  <div className="text-xs sm:text-sm font-semibold text-content-primary font-manrope">
                     {doc.consultationFee !== undefined && doc.consultationFee !== null
                       ? `$${doc.consultationFee}`
                       : "--"}
                   </div>
-                  <div className="text-[8px] sm:text-[10px] text-content-muted">per consult</div>
+                  <div className="text-[10px] text-content-muted">per consult</div>
                 </TableCell>
 
                 {/* Available Days */}
                 <TableCell>
-                  <div className="flex gap-1 flex-wrap max-w-[120px] sm:max-w-[140px]">
+                  <div className="flex gap-1 flex-wrap max-w-[130px] sm:max-w-[150px]">
                     {doc.availableDays && doc.availableDays.length > 0 ? (
                       doc.availableDays.map((d) => (
                         <span
                           key={d}
                           title={d}
-                          className="px-1.5 py-0.5 rounded text-[8px] sm:text-[10px] font-medium bg-surface-elevated text-content-secondary border border-line"
+                          className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-surface-elevated text-content-secondary border border-line"
                         >
                           {d.length > 3 ? d.slice(0, 3) : d}
                         </span>
                       ))
                     ) : (
-                      <span className="text-[8px] sm:text-[10px] text-content-muted">--</span>
+                      <span className="text-xs text-content-muted">--</span>
                     )}
                   </div>
                 </TableCell>
 
                 {/* Status */}
                 <TableCell>
-                  <Badge variant={doc.isActive ? "active" : "archived"} className="text-[9px] sm:text-xs px-1.5 sm:px-2 py-0.5">
+                  <Badge variant={doc.isActive ? "active" : "archived"} className="text-xs px-2 py-0.5">
                     {doc.isActive ? "Active" : "Archived"}
                   </Badge>
                 </TableCell>
 
                 {/* Actions */}
                 <TableCell className="text-right whitespace-nowrap pr-3 sm:pr-4">
-                  <div className="flex items-center justify-end gap-2.5 sm:gap-2">
+                  <div className="flex items-center justify-end gap-2 sm:gap-2.5">
                     <Button
                       variant="secondary"
                       size="sm"
                       onClick={() => onViewPatients(doc)}
-                      className="h-6.5 sm:h-7 px-2 sm:px-2.5 text-[10px] sm:text-xs"
+                      className="h-7 px-2.5 text-xs"
                       title="View & manage assigned patients"
                     >
-                      <Users className="w-3 h-3 sm:w-3.5 sm:h-3.5 mr-1 text-medical-sage" />
+                      <Users className="w-3.5 h-3.5 mr-1 text-medical-sage" />
                       Patients
                     </Button>
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => onViewDetails(doc)}
-                      className="h-6.5 sm:h-7 px-2 sm:px-2 text-[10px] sm:text-xs text-medical-blue hover:bg-surface-hover"
+                      className="h-7 px-2 text-xs text-medical-blue hover:bg-surface-hover"
                       title="View doctor profile"
                     >
-                      <Eye className="w-3 h-3 sm:w-3.5 sm:h-3.5 mr-1" />
+                      <Eye className="w-3.5 h-3.5 mr-1" />
                       Profile
                     </Button>
                     {onToggleArchive && (
@@ -225,7 +225,7 @@ export function DoctorTable({
                         variant="ghost"
                         size="sm"
                         onClick={() => onToggleArchive(doc._id, !doc.isActive)}
-                        className={`h-6.5 sm:h-7 px-2 sm:px-2 text-[10px] sm:text-xs transition-colors ${
+                        className={`h-7 px-2 text-xs transition-colors ${
                           doc.isActive
                             ? "text-content-muted hover:text-amber-400 hover:bg-amber-950/30"
                             : "text-medical-sage hover:bg-medical-sage/20"

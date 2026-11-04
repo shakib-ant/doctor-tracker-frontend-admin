@@ -38,20 +38,20 @@ export function ConditionDistributionCard({
 }) {
   return (
     <Card className="h-full flex flex-col transition-colors duration-200 hover:border-medical-blue/40">
-      <CardHeader className="p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pb-4 border-b border-line/60">
+      <CardHeader className="p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pb-3 border-b border-line/60">
         <div className="space-y-1">
-          <CardTitle className="flex items-center gap-2">
-            <div className="p-1.5 rounded-md bg-medical-blue/15 text-medical-blue">
+          <div className="flex items-center gap-[calc((8/375)*100vw)] lg:gap-[calc((10/1920)*100vw)]">
+            <div className="p-1.5 rounded-md bg-medical-blue/15 text-medical-blue shrink-0">
               <Activity className="w-4 h-4" />
             </div>
-            Clinical Condition Distribution
-          </CardTitle>
-          <CardDescription>
+            <CardTitle className="text-[calc((16/375)*100vw)] lg:text-[calc((20/1920)*100vw)]">Clinical Condition Distribution</CardTitle>
+          </div>
+          <CardDescription className="text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)]">
             Categorized breakdown of registered diagnoses across patient records
           </CardDescription>
         </div>
       </CardHeader>
-      <CardContent className="space-y-5 p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pt-5">
+      <CardContent className="space-y-[calc((14/375)*100vw)] lg:space-y-[calc((18/1920)*100vw)] p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pt-4">
         {isLoading ? (
           <div className="space-y-3.5 py-2">
             {Array.from({ length: 4 }).map((_, i) => (
@@ -69,23 +69,23 @@ export function ConditionDistributionCard({
             No patient conditions recorded yet.
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-[calc((10/375)*100vw)] lg:space-y-[calc((12/1920)*100vw)]">
             {conditions.map((item, idx) => {
               const pct = calculatePercentage(item.count, totalPatients);
               const color = CONDITION_COLORS[idx % CONDITION_COLORS.length];
               return (
                 <div key={item.condition} className="space-y-1.5">
                   <div className="flex justify-between text-xs">
-                    <span className="text-content-primary font-medium">
+                    <span className="text-content-primary font-medium text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)]">
                       {item.condition}
                     </span>
-                    <span className="text-content-secondary text-[11px] font-semibold">
+                    <span className="text-content-secondary text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] font-semibold">
                       {item.count} ({pct}%)
                     </span>
                   </div>
-                  <div className="w-full bg-surface-elevated rounded-full h-2 overflow-hidden border border-line/60">
+                  <div className="w-full bg-surface-elevated rounded-full h-[calc((7/375)*100vw)] lg:h-[calc((8/1920)*100vw)] overflow-hidden border border-line/60">
                     <div
-                      className="h-2 rounded-full transition-all duration-700 ease-out"
+                      className="h-full rounded-full transition-all duration-[2000ms] cubic-bezier(0.22,1,0.36,1)"
                       style={{
                         width: `${Math.max(pct, 4)}%`,
                         backgroundColor: color,
@@ -100,11 +100,11 @@ export function ConditionDistributionCard({
 
         {/* Semantic Status Caseload */}
         {statuses.length > 0 && (
-          <div className="pt-4 border-t border-line/60">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-content-muted block mb-2.5">
+          <div className="pt-3.5 border-t border-line/60">
+            <span className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] font-semibold uppercase tracking-wider text-content-muted block mb-2.5">
               Care Caseload & Triage Urgency
             </span>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-[calc((6/375)*100vw)] lg:gap-[calc((8/1920)*100vw)]">
               {statuses.map((s) => {
                 const conf = STATUS_CONFIG[s.status] || {
                   dot: "bg-content-muted",
@@ -114,7 +114,7 @@ export function ConditionDistributionCard({
                   <div
                     key={s.status}
                     className={cn(
-                      "px-3 py-1.5 rounded-lg text-xs bg-surface-elevated border border-line flex items-center gap-2 transition-colors",
+                      "px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] py-[calc((6/375)*100vw)] lg:py-[calc((6/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] bg-surface-elevated border border-line flex items-center gap-2 transition-colors",
                       conf.box
                     )}
                   >

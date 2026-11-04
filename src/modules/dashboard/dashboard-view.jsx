@@ -66,31 +66,37 @@ export function DashboardView() {
   return (
     <div className="space-y-[calc((16/375)*100vw)] lg:space-y-[calc((24/1920)*100vw)] w-full max-w-full">
       {/* Clinical Operations Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-[calc((12/375)*100vw)] lg:gap-4 pb-2 border-b border-line/60">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-[calc((12/375)*100vw)] lg:gap-[calc((16/1920)*100vw)] pb-2 border-b border-line/60">
         <div>
           <h2 className="font-manrope text-[calc((20/375)*100vw)] lg:text-[calc((28/1920)*100vw)] font-extrabold tracking-tight text-content-primary">
             Clinical Operations & Telemetry
           </h2>
-          <p className="text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)] text-content-secondary mt-1 leading-relaxed">
+          <p className="text-[calc((12/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary mt-1 leading-relaxed">
             Live hospital metrics: specialist duty roster, inpatient census, and epidemiological triage distribution.
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)]">
           <Button
             variant="secondary"
             size="sm"
             onClick={loadData}
             disabled={isLoading}
-            className="cursor-pointer"
+            className="h-[calc((34/375)*100vw)] lg:h-[calc((36/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] cursor-pointer"
           >
             <RefreshCw
-              className={`w-3.5 h-3.5 mr-1.5 ${isLoading ? "animate-spin" : ""}`}
+              className={`w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] mr-1.5 ${
+                isLoading ? "animate-spin" : ""
+              }`}
             />
             Synchronize
           </Button>
           <Link href="/doctors">
-            <Button variant="default" size="sm" className="cursor-pointer">
-              <Stethoscope className="w-3.5 h-3.5 mr-1.5" />
+            <Button
+              variant="default"
+              size="sm"
+              className="h-[calc((34/375)*100vw)] lg:h-[calc((36/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] cursor-pointer"
+            >
+              <Stethoscope className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] mr-1.5" />
               Manage Specialists
             </Button>
           </Link>
@@ -168,8 +174,8 @@ export function DashboardView() {
         />
       </div>
 
-      {/* Charts Grid with Uniform Fluid Gap */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-[calc((14/375)*100vw)] lg:gap-[calc((24/1920)*100vw)] w-full">
+      {/* Balanced 2-Column Charts Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-[calc((14/375)*100vw)] lg:gap-[calc((24/1920)*100vw)] w-full items-stretch">
         <PatientsPerDoctorChart
           data={analytics?.patientsPerDoctor || []}
           isLoading={isLoading}
@@ -193,81 +199,84 @@ export function DashboardView() {
 
         {/* Clinical Department & Ward Capacity Telemetry */}
         <Card className="flex flex-col justify-between transition-colors duration-200 hover:border-medical-blue/40">
-          <CardHeader className="p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pb-4 border-b border-line/60">
+          <CardHeader className="p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pb-3 border-b border-line/60">
             <div className="space-y-1">
-              <CardTitle className="flex items-center gap-2">
-                <div className="p-1.5 rounded-md bg-medical-blue/15 text-medical-blue">
-                  <Hospital className="w-4 h-4" />
+              <div className="flex items-center gap-[calc((8/375)*100vw)] lg:gap-[calc((10/1920)*100vw)]">
+                <div className="p-1.5 rounded-md bg-medical-blue/15 text-medical-blue shrink-0">
+                  <Hospital className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)]" />
                 </div>
-                Hospital Ward Capacity
-              </CardTitle>
-              <CardDescription>
+                <CardTitle className="text-[calc((16/375)*100vw)] lg:text-[calc((20/1920)*100vw)]">Hospital Ward Capacity</CardTitle>
+              </div>
+              <CardDescription className="text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)]">
                 Real-time operational readiness and triage alert threshold
               </CardDescription>
             </div>
           </CardHeader>
-          <CardContent className="p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pt-5 flex-1 flex flex-col justify-between space-y-4">
-            <div className="space-y-3">
+          <CardContent className="p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pt-4 flex-1 flex flex-col justify-between space-y-[calc((12/375)*100vw)] lg:space-y-[calc((16/1920)*100vw)]">
+            <div className="space-y-[calc((10/375)*100vw)] lg:space-y-[calc((12/1920)*100vw)]">
               {/* Critical Triage Alert Pill */}
-              <div className="p-3 rounded-xl bg-red-950/30 border border-red-800/60 flex items-center justify-between">
+              <div className="p-[calc((10/375)*100vw)] lg:p-[calc((12/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-red-950/30 border border-red-800/60 flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
-                  <AlertTriangle className="w-4 h-4 text-red-400 shrink-0" />
+                  <AlertTriangle className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] text-red-400 shrink-0" />
                   <div>
-                    <span className="text-xs font-semibold text-red-200 block">
+                    <span className="text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)] font-semibold text-red-200 block">
                       Critical & High-Dependency
                     </span>
-                    <span className="text-[10px] text-red-300/80">
+                    <span className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-red-300/80">
                       Requires intensive monitoring
                     </span>
                   </div>
                 </div>
-                <span className="text-sm font-extrabold text-red-300 font-manrope px-2 py-0.5 rounded-md bg-red-900/40 border border-red-700/60">
+                <span className="text-[calc((13/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-extrabold text-red-300 font-manrope px-2 py-0.5 rounded-md bg-red-900/40 border border-red-700/60">
                   {criticalCount}
                 </span>
               </div>
 
               {/* Observation Load */}
-              <div className="p-3 rounded-xl bg-amber-950/25 border border-amber-800/50 flex items-center justify-between">
+              <div className="p-[calc((10/375)*100vw)] lg:p-[calc((12/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-amber-950/25 border border-amber-800/50 flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
-                  <Activity className="w-4 h-4 text-amber-400 shrink-0" />
+                  <Activity className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] text-amber-400 shrink-0" />
                   <div>
-                    <span className="text-xs font-semibold text-amber-200 block">
+                    <span className="text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)] font-semibold text-amber-200 block">
                       Under Clinical Observation
                     </span>
-                    <span className="text-[10px] text-amber-300/80">
+                    <span className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-amber-300/80">
                       Pending discharge or re-evaluation
                     </span>
                   </div>
                 </div>
-                <span className="text-sm font-extrabold text-amber-300 font-manrope px-2 py-0.5 rounded-md bg-amber-900/40 border border-amber-700/60">
+                <span className="text-[calc((13/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-extrabold text-amber-300 font-manrope px-2 py-0.5 rounded-md bg-amber-900/40 border border-amber-700/60">
                   {observationCount}
                 </span>
               </div>
 
               {/* Department Readiness */}
-              <div className="p-3 rounded-xl bg-surface-elevated/40 border border-line/60 flex items-center justify-between">
+              <div className="p-[calc((10/375)*100vw)] lg:p-[calc((12/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-surface-elevated/40 border border-line/60 flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-medical-sage shrink-0" />
+                  <CheckCircle2 className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] text-medical-sage shrink-0" />
                   <div>
-                    <span className="text-xs font-semibold text-content-primary block">
+                    <span className="text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)] font-semibold text-content-primary block">
                       Active Clinical Specializations
                     </span>
-                    <span className="text-[10px] text-content-secondary">
+                    <span className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-secondary">
                       Full departmental roster coverage
                     </span>
                   </div>
                 </div>
-                <span className="text-xs font-bold text-medical-sage px-2 py-0.5 rounded-md bg-medical-sage/15 border border-medical-sage/30">
+                <span className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-bold text-medical-sage px-2 py-0.5 rounded-md bg-medical-sage/15 border border-medical-sage/30">
                   15 / 15 Depts
                 </span>
               </div>
             </div>
 
-            {/* Direct Clinical Action Buttons */}
-            <div className="space-y-2 pt-2 border-t border-line/60">
+            {/* Direct Clinical Action Buttons - Fully Calc Styled */}
+            <div className="space-y-[calc((8/375)*100vw)] lg:space-y-[calc((10/1920)*100vw)] pt-[calc((10/375)*100vw)] lg:pt-[calc((12/1920)*100vw)] border-t border-line/60">
               <Link href="/patients" className="block">
-                <Button variant="default" size="default" className="w-full justify-center gap-2 cursor-pointer text-xs font-semibold">
-                  <Plus className="w-3.5 h-3.5" />
+                <Button
+                  variant="default"
+                  className="w-full justify-center gap-[calc((8/375)*100vw)] lg:gap-[calc((8/1920)*100vw)] h-[calc((38/375)*100vw)] lg:h-[calc((42/1920)*100vw)] px-[calc((14/375)*100vw)] lg:px-[calc((16/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)] font-semibold cursor-pointer shadow-xs"
+                >
+                  <Plus className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] shrink-0" />
                   <span>Admit New Patient to Ward</span>
                 </Button>
               </Link>

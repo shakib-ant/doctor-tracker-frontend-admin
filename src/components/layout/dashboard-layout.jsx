@@ -4,8 +4,6 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Sidebar } from "./sidebar";
 import { Navbar } from "./navbar";
-import { X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { getAuthToken } from "@/utils/auth";
 
 export function DashboardLayout({ children, title }) {
@@ -36,10 +34,10 @@ export function DashboardLayout({ children, title }) {
   }
 
   return (
-    <div className="flex min-h-screen bg-canvas text-content-primary no-scrollbar">
-      {/* Desktop Sidebar */}
-      <div className="hidden lg:block lg:w-64 lg:shrink-0">
-        <div className="fixed inset-y-0 left-0 w-64 z-30">
+    <div className="flex min-h-screen w-full max-w-full overflow-x-hidden bg-canvas text-content-primary no-scrollbar">
+      {/* Desktop Sidebar with Fluid Calc Width */}
+      <div className="hidden lg:block lg:w-[calc((260/1920)*100vw)] lg:shrink-0">
+        <div className="fixed inset-y-0 left-0 w-[calc((260/1920)*100vw)] z-30">
           <Sidebar />
         </div>
       </div>
@@ -53,21 +51,21 @@ export function DashboardLayout({ children, title }) {
             onClick={() => setSidebarOpen(false)}
           />
 
-          {/* Drawer Panel - 100% Full width on mobile */}
+          {/* Drawer Panel */}
           <div className="fixed inset-0 flex w-full flex-col bg-surface shadow-2xl z-50 animate-in slide-in-from-left duration-250 no-scrollbar">
             <Sidebar onClose={() => setSidebarOpen(false)} />
           </div>
         </div>
       )}
 
-      {/* Main Content Area */}
-      <div className="flex flex-col flex-1 min-w-0 w-full max-w-full overflow-x-hidden no-scrollbar">
+      {/* Main Content Area - Strictly constrained to prevent any horizontal scrolling */}
+      <div className="flex flex-col flex-1 min-w-0 overflow-x-hidden no-scrollbar">
         <Navbar
           onMenuClick={() => setSidebarOpen(true)}
           title={title}
         />
-        <main className="flex-1 w-full max-w-full p-[calc((16/375)*100vw)] lg:p-[calc((32/1920)*100vw)] no-scrollbar">
-          <div className="max-w-[1700px] w-full mx-auto space-y-[calc((16/375)*100vw)] lg:space-y-[calc((24/1920)*100vw)] transition-all duration-300 animate-in fade-in-50">
+        <main className="flex-1 w-full p-[calc((14/375)*100vw)] lg:p-[calc((32/1920)*100vw)] no-scrollbar overflow-x-hidden">
+          <div className="max-w-[1720px] w-full mx-auto space-y-[calc((16/375)*100vw)] lg:space-y-[calc((24/1920)*100vw)] transition-all duration-300 animate-in fade-in-50">
             {children}
           </div>
         </main>

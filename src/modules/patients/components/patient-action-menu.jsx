@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import {
   MoreHorizontal,
   FileText,
@@ -31,15 +32,66 @@ export function PatientActionMenu({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [showStatusSubmenu, setShowStatusSubmenu] = useState(false);
+  const [menuCoords, setMenuCoords] = useState({ top: 0, left: 0, openUp: false });
+  const [isClient, setIsClient] = useState(false);
+
+  const buttonRef = useRef(null);
   const menuRef = useRef(null);
 
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const updateCoordinates = useCallback(() => {
+    if (!buttonRef.current) return;
+    const rect = buttonRef.current.getBoundingClientRect();
+    const menuWidth = 232;
+    const estimatedMenuHeight = 290;
+
+    const spaceBelow = window.innerHeight - rect.bottom;
+    const spaceAbove = rect.top;
+    const openUp = spaceBelow < estimatedMenuHeight && spaceAbove > spaceBelow;
+
+    const top = openUp
+      ? Math.max(10, rect.top - estimatedMenuHeight - 6)
+      : Math.min(window.innerHeight - estimatedMenuHeight - 10, rect.bottom + 6);
+
+    let left = rect.right - menuWidth;
+    if (left < 10) left = 10;
+    if (left + menuWidth > window.innerWidth - 10) {
+      left = window.innerWidth - menuWidth - 10;
+    }
+
+    setMenuCoords({ top, left, openUp });
+  }, []);
+
+  const handleToggle = (e) => {
+    e.stopPropagation();
+    if (!isOpen) {
+      updateCoordinates();
+      setIsOpen(true);
+      setShowStatusSubmenu(false);
+    } else {
+      setIsOpen(false);
+      setShowStatusSubmenu(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!isOpen) return;
+
     const handleClickOutside = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(e.target) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(e.target)
+      ) {
         setIsOpen(false);
         setShowStatusSubmenu(false);
       }
     };
+
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
         setIsOpen(false);
@@ -47,13 +99,21 @@ export function PatientActionMenu({
       }
     };
 
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-      document.addEventListener("keydown", handleKeyDown);
-    }
+    const handleScrollOrResize = () => {
+      setIsOpen(false);
+      setShowStatusSubmenu(false);
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("scroll", handleScrollOrResize, true);
+    window.addEventListener("resize", handleScrollOrResize);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("scroll", handleScrollOrResize, true);
+      window.removeEventListener("resize", handleScrollOrResize);
     };
   }, [isOpen]);
 
@@ -140,143 +200,172 @@ export function PatientActionMenu({
     downloadAnchor.remove();
   };
 
+  const menuContent = isOpen && isClient && (
+    <div
+      ref={menuRef}
+      style={{
+        position: "fixed",
+        top: `${menuCoords.top}px`,
+        left: `${menuCoords.left}px`,
+        zIndex: 99999,
+      }}
+      className={`w-58 rounded-xl border border-[#384A5C] bg-[#18232F]/98 p-1.5 shadow-[0_16px_48px_rgba(0,0,0,0.7)] backdrop-blur-xl text-xs select-none animate-in fade-in zoom-in-95 duration-150 ${
+        menuCoords.openUp ? "origin-bottom-right" : "origin-top-right"
+      }`}
+    >
+      {/* Patient Mini Title Banner */}
+      <div className="px-3 py-1.5 mb-1 border-b border-line/60 flex items-center justify-between text-[11px] text-content-muted">
+        <span className="font-semibold text-content-primary truncate">{patient.name}</span>
+        <span className="text-[10px] uppercase font-bold text-medical-blue">Actions</span>
+      </div>
+
+      {/* View Details */}
+      <button
+        type="button"
+        onClick={() => {
+          setIsOpen(false);
+          onViewDetails(patient);
+        }}
+        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-content-primary hover:bg-surface-elevated text-left transition-colors cursor-pointer"
+      >
+        <FileText className="w-3.5 h-3.5 text-medical-blue shrink-0" />
+        <span>View Clinical Chart</span>
+      </button>
+
+      {/* Edit */}
+      <button
+        type="button"
+        onClick={() => {
+          setIsOpen(false);
+          onEdit(patient);
+        }}
+        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-content-primary hover:bg-surface-elevated text-left transition-colors cursor-pointer"
+      >
+        <Edit2 className="w-3.5 h-3.5 text-content-secondary shrink-0" />
+        <span>Edit Information</span>
+      </button>
+
+      {/* Quick Care Status Menu */}
+      <div className="relative">
+        <button
+          type="button"
+          onClick={() => setShowStatusSubmenu(!showStatusSubmenu)}
+          className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-content-primary hover:bg-surface-elevated text-left transition-colors cursor-pointer"
+        >
+          <div className="flex items-center gap-2.5">
+            <Activity className="w-3.5 h-3.5 text-medical-sage shrink-0" />
+            <span>Update Care Status</span>
+          </div>
+          <ChevronRight
+            className={`w-3.5 h-3.5 text-content-muted transition-transform shrink-0 ${
+              showStatusSubmenu ? "rotate-90 text-medical-sage" : ""
+            }`}
+          />
+        </button>
+
+        {showStatusSubmenu && (
+          <div className="my-1 ml-2 pl-2 border-l border-medical-sage/40 space-y-0.5 animate-in fade-in duration-100">
+            {STATUS_OPTIONS.map((opt) => (
+              <button
+                key={opt.value}
+                type="button"
+                onClick={() => {
+                  setIsOpen(false);
+                  setShowStatusSubmenu(false);
+                  onStatusChange(patient, opt.value);
+                }}
+                className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md hover:bg-surface-elevated transition-colors text-left cursor-pointer ${
+                  patient.status === opt.value
+                    ? "bg-surface-elevated font-semibold text-content-primary"
+                    : "text-content-secondary"
+                }`}
+              >
+                <span className="flex items-center gap-1.5 truncate">
+                  <span
+                    className={`w-1.5 h-1.5 rounded-full shrink-0 ${opt.color.replace(
+                      "text-",
+                      "bg-"
+                    )}`}
+                  />
+                  {opt.label}
+                </span>
+                {patient.status === opt.value && (
+                  <Check className="w-3 h-3 text-medical-blue shrink-0 ml-1" />
+                )}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Print Admission Slip */}
+      <button
+        type="button"
+        onClick={handlePrintSlip}
+        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-content-primary hover:bg-surface-elevated text-left transition-colors cursor-pointer"
+      >
+        <Printer className="w-3.5 h-3.5 text-content-secondary shrink-0" />
+        <span>Print Clinical Record</span>
+      </button>
+
+      {/* Export Medical Dossier */}
+      <button
+        type="button"
+        onClick={handleExportData}
+        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-content-primary hover:bg-surface-elevated text-left transition-colors cursor-pointer"
+      >
+        <Download className="w-3.5 h-3.5 text-content-secondary shrink-0" />
+        <span>Export Patient Dossier</span>
+      </button>
+
+      <div className="my-1 border-t border-line/60" />
+
+      {/* Archive / Unarchive */}
+      <button
+        type="button"
+        onClick={() => {
+          setIsOpen(false);
+          onArchiveToggle(patient);
+        }}
+        className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-left transition-colors cursor-pointer ${
+          patient.isArchived
+            ? "text-medical-sage hover:bg-medical-sage/15"
+            : "text-amber-400 hover:bg-amber-950/30"
+        }`}
+      >
+        {patient.isArchived ? (
+          <>
+            <ArchiveRestore className="w-3.5 h-3.5 shrink-0" />
+            <span>Restore (Unarchive)</span>
+          </>
+        ) : (
+          <>
+            <Archive className="w-3.5 h-3.5 shrink-0" />
+            <span>Archive Patient Record</span>
+          </>
+        )}
+      </button>
+    </div>
+  );
+
   return (
-    <div ref={menuRef} className="relative inline-block text-left select-none">
+    <div className="inline-block text-left select-none">
       <Button
+        ref={buttonRef}
         variant="ghost"
         size="sm"
-        onClick={() => {
-          setIsOpen(!isOpen);
-          setShowStatusSubmenu(false);
-        }}
-        className="h-7 w-7 p-0 rounded-lg text-content-secondary hover:text-content-primary hover:bg-surface-elevated/80 transition-colors"
+        onClick={handleToggle}
+        className={`h-7 w-7 p-0 rounded-lg transition-colors ${
+          isOpen
+            ? "bg-surface-elevated text-content-primary ring-1 ring-medical-blue"
+            : "text-content-secondary hover:text-content-primary hover:bg-surface-elevated/80"
+        }`}
         title="More clinical actions"
       >
         <MoreHorizontal className="w-4 h-4" />
       </Button>
 
-      {isOpen && (
-        <div className="absolute right-0 top-full mt-1.5 w-56 rounded-xl border border-line bg-surface/98 p-1.5 shadow-2xl backdrop-blur-md z-50 animate-in fade-in zoom-in-95 duration-150 text-xs">
-          {/* View Details */}
-          <button
-            type="button"
-            onClick={() => {
-              setIsOpen(false);
-              onViewDetails(patient);
-            }}
-            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-content-primary hover:bg-surface-elevated text-left transition-colors cursor-pointer"
-          >
-            <FileText className="w-3.5 h-3.5 text-medical-blue" />
-            <span>View Clinical Chart</span>
-          </button>
-
-          {/* Edit */}
-          <button
-            type="button"
-            onClick={() => {
-              setIsOpen(false);
-              onEdit(patient);
-            }}
-            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-content-primary hover:bg-surface-elevated text-left transition-colors cursor-pointer"
-          >
-            <Edit2 className="w-3.5 h-3.5 text-content-secondary" />
-            <span>Edit Information</span>
-          </button>
-
-          {/* Quick Care Status Menu */}
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => setShowStatusSubmenu(!showStatusSubmenu)}
-              className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-content-primary hover:bg-surface-elevated text-left transition-colors cursor-pointer"
-            >
-              <div className="flex items-center gap-2.5">
-                <Activity className="w-3.5 h-3.5 text-medical-sage" />
-                <span>Update Care Status</span>
-              </div>
-              <ChevronRight className={`w-3.5 h-3.5 text-content-muted transition-transform ${showStatusSubmenu ? "rotate-90" : ""}`} />
-            </button>
-
-            {showStatusSubmenu && (
-              <div className="my-1 ml-2 pl-2 border-l border-line/80 space-y-0.5">
-                {STATUS_OPTIONS.map((opt) => (
-                  <button
-                    key={opt.value}
-                    type="button"
-                    onClick={() => {
-                      setIsOpen(false);
-                      setShowStatusSubmenu(false);
-                      onStatusChange(patient, opt.value);
-                    }}
-                    className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md hover:bg-surface-elevated transition-colors text-left cursor-pointer ${
-                      patient.status === opt.value
-                        ? "bg-surface-elevated font-semibold text-content-primary"
-                        : "text-content-secondary"
-                    }`}
-                  >
-                    <span className="flex items-center gap-1.5">
-                      <span className={`w-1.5 h-1.5 rounded-full ${opt.color.replace("text-", "bg-")}`} />
-                      {opt.label}
-                    </span>
-                    {patient.status === opt.value && (
-                      <Check className="w-3 h-3 text-medical-blue" />
-                    )}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Print Admission Slip */}
-          <button
-            type="button"
-            onClick={handlePrintSlip}
-            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-content-primary hover:bg-surface-elevated text-left transition-colors cursor-pointer"
-          >
-            <Printer className="w-3.5 h-3.5 text-content-secondary" />
-            <span>Print Clinical Record</span>
-          </button>
-
-          {/* Export Medical Dossier */}
-          <button
-            type="button"
-            onClick={handleExportData}
-            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-content-primary hover:bg-surface-elevated text-left transition-colors cursor-pointer"
-          >
-            <Download className="w-3.5 h-3.5 text-content-secondary" />
-            <span>Export Patient Dossier</span>
-          </button>
-
-          <div className="my-1 border-t border-line/60" />
-
-          {/* Archive / Unarchive */}
-          <button
-            type="button"
-            onClick={() => {
-              setIsOpen(false);
-              onArchiveToggle(patient);
-            }}
-            className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-left transition-colors cursor-pointer ${
-              patient.isArchived
-                ? "text-medical-sage hover:bg-medical-sage/15"
-                : "text-amber-400 hover:bg-amber-950/30"
-            }`}
-          >
-            {patient.isArchived ? (
-              <>
-                <ArchiveRestore className="w-3.5 h-3.5" />
-                <span>Restore (Unarchive)</span>
-              </>
-            ) : (
-              <>
-                <Archive className="w-3.5 h-3.5" />
-                <span>Archive Patient Record</span>
-              </>
-            )}
-          </button>
-        </div>
-      )}
+      {isClient && typeof document !== "undefined" && createPortal(menuContent, document.body)}
     </div>
   );
 }
-

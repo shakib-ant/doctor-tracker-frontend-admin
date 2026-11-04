@@ -30,13 +30,13 @@ export function PatientTable({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Patient Name</TableHead>
-            <TableHead>Age / Gender</TableHead>
-            <TableHead>Condition</TableHead>
-            <TableHead>Assigned Doctor</TableHead>
-            <TableHead>Admission Date</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
+            <TableHead className="text-xs sm:text-sm font-semibold">Patient Name</TableHead>
+            <TableHead className="text-xs sm:text-sm font-semibold">Age / Gender</TableHead>
+            <TableHead className="text-xs sm:text-sm font-semibold">Condition</TableHead>
+            <TableHead className="text-xs sm:text-sm font-semibold">Assigned Doctor</TableHead>
+            <TableHead className="text-xs sm:text-sm font-semibold">Admission Date</TableHead>
+            <TableHead className="text-xs sm:text-sm font-semibold">Status</TableHead>
+            <TableHead className="text-right text-xs sm:text-sm font-semibold">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -83,10 +83,10 @@ export function PatientTable({
                     <Users className="w-6 h-6" />
                   </div>
                   <div className="space-y-1">
-                    <p className="font-manrope text-base font-bold text-content-primary">
+                    <p className="font-manrope text-base sm:text-lg font-bold text-content-primary">
                       No patient records found
                     </p>
-                    <p className="text-xs text-content-secondary">
+                    <p className="text-xs sm:text-sm text-content-secondary">
                       No patients match your current filter or date range.
                     </p>
                   </div>
@@ -105,11 +105,11 @@ export function PatientTable({
                 {/* Patient Name & Contact */}
                 <TableCell className="font-medium text-content-primary">
                   <div>
-                    <div className="text-[11px] sm:text-sm font-semibold text-content-primary whitespace-nowrap">
+                    <div className="text-xs sm:text-sm font-semibold text-content-primary whitespace-nowrap">
                       {p.name}
                     </div>
                     {p.phone && (
-                      <div className="text-[9px] sm:text-[11px] text-content-muted whitespace-nowrap">
+                      <div className="text-[11px] sm:text-xs text-content-muted whitespace-nowrap mt-0.5">
                         {p.phone}
                       </div>
                     )}
@@ -117,37 +117,37 @@ export function PatientTable({
                 </TableCell>
 
                 {/* Age & Gender */}
-                <TableCell className="text-[10px] sm:text-xs text-content-secondary whitespace-nowrap">
+                <TableCell className="text-xs sm:text-sm text-content-secondary whitespace-nowrap">
                   {p.age} yrs &bull; {p.gender}
                 </TableCell>
 
                 {/* Condition */}
                 <TableCell className="whitespace-nowrap">
-                  <Badge variant="default" className="text-[9px] sm:text-xs font-normal px-1.5 sm:px-2 py-0.5">
+                  <Badge variant="default" className="text-xs font-normal px-2 py-0.5">
                     {p.condition}
                   </Badge>
                 </TableCell>
 
                 {/* Assigned Doctor */}
-                <TableCell className="text-[10px] sm:text-xs text-content-secondary whitespace-nowrap">
+                <TableCell className="text-xs sm:text-sm text-content-secondary whitespace-nowrap">
                   {p.doctor ? (
                     <div>
-                      <div className="font-medium text-content-primary">
+                      <div className="font-medium text-content-primary text-xs sm:text-sm">
                         {p.doctor.name}
                       </div>
-                      <div className="text-[8px] sm:text-[10px] text-content-muted">
+                      <div className="text-[11px] sm:text-xs text-content-muted mt-0.5">
                         {p.doctor.specialization} &bull; {p.doctor.hospital || "Clinic"}
                       </div>
                     </div>
                   ) : (
-                    <span className="text-content-muted">Unassigned</span>
+                    <span className="text-content-muted text-xs">Unassigned</span>
                   )}
                 </TableCell>
 
                 {/* Admission Date */}
-                <TableCell className="text-[10px] sm:text-xs text-content-secondary whitespace-nowrap">
+                <TableCell className="text-xs sm:text-sm text-content-secondary whitespace-nowrap">
                   <div className="flex items-center gap-1.5">
-                    <Calendar className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-medical-sage shrink-0" />
+                    <Calendar className="w-3.5 h-3.5 text-medical-sage shrink-0" />
                     <span>{formatDate(p.admissionDate || p.createdAt)}</span>
                   </div>
                 </TableCell>
@@ -155,11 +155,11 @@ export function PatientTable({
                 {/* Status */}
                 <TableCell className="whitespace-nowrap">
                   <div className="flex items-center gap-1.5">
-                    <Badge variant={getStatusBadgeVariant(p.status)} className="text-[9px] sm:text-xs px-1.5 sm:px-2 py-0.5">
+                    <Badge variant={getStatusBadgeVariant(p.status)} className="text-xs px-2 py-0.5">
                       {p.status}
                     </Badge>
                     {p.isArchived && (
-                      <Badge variant="warning" className="text-[9px] px-1.5 py-0.5">
+                      <Badge variant="warning" className="text-xs px-2 py-0.5">
                         Archived
                       </Badge>
                     )}
@@ -168,12 +168,12 @@ export function PatientTable({
 
                 {/* Actions: Direct Quick Actions + Real-world Clinical Action Menu */}
                 <TableCell className="text-right whitespace-nowrap pr-3 sm:pr-4">
-                  <div className="flex items-center justify-end gap-2.5 sm:gap-2">
+                  <div className="flex items-center justify-end gap-2 sm:gap-2.5">
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => onViewDetails && onViewDetails(p)}
-                      className="h-7 px-2 sm:px-2.5 text-[10px] sm:text-xs text-medical-blue hover:bg-surface-hover"
+                      className="h-7 px-2.5 text-xs text-medical-blue hover:bg-surface-hover"
                       title="View clinical chart"
                     >
                       <Eye className="w-3.5 h-3.5 mr-1" />
