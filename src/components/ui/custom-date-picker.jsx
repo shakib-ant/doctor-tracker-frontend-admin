@@ -190,7 +190,7 @@ export function CustomDatePicker({
       {isOpen && (
         <div
           className={cn(
-            "absolute z-50 mt-1.5 w-68 rounded-xl border border-line bg-surface/98 p-3.5 shadow-2xl backdrop-blur-md animate-in fade-in-50 zoom-in-95 duration-150",
+            "absolute z-50 mt-1.5 w-[272px] max-w-[calc(100vw-2rem)] rounded-xl border border-line bg-surface/98 p-3.5 shadow-2xl backdrop-blur-md animate-in fade-in-50 zoom-in-95 duration-150",
             align === "right" ? "right-0" : "left-0"
           )}
         >

@@ -18,4 +18,12 @@ export const metadata = {
     template: "%s | Doctor Tracker",
   },
   description: "Doctor Tracker — Modern Dark Healthcare Dashboard",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico" },
+    ],
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };

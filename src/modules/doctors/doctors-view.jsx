@@ -93,18 +93,18 @@ export function DoctorsView() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-[calc((16/375)*100vw)] lg:space-y-[calc((24/1920)*100vw)]">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-line/60">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-[calc((12/375)*100vw)] lg:gap-[calc((16/1920)*100vw)] pb-2 border-b border-line/60">
         <div>
-          <h2 className="font-manrope text-2xl md:text-3xl font-extrabold tracking-tight text-content-primary">
+          <h2 className="font-manrope text-[calc((20/375)*100vw)] lg:text-[calc((28/1920)*100vw)] font-extrabold tracking-tight text-content-primary">
             Doctor Registry & Management
           </h2>
-          <p className="text-xs md:text-sm text-content-secondary mt-1 leading-relaxed">
+          <p className="text-[calc((12/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary mt-1 leading-relaxed">
             Register medical specialists, manage clinical chamber hours, and assign patient rosters.
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] shrink-0">
           <Button
             variant="secondary"
             size="sm"
@@ -130,17 +130,17 @@ export function DoctorsView() {
       {/* Main Container Card */}
       <Card className="overflow-hidden">
         {/* Title Header */}
-        <CardHeader className="p-6 pb-4 border-b border-line/60">
+        <CardHeader className="p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pb-4 border-b border-line/60">
           <div className="space-y-1">
-            <CardTitle>Registered Medical Specialists</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-[calc((16/375)*100vw)] lg:text-[calc((18/1920)*100vw)]">Registered Medical Specialists</CardTitle>
+            <CardDescription className="text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)]">
               Search by doctor name or hospital, filter by clinical specialty, or click &ldquo;Patients&rdquo; to manage assigned cases.
             </CardDescription>
           </div>
         </CardHeader>
 
         {/* Filter Toolbar Section */}
-        <div className="p-6 py-4 border-b border-line/60 bg-surface-elevated/20">
+        <div className="p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] py-3.5 border-b border-line/60 bg-surface-elevated/20">
           <DoctorFilterBar
             searchQuery={searchQuery}
             onSearchChange={setSearchQuery}
@@ -152,7 +152,7 @@ export function DoctorsView() {
         </div>
 
         {/* Content Section */}
-        <CardContent className="p-6 pt-0">
+        <CardContent className="p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pt-0">
           {error && (
             <div className="my-4 p-4 rounded-xl bg-red-950/40 border border-red-800 text-red-200 text-xs flex items-center justify-between shadow-xs">
               <div className="flex items-center gap-2">

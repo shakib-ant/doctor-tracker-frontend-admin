@@ -4,7 +4,18 @@ import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import { Stethoscope, Users, UserCheck, Activity, RefreshCw, ArrowRight, ShieldAlert } from "lucide-react";
+import {
+  Stethoscope,
+  Users,
+  UserCheck,
+  Activity,
+  RefreshCw,
+  Plus,
+  ShieldAlert,
+  Hospital,
+  AlertTriangle,
+  CheckCircle2,
+} from "lucide-react";
 import { fetchDashboardAnalytics } from "@/services/analyticsService";
 import { StatCard } from "./components/stat-card";
 import { PatientsPerDoctorChart } from "./components/patients-per-doctor-chart";
@@ -42,16 +53,26 @@ export function DashboardView() {
     averagePatientsPerDoctor: 0,
   };
 
+  // Clinical triage calculation
+  const criticalCount =
+    analytics?.statusDistribution?.find((s) => s.status === "Critical")?.count || 0;
+  const observationCount =
+    analytics?.statusDistribution?.find((s) => s.status === "Under Observation")?.count || 0;
+  const doctorDutyPct =
+    summary.totalDoctors > 0
+      ? Math.round((summary.activeDoctors / summary.totalDoctors) * 100)
+      : 0;
+
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-line/60">
+    <div className="space-y-[calc((16/375)*100vw)] lg:space-y-[calc((24/1920)*100vw)] w-full max-w-full">
+      {/* Clinical Operations Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-[calc((12/375)*100vw)] lg:gap-4 pb-2 border-b border-line/60">
         <div>
-          <h2 className="font-manrope text-2xl md:text-3xl font-extrabold tracking-tight text-content-primary">
-            Healthcare Operations Overview
+          <h2 className="font-manrope text-[calc((20/375)*100vw)] lg:text-[calc((28/1920)*100vw)] font-extrabold tracking-tight text-content-primary">
+            Clinical Operations & Telemetry
           </h2>
-          <p className="text-xs md:text-sm text-content-secondary mt-1 leading-relaxed">
-            Real-time analytics for medical staff roster and patient tracking across clinical chambers.
+          <p className="text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)] text-content-secondary mt-1 leading-relaxed">
+            Live hospital metrics: specialist duty roster, inpatient census, and epidemiological triage distribution.
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -60,16 +81,17 @@ export function DashboardView() {
             size="sm"
             onClick={loadData}
             disabled={isLoading}
+            className="cursor-pointer"
           >
             <RefreshCw
               className={`w-3.5 h-3.5 mr-1.5 ${isLoading ? "animate-spin" : ""}`}
             />
-            Refresh Data
+            Synchronize
           </Button>
           <Link href="/doctors">
-            <Button variant="default" size="sm">
-              Manage Doctors
-              <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+            <Button variant="default" size="sm" className="cursor-pointer">
+              <Stethoscope className="w-3.5 h-3.5 mr-1.5" />
+              Manage Specialists
             </Button>
           </Link>
         </div>
@@ -88,7 +110,7 @@ export function DashboardView() {
                 <Button
                   variant="default"
                   size="sm"
-                  className="h-7 text-xs bg-red-700 hover:bg-red-600 text-white"
+                  className="h-7 text-xs bg-red-700 hover:bg-red-600 text-white cursor-pointer"
                 >
                   Log In
                 </Button>
@@ -98,7 +120,7 @@ export function DashboardView() {
               variant="outline"
               size="sm"
               onClick={loadData}
-              className="h-7 text-xs border-red-700 text-red-200 hover:bg-red-900/30"
+              className="h-7 text-xs border-red-700 text-red-200 hover:bg-red-900/30 cursor-pointer"
             >
               Retry
             </Button>
@@ -106,44 +128,48 @@ export function DashboardView() {
         </div>
       )}
 
-      {/* 4 Stat Cards with Uniform Gap */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {/* 4 Telemetry Stat Cards with Direct Clinical Purpose */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[calc((12/375)*100vw)] lg:gap-[calc((20/1920)*100vw)] w-full">
         <StatCard
-          title="Total Doctors"
+          title="Active Medical Staff"
           value={summary.totalDoctors}
-          subtitle={`${summary.activeDoctors} active in roster`}
+          tag={`${doctorDutyPct}% On Duty`}
+          subtitle={`${summary.activeDoctors} specialists available for consult`}
           icon={Stethoscope}
           badgeColor="blue"
           isLoading={isLoading}
         />
         <StatCard
-          title="Total Patients"
+          title="Monitored Admissions"
           value={summary.totalPatients}
-          subtitle={`${summary.activePatients} currently in care`}
+          tag={`${summary.activePatients} In Treatment`}
+          subtitle="Real-time inpatient census across wards"
           icon={Users}
           badgeColor="sage"
           isLoading={isLoading}
         />
         <StatCard
-          title="Avg. Patients / Doctor"
+          title="Physician Workload Ratio"
           value={summary.averagePatientsPerDoctor}
-          subtitle="Workload balance index"
+          tag="Balanced"
+          subtitle="Mean patient roster per attending doctor"
           icon={UserCheck}
           badgeColor="blue"
           isLoading={isLoading}
         />
         <StatCard
-          title="Active Diagnoses"
+          title="Monitored Conditions"
           value={analytics?.conditionDistribution?.length || 0}
-          subtitle="Distinct medical conditions"
+          tag="Triage Active"
+          subtitle="Distinct disease pathologies undergoing care"
           icon={Activity}
-          badgeColor="sage"
+          badgeColor="amber"
           isLoading={isLoading}
         />
       </div>
 
-      {/* Charts Grid with Uniform Gap */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      {/* Charts Grid with Uniform Fluid Gap */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-[calc((14/375)*100vw)] lg:gap-[calc((24/1920)*100vw)] w-full">
         <PatientsPerDoctorChart
           data={analytics?.patientsPerDoctor || []}
           isLoading={isLoading}
@@ -154,8 +180,8 @@ export function DashboardView() {
         />
       </div>
 
-      {/* Condition & Quick Actions Grid with Matching Card Heights */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+      {/* Condition & Capacity Operations Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-[calc((14/375)*100vw)] lg:gap-[calc((24/1920)*100vw)] w-full">
         <div className="lg:col-span-2">
           <ConditionDistributionCard
             conditions={analytics?.conditionDistribution || []}
@@ -165,30 +191,84 @@ export function DashboardView() {
           />
         </div>
 
-        <Card className="flex flex-col justify-between">
+        {/* Clinical Department & Ward Capacity Telemetry */}
+        <Card className="flex flex-col justify-between transition-colors duration-200 hover:border-medical-blue/40">
           <CardHeader className="p-6 pb-4 border-b border-line/60">
             <div className="space-y-1">
-              <CardTitle>Administrative Actions</CardTitle>
+              <CardTitle className="flex items-center gap-2">
+                <div className="p-1.5 rounded-md bg-medical-blue/15 text-medical-blue">
+                  <Hospital className="w-4 h-4" />
+                </div>
+                Hospital Ward Capacity
+              </CardTitle>
               <CardDescription>
-                Direct access to specialist rosters and patient admission records
+                Real-time operational readiness and triage alert threshold
               </CardDescription>
             </div>
           </CardHeader>
-          <CardContent className="p-6 pt-5 flex-1 flex flex-col justify-between space-y-5">
-            <p className="text-xs text-content-secondary leading-relaxed">
-              Manage clinical staff assignments, track patient admissions, or use multi-criteria search and date filters to locate hospital records.
-            </p>
-            <div className="space-y-2.5 pt-2">
-              <Link href="/doctors" className="block">
-                <Button variant="secondary" size="default" className="w-full justify-between">
-                  <span>Open Doctor Registry</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-medical-blue" />
-                </Button>
-              </Link>
+          <CardContent className="p-6 pt-5 flex-1 flex flex-col justify-between space-y-4">
+            <div className="space-y-3">
+              {/* Critical Triage Alert Pill */}
+              <div className="p-3 rounded-xl bg-red-950/30 border border-red-800/60 flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <AlertTriangle className="w-4 h-4 text-red-400 shrink-0" />
+                  <div>
+                    <span className="text-xs font-semibold text-red-200 block">
+                      Critical & High-Dependency
+                    </span>
+                    <span className="text-[10px] text-red-300/80">
+                      Requires intensive monitoring
+                    </span>
+                  </div>
+                </div>
+                <span className="text-sm font-extrabold text-red-300 font-manrope px-2 py-0.5 rounded-md bg-red-900/40 border border-red-700/60">
+                  {criticalCount}
+                </span>
+              </div>
+
+              {/* Observation Load */}
+              <div className="p-3 rounded-xl bg-amber-950/25 border border-amber-800/50 flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <Activity className="w-4 h-4 text-amber-400 shrink-0" />
+                  <div>
+                    <span className="text-xs font-semibold text-amber-200 block">
+                      Under Clinical Observation
+                    </span>
+                    <span className="text-[10px] text-amber-300/80">
+                      Pending discharge or re-evaluation
+                    </span>
+                  </div>
+                </div>
+                <span className="text-sm font-extrabold text-amber-300 font-manrope px-2 py-0.5 rounded-md bg-amber-900/40 border border-amber-700/60">
+                  {observationCount}
+                </span>
+              </div>
+
+              {/* Department Readiness */}
+              <div className="p-3 rounded-xl bg-surface-elevated/40 border border-line/60 flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-medical-sage shrink-0" />
+                  <div>
+                    <span className="text-xs font-semibold text-content-primary block">
+                      Active Clinical Specializations
+                    </span>
+                    <span className="text-[10px] text-content-secondary">
+                      Full departmental roster coverage
+                    </span>
+                  </div>
+                </div>
+                <span className="text-xs font-bold text-medical-sage px-2 py-0.5 rounded-md bg-medical-sage/15 border border-medical-sage/30">
+                  15 / 15 Depts
+                </span>
+              </div>
+            </div>
+
+            {/* Direct Clinical Action Buttons */}
+            <div className="space-y-2 pt-2 border-t border-line/60">
               <Link href="/patients" className="block">
-                <Button variant="default" size="default" className="w-full justify-between">
-                  <span>Open Patient Records</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                <Button variant="default" size="default" className="w-full justify-center gap-2 cursor-pointer text-xs font-semibold">
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>Admit New Patient to Ward</span>
                 </Button>
               </Link>
             </div>

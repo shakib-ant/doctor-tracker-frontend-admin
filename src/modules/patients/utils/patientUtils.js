@@ -30,8 +30,9 @@ export const getStatusBadgeVariant = (status) => {
     case "Recovered":
       return "sage";
     case "Critical":
-      return "destructive";
+      return "critical";
     case "Under Observation":
+      return "warning";
     default:
       return "secondary";
   }

@@ -8,9 +8,9 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default:
-          "border-transparent bg-medical-blue/20 text-[#9FC0D0] border-[#385260]",
+          "border-[#385260] bg-medical-blue/20 text-[#9FC0D0]",
         sage:
-          "border-transparent bg-medical-sage/20 text-[#A6C8C1] border-[#37534D]",
+          "border-[#37534D] bg-medical-sage/20 text-[#A6C8C1]",
         secondary:
           "border-line bg-surface-elevated text-content-secondary",
         active:
@@ -19,6 +19,10 @@ const badgeVariants = cva(
           "border-line bg-[#222E3A] text-content-disabled",
         destructive:
           "border-[#6B2A32] bg-[#331E24] text-[#FF9B9B]",
+        critical:
+          "border-red-800/80 bg-red-950/60 text-red-300 font-semibold shadow-xs",
+        warning:
+          "border-amber-700/70 bg-amber-950/50 text-amber-300 font-medium",
         outline:
           "border-line text-content-primary",
       },
@@ -36,4 +40,3 @@ function Badge({ className, variant, ...props }) {
 }
 
 export { Badge, badgeVariants };
-

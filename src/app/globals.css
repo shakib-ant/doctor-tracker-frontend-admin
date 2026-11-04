@@ -59,6 +59,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Fluid root scaling between 14px on mobile (360px) and 16px on desktop (1440px+) */
+    font-size: clamp(14px, calc(13.5px + 0.2vw), 16px);
   }
   * {
     @apply border-border;
@@ -68,11 +70,29 @@
     background-color: #111923;
     color: #e8eef2;
     transition: background-color 0.15s ease;
+    /* Fluid body font size */
+    font-size: clamp(0.8125rem, calc(0.775rem + 0.2vw), 0.9375rem);
+    line-height: calc(1.4em + 0.15rem);
   }
-  h1,
-  h2,
-  h3,
-  h4,
+  h1 {
+    font-size: clamp(1.5rem, calc(1.2rem + 1.25vw), 2.25rem);
+    line-height: calc(1.2em + 0.25rem);
+    @apply font-manrope font-bold text-foreground;
+  }
+  h2 {
+    font-size: clamp(1.25rem, calc(1.05rem + 0.9vw), 1.75rem);
+    line-height: calc(1.25em + 0.2rem);
+    @apply font-manrope font-bold text-foreground;
+  }
+  h3 {
+    font-size: clamp(1.05rem, calc(0.95rem + 0.5vw), 1.35rem);
+    line-height: calc(1.3em + 0.15rem);
+    @apply font-manrope font-semibold text-foreground;
+  }
+  h4 {
+    font-size: clamp(0.925rem, calc(0.85rem + 0.35vw), 1.15rem);
+    @apply font-manrope font-semibold text-foreground;
+  }
   h5,
   h6 {
     @apply font-manrope font-semibold text-foreground;
@@ -107,6 +127,39 @@
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* SVG Chart Animations */
+@keyframes drawPath {
+  0% {
+    stroke-dashoffset: 1500;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadeInArea {
+  0% {
+    opacity: 0;
+    transform: scaleY(0.92);
+    transform-origin: bottom;
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+}
+
+.animate-chart-line {
+  stroke-dasharray: 1500;
+  stroke-dashoffset: 0;
+  animation: drawPath 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-chart-area {
+  animation: fadeInArea 1.2s ease-out forwards;
 }
 
 /* Reduced motion preference */

@@ -49,36 +49,25 @@ export function DashboardLayout({ children, title }) {
         <div className="fixed inset-0 z-50 lg:hidden">
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-black/70 backdrop-blur-xs transition-opacity duration-200"
+            className="fixed inset-0 bg-black/80 backdrop-blur-xs transition-opacity duration-200"
             onClick={() => setSidebarOpen(false)}
           />
 
-          {/* Drawer Panel */}
-          <div className="fixed inset-y-0 left-0 flex w-72 flex-col bg-surface shadow-xl border-r border-line z-50 animate-in slide-in-from-left duration-200">
-            <div className="absolute top-3 right-3">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setSidebarOpen(false)}
-                className="text-content-secondary hover:text-content-primary"
-                aria-label="Close navigation menu"
-              >
-                <X className="w-5 h-5" />
-              </Button>
-            </div>
+          {/* Drawer Panel - Full width on mobile */}
+          <div className="fixed inset-y-0 left-0 flex w-full sm:w-80 flex-col bg-surface shadow-2xl border-r border-line z-50 animate-in slide-in-from-left duration-200">
             <Sidebar onClose={() => setSidebarOpen(false)} />
           </div>
         </div>
       )}
 
       {/* Main Content Area */}
-      <div className="flex flex-col flex-1 min-w-0">
+      <div className="flex flex-col flex-1 min-w-0 w-full max-w-full overflow-x-hidden">
         <Navbar
           onMenuClick={() => setSidebarOpen(true)}
           title={title}
         />
-        <main className="flex-1 p-4 md:p-6 lg:p-8 overflow-y-auto">
-          <div className="max-w-[1700px] w-full mx-auto space-y-6 transition-all duration-300 animate-in fade-in-50">
+        <main className="flex-1 w-full max-w-full p-[calc((16/375)*100vw)] lg:p-[calc((32/1920)*100vw)]">
+          <div className="max-w-[1700px] w-full mx-auto space-y-[calc((16/375)*100vw)] lg:space-y-[calc((24/1920)*100vw)] transition-all duration-300 animate-in fade-in-50">
             {children}
           </div>
         </main>

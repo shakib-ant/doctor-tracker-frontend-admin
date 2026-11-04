@@ -5,7 +5,7 @@ const Table = React.forwardRef(({ className, ...props }, ref) => (
   <div className="relative w-full overflow-auto rounded-md border border-line bg-surface">
     <table
       ref={ref}
-      className={cn("w-full caption-bottom text-sm", className)}
+      className={cn("w-full caption-bottom text-xs sm:text-sm", className)}
       {...props}
     />
   </div>
@@ -46,7 +46,7 @@ const TableHead = React.forwardRef(({ className, ...props }, ref) => (
   <th
     ref={ref}
     className={cn(
-      "h-11 px-4 text-left align-middle font-medium text-content-secondary text-xs uppercase tracking-wider",
+      "h-10 sm:h-11 px-3 sm:px-4 text-left align-middle font-medium text-content-secondary text-[11px] sm:text-xs uppercase tracking-wider whitespace-nowrap",
       className
     )}
     {...props}
@@ -57,7 +57,7 @@ TableHead.displayName = "TableHead";
 const TableCell = React.forwardRef(({ className, ...props }, ref) => (
   <td
     ref={ref}
-    className={cn("p-4 align-middle text-content-primary", className)}
+    className={cn("p-2.5 sm:p-4 align-middle text-content-primary", className)}
     {...props}
   />
 ));

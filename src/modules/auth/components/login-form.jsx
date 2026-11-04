@@ -59,20 +59,20 @@ export function LoginForm() {
   };
 
   return (
-    <div className="w-full bg-surface border border-line rounded-2xl shadow-2xl overflow-hidden">
+    <div className="w-full max-w-[clamp(280px,calc(100vw-2rem),440px)] mx-auto bg-surface border border-line rounded-2xl shadow-2xl overflow-hidden">
       {/* Decorative Gradient Bar */}
       <div className="h-1.5 w-full bg-gradient-to-r from-medical-blue via-medical-sage to-medical-blue" />
 
-      <div className="p-7 sm:p-9 space-y-6">
+      <div className="p-[clamp(1.25rem,calc(1rem+1.2vw),2.25rem)] space-y-6">
         {/* Header */}
         <div className="text-center space-y-2">
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-medical-blue/15 border border-medical-blue/30 text-medical-blue mb-1 shadow-xs">
             <Activity className="w-6 h-6 stroke-[2.5]" />
           </div>
-          <h1 className="font-manrope text-2xl sm:text-3xl font-extrabold text-content-primary tracking-tight">
+          <h1 className="font-manrope text-[clamp(1.35rem,calc(1.15rem+0.8vw),1.85rem)] font-extrabold text-content-primary tracking-tight">
             Administrator Sign In
           </h1>
-          <p className="text-xs text-content-secondary leading-relaxed max-w-xs mx-auto">
+          <p className="text-[clamp(0.725rem,calc(0.7rem+0.15vw),0.8rem)] text-content-secondary leading-relaxed max-w-xs mx-auto">
             Access hospital operations, clinical rosters, and patient records.
           </p>
         </div>

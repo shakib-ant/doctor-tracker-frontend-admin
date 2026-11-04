@@ -5,6 +5,30 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Skeleton } from "@/components/ui/skeleton";
 import { Activity } from "lucide-react";
 import { CONDITION_COLORS, calculatePercentage } from "../utils/dashboardUtils";
+import { cn } from "@/lib/utils";
+
+const STATUS_CONFIG = {
+  Active: {
+    dot: "bg-medical-blue",
+    box: "hover:border-medical-blue/60",
+    badge: "In Treatment",
+  },
+  Critical: {
+    dot: "bg-red-400 animate-pulse",
+    box: "border-red-800/70 bg-red-950/30 hover:border-red-700 text-red-200",
+    badge: "High Priority",
+  },
+  "Under Observation": {
+    dot: "bg-amber-400",
+    box: "border-amber-800/70 bg-amber-950/30 hover:border-amber-700 text-amber-200",
+    badge: "Monitoring",
+  },
+  Recovered: {
+    dot: "bg-medical-sage",
+    box: "hover:border-medical-sage/60",
+    badge: "Discharged",
+  },
+};
 
 export function ConditionDistributionCard({
   conditions = [],
@@ -13,7 +37,7 @@ export function ConditionDistributionCard({
   isLoading = false,
 }) {
   return (
-    <Card className="h-full flex flex-col">
+    <Card className="h-full flex flex-col transition-colors duration-200 hover:border-medical-blue/40">
       <CardHeader className="p-6 pb-4 border-b border-line/60">
         <div className="space-y-1">
           <CardTitle className="flex items-center gap-2">
@@ -74,23 +98,32 @@ export function ConditionDistributionCard({
           </div>
         )}
 
-        {/* Status badges */}
+        {/* Semantic Status Caseload */}
         {statuses.length > 0 && (
           <div className="pt-4 border-t border-line/60">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-content-muted block mb-2.5">
-              Care Caseload Status
+              Care Caseload & Triage Urgency
             </span>
             <div className="flex flex-wrap gap-2">
-              {statuses.map((s) => (
-                <div
-                  key={s.status}
-                  className="px-3 py-1.5 rounded-lg text-xs bg-surface-elevated border border-line flex items-center gap-2 hover:border-medical-blue/40 transition-colors"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-medical-sage shadow-xs" />
-                  <span className="text-content-secondary">{s.status}:</span>
-                  <span className="font-bold text-content-primary">{s.count}</span>
-                </div>
-              ))}
+              {statuses.map((s) => {
+                const conf = STATUS_CONFIG[s.status] || {
+                  dot: "bg-content-muted",
+                  box: "",
+                };
+                return (
+                  <div
+                    key={s.status}
+                    className={cn(
+                      "px-3 py-1.5 rounded-lg text-xs bg-surface-elevated border border-line flex items-center gap-2 transition-colors",
+                      conf.box
+                    )}
+                  >
+                    <span className={cn("w-2 h-2 rounded-full shrink-0 shadow-xs", conf.dot)} />
+                    <span className="text-content-secondary font-medium">{s.status}:</span>
+                    <span className="font-bold text-content-primary">{s.count}</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}
