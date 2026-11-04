@@ -1,0 +1,29 @@
+ node_modules
+ .next
+ .husky
+ coverage
+ .prettierignore
+ .stylelintignore
+ .eslintignore
+ stories
+ storybook-static
+ *.log
+ playwright-report
+ .nyc_output
+ test-results
+ junit.xml
+ docs
+out
+public
+dist
+
+# Ignore config and lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+bun.lockb
+
+# Ignore environment variables and build files
+.env
+.env.local
+.vercel
