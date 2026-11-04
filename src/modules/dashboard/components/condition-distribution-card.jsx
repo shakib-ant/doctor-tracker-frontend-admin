@@ -82,3 +82,4 @@ export function ConditionDistributionCard({ conditions = [], statuses = [], tota
     </Card>
   );
 }
+

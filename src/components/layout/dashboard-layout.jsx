@@ -1,13 +1,23 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Sidebar } from "./sidebar";
 import { Navbar } from "./navbar";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { getAuthToken } from "@/utils/auth";
 
 export function DashboardLayout({ children, title }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = getAuthToken();
+    if (!token && typeof window !== "undefined") {
+      router.push("/login");
+    }
+  }, [router]);
 
   return (
     <div className="flex min-h-screen bg-canvas text-content-primary">
@@ -58,4 +68,3 @@ export function DashboardLayout({ children, title }) {
     </div>
   );
 }
-

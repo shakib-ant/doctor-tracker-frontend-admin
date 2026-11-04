@@ -135,3 +135,4 @@ export const fetchPatientsByDoctor = async (doctorId, { page = 1, limit = 10, se
   }
   return data;
 };
+

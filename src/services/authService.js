@@ -48,3 +48,4 @@ export const getCurrentUser = () => {
 export const isAuthenticated = () => {
   return !!getAuthToken();
 };
+

@@ -98,3 +98,4 @@ export function AdmissionsTrendChart({ data = [], isLoading = false }) {
     </Card>
   );
 }
+

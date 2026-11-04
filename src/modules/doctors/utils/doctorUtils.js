@@ -32,3 +32,4 @@ export const validateDoctorForm = (formData) => {
   }
   return errors;
 };
+

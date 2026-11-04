@@ -138,3 +138,4 @@ export const archiveDoctor = async (id, isActive) => {
 
   return data;
 };
+

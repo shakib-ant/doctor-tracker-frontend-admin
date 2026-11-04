@@ -404,3 +404,4 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
     </div>
   );
 }
+

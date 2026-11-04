@@ -35,3 +35,4 @@ export function StatCard({ title, value, subtitle, icon: Icon, badgeColor = "blu
     </Card>
   );
 }
+

@@ -67,3 +67,4 @@ export function PatientsPerDoctorChart({ data = [], isLoading = false }) {
     </Card>
   );
 }
+

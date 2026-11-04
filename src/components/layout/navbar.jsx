@@ -1,8 +1,9 @@
 "use client";
 
 import React from "react";
-import { Menu, ShieldCheck } from "lucide-react";
+import { Menu, ShieldCheck, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { logout } from "@/services/authService";
 
 export function Navbar({ onMenuClick, title = "Dashboard" }) {
   return (
@@ -25,7 +26,7 @@ export function Navbar({ onMenuClick, title = "Dashboard" }) {
         </div>
       </div>
 
-      {/* User Status / Account Indicator */}
+      {/* User Status / Account Indicator & Logout */}
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-line bg-surface-elevated/70">
           <div className="flex items-center justify-center w-6 h-6 rounded-full bg-medical-blue/20 text-medical-blue">
@@ -36,12 +37,21 @@ export function Navbar({ onMenuClick, title = "Dashboard" }) {
               Clinical Admin
             </span>
             <span className="text-[10px] text-content-secondary leading-tight">
-              Hospital Central
+              Central Hospital
             </span>
           </div>
         </div>
+
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={logout}
+          className="h-8 w-8 text-content-muted hover:text-red-400 hover:bg-surface-hover"
+          title="Sign out of administration portal"
+        >
+          <LogOut className="w-4 h-4" />
+        </Button>
       </div>
     </header>
   );
 }
-

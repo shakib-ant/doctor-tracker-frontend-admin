@@ -33,3 +33,4 @@ export const getAuthHeaders = () => {
   }
   return headers;
 };
+

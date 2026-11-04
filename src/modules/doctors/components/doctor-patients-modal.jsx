@@ -328,3 +328,4 @@ export function DoctorPatientsModal({ doctor, isOpen, onClose, onPatientCountCha
     </div>
   );
 }
+

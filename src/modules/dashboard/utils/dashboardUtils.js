@@ -45,3 +45,4 @@ export const CONDITION_COLORS = [
   "#E8C170", // Amber accent
   "#C490D1", // Soft purple
 ];
+
