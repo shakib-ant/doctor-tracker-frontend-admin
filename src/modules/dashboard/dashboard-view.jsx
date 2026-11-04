@@ -3,7 +3,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Stethoscope, Users, UserCheck, Activity, RefreshCw, ArrowRight } from "lucide-react";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Stethoscope, Users, UserCheck, Activity, RefreshCw, ArrowRight, ShieldAlert } from "lucide-react";
 import { fetchDashboardAnalytics } from "@/services/analyticsService";
 import { StatCard } from "./components/stat-card";
 import { PatientsPerDoctorChart } from "./components/patients-per-doctor-chart";
@@ -42,15 +43,15 @@ export function DashboardView() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 pb-2 border-b border-line/50">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-line/60">
         <div>
           <h2 className="font-manrope text-2xl md:text-3xl font-extrabold tracking-tight text-content-primary">
             Healthcare Operations Overview
           </h2>
-          <p className="text-xs md:text-sm text-content-secondary mt-1.5 leading-relaxed">
-            Real-time analytics for medical staff roster and patient tracking across hospital chambers.
+          <p className="text-xs md:text-sm text-content-secondary mt-1 leading-relaxed">
+            Real-time analytics for medical staff roster and patient tracking across clinical chambers.
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -59,15 +60,14 @@ export function DashboardView() {
             size="sm"
             onClick={loadData}
             disabled={isLoading}
-            className="h-9 px-3.5"
           >
             <RefreshCw
-              className={`w-3.5 h-3.5 mr-2 ${isLoading ? "animate-spin" : ""}`}
+              className={`w-3.5 h-3.5 mr-1.5 ${isLoading ? "animate-spin" : ""}`}
             />
             Refresh Data
           </Button>
           <Link href="/doctors">
-            <Button variant="default" size="sm" className="h-9 px-4">
+            <Button variant="default" size="sm">
               Manage Doctors
               <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
             </Button>
@@ -77,8 +77,11 @@ export function DashboardView() {
 
       {/* Error state */}
       {error && (
-        <div className="p-4 rounded-xl bg-red-950/40 border border-red-800 text-red-200 text-xs flex items-center justify-between shadow-sm">
-          <span>{error}</span>
+        <div className="p-4 rounded-xl bg-red-950/40 border border-red-800 text-red-200 text-xs flex items-center justify-between shadow-xs">
+          <div className="flex items-center gap-2">
+            <ShieldAlert className="w-4 h-4 text-red-400 shrink-0" />
+            <span>{error}</span>
+          </div>
           <Button
             variant="outline"
             size="sm"
@@ -90,8 +93,8 @@ export function DashboardView() {
         </div>
       )}
 
-      {/* 4 Stat Cards with Generous Breathing Room */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+      {/* 4 Stat Cards with Uniform Gap */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         <StatCard
           title="Total Doctors"
           value={summary.totalDoctors}
@@ -126,8 +129,8 @@ export function DashboardView() {
         />
       </div>
 
-      {/* Charts Grid with Generous Gap */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-7">
+      {/* Charts Grid with Uniform Gap */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         <PatientsPerDoctorChart
           data={analytics?.patientsPerDoctor || []}
           isLoading={isLoading}
@@ -138,8 +141,8 @@ export function DashboardView() {
         />
       </div>
 
-      {/* Condition & Status Breakdown with Generous Gap */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-7">
+      {/* Condition & Quick Actions Grid with Matching Card Heights */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         <div className="lg:col-span-2">
           <ConditionDistributionCard
             conditions={analytics?.conditionDistribution || []}
@@ -148,30 +151,36 @@ export function DashboardView() {
             isLoading={isLoading}
           />
         </div>
-        <div className="flex flex-col justify-between p-6 rounded-xl bg-surface border border-line shadow-sm space-y-6">
-          <div className="space-y-3">
-            <h3 className="font-manrope text-base font-bold text-content-primary">
-              Administrative Quick Actions
-            </h3>
+
+        <Card className="flex flex-col justify-between">
+          <CardHeader className="p-6 pb-4 border-b border-line/60">
+            <div className="space-y-1">
+              <CardTitle>Administrative Actions</CardTitle>
+              <CardDescription>
+                Direct access to specialist rosters and patient admission records
+              </CardDescription>
+            </div>
+          </CardHeader>
+          <CardContent className="p-6 pt-5 flex-1 flex flex-col justify-between space-y-5">
             <p className="text-xs text-content-secondary leading-relaxed">
-              Access the clinical specialist registry or review patient charts with complete multi-criteria search, date filters, and nested patient assignment.
+              Manage clinical staff assignments, track patient admissions, or use multi-criteria search and date filters to locate hospital records.
             </p>
-          </div>
-          <div className="space-y-3 pt-2">
-            <Link href="/doctors" className="block">
-              <Button variant="secondary" size="sm" className="w-full justify-between h-9 text-xs">
-                <span>Doctor Registry</span>
-                <ArrowRight className="w-3.5 h-3.5 text-medical-blue" />
-              </Button>
-            </Link>
-            <Link href="/patients" className="block">
-              <Button variant="default" size="sm" className="w-full justify-between h-9 text-xs">
-                <span>Patient Records</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Button>
-            </Link>
-          </div>
-        </div>
+            <div className="space-y-2.5 pt-2">
+              <Link href="/doctors" className="block">
+                <Button variant="secondary" size="default" className="w-full justify-between">
+                  <span>Open Doctor Registry</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-medical-blue" />
+                </Button>
+              </Link>
+              <Link href="/patients" className="block">
+                <Button variant="default" size="default" className="w-full justify-between">
+                  <span>Open Patient Records</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Button>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

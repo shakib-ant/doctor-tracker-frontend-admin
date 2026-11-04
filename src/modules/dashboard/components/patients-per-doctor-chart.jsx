@@ -9,25 +9,25 @@ export function PatientsPerDoctorChart({ data = [], isLoading = false }) {
   const maxPatients = Math.max(...data.map((d) => d.patientCount || 0), 1);
 
   return (
-    <Card className="h-full flex flex-col shadow-sm">
-      <CardHeader className="pb-4">
+    <Card className="h-full flex flex-col">
+      <CardHeader className="p-6 pb-4 border-b border-line/60">
         <div className="flex items-center justify-between">
           <div className="space-y-1">
-            <CardTitle className="text-base md:text-lg flex items-center gap-2.5">
+            <CardTitle className="flex items-center gap-2">
               <div className="p-1.5 rounded-md bg-medical-blue/15 text-medical-blue">
                 <Users className="w-4 h-4" />
               </div>
               Patients per Doctor
             </CardTitle>
-            <CardDescription className="text-xs text-content-secondary">
+            <CardDescription>
               Clinical workload distribution across verified medical specialists
             </CardDescription>
           </div>
         </div>
       </CardHeader>
-      <CardContent className="flex-1 flex flex-col justify-center">
+      <CardContent className="flex-1 flex flex-col justify-center p-6 pt-5">
         {isLoading ? (
-          <div className="space-y-4 py-3">
+          <div className="space-y-4 py-2">
             {Array.from({ length: 5 }).map((_, i) => (
               <div key={i} className="space-y-2">
                 <div className="flex justify-between">
@@ -43,7 +43,7 @@ export function PatientsPerDoctorChart({ data = [], isLoading = false }) {
             No doctor assignment data available yet.
           </div>
         ) : (
-          <div className="space-y-4 py-2">
+          <div className="space-y-3.5">
             {data.map((item) => {
               const pct = Math.round((item.patientCount / maxPatients) * 100);
               return (
@@ -61,9 +61,9 @@ export function PatientsPerDoctorChart({ data = [], isLoading = false }) {
                       {item.patientCount} {item.patientCount === 1 ? "patient" : "patients"}
                     </span>
                   </div>
-                  <div className="w-full bg-surface-elevated rounded-full h-2.5 overflow-hidden border border-line/60">
+                  <div className="w-full bg-surface-elevated rounded-full h-2 overflow-hidden border border-line/60">
                     <div
-                      className="bg-medical-blue h-2.5 rounded-full transition-all duration-700 ease-out shadow-xs"
+                      className="bg-medical-blue h-2 rounded-full transition-all duration-700 ease-out shadow-xs"
                       style={{ width: `${Math.max(pct, 6)}%` }}
                     />
                   </div>

@@ -19,12 +19,12 @@ export function StatCard({
 
   if (isLoading) {
     return (
-      <Card className="p-6 space-y-4">
+      <Card className="p-5 space-y-3">
         <div className="flex items-center justify-between">
           <Skeleton className="h-4 w-24" />
           <Skeleton className="h-8 w-8 rounded-lg" />
         </div>
-        <div className="space-y-2 pt-1">
+        <div className="space-y-1.5 pt-1">
           <Skeleton className="h-8 w-20" />
           <Skeleton className="h-3 w-32" />
         </div>
@@ -33,27 +33,27 @@ export function StatCard({
   }
 
   return (
-    <Card className="transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:border-medical-blue/50">
-      <CardHeader className="flex flex-row items-center justify-between pb-3">
-        <CardTitle className="text-xs md:text-sm font-medium text-content-secondary">
+    <Card className="transition-all duration-200 hover:-translate-y-0.5 hover:border-medical-blue/50">
+      <CardHeader className="flex flex-row items-center justify-between p-5 pb-2">
+        <CardTitle className="text-xs font-medium text-content-secondary">
           {title}
         </CardTitle>
         <div
           className={cn(
-            "p-2.5 rounded-lg transition-transform duration-200 group-hover:scale-105",
+            "p-2 rounded-lg transition-transform duration-200 shrink-0",
             colorMap[badgeColor] || colorMap.blue
           )}
         >
           {Icon && <Icon className="w-4 h-4" />}
         </div>
       </CardHeader>
-      <CardContent className="space-y-2 pt-1">
-        <div className="font-manrope text-3xl font-extrabold text-content-primary tracking-tight">
+      <CardContent className="p-5 pt-0 space-y-1.5">
+        <div className="font-manrope text-2xl md:text-3xl font-extrabold text-content-primary tracking-tight">
           {value}
         </div>
-        <p className="flex items-center gap-2 pt-1 text-xs text-content-secondary">
-          <span className="inline-block w-2 h-2 rounded-full bg-medical-sage shadow-xs animate-pulse" />
-          <span>{subtitle}</span>
+        <p className="flex items-center gap-1.5 text-xs text-content-secondary">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-medical-sage shrink-0 animate-pulse" />
+          <span className="truncate">{subtitle}</span>
         </p>
       </CardContent>
     </Card>

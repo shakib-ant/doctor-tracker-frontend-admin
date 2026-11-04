@@ -93,15 +93,15 @@ export function DoctorsView() {
   };
 
   return (
-    <div className="space-y-7">
+    <div className="space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 pb-2 border-b border-line/50">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-line/60">
         <div>
           <h2 className="font-manrope text-2xl md:text-3xl font-extrabold tracking-tight text-content-primary">
             Doctor Registry & Management
           </h2>
-          <p className="text-xs md:text-sm text-content-secondary mt-1.5 leading-relaxed">
-            Register USA specialists, manage clinical assignments, and review patient rosters.
+          <p className="text-xs md:text-sm text-content-secondary mt-1 leading-relaxed">
+            Register medical specialists, manage clinical chamber hours, and assign patient rosters.
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -110,10 +110,9 @@ export function DoctorsView() {
             size="sm"
             onClick={() => loadDoctors(pagination.page)}
             disabled={isLoading}
-            className="h-9 px-3.5"
           >
             <RefreshCw
-              className={`w-3.5 h-3.5 mr-2 ${isLoading ? "animate-spin" : ""}`}
+              className={`w-3.5 h-3.5 mr-1.5 ${isLoading ? "animate-spin" : ""}`}
             />
             Refresh
           </Button>
@@ -121,7 +120,6 @@ export function DoctorsView() {
             variant="default"
             size="sm"
             onClick={() => setIsAddModalOpen(true)}
-            className="h-9 px-4"
           >
             <Plus className="w-4 h-4 mr-1.5" />
             Add New Doctor
@@ -129,16 +127,20 @@ export function DoctorsView() {
         </div>
       </div>
 
-      {/* Main Card */}
-      <Card className="shadow-sm">
-        <CardHeader className="pb-4 space-y-4">
+      {/* Main Container Card */}
+      <Card className="overflow-hidden">
+        {/* Title Header */}
+        <CardHeader className="p-6 pb-4 border-b border-line/60">
           <div className="space-y-1">
             <CardTitle>Registered Medical Specialists</CardTitle>
             <CardDescription>
-              Search, filter by clinical specialty, or click &ldquo;Patients&rdquo; to view and manage assigned cases.
+              Search by doctor name or hospital, filter by clinical specialty, or click &ldquo;Patients&rdquo; to manage assigned cases.
             </CardDescription>
           </div>
+        </CardHeader>
 
+        {/* Filter Toolbar Section */}
+        <div className="p-6 py-4 border-b border-line/60 bg-surface-elevated/20">
           <DoctorFilterBar
             searchQuery={searchQuery}
             onSearchChange={setSearchQuery}
@@ -147,11 +149,12 @@ export function DoctorsView() {
             statusFilter={statusFilter}
             onStatusChange={setStatusFilter}
           />
-        </CardHeader>
+        </div>
 
-        <CardContent>
+        {/* Content Section */}
+        <CardContent className="p-6 pt-0">
           {error && (
-            <div className="mb-4 p-4 rounded-lg bg-red-950/40 border border-red-800 text-red-200 text-xs flex items-center justify-between">
+            <div className="my-4 p-4 rounded-xl bg-red-950/40 border border-red-800 text-red-200 text-xs flex items-center justify-between shadow-xs">
               <div className="flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
                 <span>{error}</span>
@@ -167,22 +170,24 @@ export function DoctorsView() {
             </div>
           )}
 
-          <DoctorTable
-            doctors={doctors}
-            isLoading={isLoading}
-            onViewDetails={(doc) => {
-              setSelectedDoctor(doc);
-              setIsDetailModalOpen(true);
-            }}
-            onViewPatients={(doc) => {
-              setPatientsModalDoctor(doc);
-            }}
-            onAddNew={() => setIsAddModalOpen(true)}
-          />
+          <div className="pt-4">
+            <DoctorTable
+              doctors={doctors}
+              isLoading={isLoading}
+              onViewDetails={(doc) => {
+                setSelectedDoctor(doc);
+                setIsDetailModalOpen(true);
+              }}
+              onViewPatients={(doc) => {
+                setPatientsModalDoctor(doc);
+              }}
+              onAddNew={() => setIsAddModalOpen(true)}
+            />
+          </div>
 
           {/* Pagination */}
           {pagination.total > 0 && (
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-line text-xs text-content-secondary">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-5 mt-4 border-t border-line/60 text-xs text-content-secondary">
               <div>
                 Showing{" "}
                 <span className="font-semibold text-content-primary">
@@ -205,14 +210,13 @@ export function DoctorsView() {
                   size="sm"
                   onClick={() => handlePageChange(pagination.page - 1)}
                   disabled={pagination.page <= 1 || isLoading}
-                  className="h-8 px-2.5 text-xs"
                 >
                   <ChevronLeft className="w-3.5 h-3.5 mr-1" />
                   Previous
                 </Button>
 
-                <span className="px-2.5 py-1 text-xs font-medium text-content-primary">
-                  Page {pagination.page} of {pagination.totalPages}
+                <span className="px-3 py-1 text-xs font-semibold text-content-primary bg-surface-elevated rounded-md border border-line">
+                  {pagination.page} / {pagination.totalPages}
                 </span>
 
                 <Button
@@ -220,7 +224,6 @@ export function DoctorsView() {
                   size="sm"
                   onClick={() => handlePageChange(pagination.page + 1)}
                   disabled={pagination.page >= pagination.totalPages || isLoading}
-                  className="h-8 px-2.5 text-xs"
                 >
                   Next
                   <ChevronRight className="w-3.5 h-3.5 ml-1" />
@@ -259,4 +262,3 @@ export function DoctorsView() {
     </div>
   );
 }
-

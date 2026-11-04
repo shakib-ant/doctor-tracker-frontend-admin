@@ -13,21 +13,21 @@ export function ConditionDistributionCard({
   isLoading = false,
 }) {
   return (
-    <Card className="h-full flex flex-col shadow-sm">
-      <CardHeader className="pb-4">
+    <Card className="h-full flex flex-col">
+      <CardHeader className="p-6 pb-4 border-b border-line/60">
         <div className="space-y-1">
-          <CardTitle className="text-base md:text-lg flex items-center gap-2.5">
+          <CardTitle className="flex items-center gap-2">
             <div className="p-1.5 rounded-md bg-medical-blue/15 text-medical-blue">
               <Activity className="w-4 h-4" />
             </div>
             Clinical Condition Distribution
           </CardTitle>
-          <CardDescription className="text-xs text-content-secondary">
+          <CardDescription>
             Categorized breakdown of registered diagnoses across patient records
           </CardDescription>
         </div>
       </CardHeader>
-      <CardContent className="space-y-5">
+      <CardContent className="space-y-5 p-6 pt-5">
         {isLoading ? (
           <div className="space-y-3.5 py-2">
             {Array.from({ length: 4 }).map((_, i) => (
@@ -45,7 +45,7 @@ export function ConditionDistributionCard({
             No patient conditions recorded yet.
           </div>
         ) : (
-          <div className="space-y-3.5">
+          <div className="space-y-3">
             {conditions.map((item, idx) => {
               const pct = calculatePercentage(item.count, totalPatients);
               const color = CONDITION_COLORS[idx % CONDITION_COLORS.length];
@@ -76,7 +76,7 @@ export function ConditionDistributionCard({
 
         {/* Status badges */}
         {statuses.length > 0 && (
-          <div className="pt-3 border-t border-line">
+          <div className="pt-4 border-t border-line/60">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-content-muted block mb-2.5">
               Care Caseload Status
             </span>

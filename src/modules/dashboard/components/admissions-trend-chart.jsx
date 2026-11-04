@@ -10,23 +10,23 @@ export function AdmissionsTrendChart({ data = [], isLoading = false }) {
   const chart = buildSvgLineChart(data, 600, 200);
 
   return (
-    <Card className="h-full flex flex-col shadow-sm">
-      <CardHeader className="pb-4">
+    <Card className="h-full flex flex-col">
+      <CardHeader className="p-6 pb-4 border-b border-line/60">
         <div className="flex items-center justify-between">
           <div className="space-y-1">
-            <CardTitle className="text-base md:text-lg flex items-center gap-2.5">
+            <CardTitle className="flex items-center gap-2">
               <div className="p-1.5 rounded-md bg-medical-sage/15 text-medical-sage">
                 <Calendar className="w-4 h-4" />
               </div>
               Date-Based Patient Activity
             </CardTitle>
-            <CardDescription className="text-xs text-content-secondary">
+            <CardDescription>
               Chronological patient registrations and admissions over the last 30 days
             </CardDescription>
           </div>
         </div>
       </CardHeader>
-      <CardContent className="flex-1 flex flex-col justify-between pt-1">
+      <CardContent className="flex-1 flex flex-col justify-between p-6 pt-5">
         {isLoading ? (
           <div className="space-y-3 py-6">
             <Skeleton className="h-36 w-full rounded-lg" />

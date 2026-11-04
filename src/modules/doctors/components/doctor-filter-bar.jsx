@@ -14,16 +14,17 @@ export function DoctorFilterBar({
   onStatusChange,
 }) {
   return (
-    <div className="space-y-3 pb-2">
+    <div className="space-y-3">
+      {/* Top row: search & status dropdown */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="relative w-full sm:w-72">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-content-disabled" />
+          <Search className="absolute left-3 top-2.5 h-4 w-4 text-content-disabled" />
           <Input
             type="text"
             placeholder="Search doctor, hospital, phone..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="pl-8 text-xs"
+            className="pl-9 pr-3 text-xs h-9"
           />
         </div>
 
@@ -31,7 +32,7 @@ export function DoctorFilterBar({
           <select
             value={statusFilter}
             onChange={(e) => onStatusChange(e.target.value)}
-            className="h-9 rounded-md border border-line bg-surface px-3 py-1 text-xs text-content-primary focus:outline-none focus:ring-2 focus:ring-medical-blue"
+            className="h-9 rounded-md border border-line bg-surface px-3 text-xs text-content-primary focus:outline-none focus:ring-2 focus:ring-medical-blue"
           >
             <option value="all">All Status</option>
             <option value="active">Active Only</option>
@@ -48,9 +49,9 @@ export function DoctorFilterBar({
             <button
               key={spec}
               onClick={() => onSpecialtyChange(spec)}
-              className={`px-3 py-1 text-xs font-medium rounded-full transition-colors duration-150 border ${
+              className={`h-7 px-3 text-xs font-medium rounded-full transition-colors duration-150 border inline-flex items-center justify-center leading-none ${
                 isSelected
-                  ? "bg-medical-blue text-canvas border-medical-blue font-semibold"
+                  ? "bg-medical-blue text-canvas border-medical-blue font-semibold shadow-xs"
                   : "bg-surface text-content-secondary border-line hover:bg-surface-hover hover:text-content-primary"
               }`}
             >
@@ -62,4 +63,3 @@ export function DoctorFilterBar({
     </div>
   );
 }
-

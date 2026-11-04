@@ -5,14 +5,14 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-medical-blue focus-visible:ring-offset-2 focus-visible:ring-offset-canvas disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.99] [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-medical-blue focus-visible:ring-offset-2 focus-visible:ring-offset-canvas disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.99] [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 select-none",
   {
     variants: {
       variant: {
         default:
-          "bg-medical-blue text-canvas font-semibold shadow-sm hover:bg-[#8AAEC0] active:bg-[#688C9D]",
+          "bg-medical-blue text-canvas font-semibold shadow-xs hover:bg-[#8AAEC0] active:bg-[#688C9D]",
         secondary:
-          "bg-surface text-content-primary border border-line shadow-sm hover:bg-surface-hover hover:border-[#384A5C]",
+          "bg-surface text-content-primary border border-line shadow-xs hover:bg-surface-hover hover:border-[#384A5C]",
         outline:
           "border border-line bg-transparent text-content-primary hover:bg-surface-hover hover:text-content-primary",
         ghost:
@@ -20,13 +20,13 @@ const buttonVariants = cva(
         destructive:
           "bg-[#331E24] border border-[#6B2A32] text-[#FF9B9B] hover:bg-[#4A2027] hover:border-[#8A343F]",
         link: "text-medical-blue underline-offset-4 hover:underline p-0 h-auto",
-        sage: "bg-medical-sage text-canvas font-semibold shadow-sm hover:bg-[#97B8B1]",
+        sage: "bg-medical-sage text-canvas font-semibold shadow-xs hover:bg-[#97B8B1]",
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-6 text-base",
-        icon: "h-9 w-9 p-0",
+        default: "h-9 px-4 text-xs font-semibold leading-none",
+        sm: "h-8 px-3 text-xs leading-none",
+        lg: "h-10 px-5 text-sm leading-none",
+        icon: "h-8 w-8 p-0 shrink-0",
       },
     },
     defaultVariants: {
