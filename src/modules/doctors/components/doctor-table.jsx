@@ -125,15 +125,15 @@ export function DoctorTable({
                         />
                       </div>
                     ) : (
-                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-medical-blue/20 text-medical-blue flex items-center justify-center font-manrope font-bold text-[10px] sm:text-xs shrink-0 border border-medical-blue/30">
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-medical-blue/20 text-medical-blue flex items-center justify-center font-manrope font-bold text-[9px] sm:text-xs shrink-0 border border-medical-blue/30">
                         {getDoctorInitials(doc.name)}
                       </div>
                     )}
                     <div>
-                      <div className="text-xs sm:text-sm font-semibold text-content-primary whitespace-nowrap">
+                      <div className="text-[11px] sm:text-sm font-semibold text-content-primary whitespace-nowrap">
                         {doc.name}
                       </div>
-                      <div className="text-[10px] sm:text-[11px] text-content-muted truncate max-w-[140px] sm:max-w-[170px]">
+                      <div className="text-[9px] sm:text-[11px] text-content-muted truncate max-w-[130px] sm:max-w-[170px]">
                         {doc.qualifications || doc.designation || "Physician"}
                       </div>
                     </div>
@@ -142,56 +142,56 @@ export function DoctorTable({
 
                 {/* Specialization */}
                 <TableCell>
-                  <Badge variant="default" className="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 whitespace-nowrap">
+                  <Badge variant="default" className="text-[9px] sm:text-xs px-1.5 sm:px-2 py-0.5 whitespace-nowrap">
                     {doc.specialization}
                   </Badge>
                 </TableCell>
 
                 {/* Hospital */}
-                <TableCell className="text-[11px] sm:text-xs text-content-secondary whitespace-nowrap">
+                <TableCell className="text-[10px] sm:text-xs text-content-secondary whitespace-nowrap">
                   {doc.hospital || "Not assigned"}
                 </TableCell>
 
                 {/* Contact */}
-                <TableCell className="text-[11px] sm:text-xs text-content-secondary whitespace-nowrap">
+                <TableCell className="text-[10px] sm:text-xs text-content-secondary whitespace-nowrap">
                   <div>{doc.phone || "--"}</div>
-                  <div className="text-[9px] sm:text-[10px] text-content-muted truncate max-w-[120px] sm:max-w-[140px]">
+                  <div className="text-[9px] sm:text-[10px] text-content-muted truncate max-w-[110px] sm:max-w-[140px]">
                     {doc.email || ""}
                   </div>
                 </TableCell>
 
                 {/* Fee */}
                 <TableCell className="whitespace-nowrap">
-                  <div className="text-[11px] sm:text-xs font-semibold text-content-primary font-manrope">
+                  <div className="text-[10px] sm:text-xs font-semibold text-content-primary font-manrope">
                     {doc.consultationFee !== undefined && doc.consultationFee !== null
                       ? `$${doc.consultationFee}`
                       : "--"}
                   </div>
-                  <div className="text-[9px] sm:text-[10px] text-content-muted">per consult</div>
+                  <div className="text-[8px] sm:text-[10px] text-content-muted">per consult</div>
                 </TableCell>
 
                 {/* Available Days */}
                 <TableCell>
-                  <div className="flex gap-1 flex-wrap max-w-[130px] sm:max-w-[140px]">
+                  <div className="flex gap-1 flex-wrap max-w-[120px] sm:max-w-[140px]">
                     {doc.availableDays && doc.availableDays.length > 0 ? (
                       doc.availableDays.map((d) => (
                         <span
                           key={d}
                           title={d}
-                          className="px-1.5 py-0.5 rounded text-[9px] sm:text-[10px] font-medium bg-surface-elevated text-content-secondary border border-line"
+                          className="px-1.5 py-0.5 rounded text-[8px] sm:text-[10px] font-medium bg-surface-elevated text-content-secondary border border-line"
                         >
                           {d.length > 3 ? d.slice(0, 3) : d}
                         </span>
                       ))
                     ) : (
-                      <span className="text-[9px] sm:text-[10px] text-content-muted">--</span>
+                      <span className="text-[8px] sm:text-[10px] text-content-muted">--</span>
                     )}
                   </div>
                 </TableCell>
 
                 {/* Status */}
                 <TableCell>
-                  <Badge variant={doc.isActive ? "active" : "archived"} className="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5">
+                  <Badge variant={doc.isActive ? "active" : "archived"} className="text-[9px] sm:text-xs px-1.5 sm:px-2 py-0.5">
                     {doc.isActive ? "Active" : "Archived"}
                   </Badge>
                 </TableCell>
@@ -203,7 +203,7 @@ export function DoctorTable({
                       variant="secondary"
                       size="sm"
                       onClick={() => onViewPatients(doc)}
-                      className="h-6.5 sm:h-7 px-2 sm:px-2.5 text-[11px] sm:text-xs"
+                      className="h-6 sm:h-7 px-1.5 sm:px-2.5 text-[10px] sm:text-xs"
                       title="View & manage assigned patients"
                     >
                       <Users className="w-3 h-3 sm:w-3.5 sm:h-3.5 mr-1 text-medical-sage" />
@@ -213,7 +213,7 @@ export function DoctorTable({
                       variant="ghost"
                       size="sm"
                       onClick={() => onViewDetails(doc)}
-                      className="h-6.5 sm:h-7 px-1.5 sm:px-2 text-[11px] sm:text-xs"
+                      className="h-6 sm:h-7 px-1.5 sm:px-2 text-[10px] sm:text-xs"
                       title="View doctor profile"
                     >
                       <Eye className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-medical-blue" />

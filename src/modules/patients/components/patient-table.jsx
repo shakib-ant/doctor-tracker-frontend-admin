@@ -12,14 +12,17 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Edit2, Trash2, Users, Calendar, Plus } from "lucide-react";
+import { Eye, Users, Calendar, Plus } from "lucide-react";
 import { getStatusBadgeVariant, formatDate } from "../utils/patientUtils";
+import { PatientActionMenu } from "./patient-action-menu";
 
 export function PatientTable({
   patients = [],
   isLoading = false,
   onEdit,
   onDelete,
+  onViewDetails,
+  onStatusChange,
   onAddNew,
 }) {
   return (
@@ -102,11 +105,11 @@ export function PatientTable({
                 {/* Patient Name & Contact */}
                 <TableCell className="font-medium text-content-primary">
                   <div>
-                    <div className="text-xs sm:text-sm font-semibold text-content-primary whitespace-nowrap">
+                    <div className="text-[11px] sm:text-sm font-semibold text-content-primary whitespace-nowrap">
                       {p.name}
                     </div>
                     {p.phone && (
-                      <div className="text-[10px] sm:text-[11px] text-content-muted whitespace-nowrap">
+                      <div className="text-[9px] sm:text-[11px] text-content-muted whitespace-nowrap">
                         {p.phone}
                       </div>
                     )}
@@ -114,25 +117,25 @@ export function PatientTable({
                 </TableCell>
 
                 {/* Age & Gender */}
-                <TableCell className="text-[11px] sm:text-xs text-content-secondary whitespace-nowrap">
+                <TableCell className="text-[10px] sm:text-xs text-content-secondary whitespace-nowrap">
                   {p.age} yrs &bull; {p.gender}
                 </TableCell>
 
                 {/* Condition */}
                 <TableCell className="whitespace-nowrap">
-                  <Badge variant="default" className="text-[10px] sm:text-xs font-normal px-1.5 sm:px-2 py-0.5">
+                  <Badge variant="default" className="text-[9px] sm:text-xs font-normal px-1.5 sm:px-2 py-0.5">
                     {p.condition}
                   </Badge>
                 </TableCell>
 
                 {/* Assigned Doctor */}
-                <TableCell className="text-[11px] sm:text-xs text-content-secondary whitespace-nowrap">
+                <TableCell className="text-[10px] sm:text-xs text-content-secondary whitespace-nowrap">
                   {p.doctor ? (
                     <div>
                       <div className="font-medium text-content-primary">
                         {p.doctor.name}
                       </div>
-                      <div className="text-[9px] sm:text-[10px] text-content-muted">
+                      <div className="text-[8px] sm:text-[10px] text-content-muted">
                         {p.doctor.specialization} &bull; {p.doctor.hospital || "Clinic"}
                       </div>
                     </div>
@@ -142,7 +145,7 @@ export function PatientTable({
                 </TableCell>
 
                 {/* Admission Date */}
-                <TableCell className="text-[11px] sm:text-xs text-content-secondary whitespace-nowrap">
+                <TableCell className="text-[10px] sm:text-xs text-content-secondary whitespace-nowrap">
                   <div className="flex items-center gap-1.5">
                     <Calendar className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-medical-sage shrink-0" />
                     <span>{formatDate(p.admissionDate || p.createdAt)}</span>
@@ -151,32 +154,38 @@ export function PatientTable({
 
                 {/* Status */}
                 <TableCell className="whitespace-nowrap">
-                  <Badge variant={getStatusBadgeVariant(p.status)} className="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5">
-                    {p.status}
-                  </Badge>
+                  <div className="flex items-center gap-1.5">
+                    <Badge variant={getStatusBadgeVariant(p.status)} className="text-[9px] sm:text-xs px-1.5 sm:px-2 py-0.5">
+                      {p.status}
+                    </Badge>
+                    {p.isArchived && (
+                      <Badge variant="warning" className="text-[9px] px-1.5 py-0.5">
+                        Archived
+                      </Badge>
+                    )}
+                  </div>
                 </TableCell>
 
-                {/* Actions */}
+                {/* Actions: Direct Quick Actions + Real-world Clinical Action Menu */}
                 <TableCell className="text-right whitespace-nowrap">
                   <div className="flex items-center justify-end gap-1 sm:gap-1.5">
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => onEdit(p)}
-                      className="h-6.5 w-6.5 sm:h-7 sm:w-7 p-0 text-content-secondary hover:text-content-primary hover:bg-surface-hover"
-                      title="Edit patient info"
+                      onClick={() => onViewDetails && onViewDetails(p)}
+                      className="h-6.5 px-1.5 sm:px-2 text-[10px] sm:text-xs text-medical-blue hover:bg-surface-hover"
+                      title="View clinical chart"
                     >
-                      <Edit2 className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                      <Eye className="w-3.5 h-3.5 mr-1" />
+                      Chart
                     </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => onDelete(p)}
-                      className="h-6.5 w-6.5 sm:h-7 sm:w-7 p-0 text-red-400 hover:text-red-300 hover:bg-red-950/40"
-                      title="Delete patient record"
-                    >
-                      <Trash2 className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                    </Button>
+                    <PatientActionMenu
+                      patient={p}
+                      onViewDetails={onViewDetails}
+                      onEdit={onEdit}
+                      onArchiveToggle={onDelete}
+                      onStatusChange={onStatusChange}
+                    />
                   </div>
                 </TableCell>
               </TableRow>

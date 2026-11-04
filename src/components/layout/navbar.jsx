@@ -26,8 +26,8 @@ export function Navbar({ onMenuClick, title = "Dashboard" }) {
         </div>
       </div>
 
-      {/* User Status / Account Indicator & Logout (Hidden on mobile to keep navbar minimal) */}
-      <div className="hidden sm:flex items-center gap-3">
+      {/* User Status / Account Indicator & Logout (Hidden on mobile/tablet, strictly desktop LG+ only) */}
+      <div className="hidden lg:flex items-center gap-3">
         <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-line bg-surface-elevated/70">
           <div className="flex items-center justify-center w-6 h-6 rounded-full bg-medical-blue/20 text-medical-blue">
             <ShieldCheck className="w-3.5 h-3.5" />

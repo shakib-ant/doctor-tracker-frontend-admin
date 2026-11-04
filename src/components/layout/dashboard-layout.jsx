@@ -53,8 +53,8 @@ export function DashboardLayout({ children, title }) {
             onClick={() => setSidebarOpen(false)}
           />
 
-          {/* Drawer Panel - Full width on mobile */}
-          <div className="fixed inset-y-0 left-0 flex w-full sm:w-80 flex-col bg-surface shadow-2xl border-r border-line z-50 animate-in slide-in-from-left duration-200">
+          {/* Drawer Panel - 100% Full width on mobile */}
+          <div className="fixed inset-0 flex w-full flex-col bg-surface shadow-2xl z-50 animate-in slide-in-from-left duration-250">
             <Sidebar onClose={() => setSidebarOpen(false)} />
           </div>
         </div>

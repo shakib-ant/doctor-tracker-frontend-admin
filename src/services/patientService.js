@@ -12,6 +12,7 @@ export const fetchPatients = async ({
   doctorId = "",
   startDate = "",
   endDate = "",
+  archived = "active",
 } = {}) => {
   const query = new URLSearchParams();
   if (page) query.set("page", String(page));
@@ -22,6 +23,7 @@ export const fetchPatients = async ({
   if (doctorId) query.set("doctorId", doctorId);
   if (startDate) query.set("startDate", startDate);
   if (endDate) query.set("endDate", endDate);
+  if (archived) query.set("archived", archived);
 
   const res = await fetch(`${BASE_URL}?${query.toString()}`, {
     method: "GET",
@@ -100,10 +102,30 @@ export const updatePatient = async (id, patientData) => {
   return data;
 };
 
-export const deletePatient = async (id) => {
+export const archivePatient = async (id, isArchived) => {
   if (!id) throw new Error("Patient ID is required");
 
-  const res = await fetch(`${BASE_URL}/${id}`, {
+  const res = await fetch(`${BASE_URL}/archive/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      ...getAuthHeaders(),
+    },
+    body: JSON.stringify({ isArchived }),
+  });
+
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    throw new Error(data.message || `Failed to archive/unarchive patient (HTTP ${res.status})`);
+  }
+  return data;
+};
+
+export const deletePatient = async (id, hardDelete = false) => {
+  if (!id) throw new Error("Patient ID is required");
+
+  const url = hardDelete ? `${BASE_URL}/${id}?hardDelete=true` : `${BASE_URL}/${id}`;
+  const res = await fetch(url, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
