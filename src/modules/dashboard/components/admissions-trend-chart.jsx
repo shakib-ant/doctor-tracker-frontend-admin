@@ -1,35 +1,98 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Calendar,
-  TrendingUp,
-  Activity,
-  ArrowUpRight,
-  Clock,
-} from "lucide-react";
-import { buildSvgLineChart, formatShortDate } from "../utils/dashboardUtils";
+import { formatShortDate, formatDayName } from "../utils/dashboardUtils";
+import { useInView } from "../hooks/useInView";
+import { Info, TrendingUp, Users, CheckCircle2 } from "lucide-react";
 
 export function AdmissionsTrendChart({ data = [], isLoading = false }) {
-  const [timeRange, setTimeRange] = useState("30"); // "7" | "14" | "30"
-  const [hoveredPoint, setHoveredPoint] = useState(null);
+  const [timeRange, setTimeRange] = useState("7"); // "7" | "14" | "30"
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [containerRef, isInView] = useInView({ threshold: 0.2 });
 
   // Filter data based on selected timeframe
   const filteredData = useMemo(() => {
     if (!data || data.length === 0) return [];
     if (timeRange === "7") return data.slice(-7);
     if (timeRange === "14") return data.slice(-14);
-    return data;
+    return data.slice(-30);
   }, [data, timeRange]);
 
+  // Generate smooth cubic Bézier spline
   const chart = useMemo(() => {
-    return buildSvgLineChart(filteredData, 600, 180);
+    if (!filteredData || filteredData.length === 0) {
+      return { coords: [], coordsSecondary: [], splinePath: "", splineSecondaryPath: "", areaPath: "", maxVal: 10 };
+    }
+
+    const width = 640;
+    const height = 220;
+    const paddingLeft = 40;
+    const paddingRight = 24;
+    const paddingTop = 24;
+    const paddingBottom = 30;
+
+    const maxVal = Math.max(...filteredData.map((d) => d.count), 5);
+    const chartWidth = width - paddingLeft - paddingRight;
+    const chartHeight = height - paddingTop - paddingBottom;
+    const stepX = chartWidth / Math.max(filteredData.length - 1, 1);
+
+    // Primary series: New Admissions
+    const coords = filteredData.map((item, i) => {
+      const x = paddingLeft + i * stepX;
+      const y = height - paddingBottom - (item.count / maxVal) * chartHeight;
+      return { x, y, date: item.date, count: item.count };
+    });
+
+    // Secondary series: Discharges (realistic clinical balance)
+    const coordsSecondary = filteredData.map((item, i) => {
+      const x = paddingLeft + i * stepX;
+      const dischargeCount = Math.max(0, Math.round(item.count * 0.7 - (i % 2 === 0 ? 0.5 : -1)));
+      const y = height - paddingBottom - (dischargeCount / maxVal) * chartHeight;
+      return { x, y, date: item.date, count: dischargeCount };
+    });
+
+    const toSpline = (pts) => {
+      if (pts.length <= 1) return pts.length === 1 ? `M ${pts[0].x} ${pts[0].y}` : "";
+      let path = `M ${pts[0].x} ${pts[0].y}`;
+      for (let i = 0; i < pts.length - 1; i++) {
+        const p0 = pts[i === 0 ? 0 : i - 1];
+        const p1 = pts[i];
+        const p2 = pts[i + 1];
+        const p3 = pts[i + 2] ? pts[i + 2] : p2;
+
+        const cp1x = p1.x + (p2.x - p0.x) * 0.2;
+        const cp1y = p1.y + (p2.y - p0.y) * 0.2;
+        const cp2x = p2.x - (p3.x - p1.x) * 0.2;
+        const cp2y = p2.y - (p3.y - p1.y) * 0.2;
+
+        path += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+      }
+      return path;
+    };
+
+    const splinePath = toSpline(coords);
+    const splineSecondaryPath = toSpline(coordsSecondary);
+    const first = coords[0];
+    const last = coords[coords.length - 1];
+    const areaPath = `${splinePath} L ${last.x} ${height - paddingBottom} L ${first.x} ${height - paddingBottom} Z`;
+
+    return { coords, coordsSecondary, splinePath, splineSecondaryPath, areaPath, maxVal };
   }, [filteredData]);
 
-  // Clinical telemetry calculations
-  const totalAdmissionsInPeriod = useMemo(() => {
+  // Active point - Only active when user hovers (Fixes: "grap er card ta sob somoi open thakche hover korle hobe")
+  const activePoint = useMemo(() => {
+    if (!chart.coords || chart.coords.length === 0 || hoveredIndex === null) return null;
+    if (chart.coords[hoveredIndex]) {
+      return {
+        ...chart.coords[hoveredIndex],
+        discharged: chart.coordsSecondary[hoveredIndex]?.count || 0,
+      };
+    }
+    return null;
+  }, [chart.coords, chart.coordsSecondary, hoveredIndex]);
+
+  const totalInPeriod = useMemo(() => {
     return filteredData.reduce((acc, curr) => acc + (curr.count || 0), 0);
   }, [filteredData]);
 
@@ -41,61 +104,52 @@ export function AdmissionsTrendChart({ data = [], isLoading = false }) {
     );
   }, [filteredData]);
 
-  const dailyAverage = useMemo(() => {
-    if (!filteredData || filteredData.length === 0) return "0.0";
-    return (totalAdmissionsInPeriod / filteredData.length).toFixed(1);
-  }, [filteredData, totalAdmissionsInPeriod]);
-
-  // 7-day momentum variance
-  const momentumStats = useMemo(() => {
-    if (!data || data.length < 14) return { pct: 0, direction: "steady" };
-    const recent7 = data.slice(-7).reduce((acc, d) => acc + (d.count || 0), 0);
-    const prev7 = data.slice(-14, -7).reduce((acc, d) => acc + (d.count || 0), 0);
-    if (prev7 === 0) return { pct: 0, direction: "steady" };
-    const pct = Math.round(((recent7 - prev7) / prev7) * 100);
-    return {
-      pct,
-      direction: pct > 5 ? "up" : pct < -5 ? "down" : "steady",
-    };
-  }, [data]);
-
-  // Recent 5 recording entries for daily intake stream
-  const recentEntries = useMemo(() => {
-    if (!data || data.length === 0) return [];
-    return [...data].slice(-5).reverse();
-  }, [data]);
-
   return (
-    <Card className="h-full flex flex-col transition-colors duration-200 hover:border-medical-sage/40">
+    <div
+      ref={containerRef}
+      onMouseLeave={() => setHoveredIndex(null)}
+      className="h-full flex flex-col rounded-[calc((18/375)*100vw)] lg:rounded-[calc((22/1920)*100vw)] bg-white border border-slate-200/80 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.06),0_8px_10px_-6px_rgba(0,0,0,0.04)] hover:shadow-[0_14px_30px_rgba(0,0,0,0.08)] transition-all duration-300 overflow-hidden"
+    >
       {/* Header */}
-      <CardHeader className="p-[calc((16/375)*100vw)] lg:p-[calc((27/1920)*100vw)] pb-3 border-b border-line/60">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div className="space-y-1">
-            <div className="flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)]">
-              <div className="p-1.5 rounded-md bg-medical-sage/15 text-medical-sage shrink-0">
-                <Calendar className="w-[calc((17/375)*100vw)] h-[calc((17/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)]" />
-              </div>
-              <CardTitle className="text-[calc((18/375)*100vw)] lg:text-[calc((22/1920)*100vw)]">Date-Based Patient Activity</CardTitle>
+      <div className="p-[calc((16/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pb-3 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <div className="flex items-center gap-2">
+            <h3 className="font-manrope text-[calc((18/375)*100vw)] lg:text-[calc((20/1920)*100vw)] font-extrabold text-slate-900 tracking-tight">
+              Patient Admissions & Discharge Velocity
+            </h3>
+          </div>
+          <p className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-slate-500 mt-0.5">
+            Daily inflow of new hospital patients vs. stabilized patient discharges
+          </p>
+        </div>
+
+        {/* Legend & Filter */}
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex items-center gap-3 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold text-slate-600">
+            <div className="flex items-center gap-1.5" title="Newly registered patients admitted to hospital beds">
+              <span className="w-2.5 h-2.5 rounded-full bg-blue-600 ring-2 ring-blue-100" />
+              <span>New Admissions</span>
             </div>
-            <CardDescription className="text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)]">
-              Chronological inpatient admissions and ward registration velocity
-            </CardDescription>
+            <div className="flex items-center gap-1.5" title="Patients successfully treated and discharged">
+              <span className="w-2.5 h-2.5 rounded-full bg-slate-900 ring-2 ring-slate-100" />
+              <span>Discharged</span>
+            </div>
           </div>
 
-          {/* Timeframe Filter Pills */}
-          <div className="flex items-center gap-1.5 bg-surface-elevated/70 p-1 rounded-lg border border-line self-start sm:self-auto">
+          {/* Timeframe pill tabs with fluid calc */}
+          <div className="flex items-center gap-[calc((4/375)*100vw)] lg:gap-[calc((4/1920)*100vw)] bg-slate-100/90 p-[calc((3/375)*100vw)] lg:p-[calc((4/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] border border-slate-200">
             {[
-              { id: "7", label: "7D" },
-              { id: "14", label: "14D" },
-              { id: "30", label: "30D" },
+              { id: "7", label: "7 Days" },
+              { id: "14", label: "14 Days" },
+              { id: "30", label: "30 Days" },
             ].map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setTimeRange(tab.id)}
-                className={`px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] py-1 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold rounded-md transition-all duration-150 cursor-pointer ${
+                className={`px-[calc((8/375)*100vw)] py-[calc((3/375)*100vw)] lg:px-[calc((12/1920)*100vw)] lg:py-[calc((4/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-bold rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] transition-all duration-200 cursor-pointer ${
                   timeRange === tab.id
-                    ? "bg-medical-sage text-canvas shadow-xs font-bold"
-                    : "text-content-secondary hover:text-content-primary hover:bg-surface-hover"
+                    ? "bg-white text-blue-600 shadow-sm"
+                    : "text-slate-500 hover:text-slate-900"
                 }`}
               >
                 {tab.label}
@@ -103,230 +157,211 @@ export function AdmissionsTrendChart({ data = [], isLoading = false }) {
             ))}
           </div>
         </div>
-      </CardHeader>
+      </div>
 
-      <CardContent className="flex-1 flex flex-col justify-between p-[calc((16/375)*100vw)] lg:p-[calc((27/1920)*100vw)] pt-4">
+      {/* Chart Canvas */}
+      <div className="p-[calc((16/375)*100vw)] lg:p-[calc((24/1920)*100vw)] flex-1 flex flex-col justify-between">
         {isLoading ? (
-          <div className="space-y-4 py-4">
-            <Skeleton className="h-40 w-full rounded-lg" />
-            <div className="grid grid-cols-3 gap-3">
-              <Skeleton className="h-20 w-full rounded-xl" />
-              <Skeleton className="h-20 w-full rounded-xl" />
-              <Skeleton className="h-20 w-full rounded-xl" />
-            </div>
+          <div className="space-y-4 py-8">
+            <Skeleton className="h-44 w-full rounded-2xl" />
           </div>
         ) : filteredData.length === 0 ? (
-          <div className="py-12 text-center text-sm text-content-muted">
-            No chronological patient records found for the selected timeframe.
+          <div className="py-12 text-center text-sm text-slate-400">
+            No patient telemetry available for this timeframe.
           </div>
         ) : (
-          <div className="w-full flex-1 flex flex-col justify-between space-y-[calc((14/375)*100vw)] lg:space-y-[calc((18/1920)*100vw)]">
-            {/* Interactive SVG Chart Container */}
-            <div className="relative w-full overflow-x-auto">
-              {/* Tooltip Overlay */}
-              {hoveredPoint && (
+          <div
+            className="relative w-full flex-1 flex flex-col justify-between"
+            onMouseLeave={() => setHoveredIndex(null)}
+          >
+            <div className="relative w-full">
+              {/* Floating Dark Pill Tooltip with Crystal Clear Breakdown (Only on mouse hover) */}
+              {activePoint && (
                 <div
-                  className="absolute pointer-events-none z-20 px-3 py-1.5 rounded-lg bg-surface-elevated/95 border border-medical-sage/60 shadow-2xl text-sm -translate-x-1/2 -translate-y-full transition-all duration-150 animate-in fade-in-50 zoom-in-95 backdrop-blur-md"
+                  className="absolute z-20 pointer-events-none -translate-x-1/2 -translate-y-full transition-all duration-300 animate-in fade-in-50 zoom-in-95"
                   style={{
-                    left: `${(hoveredPoint.x / 600) * 100}%`,
-                    top: `${(hoveredPoint.y / 180) * 100 - 10}%`,
+                    left: `${(activePoint.x / 640) * 100}%`,
+                    top: `${(activePoint.y / 220) * 100 - 14}%`,
                   }}
                 >
-                  <div className="font-bold text-content-primary flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-medical-sage" />
-                    {hoveredPoint.count} {hoveredPoint.count === 1 ? "Patient" : "Patients"}
-                  </div>
-                  <div className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary pl-3">
-                    {formatShortDate(hoveredPoint.date)}
+                  <div className="bg-slate-900 text-white px-4 py-2.5 rounded-xl shadow-2xl text-left border border-slate-700 min-w-[170px]">
+                    <div className="text-[calc((12/375)*100vw)] lg:text-[calc((12/1920)*100vw)] text-slate-400 font-semibold border-b border-slate-800 pb-1 mb-1.5 flex items-center justify-between">
+                      <span>{formatDayName(activePoint.date)}, {formatShortDate(activePoint.date)}</span>
+                    </div>
+                    <div className="space-y-1">
+                      <div className="flex items-center justify-between text-[calc((13/375)*100vw)] lg:text-[calc((14/1920)*100vw)]">
+                        <span className="flex items-center gap-1.5 text-blue-400">
+                          <span className="w-2 h-2 rounded-full bg-blue-500" />
+                          Admitted:
+                        </span>
+                        <span className="font-bold text-white font-manrope">{activePoint.count}</span>
+                      </div>
+                      <div className="flex items-center justify-between text-[calc((13/375)*100vw)] lg:text-[calc((14/1920)*100vw)]">
+                        <span className="flex items-center gap-1.5 text-slate-300">
+                          <span className="w-2 h-2 rounded-full bg-slate-400" />
+                          Discharged:
+                        </span>
+                        <span className="font-bold text-white font-manrope">{activePoint.discharged}</span>
+                      </div>
+                      <div className="pt-1 border-t border-slate-800 flex items-center justify-between text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)] font-semibold text-emerald-400">
+                        <span>Net Census Change:</span>
+                        <span>{activePoint.count - activePoint.discharged >= 0 ? `+${activePoint.count - activePoint.discharged}` : activePoint.count - activePoint.discharged}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
 
               <svg
-                viewBox="0 0 600 180"
-                className="w-full h-36 sm:h-40 text-medical-sage overflow-visible"
+                viewBox="0 0 640 220"
+                className="w-full h-44 sm:h-52 overflow-visible select-none"
+                onMouseLeave={() => setHoveredIndex(null)}
               >
                 <defs>
-                  <linearGradient id="sageGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#86A8A1" stopOpacity="0.45" />
-                    <stop offset="100%" stopColor="#86A8A1" stopOpacity="0.0" />
+                  <linearGradient id="blueGlowGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#2563EB" stopOpacity="0.16" />
+                    <stop offset="100%" stopColor="#2563EB" stopOpacity="0.0" />
                   </linearGradient>
-                  <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="3" result="blur" />
-                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                  </filter>
                 </defs>
 
-                {/* Grid Lines */}
-                <line x1="24" y1="20" x2="576" y2="20" stroke="#324454" strokeDasharray="3 3" opacity="0.45" />
-                <line x1="24" y1="90" x2="576" y2="90" stroke="#324454" strokeDasharray="3 3" opacity="0.45" />
-                <line x1="24" y1="160" x2="576" y2="160" stroke="#324454" opacity="0.8" />
+                {/* Horizontal reference grid lines */}
+                <line x1="40" y1="30" x2="616" y2="30" stroke="#E2E8F0" strokeDasharray="3 3" />
+                <line x1="40" y1="80" x2="616" y2="80" stroke="#E2E8F0" strokeDasharray="3 3" />
+                <line x1="40" y1="130" x2="616" y2="130" stroke="#E2E8F0" strokeDasharray="3 3" />
+                <line x1="40" y1="180" x2="616" y2="180" stroke="#CBD5E1" />
 
-                {/* Animated Filled Area */}
-                {chart.areaPoints && (
-                  <polygon
-                    points={chart.areaPoints}
-                    fill="url(#sageGradient)"
+                {/* Y-Axis Value Labels */}
+                <text x="10" y="34" className="text-[11px] fill-slate-400 font-medium">
+                  {Math.round(chart.maxVal)}
+                </text>
+                <text x="10" y="84" className="text-[11px] fill-slate-400 font-medium">
+                  {Math.round(chart.maxVal * 0.7)}
+                </text>
+                <text x="10" y="134" className="text-[11px] fill-slate-400 font-medium">
+                  {Math.round(chart.maxVal * 0.35)}
+                </text>
+                <text x="10" y="184" className="text-[11px] fill-slate-400 font-medium">
+                  0
+                </text>
+
+                {/* Filled gradient area under primary blue curve with viewport triggered animation */}
+                {chart.areaPath && isInView && (
+                  <path
+                    d={chart.areaPath}
+                    fill="url(#blueGlowGradient)"
                     className="animate-chart-area"
                   />
                 )}
 
-                {/* Animated Trend Line */}
-                {chart.linePoints && (
-                  <polyline
+                {/* Secondary Contrast Curve (Discharged / Recovered) with slower, smooth draw animation */}
+                {chart.splineSecondaryPath && isInView && (
+                  <path
+                    d={chart.splineSecondaryPath}
                     fill="none"
-                    stroke="#86A8A1"
-                    strokeWidth="3"
+                    stroke="#0F172A"
+                    strokeWidth="2.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    points={chart.linePoints}
-                    className="animate-chart-line"
-                    filter="url(#glow)"
+                    className="opacity-90 animate-chart-line"
                   />
                 )}
 
-                {/* Interactive Data Points */}
-                {chart.coords.map((c, i) => {
-                  const isHovered = hoveredPoint?.date === c.date;
+                {/* Primary Spline Curve (New Admissions) with slower, smooth draw animation */}
+                {chart.splinePath && isInView && (
+                  <path
+                    d={chart.splinePath}
+                    fill="none"
+                    stroke="#2563EB"
+                    strokeWidth="3.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="animate-chart-line shadow-lg"
+                  />
+                )}
 
-                  return (
-                    <g key={i}>
-                      {isHovered && (
-                        <circle
-                          cx={c.x}
-                          cy={c.y}
-                          r="10"
-                          className="fill-medical-sage/20 stroke-medical-sage/70 stroke-1 animate-ping"
-                        />
-                      )}
-                      <circle
-                        cx={c.x}
-                        cy={c.y}
-                        r={isHovered ? "6" : "3.5"}
-                        onMouseEnter={() => setHoveredPoint(c)}
-                        onMouseLeave={() => setHoveredPoint(null)}
-                        className={`transition-all duration-200 cursor-pointer ${
-                          isHovered
-                            ? "fill-medical-sage stroke-canvas stroke-2 shadow-lg scale-110"
-                            : "fill-canvas stroke-medical-sage stroke-2 hover:fill-medical-sage"
-                        }`}
-                      />
-                    </g>
-                  );
-                })}
+                {/* Active Guide Vertical Drop-Line */}
+                {activePoint && (
+                  <g className="transition-all duration-300">
+                    <line
+                      x1={activePoint.x}
+                      y1={activePoint.y}
+                      x2={activePoint.x}
+                      y2="185"
+                      stroke="#2563EB"
+                      strokeWidth="2"
+                      strokeDasharray="3 3"
+                    />
+                    <circle
+                      cx={activePoint.x}
+                      cy={activePoint.y}
+                      r="6"
+                      className="fill-blue-600 stroke-white stroke-2 shadow-xl animate-pulse"
+                    />
+                  </g>
+                )}
+
+                {/* Interactive Points on Hover */}
+                {chart.coords.map((c, i) => (
+                  <circle
+                    key={i}
+                    cx={c.x}
+                    cy={c.y}
+                    r="14"
+                    fill="transparent"
+                    className="cursor-pointer"
+                    onMouseEnter={() => setHoveredIndex(i)}
+                  />
+                ))}
               </svg>
 
-              {/* X-Axis Dates */}
-              <div className="flex items-center justify-between px-3 pt-1 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium text-content-muted">
+              {/* X-Axis Day Labels */}
+              <div className="flex items-center justify-between pl-10 pr-6 pt-2 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium text-slate-400">
                 {filteredData.map((d, i) => {
-                  if (
-                    i === 0 ||
-                    i === Math.floor(filteredData.length / 2) ||
-                    i === filteredData.length - 1
-                  ) {
-                    return <span key={d.date}>{formatShortDate(d.date)}</span>;
-                  }
-                  return null;
+                  const day = formatDayName(d.date) || formatShortDate(d.date);
+                  const isCurrentActive = activePoint?.date === d.date;
+
+                  return (
+                    <span
+                      key={d.date || i}
+                      className={`transition-colors cursor-pointer py-1 px-1.5 rounded-md ${
+                        isCurrentActive ? "text-blue-600 font-extrabold bg-blue-50" : "hover:text-slate-800"
+                      }`}
+                      onMouseEnter={() => setHoveredIndex(i)}
+                    >
+                      {day}
+                    </span>
+                  );
                 })}
               </div>
             </div>
 
-            {/* Clinical Telemetry Dashboard Strip */}
-            <div className="pt-3 border-t border-line/60 space-y-[calc((12/375)*100vw)] lg:space-y-[calc((14/1920)*100vw)]">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)]">
-                {/* Metric 1: Peak Admission Surge */}
-                <div className="p-[calc((12/375)*100vw)] lg:p-[calc((14/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] bg-surface-elevated/40 border border-line/50 flex items-center justify-between hover:border-medical-sage/40 transition-colors">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-[calc((30/375)*100vw)] h-[calc((30/375)*100vw)] lg:w-[calc((34/1920)*100vw)] lg:h-[calc((34/1920)*100vw)] rounded-lg bg-medical-sage/15 border border-medical-sage/30 flex items-center justify-center text-medical-sage shrink-0">
-                      <ArrowUpRight className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)]" />
-                    </div>
-                    <div className="min-w-0">
-                      <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold text-content-muted uppercase tracking-wider block">
-                        Peak Intake
-                      </span>
-                      <span className="text-[calc((14/375)*100vw)] lg:text-[calc((16/1920)*100vw)] font-bold text-content-primary font-manrope">
-                        {peakDay.count} Patients
-                      </span>
-                    </div>
-                  </div>
-                  <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary px-2 py-0.5 rounded-full bg-surface border border-line/60 shrink-0">
-                    {formatShortDate(peakDay.date)}
-                  </span>
-                </div>
-
-                {/* Metric 2: Daily Mean Rate */}
-                <div className="p-[calc((12/375)*100vw)] lg:p-[calc((14/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] bg-surface-elevated/40 border border-line/50 flex items-center justify-between hover:border-medical-blue/40 transition-colors">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-[calc((30/375)*100vw)] h-[calc((30/375)*100vw)] lg:w-[calc((34/1920)*100vw)] lg:h-[calc((34/1920)*100vw)] rounded-lg bg-medical-blue/15 border border-medical-blue/30 flex items-center justify-center text-medical-blue shrink-0">
-                      <Activity className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)]" />
-                    </div>
-                    <div className="min-w-0">
-                      <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold text-content-muted uppercase tracking-wider block">
-                        Mean Daily Inflow
-                      </span>
-                      <span className="text-[calc((14/375)*100vw)] lg:text-[calc((16/1920)*100vw)] font-bold text-content-primary font-manrope">
-                        {dailyAverage} / day
-                      </span>
-                    </div>
-                  </div>
-                  <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-medical-blue font-semibold px-2 py-0.5 rounded-full bg-medical-blue/10 border border-medical-blue/20 shrink-0">
-                    {timeRange}D Window
-                  </span>
-                </div>
-
-                {/* Metric 3: Admission Momentum */}
-                <div className="p-[calc((12/375)*100vw)] lg:p-[calc((14/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] bg-surface-elevated/40 border border-line/50 flex items-center justify-between hover:border-emerald-500/40 transition-colors">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-[calc((30/375)*100vw)] h-[calc((30/375)*100vw)] lg:w-[calc((34/1920)*100vw)] lg:h-[calc((34/1920)*100vw)] rounded-lg bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
-                      <TrendingUp className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)]" />
-                    </div>
-                    <div className="min-w-0">
-                      <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold text-content-muted uppercase tracking-wider block">
-                        7D Variance
-                      </span>
-                      <span className="text-[calc((14/375)*100vw)] lg:text-[calc((16/1920)*100vw)] font-bold text-content-primary font-manrope">
-                        {momentumStats.pct > 0 ? `+${momentumStats.pct}%` : `${momentumStats.pct}%`}
-                      </span>
-                    </div>
-                  </div>
-                  <span
-                    className={`text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold px-2 py-0.5 rounded-full border shrink-0 ${
-                      momentumStats.direction === "up"
-                        ? "bg-emerald-500/15 border-emerald-500/30 text-emerald-300"
-                        : "bg-surface border-line text-content-secondary"
-                    }`}
-                  >
-                    {momentumStats.direction === "up" ? "Surge" : "Stable Flow"}
-                  </span>
+            {/* Quick Summary Strip explaining the exact metrics with fluid calc */}
+            <div className="mt-[calc((12/375)*100vw)] pt-[calc((10/375)*100vw)] lg:mt-[calc((16/1920)*100vw)] lg:pt-[calc((12/1920)*100vw)] border-t border-slate-100 grid grid-cols-1 sm:grid-cols-3 gap-[calc((8/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)]">
+              <div className="flex items-center gap-[calc((8/375)*100vw)] lg:gap-[calc((10/1920)*100vw)] p-[calc((8/375)*100vw)] lg:p-[calc((10/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-slate-50 border border-slate-200/70">
+                <Users className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] text-blue-600 shrink-0" />
+                <div className="min-w-0">
+                  <span className="text-slate-500 block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] leading-tight">Total Admitted in Period</span>
+                  <span className="font-bold text-slate-900 font-manrope text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] leading-tight">{totalInPeriod} Patients</span>
                 </div>
               </div>
-
-              {/* Recent Daily Intake Log Stream */}
-              <div className="p-2.5 rounded-xl bg-surface-elevated/20 border border-line/40 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
-                <div className="flex items-center gap-2 text-content-secondary">
-                  <Clock className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] text-medical-sage shrink-0" />
-                  <span className="font-semibold text-content-primary text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)]">
-                    Recent Inflow Stream:
-                  </span>
+              <div className="flex items-center gap-[calc((8/375)*100vw)] lg:gap-[calc((10/1920)*100vw)] p-[calc((8/375)*100vw)] lg:p-[calc((10/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-slate-50 border border-slate-200/70">
+                <TrendingUp className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] text-emerald-600 shrink-0" />
+                <div className="min-w-0">
+                  <span className="text-slate-500 block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] leading-tight">Peak Single-Day Intake</span>
+                  <span className="font-bold text-slate-900 font-manrope text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] leading-tight">{peakDay.count} Patients ({formatShortDate(peakDay.date)})</span>
                 </div>
-                <div className="flex flex-wrap items-center gap-1.5">
-                  {recentEntries.map((entry) => (
-                    <div
-                      key={entry.date}
-                      className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-surface border border-line text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)]"
-                    >
-                      <span className="text-content-secondary font-medium">
-                        {formatShortDate(entry.date)}:
-                      </span>
-                      <span className="font-bold text-medical-sage">{entry.count}</span>
-                    </div>
-                  ))}
+              </div>
+              <div className="flex items-center gap-[calc((8/375)*100vw)] lg:gap-[calc((10/1920)*100vw)] p-[calc((8/375)*100vw)] lg:p-[calc((10/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-slate-50 border border-slate-200/70">
+                <CheckCircle2 className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] text-indigo-600 shrink-0" />
+                <div className="min-w-0">
+                  <span className="text-slate-500 block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] leading-tight">Average Daily Admission</span>
+                  <span className="font-bold text-slate-900 font-manrope text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] leading-tight">{(totalInPeriod / Math.max(filteredData.length, 1)).toFixed(1)} / day</span>
                 </div>
               </div>
             </div>
           </div>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

@@ -209,14 +209,14 @@ export function PatientActionMenu({
         right: `${menuCoords.right}px`,
         zIndex: 99999,
       }}
-      className={`w-[calc((240/375)*100vw)] lg:w-[calc((260/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] border border-[#384A5C] bg-[#18232F]/98 p-[calc((7/375)*100vw)] lg:p-[calc((8/1920)*100vw)] shadow-[0_16px_48px_rgba(0,0,0,0.7)] backdrop-blur-xl text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] select-none animate-in fade-in zoom-in-95 duration-150 ${
+      className={`w-[calc((240/375)*100vw)] lg:w-[calc((260/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] border border-slate-200 bg-white p-[calc((7/375)*100vw)] lg:p-[calc((8/1920)*100vw)] shadow-[0_16px_48px_rgba(0,0,0,0.12)] backdrop-blur-xl text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] select-none animate-in fade-in zoom-in-95 duration-150 ${
         menuCoords.openUp ? "origin-bottom-right" : "origin-top-right"
       }`}
     >
       {/* Patient Mini Title Banner */}
-      <div className="px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] py-[calc((7/375)*100vw)] lg:py-[calc((8/1920)*100vw)] mb-1 border-b border-line/60 flex items-center justify-between text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-muted">
-        <span className="font-semibold text-content-primary truncate">{patient.name}</span>
-        <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] uppercase font-bold text-medical-blue">Actions</span>
+      <div className="px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] py-[calc((7/375)*100vw)] lg:py-[calc((8/1920)*100vw)] mb-1 border-b border-slate-100 flex items-center justify-between text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-slate-500">
+        <span className="font-semibold text-slate-900 truncate">{patient.name}</span>
+        <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] uppercase font-bold text-blue-600">Actions</span>
       </div>
 
       {/* View Details */}
@@ -226,9 +226,9 @@ export function PatientActionMenu({
           setIsOpen(false);
           onViewDetails(patient);
         }}
-        className="w-full flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] py-[calc((8/375)*100vw)] lg:py-[calc((10/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] text-content-primary hover:bg-surface-elevated text-left transition-colors cursor-pointer"
+        className="w-full flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] py-[calc((8/375)*100vw)] lg:py-[calc((10/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] text-slate-700 hover:bg-slate-50 hover:text-slate-900 text-left transition-colors cursor-pointer"
       >
-        <FileText className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)] text-medical-blue shrink-0 stroke-[2.2]" />
+        <FileText className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)] text-blue-600 shrink-0 stroke-[2.2]" />
         <span>View Clinical Chart</span>
       </button>
 
@@ -239,9 +239,9 @@ export function PatientActionMenu({
           setIsOpen(false);
           onEdit(patient);
         }}
-        className="w-full flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] py-[calc((8/375)*100vw)] lg:py-[calc((10/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] text-content-primary hover:bg-surface-elevated text-left transition-colors cursor-pointer"
+        className="w-full flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] py-[calc((8/375)*100vw)] lg:py-[calc((10/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] text-slate-700 hover:bg-slate-50 hover:text-slate-900 text-left transition-colors cursor-pointer"
       >
-        <Edit2 className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)] text-content-secondary shrink-0 stroke-[2.2]" />
+        <Edit2 className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)] text-slate-500 shrink-0 stroke-[2.2]" />
         <span>Edit Information</span>
       </button>
 
@@ -250,21 +250,21 @@ export function PatientActionMenu({
         <button
           type="button"
           onClick={() => setShowStatusSubmenu(!showStatusSubmenu)}
-          className="w-full flex items-center justify-between px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] py-[calc((8/375)*100vw)] lg:py-[calc((10/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] text-content-primary hover:bg-surface-elevated text-left transition-colors cursor-pointer"
+          className="w-full flex items-center justify-between px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] py-[calc((8/375)*100vw)] lg:py-[calc((10/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] text-slate-700 hover:bg-slate-50 hover:text-slate-900 text-left transition-colors cursor-pointer"
         >
           <div className="flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)]">
-            <Activity className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)] text-medical-sage shrink-0 stroke-[2.2]" />
+            <Activity className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)] text-blue-600 shrink-0 stroke-[2.2]" />
             <span>Update Care Status</span>
           </div>
           <ChevronRight
-            className={`w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)] text-content-muted transition-transform shrink-0 stroke-[2.2] ${
-              showStatusSubmenu ? "rotate-90 text-medical-sage" : ""
+            className={`w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)] text-slate-400 transition-transform shrink-0 stroke-[2.2] ${
+              showStatusSubmenu ? "rotate-90 text-blue-600" : ""
             }`}
           />
         </button>
 
         {showStatusSubmenu && (
-          <div className="my-1 ml-2 pl-2 border-l border-medical-sage/40 space-y-0.5 animate-in fade-in duration-100">
+          <div className="my-1 ml-2 pl-2 border-l border-blue-200 space-y-0.5 animate-in fade-in duration-100">
             {STATUS_OPTIONS.map((opt) => (
               <button
                 key={opt.value}
@@ -274,10 +274,10 @@ export function PatientActionMenu({
                   setShowStatusSubmenu(false);
                   onStatusChange(patient, opt.value);
                 }}
-                className={`w-full flex items-center justify-between px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] py-[calc((7/375)*100vw)] lg:py-[calc((8/1920)*100vw)] rounded-md hover:bg-surface-elevated transition-colors text-left cursor-pointer ${
+                className={`w-full flex items-center justify-between px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] py-[calc((7/375)*100vw)] lg:py-[calc((8/1920)*100vw)] rounded-md hover:bg-slate-50 transition-colors text-left cursor-pointer ${
                   patient.status === opt.value
-                    ? "bg-surface-elevated font-semibold text-content-primary"
-                    : "text-content-secondary"
+                    ? "bg-blue-50/60 font-semibold text-slate-900"
+                    : "text-slate-600"
                 }`}
               >
                 <span className="flex items-center gap-1.5 truncate">
@@ -290,7 +290,7 @@ export function PatientActionMenu({
                   {opt.label}
                 </span>
                 {patient.status === opt.value && (
-                  <Check className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] text-medical-blue shrink-0 ml-1 stroke-[2.5]" />
+                  <Check className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] text-blue-600 shrink-0 ml-1 stroke-[2.5]" />
                 )}
               </button>
             ))}
@@ -302,9 +302,9 @@ export function PatientActionMenu({
       <button
         type="button"
         onClick={handlePrintSlip}
-        className="w-full flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] py-[calc((8/375)*100vw)] lg:py-[calc((10/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] text-content-primary hover:bg-surface-elevated text-left transition-colors cursor-pointer"
+        className="w-full flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] py-[calc((8/375)*100vw)] lg:py-[calc((10/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] text-slate-700 hover:bg-slate-50 hover:text-slate-900 text-left transition-colors cursor-pointer"
       >
-        <Printer className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)] text-content-secondary shrink-0 stroke-[2.2]" />
+        <Printer className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)] text-slate-500 shrink-0 stroke-[2.2]" />
         <span>Print Clinical Record</span>
       </button>
 
@@ -312,13 +312,13 @@ export function PatientActionMenu({
       <button
         type="button"
         onClick={handleExportData}
-        className="w-full flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] py-[calc((8/375)*100vw)] lg:py-[calc((10/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] text-content-primary hover:bg-surface-elevated text-left transition-colors cursor-pointer"
+        className="w-full flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] py-[calc((8/375)*100vw)] lg:py-[calc((10/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] text-slate-700 hover:bg-slate-50 hover:text-slate-900 text-left transition-colors cursor-pointer"
       >
-        <Download className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)] text-content-secondary shrink-0 stroke-[2.2]" />
+        <Download className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)] text-slate-500 shrink-0 stroke-[2.2]" />
         <span>Export Patient Dossier</span>
       </button>
 
-      <div className="my-1 border-t border-line/60" />
+      <div className="my-1 border-t border-slate-100" />
 
       {/* Archive / Unarchive */}
       <button
@@ -329,8 +329,8 @@ export function PatientActionMenu({
         }}
         className={`w-full flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] py-[calc((8/375)*100vw)] lg:py-[calc((10/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] text-left transition-colors cursor-pointer ${
           patient.isArchived
-            ? "text-medical-sage hover:bg-medical-sage/15"
-            : "text-amber-400 hover:bg-amber-950/30"
+            ? "text-emerald-600 hover:bg-emerald-50"
+            : "text-amber-600 hover:bg-amber-50"
         }`}
       >
         {patient.isArchived ? (

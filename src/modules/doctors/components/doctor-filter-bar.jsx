@@ -41,7 +41,7 @@ export function DoctorFilterBar({
               onClick={() => onStatusChange(tab.value)}
               className={`px-[calc((12/375)*100vw)] lg:px-[calc((16/1920)*100vw)] py-[calc((6/375)*100vw)] lg:py-[calc((7/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium transition-colors cursor-pointer ${
                 statusFilter === tab.value
-                  ? "bg-medical-blue text-canvas font-semibold shadow-xs"
+                  ? "bg-blue-600 text-white font-semibold shadow-xs"
                   : "text-content-secondary hover:text-content-primary hover:bg-surface-hover"
               }`}
             >
@@ -61,7 +61,7 @@ export function DoctorFilterBar({
               onClick={() => onSpecialtyChange(spec)}
               className={`h-[calc((30/375)*100vw)] lg:h-[calc((32/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium rounded-full transition-colors duration-150 border inline-flex items-center justify-center leading-none cursor-pointer ${
                 isSelected
-                  ? "bg-medical-blue text-canvas border-medical-blue font-semibold shadow-xs"
+                  ? "bg-blue-600 text-white border-blue-600 font-semibold shadow-xs"
                   : "bg-surface text-content-secondary border-line hover:bg-surface-hover hover:text-content-primary"
               }`}
             >

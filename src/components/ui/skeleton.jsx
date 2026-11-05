@@ -5,7 +5,7 @@ function Skeleton({ className, ...props }) {
   return (
     <div
       className={cn(
-        "animate-shimmer rounded-md bg-surface-elevated/80 border border-line/40",
+        "animate-shimmer rounded-lg border border-slate-200/60 shadow-xs",
         className
       )}
       {...props}
@@ -14,4 +14,3 @@ function Skeleton({ className, ...props }) {
 }
 
 export { Skeleton };
-

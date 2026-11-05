@@ -36,19 +36,19 @@ export function PatientDeleteDialog({ patient, isOpen, onClose, onSuccess }) {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-[calc((14/375)*100vw)] lg:p-[calc((27/1920)*100vw)] bg-black/80 backdrop-blur-md animate-in fade-in duration-150 select-none"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-[calc((14/375)*100vw)] lg:p-[calc((27/1920)*100vw)] bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200 select-none"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-[calc((365/375)*100vw)] lg:max-w-[calc((365/1920)*100vw)] bg-surface border border-line rounded-[calc((16/375)*100vw)] lg:rounded-[calc((18/1920)*100vw)] shadow-2xl p-[calc((18/375)*100vw)] lg:p-[calc((27/1920)*100vw)] space-y-[calc((14/375)*100vw)] lg:space-y-[calc((18/1920)*100vw)]"
+        className="relative w-full max-w-[calc((365/375)*100vw)] lg:max-w-[calc((480/1920)*100vw)] bg-white border border-slate-200/90 rounded-[calc((18/375)*100vw)] lg:rounded-[calc((22/1920)*100vw)] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)] p-[calc((18/375)*100vw)] lg:p-[calc((27/1920)*100vw)] space-y-[calc((14/375)*100vw)] lg:space-y-[calc((18/1920)*100vw)] animate-in fade-in-0 zoom-in-95 slide-in-from-bottom-4 duration-300 ease-out"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start gap-[calc((12/375)*100vw)] lg:gap-[calc((14/1920)*100vw)]">
           <div
             className={`p-[calc((10/375)*100vw)] lg:p-[calc((12/1920)*100vw)] rounded-full border shrink-0 ${
               isCurrentlyArchived
-                ? "bg-medical-sage/20 border-medical-sage/40 text-medical-sage"
-                : "bg-amber-950/40 border-amber-800 text-amber-400"
+                ? "bg-emerald-50 border-emerald-200 text-emerald-600"
+                : "bg-amber-50 border-amber-200 text-amber-600"
             }`}
           >
             {isCurrentlyArchived ? (

@@ -67,11 +67,11 @@ export function AddAdminModal({ isOpen, onClose, onSuccess }) {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-[calc((14/375)*100vw)] lg:p-[calc((27/1920)*100vw)] bg-black/80 backdrop-blur-md animate-in fade-in duration-150 select-none"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-[calc((14/375)*100vw)] lg:p-[calc((27/1920)*100vw)] bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200 select-none"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-[calc((365/375)*100vw)] sm:max-w-[calc((365/1920)*100vw)] p-[calc((18/375)*100vw)] lg:p-[calc((27/1920)*100vw)] rounded-[calc((16/375)*100vw)] lg:rounded-[calc((18/1920)*100vw)] bg-surface border border-line shadow-2xl select-none animate-in zoom-in-95 duration-150"
+        className="relative w-full max-w-[calc((365/375)*100vw)] sm:max-w-[calc((520/1920)*100vw)] p-[calc((18/375)*100vw)] lg:p-[calc((27/1920)*100vw)] rounded-[calc((18/375)*100vw)] lg:rounded-[calc((22/1920)*100vw)] bg-white border border-slate-200/90 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)] select-none animate-in fade-in-0 zoom-in-95 slide-in-from-bottom-4 duration-300 ease-out"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between border-b border-line pb-[calc((14/375)*100vw)] lg:pb-[calc((16/1920)*100vw)] mb-[calc((14/375)*100vw)] lg:mb-[calc((16/1920)*100vw)]">

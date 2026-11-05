@@ -183,16 +183,16 @@ export function PatientsView() {
         {/* Content Section */}
         <CardContent className="p-[calc((16/375)*100vw)] lg:p-[calc((27/1920)*100vw)] pt-0">
           {error && (
-            <div className="my-4 p-4 rounded-xl bg-red-950/40 border border-red-800 text-red-200 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] flex items-center justify-between shadow-xs">
+            <div className="my-4 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] flex items-center justify-between shadow-xs">
               <div className="flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+                <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
                 <span>{error}</span>
               </div>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => loadPatients(pagination.page)}
-                className="h-8 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] border-red-700 text-red-200"
+                className="h-8 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] border-red-300 text-red-700 hover:bg-red-100/50"
               >
                 Try Again
               </Button>

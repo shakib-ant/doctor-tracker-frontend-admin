@@ -1,120 +1,70 @@
 "use client";
 
 import React from "react";
-import { Menu, ShieldCheck, LogOut, Activity, Stethoscope, Users } from "lucide-react";
+import { Menu, Search, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { logout } from "@/services/authService";
+import { NotificationDropdown } from "./notification-dropdown";
 
-export function Navbar({ onMenuClick, title = "Dashboard" }) {
-  // Determine appropriate clinical icon based on section title
-  const getHeaderIcon = () => {
-    if (title.includes("Access")) {
-      return (
-        <ShieldCheck className="w-[calc((20/375)*100vw)] h-[calc((20/375)*100vw)] lg:w-[calc((22/1920)*100vw)] lg:h-[calc((22/1920)*100vw)] stroke-[2.2]" />
-      );
-    }
-    if (title.includes("Doctor")) {
-      return (
-        <Stethoscope className="w-[calc((20/375)*100vw)] h-[calc((20/375)*100vw)] lg:w-[calc((22/1920)*100vw)] lg:h-[calc((22/1920)*100vw)] stroke-[2.2]" />
-      );
-    }
-    if (title.includes("Patient")) {
-      return (
-        <Users className="w-[calc((20/375)*100vw)] h-[calc((20/375)*100vw)] lg:w-[calc((22/1920)*100vw)] lg:h-[calc((22/1920)*100vw)] stroke-[2.2]" />
-      );
-    }
-    return (
-      <Activity className="w-[calc((20/375)*100vw)] h-[calc((20/375)*100vw)] lg:w-[calc((22/1920)*100vw)] lg:h-[calc((22/1920)*100vw)] stroke-[2.2]" />
-    );
-  };
-
-  const getHeaderSubtitle = () => {
-    if (title.includes("Access")) {
-      return "SuperAdmin Security & Permissions";
-    }
-    if (title.includes("Doctor")) {
-      return "Specialist Directory & Roster";
-    }
-    if (title.includes("Patient")) {
-      return "Inpatient Census & Records";
-    }
-    return "Hospital Operations & Telemetry";
-  };
-
+export function Navbar({ onMenuClick }) {
   return (
-    <header className="sticky top-0 z-30 flex items-center justify-between h-[calc((60/375)*100vw)] lg:h-[calc((68/1920)*100vw)] px-[calc((16/375)*100vw)] lg:px-[calc((27/1920)*100vw)] border-b border-line bg-surface/95 backdrop-blur-sm select-none">
-      {/* Mobile Menu & Section Header */}
-      <div className="flex items-center gap-[calc((12/375)*100vw)] lg:gap-[calc((14/1920)*100vw)] min-w-0">
+    <header className="sticky top-0 z-30 flex items-center justify-between h-[calc((56/375)*100vw)] sm:h-16 lg:h-[calc((68/1920)*100vw)] px-[calc((14/375)*100vw)] sm:px-6 lg:px-[calc((28/1920)*100vw)] border-b border-slate-200/80 bg-white/90 backdrop-blur-md select-none gap-2 sm:gap-4 lg:gap-[calc((16/1920)*100vw)]">
+      {/* Left side: Mobile Menu Button + Compact Search Input (Fixes mobile gap & search size) */}
+      <div className="flex items-center gap-[calc((8/375)*100vw)] sm:gap-3 lg:gap-[calc((16/1920)*100vw)] flex-1 min-w-0 max-w-[calc((210/375)*100vw)] sm:max-w-xs md:max-w-md">
         <Button
           variant="ghost"
           size="icon"
           onClick={onMenuClick}
-          className="lg:hidden text-content-secondary hover:text-content-primary -ml-1 h-[calc((42/375)*100vw)] w-[calc((42/375)*100vw)] rounded-[calc((10/375)*100vw)] shrink-0 cursor-pointer flex items-center justify-center"
+          className="lg:hidden text-slate-600 hover:text-slate-900 -ml-1 h-[calc((36/375)*100vw)] w-[calc((36/375)*100vw)] sm:h-10 sm:w-10 rounded-[calc((8/375)*100vw)] sm:rounded-xl shrink-0 cursor-pointer flex items-center justify-center"
           aria-label="Open navigation menu"
         >
-          <Menu className="w-[calc((26/375)*100vw)] h-[calc((26/375)*100vw)] stroke-[2.3]" />
+          <Menu className="w-[calc((20/375)*100vw)] h-[calc((20/375)*100vw)] sm:w-5 sm:h-5 stroke-[2.2]" />
         </Button>
 
-        {/* Section title on desktop */}
-        <div className="hidden lg:flex items-center gap-[calc((14/1920)*100vw)] min-w-0">
-          <div className="flex items-center justify-center w-[calc((40/1920)*100vw)] h-[calc((40/1920)*100vw)] rounded-[calc((12/1920)*100vw)] bg-medical-blue/15 border border-medical-blue/30 text-medical-blue shrink-0 shadow-[0_0_12px_rgba(137,180,206,0.15)]">
-            {getHeaderIcon()}
-          </div>
-          <div className="flex flex-col truncate">
-            <h1 className="font-manrope text-[calc((18/1920)*100vw)] font-bold tracking-tight text-content-primary leading-tight truncate">
-              {title}
-            </h1>
-            <span className="text-[calc((14/1920)*100vw)] font-medium text-content-secondary tracking-wider uppercase leading-tight mt-0.5 truncate">
-              {getHeaderSubtitle()}
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* On mobile: Text placed on the right side */}
-      <div className="flex flex-col text-right items-end truncate min-w-0 lg:hidden">
-        <h1 className="font-manrope text-[calc((16/375)*100vw)] font-bold tracking-tight text-content-primary leading-tight truncate">
-          {title}
-        </h1>
-        <span className="text-[calc((14/375)*100vw)] font-medium text-content-secondary tracking-wider uppercase leading-tight mt-0.5 truncate">
-          {getHeaderSubtitle()}
-        </span>
-      </div>
-
-      {/* User Status Glass Pill & Matching Logout Button */}
-      <div className="hidden lg:flex items-center gap-[calc((12/1920)*100vw)] shrink-0">
-        <div className="flex items-center gap-[calc((12/1920)*100vw)] h-[calc((40/1920)*100vw)] px-[calc((16/1920)*100vw)] rounded-full border border-white/[0.15] bg-gradient-to-r from-white/[0.08] via-white/[0.03] to-white/[0.08] backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.37),inset_0_1px_1px_0_rgba(255,255,255,0.2)] shrink-0 hover:border-medical-blue/40 transition-all duration-300">
-          <div className="flex items-center justify-center w-[calc((28/1920)*100vw)] h-[calc((28/1920)*100vw)] rounded-full bg-medical-blue/20 text-medical-blue shrink-0 border border-medical-blue/35 shadow-[0_0_10px_rgba(137,180,206,0.35)]">
-            <ShieldCheck className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((19/1920)*100vw)] lg:h-[calc((19/1920)*100vw)] stroke-[2.2] shrink-0" />
-          </div>
-          <div className="flex flex-col text-left shrink-0">
-            <div className="flex items-center gap-1.5">
-              <span className="text-[calc((14/1920)*100vw)] font-semibold text-content-primary leading-tight whitespace-nowrap tracking-tight">
-                Clinical Administrator
-              </span>
-              <span className="relative flex h-[calc((8/1920)*100vw)] w-[calc((8/1920)*100vw)] shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-full w-full bg-emerald-400" />
-              </span>
-            </div>
-            <span className="text-[calc((14/1920)*100vw)] text-content-secondary leading-tight whitespace-nowrap mt-0.5 tracking-normal">
-              Central Hospital Network
-            </span>
-          </div>
-        </div>
-
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={logout}
-          className="h-[calc((40/1920)*100vw)] w-[calc((40/1920)*100vw)] rounded-full border border-white/[0.1] bg-white/[0.04] backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] text-content-muted hover:text-red-300 hover:bg-red-950/40 hover:border-red-500/40 shrink-0 transition-all cursor-pointer flex items-center justify-center"
-          title="Sign out of administration portal"
-        >
-          <LogOut
-            strokeWidth={2.4}
-            className="w-[calc((22/375)*100vw)] h-[calc((22/375)*100vw)] lg:w-[calc((24/1920)*100vw)] lg:h-[calc((24/1920)*100vw)]"
+        {/* Search Capsule: Compact on mobile with generous gap to right-side buttons */}
+        <div className="flex items-center gap-[calc((6/375)*100vw)] sm:gap-2 lg:gap-[calc((10/1920)*100vw)] h-[calc((34/375)*100vw)] sm:h-10 lg:h-[calc((42/1920)*100vw)] px-[calc((10/375)*100vw)] sm:px-3 lg:px-[calc((16/1920)*100vw)] rounded-[calc((8/375)*100vw)] sm:rounded-xl bg-slate-50 border border-slate-200 text-slate-400 focus-within:border-blue-500 focus-within:bg-white focus-within:text-slate-900 focus-within:shadow-xs transition-all duration-200 w-[calc((130/375)*100vw)] sm:w-56 md:w-64 lg:w-[calc((320/1920)*100vw)] shrink-0">
+          <Search className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] sm:w-4 sm:h-4 lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] shrink-0 text-slate-400" />
+          <input
+            type="text"
+            placeholder="Search..."
+            className="bg-transparent border-none outline-none text-[calc((12/375)*100vw)] sm:text-xs md:text-sm lg:text-[calc((14/1920)*100vw)] text-slate-800 placeholder:text-slate-400 w-full"
+            readOnly
           />
-        </Button>
+        </div>
+      </div>
+
+      {/* Right side: Message Icon + Live Notification Dropdown + User Avatar Circle */}
+      <div className="flex items-center gap-[calc((8/375)*100vw)] sm:gap-3 lg:gap-[calc((14/1920)*100vw)] shrink-0">
+        {/* Message Icon Button */}
+        <button
+          type="button"
+          onClick={() => {
+            alert("Hospital Messaging Service: All clinical dispatch lines are active and running normally.");
+          }}
+          className="flex items-center justify-center w-[calc((34/375)*100vw)] h-[calc((34/375)*100vw)] sm:w-10 sm:h-10 lg:w-[calc((42/1920)*100vw)] lg:h-[calc((42/1920)*100vw)] rounded-[calc((8/375)*100vw)] sm:rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors shadow-xs cursor-pointer"
+          title="Clinical Dispatch & Messages"
+        >
+          <MessageSquare className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] sm:w-4 sm:h-4 lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)]" />
+        </button>
+
+        {/* Live Server-Connected Notification Dropdown */}
+        <NotificationDropdown />
+
+        {/* User Avatar Photo matching Reference Image */}
+        <div
+          className="relative flex items-center justify-center w-[calc((34/375)*100vw)] h-[calc((34/375)*100vw)] sm:w-10 sm:h-10 lg:w-[calc((42/1920)*100vw)] lg:h-[calc((42/1920)*100vw)] rounded-full overflow-hidden shadow-sm cursor-pointer border-2 border-white ring-1 ring-slate-200 hover:scale-105 transition-transform bg-slate-100"
+          title="Clinical Administrator"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
+            alt="Administrator Profile"
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80";
+            }}
+          />
+          <span className="absolute bottom-0 right-0 w-[calc((8/375)*100vw)] h-[calc((8/375)*100vw)] sm:w-2.5 sm:h-2.5 lg:w-[calc((11/1920)*100vw)] lg:h-[calc((11/1920)*100vw)] rounded-full bg-emerald-500 ring-2 ring-white" />
+        </div>
       </div>
     </header>
   );

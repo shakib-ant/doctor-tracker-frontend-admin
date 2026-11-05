@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Stethoscope, Users, Activity, X, ShieldCheck, LogOut, ChevronRight } from "lucide-react";
+import { LayoutDashboard, Stethoscope, Users, Activity, X, ShieldCheck, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { logout } from "@/services/authService";
@@ -37,21 +37,21 @@ export function Sidebar({ className, onClose }) {
   return (
     <aside
       className={cn(
-        "flex flex-col h-full w-full lg:w-[calc((280/1920)*100vw)] bg-surface lg:border-r border-line select-none",
+        "flex flex-col h-full w-full bg-[#0C1322] lg:border-r border-[#1B273A] select-none text-slate-300",
         className
       )}
     >
-      {/* Brand Header */}
-      <div className="flex items-center justify-between h-[calc((60/375)*100vw)] lg:h-[calc((68/1920)*100vw)] px-[calc((18/375)*100vw)] lg:px-[calc((22/1920)*100vw)] border-b border-line shrink-0">
-        <div className="flex items-center gap-[calc((12/375)*100vw)] lg:gap-[calc((14/1920)*100vw)]">
-          <div className="flex items-center justify-center w-[calc((34/375)*100vw)] h-[calc((34/375)*100vw)] lg:w-[calc((38/1920)*100vw)] lg:h-[calc((38/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-medical-blue/15 border border-medical-blue/30 text-medical-blue shrink-0">
-            <Activity className="w-[calc((20/375)*100vw)] h-[calc((20/375)*100vw)] lg:w-[calc((22/1920)*100vw)] lg:h-[calc((22/1920)*100vw)] stroke-[2.5]" />
+      {/* Brand Header with compact sleek height */}
+      <div className="flex items-center justify-between h-[calc((60/375)*100vw)] sm:h-16 lg:h-[calc((70/1920)*100vw)] px-4 lg:px-[calc((16/1920)*100vw)] border-b border-[#1B273A] shrink-0">
+        <div className="flex items-center gap-2.5 lg:gap-[calc((12/1920)*100vw)]">
+          <div className="flex items-center justify-center w-[calc((32/375)*100vw)] h-[calc((32/375)*100vw)] sm:w-9 sm:h-9 lg:w-[calc((36/1920)*100vw)] lg:h-[calc((36/1920)*100vw)] rounded-[calc((10/375)*100vw)] sm:rounded-xl lg:rounded-[calc((12/1920)*100vw)] bg-blue-600/20 border border-blue-500/40 text-blue-400 shrink-0 shadow-[0_0_12px_rgba(37,99,235,0.25)]">
+            <Activity className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] sm:w-5 sm:h-5 lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] stroke-[2.4]" />
           </div>
           <div className="flex flex-col">
-            <span className="font-manrope font-bold text-[calc((16/375)*100vw)] lg:text-[calc((18/1920)*100vw)] tracking-tight text-content-primary leading-tight">
+            <span className="font-manrope font-extrabold text-[calc((14/375)*100vw)] sm:text-base lg:text-[calc((16/1920)*100vw)] tracking-tight text-white leading-tight">
               Doctor Tracker
             </span>
-            <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium text-content-secondary tracking-wider uppercase leading-tight mt-0.5">
+            <span className="text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-medium text-slate-400 tracking-wider uppercase leading-tight mt-0.5">
               Hospital Admin
             </span>
           </div>
@@ -62,24 +62,28 @@ export function Sidebar({ className, onClose }) {
             variant="ghost"
             size="icon"
             onClick={onClose}
-            className="text-content-secondary hover:text-content-primary lg:hidden h-[calc((38/375)*100vw)] w-[calc((38/375)*100vw)] rounded-[calc((10/375)*100vw)] flex items-center justify-center cursor-pointer"
+            className="text-slate-400 hover:text-white lg:hidden h-9 w-9 rounded-xl flex items-center justify-center cursor-pointer"
             aria-label="Close navigation menu"
           >
-            <X className="w-[calc((22/375)*100vw)] h-[calc((22/375)*100vw)]" />
+            <X className="w-5 h-5" />
           </Button>
         )}
       </div>
 
-      {/* Navigation */}
-      <nav className="flex-1 px-[calc((14/375)*100vw)] lg:px-[calc((18/1920)*100vw)] py-[calc((16/375)*100vw)] lg:py-[calc((20/1920)*100vw)] space-y-[calc((10/375)*100vw)] lg:space-y-[calc((8/1920)*100vw)] overflow-y-auto no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-        <div className="px-3 pb-1 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold text-content-disabled uppercase tracking-wider">
-          Main Navigation
+      {/* Navigation: Compact & Sleek */}
+      <nav className="flex-1 px-3 sm:px-4 lg:px-[calc((12/1920)*100vw)] pt-4 sm:pt-6 lg:pt-[calc((20/1920)*100vw)] pb-4 lg:pb-[calc((16/1920)*100vw)] space-y-1.5 sm:space-y-2 lg:space-y-[calc((7/1920)*100vw)] overflow-y-auto no-scrollbar">
+        <div className="px-3 sm:px-3.5 pb-2 text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-bold text-slate-400 tracking-wider uppercase">
+          Menu
         </div>
         {navigationItems.map((item) => {
-          const Icon = item.icon;
           const isActive =
             pathname === item.href ||
             (item.href !== "/" && pathname?.startsWith(item.href));
+
+          const iconClass = cn(
+            "w-[calc((17/375)*100vw)] h-[calc((17/375)*100vw)] sm:w-[18px] sm:h-[18px] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] shrink-0 transition-all duration-200",
+            isActive ? "text-white" : "text-slate-400 group-hover:text-white"
+          );
 
           return (
             <Link
@@ -87,74 +91,78 @@ export function Sidebar({ className, onClose }) {
               href={item.href}
               onClick={onClose}
               className={cn(
-                "group relative flex items-center justify-between gap-[calc((12/375)*100vw)] lg:gap-[calc((14/1920)*100vw)] px-[calc((16/375)*100vw)] lg:px-[calc((16/1920)*100vw)] py-[calc((14/375)*100vw)] lg:py-[calc((14/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] text-[calc((16/375)*100vw)] lg:text-[calc((16/1920)*100vw)] font-medium transition-all duration-200 cursor-pointer",
+                "group relative flex items-center gap-2.5 sm:gap-3 lg:gap-[calc((12/1920)*100vw)] px-3 sm:px-3.5 lg:px-[calc((14/1920)*100vw)] py-2 sm:py-2.5 lg:py-[calc((8.5/1920)*100vw)] rounded-xl lg:rounded-[calc((12/1920)*100vw)] text-[calc((13/375)*100vw)] sm:text-sm lg:text-[calc((14/1920)*100vw)] font-medium transition-all duration-200 cursor-pointer",
                 isActive
-                  ? "bg-medical-blue/20 text-medical-blue font-semibold border border-medical-blue/40 shadow-xs lg:bg-surface-selected lg:text-content-primary lg:border-transparent"
-                  : "bg-surface-elevated/70 lg:bg-transparent border border-line/60 lg:border-transparent text-content-secondary hover:bg-surface-hover hover:text-content-primary active:bg-surface-hover active:scale-[0.99]"
+                  ? "bg-blue-600 text-white font-semibold shadow-[0_6px_16px_rgba(37,99,235,0.35)]"
+                  : "text-slate-400 hover:text-white hover:bg-white/[0.06] active:scale-[0.99]"
               )}
             >
-              {isActive && (
-                <span className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-medical-blue transition-all duration-200" />
+              {/* Perfectly crafted active icons (Fixes: "doctor access control er ta thik nai active") */}
+              {item.href === "/" && (
+                <LayoutDashboard className={cn(iconClass, isActive ? "fill-white" : "fill-none")} strokeWidth={isActive ? 2.4 : 2} />
               )}
-              <div className="flex items-center gap-[calc((12/375)*100vw)] lg:gap-[calc((14/1920)*100vw)] min-w-0">
-                <Icon
-                  className={cn(
-                    "w-[calc((20/375)*100vw)] h-[calc((20/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] shrink-0 transition-colors duration-150",
-                    isActive
-                      ? "text-medical-blue"
-                      : "text-content-secondary group-hover:text-content-primary"
-                  )}
-                />
-                <span className="truncate">{item.name}</span>
-              </div>
-              <ChevronRight className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] text-content-muted lg:hidden shrink-0" />
+              {item.href === "/doctors" && (
+                isActive ? (
+                  <svg viewBox="0 0 24 24" className={iconClass} fill="none">
+                    <path
+                      d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"
+                      stroke="white"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"
+                      stroke="white"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                    />
+                    <circle cx="20" cy="10" r="2.8" fill="white" stroke="white" strokeWidth="0.5" />
+                    <circle cx="5" cy="2" r="1.5" fill="white" />
+                    <circle cx="19" cy="2" r="1.5" fill="white" />
+                  </svg>
+                ) : (
+                  <Stethoscope className={iconClass} strokeWidth={2} />
+                )
+              )}
+              {item.href === "/patients" && (
+                <Users className={cn(iconClass, isActive ? "fill-white" : "fill-none")} strokeWidth={isActive ? 2.4 : 2} />
+              )}
+              {item.href === "/access" && (
+                isActive ? (
+                  <svg viewBox="0 0 24 24" className={iconClass}>
+                    <path
+                      d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"
+                      fill="white"
+                    />
+                    <path
+                      d="m9 12 2 2 4-4"
+                      fill="none"
+                      stroke="#2563EB"
+                      strokeWidth="2.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                ) : (
+                  <ShieldCheck className={iconClass} strokeWidth={2} />
+                )
+              )}
+              <span className="whitespace-nowrap font-medium tracking-wide">{item.name}</span>
             </Link>
           );
         })}
       </nav>
 
-      {/* Mobile User Profile & Logout Action */}
-      {onClose && (
-        <div className="p-[calc((14/375)*100vw)] mx-[calc((14/375)*100vw)] mb-[calc((14/375)*100vw)] rounded-[calc((14/375)*100vw)] border border-line bg-surface-elevated/50 space-y-[calc((12/375)*100vw)] shrink-0 lg:hidden">
-          <div className="flex items-center gap-[calc((12/375)*100vw)]">
-            <div className="flex items-center justify-center w-[calc((34/375)*100vw)] h-[calc((34/375)*100vw)] rounded-full bg-medical-blue/20 text-medical-blue shrink-0">
-              <ShieldCheck className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)]" />
-            </div>
-            <div className="flex flex-col flex-1 min-w-0">
-              <span className="text-[calc((14/375)*100vw)] font-semibold text-content-primary truncate">
-                Clinical Administrator
-              </span>
-              <span className="text-[calc((14/375)*100vw)] text-content-secondary truncate">
-                Central Hospital Network
-              </span>
-            </div>
-          </div>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={logout}
-            className="w-full justify-center gap-2 text-[calc((14/375)*100vw)] border-red-900/50 text-red-300 hover:bg-red-950/40 hover:text-red-200 h-[calc((36/375)*100vw)] rounded-[calc((10/375)*100vw)] cursor-pointer"
-          >
-            <LogOut strokeWidth={2.4} className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)]" />
-            Sign Out
-          </Button>
-        </div>
-      )}
-
-      {/* System Status Footer */}
-      <div className="p-[calc((14/375)*100vw)] lg:p-[calc((16/1920)*100vw)] mx-[calc((14/375)*100vw)] lg:mx-[calc((18/1920)*100vw)] mb-[calc((22/375)*100vw)] lg:mb-[calc((26/1920)*100vw)] rounded-[calc((14/375)*100vw)] lg:rounded-[calc((16/1920)*100vw)] border border-line bg-surface-elevated/40 shrink-0">
-        <div className="flex items-center gap-2">
-          <span className="relative flex h-2 w-2 shrink-0">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-medical-sage opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-medical-sage"></span>
-          </span>
-          <span className="text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] font-semibold text-content-primary truncate">
-            Hospital Cloud Network
-          </span>
-        </div>
-        <p className="mt-1 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary leading-tight truncate">
-          HIPAA Secured &bull; 511 Clinical Records
-        </p>
+      {/* Bottom Actions: Log Out Button Only (Sun/Moon removed as requested) */}
+      <div className="p-[calc((10/375)*100vw)] lg:p-[calc((12/1920)*100vw)] border-t border-[#1B273A] shrink-0">
+        <button
+          type="button"
+          onClick={logout}
+          className="w-full flex items-center justify-center gap-2 py-[calc((8/375)*100vw)] lg:py-[calc((9/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-[#141E33] hover:bg-[#1A2744] text-slate-200 hover:text-white border border-[#1E2D4A] transition-all font-medium text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] cursor-pointer shadow-xs active:scale-[0.99]"
+        >
+          <LogOut strokeWidth={2.2} className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)] text-slate-400 group-hover:text-white" />
+          <span>Log out</span>
+        </button>
       </div>
     </aside>
   );

@@ -10,17 +10,17 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-medical-blue text-canvas font-semibold shadow-xs hover:bg-[#8AAEC0] active:bg-[#688C9D]",
+          "bg-blue-600 text-white font-semibold shadow-sm hover:bg-blue-700 active:bg-blue-800 shadow-[0_4px_14px_rgba(37,99,235,0.25)]",
         secondary:
-          "bg-surface text-content-primary border border-line shadow-xs hover:bg-surface-hover hover:border-[#384A5C]",
+          "bg-white text-slate-700 border border-slate-200 shadow-xs hover:bg-slate-50 hover:border-slate-300",
         outline:
-          "border border-line bg-transparent text-content-primary hover:bg-surface-hover hover:text-content-primary",
+          "border border-slate-200 bg-transparent text-slate-700 hover:bg-slate-50 hover:text-slate-900",
         ghost:
-          "text-content-secondary hover:bg-surface-hover hover:text-content-primary",
+          "text-slate-600 hover:bg-slate-100 hover:text-slate-900",
         destructive:
-          "bg-[#331E24] border border-[#6B2A32] text-[#FF9B9B] hover:bg-[#4A2027] hover:border-[#8A343F]",
-        link: "text-medical-blue underline-offset-4 hover:underline p-0 h-auto",
-        sage: "bg-medical-sage text-canvas font-semibold shadow-xs hover:bg-[#97B8B1]",
+          "bg-red-50 border border-red-200 text-red-600 hover:bg-red-100 hover:border-red-300",
+        link: "text-blue-600 underline-offset-4 hover:underline p-0 h-auto",
+        sage: "bg-sky-500 text-white font-semibold shadow-xs hover:bg-sky-600",
       },
       size: {
         default: "h-11 px-4 py-2 text-sm sm:text-base font-semibold gap-2",

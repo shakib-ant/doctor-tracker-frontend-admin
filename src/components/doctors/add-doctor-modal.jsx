@@ -127,11 +127,11 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-[calc((14/375)*100vw)] lg:p-[calc((27/1920)*100vw)] bg-black/80 backdrop-blur-md animate-in fade-in duration-150 select-none"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-[calc((14/375)*100vw)] lg:p-[calc((27/1920)*100vw)] bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200 select-none"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-[calc((365/375)*100vw)] lg:max-w-[calc((700/1920)*100vw)] bg-surface border border-line rounded-[calc((16/375)*100vw)] lg:rounded-[calc((18/1920)*100vw)] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+        className="relative w-full max-w-[calc((365/375)*100vw)] lg:max-w-[calc((700/1920)*100vw)] bg-white border border-slate-200/90 rounded-[calc((18/375)*100vw)] lg:rounded-[calc((22/1920)*100vw)] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in-0 zoom-in-95 slide-in-from-bottom-4 duration-300 ease-out"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -392,7 +392,7 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
               variant="default"
               size="sm"
               disabled={isSubmitting}
-              className="h-[calc((34/375)*100vw)] lg:h-[calc((38/1920)*100vw)] px-[calc((16/375)*100vw)] lg:px-[calc((18/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] cursor-pointer"
+              className="h-[calc((36/375)*100vw)] lg:h-[calc((40/1920)*100vw)] px-[calc((16/375)*100vw)] lg:px-[calc((20/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-[0_6px_18px_rgba(37,99,235,0.3)] hover:shadow-[0_10px_22px_rgba(37,99,235,0.4)] cursor-pointer transition-all"
             >
               {isSubmitting ? (
                 <>

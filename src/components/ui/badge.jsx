@@ -3,28 +3,28 @@ import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-3 py-1 text-sm sm:text-base font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-medical-blue focus:ring-offset-2 shrink-0 select-none",
+  "inline-flex items-center justify-center rounded-full border px-2 py-0.5 sm:px-2.5 sm:py-0.5 lg:px-[calc((10/1920)*100vw)] lg:py-[calc((2.5/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-xs lg:text-[calc((13/1920)*100vw)] font-medium leading-none transition-colors focus:outline-none focus:ring-2 focus:ring-medical-blue focus:ring-offset-2 shrink-0 select-none",
   {
     variants: {
       variant: {
         default:
-          "border-[#385260] bg-medical-blue/20 text-[#9FC0D0]",
+          "border-blue-200 bg-blue-50 text-blue-700 font-medium",
         sage:
-          "border-[#37534D] bg-medical-sage/20 text-[#A6C8C1]",
+          "border-sky-200 bg-sky-50 text-sky-700 font-medium",
         secondary:
-          "border-line bg-surface-elevated text-content-secondary",
+          "border-slate-200 bg-slate-100 text-slate-700 font-medium",
         active:
-          "border-[#2E5848] bg-[#1C362C] text-[#86A8A1]",
+          "border-emerald-200 bg-emerald-50 text-emerald-700 font-semibold",
         archived:
-          "border-line bg-[#222E3A] text-content-disabled",
+          "border-slate-200 bg-slate-100 text-slate-500 font-medium",
         destructive:
-          "border-[#6B2A32] bg-[#331E24] text-[#FF9B9B]",
+          "border-red-200 bg-red-50 text-red-700 font-medium",
         critical:
-          "border-red-800/80 bg-red-950/60 text-red-300 font-semibold shadow-xs",
+          "border-red-300 bg-red-50 text-red-700 font-semibold shadow-xs",
         warning:
-          "border-amber-700/70 bg-amber-950/50 text-amber-300 font-medium",
+          "border-amber-200 bg-amber-50 text-amber-700 font-medium",
         outline:
-          "border-line text-content-primary",
+          "border-slate-200 text-slate-700",
       },
     },
     defaultVariants: {

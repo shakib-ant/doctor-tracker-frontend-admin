@@ -116,8 +116,8 @@ export function LoginForm() {
       <div className="h-[calc((6/375)*100vw)] lg:h-[calc((7/1920)*100vw)] w-full bg-gradient-to-r from-medical-blue via-medical-sage to-medical-blue" />
 
       <div className="p-[calc((20/375)*100vw)] lg:p-[calc((31/1920)*100vw)] space-y-[calc((16/375)*100vw)] lg:space-y-[calc((20/1920)*100vw)]">
-        {/* Mode Tabs */}
-        <div className="grid grid-cols-2 p-1 bg-surface-elevated/70 rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] border border-line/60">
+        {/* Mode Tabs with Tablet Protection & Mobile Text 2px smaller */}
+        <div className="grid grid-cols-2 p-1 bg-slate-100 rounded-xl border border-slate-200">
           <button
             type="button"
             onClick={() => {
@@ -125,10 +125,10 @@ export function LoginForm() {
               setApiError(null);
               setErrors({});
             }}
-            className={`py-[calc((8/375)*100vw)] lg:py-[calc((10/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] transition-all cursor-pointer ${
+            className={`py-2 sm:py-2.5 lg:py-[calc((11/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-xs md:text-sm lg:text-[calc((14/1920)*100vw)] font-semibold rounded-lg transition-all cursor-pointer ${
               mode === "login"
-                ? "bg-medical-blue text-canvas shadow-xs font-bold"
-                : "text-content-secondary hover:text-content-primary"
+                ? "bg-blue-600 text-white shadow-sm font-bold"
+                : "text-slate-600 hover:text-slate-900"
             }`}
           >
             Administrator Sign In
@@ -140,10 +140,10 @@ export function LoginForm() {
               setApiError(null);
               setErrors({});
             }}
-            className={`py-[calc((8/375)*100vw)] lg:py-[calc((10/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] transition-all cursor-pointer ${
+            className={`py-2 sm:py-2.5 lg:py-[calc((11/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-xs md:text-sm lg:text-[calc((14/1920)*100vw)] font-semibold rounded-lg transition-all cursor-pointer ${
               mode === "request"
-                ? "bg-medical-blue text-canvas shadow-xs font-bold"
-                : "text-content-secondary hover:text-content-primary"
+                ? "bg-blue-600 text-white shadow-sm font-bold"
+                : "text-slate-600 hover:text-slate-900"
             }`}
           >
             Request Access / Join
@@ -151,18 +151,18 @@ export function LoginForm() {
         </div>
 
         {/* Header */}
-        <div className="text-center space-y-[calc((8/375)*100vw)] lg:space-y-[calc((10/1920)*100vw)]">
-          <div className="inline-flex items-center justify-center w-[calc((44/375)*100vw)] h-[calc((44/375)*100vw)] lg:w-[calc((50/1920)*100vw)] lg:h-[calc((50/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] bg-medical-blue/15 border border-medical-blue/30 text-medical-blue mb-1 shadow-xs">
+        <div className="text-center space-y-2 sm:space-y-2.5 lg:space-y-[calc((10/1920)*100vw)]">
+          <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 lg:w-[calc((50/1920)*100vw)] lg:h-[calc((50/1920)*100vw)] rounded-xl lg:rounded-[calc((14/1920)*100vw)] bg-medical-blue/15 border border-medical-blue/30 text-medical-blue mb-1 shadow-xs">
             {mode === "login" ? (
-              <Activity className="w-[calc((24/375)*100vw)] h-[calc((24/375)*100vw)] lg:w-[calc((28/1920)*100vw)] lg:h-[calc((28/1920)*100vw)] stroke-[2.5]" />
+              <Activity className="w-5 h-5 sm:w-6 sm:h-6 lg:w-[calc((28/1920)*100vw)] lg:h-[calc((28/1920)*100vw)] stroke-[2.5]" />
             ) : (
-              <FileCheck className="w-[calc((24/375)*100vw)] h-[calc((24/375)*100vw)] lg:w-[calc((28/1920)*100vw)] lg:h-[calc((28/1920)*100vw)] stroke-[2.5]" />
+              <FileCheck className="w-5 h-5 sm:w-6 sm:h-6 lg:w-[calc((28/1920)*100vw)] lg:h-[calc((28/1920)*100vw)] stroke-[2.5]" />
             )}
           </div>
-          <h1 className="font-manrope text-[calc((20/375)*100vw)] lg:text-[calc((24/1920)*100vw)] font-extrabold text-content-primary tracking-tight">
+          <h1 className="font-manrope text-[calc((18/375)*100vw)] sm:text-xl lg:text-[calc((24/1920)*100vw)] font-extrabold text-content-primary tracking-tight">
             {mode === "login" ? "Administrator Sign In" : "Request Portal Membership"}
           </h1>
-          <p className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary leading-relaxed max-w-xs mx-auto">
+          <p className="text-[calc((12/375)*100vw)] sm:text-xs md:text-sm lg:text-[calc((14/1920)*100vw)] text-content-secondary leading-relaxed max-w-xs mx-auto">
             {mode === "login"
               ? "Access hospital operations, clinical rosters, and patient records."
               : "Submit your details for Super Administrator verification & approval."}
@@ -171,8 +171,8 @@ export function LoginForm() {
 
         {/* Error banner */}
         {apiError && (
-          <div className="p-3 rounded-lg bg-red-950/40 border border-red-800 text-red-200 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] flex items-center gap-2.5 shadow-xs">
-            <AlertCircle className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] stroke-[2.2] text-red-400 shrink-0" />
+          <div className="p-3 rounded-lg bg-red-950/40 border border-red-800 text-red-200 text-[calc((12/375)*100vw)] sm:text-xs md:text-sm lg:text-[calc((14/1920)*100vw)] flex items-center gap-2.5 shadow-xs">
+            <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.2] text-red-400 shrink-0" />
             <span className="leading-tight">{apiError}</span>
           </div>
         )}
@@ -180,14 +180,14 @@ export function LoginForm() {
         {/* LOGIN MODE */}
         {mode === "login" && (
           <>
-            <form onSubmit={handleSubmitLogin} className="space-y-[calc((14/375)*100vw)] lg:space-y-[calc((16/1920)*100vw)]">
+            <form onSubmit={handleSubmitLogin} className="space-y-3 sm:space-y-4 lg:space-y-[calc((16/1920)*100vw)]">
               {/* Email */}
               <div className="space-y-1">
-                <label className="block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold text-content-secondary">
+                <label className="block text-[calc((12/375)*100vw)] sm:text-xs md:text-sm lg:text-[calc((14/1920)*100vw)] font-semibold text-content-secondary">
                   Official Email Address
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-[calc((12/375)*100vw)] lg:left-[calc((14/1920)*100vw)] top-1/2 -translate-y-1/2 w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] stroke-[2.2] text-content-disabled" />
+                  <Mail className="absolute left-3 sm:left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 stroke-[2.2] text-content-disabled" />
                   <Input
                     type="email"
                     placeholder="name@doctortracker.com"
@@ -196,39 +196,39 @@ export function LoginForm() {
                       setEmail(e.target.value);
                       if (errors.email) setErrors((prev) => ({ ...prev, email: null }));
                     }}
-                    className={`pl-[calc((33/375)*100vw)] lg:pl-[calc((39/1920)*100vw)] pr-3 text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] h-[calc((38/375)*100vw)] lg:h-[calc((42/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] ${errors.email ? "border-red-500" : ""}`}
+                    className={`pl-9 sm:pl-10 pr-3 text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((15/1920)*100vw)] h-10 sm:h-11 lg:h-[calc((42/1920)*100vw)] rounded-xl ${errors.email ? "border-red-500" : ""}`}
                     autoComplete="email"
                   />
                 </div>
                 {errors.email && (
-                  <p className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-red-400">{errors.email}</p>
+                  <p className="text-[calc((11/375)*100vw)] sm:text-xs text-red-400">{errors.email}</p>
                 )}
               </div>
 
               {/* Password */}
               <div className="space-y-1">
                 <div className="flex items-center justify-between">
-                  <label className="block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold text-content-secondary">
+                  <label className="block text-[calc((12/375)*100vw)] sm:text-xs md:text-sm lg:text-[calc((14/1920)*100vw)] font-semibold text-content-secondary">
                     Password
                   </label>
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-medical-blue hover:underline inline-flex items-center gap-1 font-medium cursor-pointer"
+                    className="text-[calc((11/375)*100vw)] sm:text-xs text-medical-blue hover:underline inline-flex items-center gap-1 font-medium cursor-pointer"
                   >
                     {showPassword ? (
                       <>
-                        <EyeOff className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)] stroke-[2.2]" /> Hide
+                        <EyeOff className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.2]" /> Hide
                       </>
                     ) : (
                       <>
-                        <Eye className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)] stroke-[2.2]" /> Show
+                        <Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.2]" /> Show
                       </>
                     )}
                   </button>
                 </div>
                 <div className="relative">
-                  <Lock className="absolute left-[calc((12/375)*100vw)] lg:left-[calc((14/1920)*100vw)] top-1/2 -translate-y-1/2 w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] stroke-[2.2] text-content-disabled" />
+                  <Lock className="absolute left-3 sm:left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 stroke-[2.2] text-content-disabled" />
                   <Input
                     type={showPassword ? "text" : "password"}
                     placeholder="••••••••"
@@ -237,12 +237,12 @@ export function LoginForm() {
                       setPassword(e.target.value);
                       if (errors.password) setErrors((prev) => ({ ...prev, password: null }));
                     }}
-                    className={`pl-[calc((33/375)*100vw)] lg:pl-[calc((39/1920)*100vw)] pr-9 text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] h-[calc((38/375)*100vw)] lg:h-[calc((42/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] ${errors.password ? "border-red-500" : ""}`}
+                    className={`pl-9 sm:pl-10 pr-9 text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((15/1920)*100vw)] h-10 sm:h-11 lg:h-[calc((42/1920)*100vw)] rounded-xl ${errors.password ? "border-red-500" : ""}`}
                     autoComplete="current-password"
                   />
                 </div>
                 {errors.password && (
-                  <p className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-red-400">{errors.password}</p>
+                  <p className="text-[calc((11/375)*100vw)] sm:text-xs text-red-400">{errors.password}</p>
                 )}
               </div>
 
@@ -252,17 +252,17 @@ export function LoginForm() {
                 variant="default"
                 size="default"
                 disabled={isSubmitting}
-                className="w-full text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] font-bold h-[calc((42/375)*100vw)] lg:h-[calc((46/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] mt-2 shadow-md cursor-pointer"
+                className="w-full text-[calc((13/375)*100vw)] sm:text-sm lg:text-[calc((15/1920)*100vw)] font-bold h-11 sm:h-12 lg:h-[calc((46/1920)*100vw)] rounded-xl mt-2 bg-blue-600 hover:bg-blue-700 text-white shadow-[0_8px_20px_rgba(37,99,235,0.35)] hover:shadow-[0_12px_24px_rgba(37,99,235,0.45)] active:scale-[0.99] transition-all cursor-pointer"
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] stroke-[2.4] animate-spin" />
+                    <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.4] animate-spin" />
                     Signing In...
                   </>
                 ) : (
                   <>
                     Sign In with Credentials
-                    <ArrowRight className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] stroke-[2.4]" />
+                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.4]" />
                   </>
                 )}
               </Button>
@@ -337,66 +337,66 @@ export function LoginForm() {
 
                 {/* Email */}
                 <div className="space-y-1">
-                  <label className="block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold text-content-secondary">
+                  <label className="block text-[calc((12/375)*100vw)] sm:text-xs md:text-sm lg:text-[calc((14/1920)*100vw)] font-semibold text-content-secondary">
                     Official Email *
                   </label>
                   <div className="relative">
-                    <Mail className="absolute left-[calc((12/375)*100vw)] lg:left-[calc((14/1920)*100vw)] top-1/2 -translate-y-1/2 w-[calc((17/375)*100vw)] h-[calc((17/375)*100vw)] lg:w-[calc((19/1920)*100vw)] lg:h-[calc((19/1920)*100vw)] text-content-disabled" />
+                    <Mail className="absolute left-3 sm:left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-content-disabled" />
                     <Input
                       type="email"
                       placeholder="doctor@hospital.org"
                       value={reqEmail}
                       onChange={(e) => setReqEmail(e.target.value)}
-                      className="pl-[calc((33/375)*100vw)] lg:pl-[calc((39/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] h-[calc((38/375)*100vw)] lg:h-[calc((40/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)]"
+                      className="pl-9 sm:pl-10 text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((15/1920)*100vw)] h-10 sm:h-11 lg:h-[calc((40/1920)*100vw)] rounded-xl"
                       required
                     />
                   </div>
                   {errors.email && (
-                    <p className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-red-400">{errors.email}</p>
+                    <p className="text-[calc((11/375)*100vw)] sm:text-xs text-red-400">{errors.email}</p>
                   )}
                 </div>
 
                 {/* Department / Specialty */}
                 <div className="space-y-1">
-                  <label className="block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold text-content-secondary">
+                  <label className="block text-[calc((12/375)*100vw)] sm:text-xs md:text-sm lg:text-[calc((14/1920)*100vw)] font-semibold text-content-secondary">
                     Department / Clinical Ward
                   </label>
                   <div className="relative">
-                    <Building2 className="absolute left-[calc((12/375)*100vw)] lg:left-[calc((14/1920)*100vw)] top-1/2 -translate-y-1/2 w-[calc((17/375)*100vw)] h-[calc((17/375)*100vw)] lg:w-[calc((19/1920)*100vw)] lg:h-[calc((19/1920)*100vw)] text-content-disabled" />
+                    <Building2 className="absolute left-3 sm:left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-content-disabled" />
                     <Input
                       type="text"
                       placeholder="e.g. Cardiology / Inpatient Ward"
                       value={reqDepartment}
                       onChange={(e) => setReqDepartment(e.target.value)}
-                      className="pl-[calc((33/375)*100vw)] lg:pl-[calc((39/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] h-[calc((38/375)*100vw)] lg:h-[calc((40/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)]"
+                      className="pl-9 sm:pl-10 text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((15/1920)*100vw)] h-10 sm:h-11 lg:h-[calc((40/1920)*100vw)] rounded-xl"
                     />
                   </div>
                 </div>
 
                 {/* Password */}
                 <div className="space-y-1">
-                  <label className="block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold text-content-secondary">
+                  <label className="block text-[calc((12/375)*100vw)] sm:text-xs md:text-sm lg:text-[calc((14/1920)*100vw)] font-semibold text-content-secondary">
                     Desired Password (Min 6 chars) *
                   </label>
                   <div className="relative">
-                    <Lock className="absolute left-[calc((12/375)*100vw)] lg:left-[calc((14/1920)*100vw)] top-1/2 -translate-y-1/2 w-[calc((17/375)*100vw)] h-[calc((17/375)*100vw)] lg:w-[calc((19/1920)*100vw)] lg:h-[calc((19/1920)*100vw)] text-content-disabled" />
+                    <Lock className="absolute left-3 sm:left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-content-disabled" />
                     <Input
                       type="password"
                       placeholder="••••••••"
                       value={reqPassword}
                       onChange={(e) => setReqPassword(e.target.value)}
-                      className="pl-[calc((33/375)*100vw)] lg:pl-[calc((39/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] h-[calc((38/375)*100vw)] lg:h-[calc((40/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)]"
+                      className="pl-9 sm:pl-10 text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((15/1920)*100vw)] h-10 sm:h-11 lg:h-[calc((40/1920)*100vw)] rounded-xl"
                       required
                     />
                   </div>
                   {errors.password && (
-                    <p className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-red-400">{errors.password}</p>
+                    <p className="text-[calc((11/375)*100vw)] sm:text-xs text-red-400">{errors.password}</p>
                   )}
                 </div>
 
                 {/* Reason Note */}
                 <div className="space-y-1">
-                  <label className="block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold text-content-secondary">
+                  <label className="block text-[calc((12/375)*100vw)] sm:text-xs md:text-sm lg:text-[calc((14/1920)*100vw)] font-semibold text-content-secondary">
                     Reason / Administrative Note
                   </label>
                   <Input
@@ -404,7 +404,7 @@ export function LoginForm() {
                     placeholder="e.g. Assigned to morning census triage"
                     value={reqNote}
                     onChange={(e) => setReqNote(e.target.value)}
-                    className="text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] h-[calc((38/375)*100vw)] lg:h-[calc((40/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)]"
+                    className="text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((15/1920)*100vw)] h-10 sm:h-11 lg:h-[calc((40/1920)*100vw)] rounded-xl"
                   />
                 </div>
 
@@ -413,17 +413,17 @@ export function LoginForm() {
                   type="submit"
                   variant="default"
                   disabled={isSubmitting}
-                  className="w-full text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] font-bold h-[calc((42/375)*100vw)] lg:h-[calc((44/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] mt-2 shadow-md cursor-pointer"
+                  className="w-full text-[calc((13/375)*100vw)] sm:text-sm lg:text-[calc((15/1920)*100vw)] font-bold h-11 sm:h-12 lg:h-[calc((44/1920)*100vw)] rounded-xl mt-2 shadow-md cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] animate-spin" />
+                      <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />
                       Submitting Request...
                     </>
                   ) : (
                     <>
                       Submit Request to Super Administrator
-                      <ArrowRight className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)]" />
+                      <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                     </>
                   )}
                 </Button>
@@ -435,7 +435,7 @@ export function LoginForm() {
               <button
                 type="button"
                 onClick={resetToLogin}
-                className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium text-content-muted hover:text-content-primary hover:underline cursor-pointer"
+                className="text-[calc((12/375)*100vw)] sm:text-xs md:text-sm lg:text-[calc((14/1920)*100vw)] font-medium text-content-muted hover:text-content-primary hover:underline cursor-pointer"
               >
                 Already have an approved account? Sign In
               </button>

@@ -116,11 +116,11 @@ export function DoctorPatientsModal({ doctor, isOpen, onClose, onPatientCountCha
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-[calc((14/375)*100vw)] lg:p-[calc((27/1920)*100vw)] bg-black/80 backdrop-blur-md animate-in fade-in duration-150 select-none"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-[calc((14/375)*100vw)] lg:p-[calc((27/1920)*100vw)] bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200 select-none"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-[calc((365/375)*100vw)] lg:max-w-[calc((700/1920)*100vw)] bg-surface border border-line rounded-[calc((16/375)*100vw)] lg:rounded-[calc((18/1920)*100vw)] shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-150"
+        className="relative w-full max-w-[calc((365/375)*100vw)] lg:max-w-[calc((700/1920)*100vw)] bg-white border border-slate-200/90 rounded-[calc((18/375)*100vw)] lg:rounded-[calc((22/1920)*100vw)] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in-0 zoom-in-95 slide-in-from-bottom-4 duration-300 ease-out"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -284,21 +284,21 @@ export function DoctorPatientsModal({ doctor, isOpen, onClose, onPatientCountCha
                 {/* Left: Patient Details (flex-1 min-w-0) */}
                 <div className="flex-1 min-w-0 space-y-[calc((5/375)*100vw)] lg:space-y-[calc((6/1920)*100vw)]">
                   {/* Top Row: Name, Age/Gender, Condition badge */}
-                  <div className="flex items-center gap-[calc((8/375)*100vw)] lg:gap-[calc((10/1920)*100vw)] min-w-0 flex-nowrap overflow-hidden">
+                  <div className="flex items-center gap-2 sm:gap-2.5 lg:gap-[calc((10/1920)*100vw)] min-w-0 flex-nowrap overflow-hidden">
                     <span
-                      className="font-semibold text-[calc((14/375)*100vw)] lg:text-[calc((16/1920)*100vw)] text-content-primary whitespace-nowrap truncate max-w-[calc((140/375)*100vw)] lg:max-w-[calc((200/1920)*100vw)] shrink-0"
+                      className="font-semibold text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((16/1920)*100vw)] text-content-primary whitespace-nowrap truncate max-w-[calc((120/375)*100vw)] sm:max-w-[160px] lg:max-w-[calc((200/1920)*100vw)] shrink-0"
                       title={p.name}
                     >
                       {p.name}
                     </span>
 
-                    <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-muted whitespace-nowrap shrink-0">
+                    <span className="text-[calc((11/375)*100vw)] sm:text-xs text-content-muted whitespace-nowrap shrink-0">
                       ({p.age} yrs, {p.gender})
                     </span>
 
                     <Badge
                       variant="default"
-                      className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] py-0.5 px-[calc((8/375)*100vw)] lg:px-[calc((10/1920)*100vw)] font-medium truncate max-w-[calc((120/375)*100vw)] lg:max-w-[calc((180/1920)*100vw)] whitespace-nowrap shrink min-w-0 inline-block align-middle"
+                      className="text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((13/1920)*100vw)] py-0.5 px-2.5 font-medium truncate max-w-[calc((110/375)*100vw)] sm:max-w-[150px] lg:max-w-[calc((180/1920)*100vw)] whitespace-nowrap shrink min-w-0 inline-block align-middle rounded-full leading-none"
                       title={p.condition}
                     >
                       {p.condition}
@@ -306,13 +306,13 @@ export function DoctorPatientsModal({ doctor, isOpen, onClose, onPatientCountCha
                   </div>
 
                   {/* Bottom Row: Admission date & Phone */}
-                  <div className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary flex items-center gap-[calc((12/375)*100vw)] lg:gap-[calc((14/1920)*100vw)] min-w-0 truncate">
+                  <div className="text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((13/1920)*100vw)] text-content-secondary flex items-center gap-2.5 sm:gap-3 lg:gap-[calc((14/1920)*100vw)] min-w-0 truncate">
                     <span className="flex items-center gap-1.5 shrink-0 whitespace-nowrap">
-                      <Calendar className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] text-medical-sage shrink-0" />
+                      <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-medical-sage shrink-0" />
                       {new Date(p.admissionDate || p.createdAt).toLocaleDateString()}
                     </span>
                     {p.phone && (
-                      <span className="shrink-0 whitespace-nowrap text-content-muted truncate max-w-[calc((130/375)*100vw)] lg:max-w-[calc((170/1920)*100vw)]">
+                      <span className="shrink-0 whitespace-nowrap text-content-muted truncate max-w-[calc((120/375)*100vw)] sm:max-w-[150px] lg:max-w-[calc((170/1920)*100vw)]">
                         {p.phone}
                       </span>
                     )}
@@ -320,10 +320,10 @@ export function DoctorPatientsModal({ doctor, isOpen, onClose, onPatientCountCha
                 </div>
 
                 {/* Right: Status badge & Delete button (shrink-0) */}
-                <div className="flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] shrink-0 ml-auto pl-[calc((8/375)*100vw)]">
+                <div className="flex items-center gap-2 sm:gap-2.5 lg:gap-[calc((12/1920)*100vw)] shrink-0 ml-auto pl-2">
                   <Badge
                     variant={p.status === "Active" ? "active" : "secondary"}
-                    className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] px-[calc((8/375)*100vw)] lg:px-[calc((10/1920)*100vw)] py-0.5 whitespace-nowrap shrink-0"
+                    className="text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((13/1920)*100vw)] px-2.5 py-0.5 whitespace-nowrap shrink-0 rounded-full leading-none"
                   >
                     {p.status}
                   </Badge>
@@ -331,10 +331,10 @@ export function DoctorPatientsModal({ doctor, isOpen, onClose, onPatientCountCha
                     variant="ghost"
                     size="sm"
                     onClick={() => handleDeletePatient(p._id)}
-                    className="h-[calc((32/375)*100vw)] w-[calc((32/375)*100vw)] lg:h-[calc((36/1920)*100vw)] lg:w-[calc((36/1920)*100vw)] p-0 text-red-400 hover:text-red-300 hover:bg-red-950/40 shrink-0 cursor-pointer flex items-center justify-center rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)]"
+                    className="h-8 w-8 sm:h-9 sm:w-9 lg:h-[calc((36/1920)*100vw)] lg:w-[calc((36/1920)*100vw)] p-0 text-red-400 hover:text-red-300 hover:bg-red-950/40 shrink-0 cursor-pointer flex items-center justify-center rounded-lg"
                     title="Delete patient from doctor roster"
                   >
-                    <Trash2 className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)]" />
+                    <Trash2 className="w-4 h-4" />
                   </Button>
                 </div>
               </div>

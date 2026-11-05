@@ -140,15 +140,15 @@ export function DoctorsView() {
 
       {/* Action Notification Banner */}
       {actionBanner && (
-        <div className="p-[calc((12/375)*100vw)] lg:p-[calc((16/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] bg-emerald-950/40 border border-emerald-800 text-emerald-200 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] flex items-center justify-between shadow-xs animate-in fade-in">
+        <div className="p-[calc((12/375)*100vw)] lg:p-[calc((16/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] bg-emerald-50 border border-emerald-200 text-emerald-800 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] flex items-center justify-between shadow-xs animate-in fade-in">
           <div className="flex items-center gap-[calc((8/375)*100vw)] lg:gap-[calc((10/1920)*100vw)]">
-            <CheckCircle2 className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] text-emerald-400 shrink-0" />
+            <CheckCircle2 className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] text-emerald-600 shrink-0" />
             <span>{actionBanner.message}</span>
           </div>
           {actionBanner.message.includes("Archived Doctors") && statusFilter !== "archived" && (
             <button
               onClick={() => setStatusFilter("archived")}
-              className="text-medical-sage underline font-semibold hover:text-white cursor-pointer ml-3 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)]"
+              className="text-blue-600 underline font-semibold hover:text-blue-800 cursor-pointer ml-3 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)]"
             >
               View Archived Doctors &rarr;
             </button>
@@ -183,16 +183,16 @@ export function DoctorsView() {
         {/* Content Section */}
         <CardContent className="p-[calc((16/375)*100vw)] lg:p-[calc((27/1920)*100vw)] pt-0">
           {error && (
-            <div className="my-4 p-4 rounded-xl bg-red-950/40 border border-red-800 text-red-200 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] flex items-center justify-between shadow-xs">
+            <div className="my-4 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] flex items-center justify-between shadow-xs">
               <div className="flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+                <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
                 <span>{error}</span>
               </div>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => loadDoctors(pagination.page)}
-                className="h-8 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] border-red-700 text-red-200"
+                className="h-8 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] border-red-300 text-red-700 hover:bg-red-100/50"
               >
                 Try Again
               </Button>

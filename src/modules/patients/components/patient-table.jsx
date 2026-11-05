@@ -26,17 +26,17 @@ export function PatientTable({
   onAddNew,
 }) {
   return (
-    <div className="overflow-x-auto no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+    <div className="overflow-x-auto no-scrollbar rounded-2xl border border-slate-200/90 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] bg-white [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
       <Table>
         <TableHeader>
-          <TableRow>
-            <TableHead className="text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] font-semibold">Patient Name</TableHead>
-            <TableHead className="text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] font-semibold">Age / Gender</TableHead>
-            <TableHead className="text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] font-semibold">Condition</TableHead>
-            <TableHead className="text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] font-semibold">Assigned Doctor</TableHead>
-            <TableHead className="text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] font-semibold">Admission Date</TableHead>
-            <TableHead className="text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] font-semibold">Status</TableHead>
-            <TableHead className="text-right text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] font-semibold">Actions</TableHead>
+          <TableRow className="bg-slate-50/70 border-b border-slate-200/80 hover:bg-slate-50/70">
+            <TableHead className="py-[calc((10/375)*100vw)] px-[calc((10/375)*100vw)] sm:py-3.5 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Patient Name</TableHead>
+            <TableHead className="py-[calc((10/375)*100vw)] px-[calc((10/375)*100vw)] sm:py-3.5 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Age / Gender</TableHead>
+            <TableHead className="py-[calc((10/375)*100vw)] px-[calc((10/375)*100vw)] sm:py-3.5 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Condition</TableHead>
+            <TableHead className="py-[calc((10/375)*100vw)] px-[calc((10/375)*100vw)] sm:py-3.5 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Assigned Doctor</TableHead>
+            <TableHead className="py-[calc((10/375)*100vw)] px-[calc((10/375)*100vw)] sm:py-3.5 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Admission Date</TableHead>
+            <TableHead className="py-[calc((10/375)*100vw)] px-[calc((10/375)*100vw)] sm:py-3.5 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Status</TableHead>
+            <TableHead className="text-right py-[calc((10/375)*100vw)] px-[calc((10/375)*100vw)] sm:py-3.5 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -105,66 +105,75 @@ export function PatientTable({
               </TableCell>
             </TableRow>
           ) : (
-            patients.map((p) => (
-              <TableRow key={p._id}>
-                {/* Patient Name & Contact */}
-                <TableCell className="font-medium text-content-primary">
-                  <div className="flex flex-col justify-center">
-                    <div className="text-[calc((14/375)*100vw)] lg:text-[calc((16/1920)*100vw)] font-semibold text-content-primary whitespace-nowrap leading-tight">
-                      {p.name}
+            patients.map((p, idx) => (
+              <TableRow
+                key={p._id}
+                className="hover:bg-blue-50/40 transition-colors duration-150 animate-in fade-in slide-in-from-bottom-1"
+                style={{ animationDelay: `${idx * 40}ms` }}
+              >
+                {/* Patient Name & Avatar */}
+                <TableCell className="font-medium text-content-primary py-2.5 sm:py-3.5 px-3 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)]">
+                  <div className="flex items-center gap-2.5 sm:gap-3 lg:gap-[calc((12/1920)*100vw)]">
+                    <div className="w-[calc((32/375)*100vw)] h-[calc((32/375)*100vw)] sm:w-9 sm:h-9 lg:w-[calc((40/1920)*100vw)] lg:h-[calc((40/1920)*100vw)] rounded-full bg-slate-100 text-blue-700 font-bold flex items-center justify-center text-[calc((12/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] shrink-0 border border-slate-200 shadow-xs font-manrope">
+                      {p.name?.split(" ").map(n => n[0]).slice(0, 2).join("") || "PT"}
                     </div>
-                    {p.phone && (
-                      <div className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-muted whitespace-nowrap leading-tight mt-[calc((2/375)*100vw)] lg:mt-[calc((2/1920)*100vw)]">
-                        {p.phone}
+                    <div className="flex flex-col justify-center">
+                      <div className="text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((15/1920)*100vw)] font-bold text-slate-900 whitespace-nowrap leading-tight">
+                        {p.name}
                       </div>
-                    )}
+                      {p.phone && (
+                        <div className="text-[calc((11/375)*100vw)] sm:text-xs text-slate-400 whitespace-nowrap leading-tight mt-0.5">
+                          {p.phone}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </TableCell>
 
                 {/* Age & Gender */}
-                <TableCell className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary whitespace-nowrap">
+                <TableCell className="py-2.5 sm:py-3.5 px-3 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((14/1920)*100vw)] text-content-secondary whitespace-nowrap">
                   {p.age} yrs &bull; {p.gender}
                 </TableCell>
 
                 {/* Condition */}
-                <TableCell className="whitespace-nowrap">
-                  <Badge variant="default" className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-normal px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] py-0.5">
+                <TableCell className="py-2.5 sm:py-3.5 px-3 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] whitespace-nowrap">
+                  <Badge variant="default" className="text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((13/1920)*100vw)] font-normal px-2.5 py-0.5 rounded-full leading-none">
                     {p.condition}
                   </Badge>
                 </TableCell>
 
                 {/* Assigned Doctor */}
-                <TableCell className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary whitespace-nowrap">
+                <TableCell className="py-2.5 sm:py-3.5 px-3 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((14/1920)*100vw)] text-content-secondary whitespace-nowrap">
                   {p.doctor ? (
                     <div className="flex flex-col justify-center">
-                      <div className="font-medium text-content-primary text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] leading-tight">
+                      <div className="font-medium text-content-primary text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((15/1920)*100vw)] leading-tight">
                         {p.doctor.name}
                       </div>
-                      <div className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-muted leading-tight mt-[calc((2/375)*100vw)] lg:mt-[calc((2/1920)*100vw)]">
+                      <div className="text-[calc((11/375)*100vw)] sm:text-xs text-content-muted leading-tight mt-0.5">
                         {p.doctor.specialization} &bull; {p.doctor.hospital || "Clinic"}
                       </div>
                     </div>
                   ) : (
-                    <span className="text-content-muted text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)]">Unassigned</span>
+                    <span className="text-content-muted text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((14/1920)*100vw)]">Unassigned</span>
                   )}
                 </TableCell>
 
                 {/* Admission Date */}
-                <TableCell className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary whitespace-nowrap">
+                <TableCell className="py-2.5 sm:py-3.5 px-3 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((14/1920)*100vw)] text-content-secondary whitespace-nowrap">
                   <div className="flex items-center gap-1.5">
-                    <Calendar className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] text-medical-sage shrink-0" />
+                    <Calendar className="w-4 h-4 text-medical-sage shrink-0" />
                     <span>{formatDate(p.admissionDate || p.createdAt)}</span>
                   </div>
                 </TableCell>
 
                 {/* Status */}
-                <TableCell className="whitespace-nowrap">
+                <TableCell className="py-2.5 sm:py-3.5 px-3 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] whitespace-nowrap">
                   <div className="flex items-center gap-1.5">
-                    <Badge variant={getStatusBadgeVariant(p.status)} className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] py-0.5">
+                    <Badge variant={getStatusBadgeVariant(p.status)} className="text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((13/1920)*100vw)] px-2.5 py-0.5 rounded-full leading-none">
                       {p.status}
                     </Badge>
                     {p.isArchived && (
-                      <Badge variant="warning" className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] py-0.5">
+                      <Badge variant="warning" className="text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((13/1920)*100vw)] px-2.5 py-0.5 rounded-full leading-none">
                         Archived
                       </Badge>
                     )}
@@ -172,7 +181,7 @@ export function PatientTable({
                 </TableCell>
 
                 {/* Actions: Direct Quick Actions + Real-world Clinical Action Menu */}
-                <TableCell className="text-right whitespace-nowrap pr-[calc((12/375)*100vw)] lg:pr-[calc((18/1920)*100vw)]">
+                <TableCell className="text-right whitespace-nowrap py-2.5 sm:py-3.5 pr-3 sm:pr-4 lg:pr-[calc((18/1920)*100vw)]">
                   <div className="flex items-center justify-end gap-[calc((8/375)*100vw)] lg:gap-[calc((10/1920)*100vw)]">
                     <Button
                       variant="ghost"
