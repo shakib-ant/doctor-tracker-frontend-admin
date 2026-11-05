@@ -200,7 +200,7 @@ Instead of jarring jumps across standard media queries, Doctor Tracker utilizes 
 
 ### 1. Prerequisites
 - **Node.js**: `v18.0.0` or higher (verified on Node 20 & 22)
-- **Doctor Tracker Backend Server** running on `http://localhost:5000`
+- **Doctor Tracker Backend Server** running on `https://shakib-ant-doctor-tracker-server.vercel.app` (or local `http://localhost:5000`)
 
 ### 2. Setup Steps
 ```bash
@@ -214,7 +214,7 @@ npm install
 cp .env.example .env.local
 
 # 4. Verify API URL in .env.local:
-# NEXT_PUBLIC_API_URL=http://localhost:5000/api/employeeApp
+# NEXT_PUBLIC_API_URL=https://shakib-ant-doctor-tracker-server.vercel.app/api/employeeApp
 ```
 
 ### 3. Run Development Server
