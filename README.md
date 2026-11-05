@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🏥 Doctor Tracker — Admin Dashboard Client (`doctorTrackerAdmin`)
 
-## Getting Started
+> High-performance clinical administrative interface built with Next.js 15 (App Router), React 19, Tailwind CSS with fluid viewport `calc()` typography, and zero-dependency SVG data visualizations.
 
-First, run the development server:
-
+## Quick Start
 ```bash
+# Install dependencies
+npm install
+
+# Setup local environment
+cp .env.example .env.local
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Run lint & production build
+npm run lint
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Key Technologies & Architectural Decisions
+- **Next.js 15.2 (App Router)**: Fast Server-Side Rendering (SSR) and static prerendering across all routes with sub-142kB initial bundles.
+- **React 19**: Concurrent rendering and modern hook architecture.
+- **Zero-Dependency SVG Charts**: Recharts/Chart.js were replaced with custom mathematical SVG charts to avoid bundle bloat and React 19 hydration issues.
+- **Fluid Tailwind CSS**: Custom viewport `calc()` system ensuring zero text wrapping, zero button clipping, and flawless mobile responsiveness.
+- **Lucide React**: Scalable, lightweight SVG icon system.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*For complete architecture, endpoints, and setup instructions, refer to the [Root README](../README.md).*
