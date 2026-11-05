@@ -129,8 +129,8 @@ export function CustomDatePicker({
 
   const heightClass =
     size === "sm"
-      ? "h-[calc((28/375)*100vw)] lg:h-[calc((32/1920)*100vw)] text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] px-[calc((8/375)*100vw)] lg:px-[calc((10/1920)*100vw)]"
-      : "h-[calc((36/375)*100vw)] lg:h-[calc((40/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((13/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)]";
+      ? "h-[calc((30/375)*100vw)] lg:h-[calc((34/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)]"
+      : "h-[calc((38/375)*100vw)] lg:h-[calc((42/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)]";
 
   const today = new Date();
   const isToday = (day) =>
@@ -157,7 +157,7 @@ export function CustomDatePicker({
         disabled={disabled}
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          "w-full flex items-center justify-between gap-2 rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] border border-line bg-surface text-content-primary shadow-xs transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-medical-blue hover:border-[#384A5C] cursor-pointer",
+          "w-full flex items-center justify-between gap-2 rounded-[calc((10/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] border border-line bg-surface text-content-primary shadow-xs transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-medical-blue hover:border-[#384A5C] cursor-pointer",
           heightClass,
           disabled && "opacity-50 cursor-not-allowed",
           isOpen && "border-medical-blue ring-1 ring-medical-blue",
@@ -165,7 +165,7 @@ export function CustomDatePicker({
         )}
       >
         <div className="flex items-center gap-2 truncate min-w-0">
-          <CalendarIcon className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((15/1920)*100vw)] lg:h-[calc((15/1920)*100vw)] text-medical-blue shrink-0" />
+          <CalendarIcon className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)] text-medical-blue shrink-0" />
           <span className={cn("truncate font-medium text-left", !value && "text-content-disabled")}>
             {formatDisplay(value) || placeholder}
           </span>
@@ -185,7 +185,7 @@ export function CustomDatePicker({
             className="p-0.5 rounded-full hover:bg-surface-hover text-content-muted hover:text-content-primary cursor-pointer shrink-0 transition-colors"
             title="Clear date"
           >
-            <X className="w-[calc((11/375)*100vw)] h-[calc((11/375)*100vw)] lg:w-[calc((13/1920)*100vw)] lg:h-[calc((13/1920)*100vw)]" />
+            <X className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((15/1920)*100vw)] lg:h-[calc((15/1920)*100vw)]" />
           </span>
         )}
       </button>
@@ -193,7 +193,7 @@ export function CustomDatePicker({
       {isOpen && (
         <div
           className={cn(
-            "absolute z-50 mt-1.5 w-[calc((272/375)*100vw)] max-w-[calc(100vw-2rem)] lg:w-[calc((280/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] border border-line bg-surface/98 p-[calc((12/375)*100vw)] lg:p-[calc((14/1920)*100vw)] shadow-2xl backdrop-blur-md animate-in fade-in-50 zoom-in-95 duration-150",
+            "absolute z-50 mt-1.5 w-[calc((292/375)*100vw)] max-w-[calc(100vw-2rem)] lg:w-[calc((300/1920)*100vw)] rounded-[calc((14/375)*100vw)] lg:rounded-[calc((16/1920)*100vw)] border border-line bg-surface/98 p-[calc((14/375)*100vw)] lg:p-[calc((16/1920)*100vw)] shadow-2xl backdrop-blur-md animate-in fade-in-50 zoom-in-95 duration-150",
             align === "right" ? "right-0" : "left-0"
           )}
         >
@@ -205,9 +205,9 @@ export function CustomDatePicker({
               className="p-1 rounded-md text-content-secondary hover:text-content-primary hover:bg-surface-hover cursor-pointer transition-colors"
               title="Previous month"
             >
-              <ChevronLeft strokeWidth={2.6} className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)]" />
+              <ChevronLeft strokeWidth={2.6} className="w-[calc((17/375)*100vw)] h-[calc((17/375)*100vw)] lg:w-[calc((19/1920)*100vw)] lg:h-[calc((19/1920)*100vw)]" />
             </button>
-            <span className="font-manrope text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)] font-bold text-content-primary tracking-wide">
+            <span className="font-manrope text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] font-bold text-content-primary tracking-wide">
               {MONTHS[viewMonth]} {viewYear}
             </span>
             <button
@@ -216,7 +216,7 @@ export function CustomDatePicker({
               className="p-1 rounded-md text-content-secondary hover:text-content-primary hover:bg-surface-hover cursor-pointer transition-colors"
               title="Next month"
             >
-              <ChevronRight strokeWidth={2.6} className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)]" />
+              <ChevronRight strokeWidth={2.6} className="w-[calc((17/375)*100vw)] h-[calc((17/375)*100vw)] lg:w-[calc((19/1920)*100vw)] lg:h-[calc((19/1920)*100vw)]" />
             </button>
           </div>
 
@@ -225,7 +225,7 @@ export function CustomDatePicker({
             {DAYS_OF_WEEK.map((d) => (
               <span
                 key={d}
-                className="text-[calc((9/375)*100vw)] lg:text-[calc((10/1920)*100vw)] font-semibold text-content-muted uppercase tracking-wider py-0.5"
+                className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold text-content-muted uppercase tracking-wider py-0.5"
               >
                 {d}
               </span>
@@ -238,7 +238,7 @@ export function CustomDatePicker({
             {prevMonthDays.map((day, idx) => (
               <div
                 key={`prev-${idx}`}
-                className="flex items-center justify-center h-[calc((26/375)*100vw)] lg:h-[calc((28/1920)*100vw)] text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-disabled/40 select-none"
+                className="flex items-center justify-center h-[calc((28/375)*100vw)] lg:h-[calc((30/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-disabled/40 select-none"
               >
                 {day}
               </div>
@@ -255,7 +255,7 @@ export function CustomDatePicker({
                   type="button"
                   onClick={() => handleSelectDay(day)}
                   className={cn(
-                    "flex items-center justify-center h-[calc((26/375)*100vw)] w-[calc((26/375)*100vw)] lg:h-[calc((28/1920)*100vw)] lg:w-[calc((28/1920)*100vw)] mx-auto rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] font-medium cursor-pointer transition-all duration-150",
+                    "flex items-center justify-center h-[calc((28/375)*100vw)] w-[calc((28/375)*100vw)] lg:h-[calc((30/1920)*100vw)] lg:w-[calc((30/1920)*100vw)] mx-auto rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium cursor-pointer transition-all duration-150",
                     selected
                       ? "bg-medical-blue text-canvas font-bold shadow-xs scale-105"
                       : current
@@ -272,7 +272,7 @@ export function CustomDatePicker({
             {nextMonthDays.map((day, idx) => (
               <div
                 key={`next-${idx}`}
-                className="flex items-center justify-center h-[calc((26/375)*100vw)] lg:h-[calc((28/1920)*100vw)] text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-disabled/40 select-none"
+                className="flex items-center justify-center h-[calc((28/375)*100vw)] lg:h-[calc((30/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-disabled/40 select-none"
               >
                 {day}
               </div>
@@ -284,7 +284,7 @@ export function CustomDatePicker({
             <button
               type="button"
               onClick={handleToday}
-              className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] font-semibold text-medical-blue hover:underline cursor-pointer transition-colors"
+              className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold text-medical-blue hover:underline cursor-pointer transition-colors"
             >
               Today
             </button>
@@ -292,7 +292,7 @@ export function CustomDatePicker({
               <button
                 type="button"
                 onClick={handleClear}
-                className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] font-medium text-content-muted hover:text-red-400 cursor-pointer transition-colors"
+                className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium text-content-muted hover:text-red-400 cursor-pointer transition-colors"
               >
                 Clear
               </button>

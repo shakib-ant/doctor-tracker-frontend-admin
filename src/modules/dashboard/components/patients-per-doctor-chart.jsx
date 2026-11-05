@@ -20,26 +20,26 @@ export function PatientsPerDoctorChart({ data = [], isLoading = false }) {
 
   return (
     <Card className="h-full flex flex-col transition-colors duration-200 hover:border-medical-blue/40">
-      <CardHeader className="p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pb-3 border-b border-line/60">
+      <CardHeader className="p-[calc((16/375)*100vw)] lg:p-[calc((27/1920)*100vw)] pb-3 border-b border-line/60">
         <div className="flex items-center justify-between">
           <div className="space-y-1">
-            <div className="flex items-center gap-[calc((8/375)*100vw)] lg:gap-[calc((10/1920)*100vw)]">
+            <div className="flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)]">
               <div className="p-1.5 rounded-md bg-medical-blue/15 text-medical-blue shrink-0">
                 <Users className="w-4 h-4" />
               </div>
-              <CardTitle className="text-[calc((16/375)*100vw)] lg:text-[calc((20/1920)*100vw)]">Patients per Doctor</CardTitle>
+              <CardTitle className="text-[calc((18/375)*100vw)] lg:text-[calc((22/1920)*100vw)]">Patients per Doctor</CardTitle>
             </div>
-            <CardDescription className="text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)]">
+            <CardDescription className="text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)]">
               Clinical workload distribution across verified medical specialists
             </CardDescription>
           </div>
-          <span className="hidden sm:inline-flex text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-semibold px-2.5 py-1 rounded-full bg-medical-blue/10 border border-medical-blue/20 text-medical-blue shrink-0">
+          <span className="hidden sm:inline-flex text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold px-2.5 py-1 rounded-full bg-medical-blue/10 border border-medical-blue/20 text-medical-blue shrink-0">
             Top 5 Specialists
           </span>
         </div>
       </CardHeader>
 
-      <CardContent className="flex-1 flex flex-col justify-between p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pt-4">
+      <CardContent className="flex-1 flex flex-col justify-between p-[calc((16/375)*100vw)] lg:p-[calc((27/1920)*100vw)] pt-4">
         {isLoading ? (
           <div className="space-y-3.5 py-2">
             {Array.from({ length: 5 }).map((_, i) => (
@@ -53,24 +53,24 @@ export function PatientsPerDoctorChart({ data = [], isLoading = false }) {
             ))}
           </div>
         ) : displayData.length === 0 ? (
-          <div className="py-12 text-center text-xs text-content-muted">
+          <div className="py-12 text-center text-sm text-content-muted">
             No doctor assignment records available yet.
           </div>
         ) : (
-          <div className="flex-1 flex flex-col justify-between space-y-[calc((10/375)*100vw)] lg:space-y-[calc((12/1920)*100vw)]">
-            <div className="space-y-[calc((8/375)*100vw)] lg:space-y-[calc((10/1920)*100vw)]">
+          <div className="flex-1 flex flex-col justify-between space-y-[calc((12/375)*100vw)] lg:space-y-[calc((14/1920)*100vw)]">
+            <div className="space-y-[calc((10/375)*100vw)] lg:space-y-[calc((12/1920)*100vw)]">
               {displayData.map((item, index) => {
                 const pct = Math.round((item.patientCount / maxPatients) * 100);
 
                 return (
                   <div
                     key={item.doctorId || item.name}
-                    className="p-[calc((10/375)*100vw)] lg:p-[calc((12/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-surface-elevated/30 border border-line/50 hover:border-medical-blue/50 hover:bg-surface-elevated/50 transition-all duration-200"
+                    className="p-[calc((12/375)*100vw)] lg:p-[calc((14/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] bg-surface-elevated/30 border border-line/50 hover:border-medical-blue/50 hover:bg-surface-elevated/50 transition-all duration-200"
                   >
                     {/* Doctor Header Info */}
-                    <div className="flex items-center justify-between text-xs">
-                      <div className="flex items-center gap-[calc((8/375)*100vw)] lg:gap-[calc((10/1920)*100vw)] flex-1 min-w-0 pr-2">
-                        <div className="w-[calc((26/375)*100vw)] h-[calc((26/375)*100vw)] lg:w-[calc((30/1920)*100vw)] lg:h-[calc((30/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] bg-medical-blue/15 text-medical-blue flex items-center justify-center shrink-0 border border-medical-blue/25">
+                    <div className="flex items-center justify-between text-sm">
+                      <div className="flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] flex-1 min-w-0 pr-2">
+                        <div className="w-[calc((28/375)*100vw)] h-[calc((28/375)*100vw)] lg:w-[calc((32/1920)*100vw)] lg:h-[calc((32/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] bg-medical-blue/15 text-medical-blue flex items-center justify-center shrink-0 border border-medical-blue/25">
                           {index === 0 ? (
                             <Award className="w-3.5 h-3.5 text-amber-300" />
                           ) : (
@@ -78,10 +78,10 @@ export function PatientsPerDoctorChart({ data = [], isLoading = false }) {
                           )}
                         </div>
                         <div className="flex flex-col flex-1 min-w-0 truncate">
-                          <span className="font-semibold text-content-primary truncate text-[calc((12/375)*100vw)] lg:text-[calc((14/1920)*100vw)]">
+                          <span className="font-semibold text-content-primary truncate text-[calc((14/375)*100vw)] lg:text-[calc((16/1920)*100vw)]">
                             {item.name}
                           </span>
-                          <span className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-secondary truncate">
+                          <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary truncate">
                             {item.specialization} &bull; {item.hospital}
                           </span>
                         </div>
@@ -89,18 +89,18 @@ export function PatientsPerDoctorChart({ data = [], isLoading = false }) {
 
                       {/* Patient Count Pill */}
                       <div className="flex items-center gap-1.5 shrink-0">
-                        <span className="px-2.5 py-0.5 rounded-full bg-medical-blue/15 text-medical-blue font-bold text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] border border-medical-blue/30">
+                        <span className="px-2.5 py-0.5 rounded-full bg-medical-blue/15 text-medical-blue font-bold text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] border border-medical-blue/30">
                           {item.patientCount}
                         </span>
-                        <span className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-muted hidden sm:inline">
+                        <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-muted hidden sm:inline">
                           {item.patientCount === 1 ? "patient" : "patients"}
                         </span>
                       </div>
                     </div>
 
                     {/* Smooth Growing Progress Bar */}
-                    <div className="mt-[calc((8/375)*100vw)] lg:mt-[calc((10/1920)*100vw)] pt-0.5">
-                      <div className="w-full bg-[#111A24] rounded-full h-[calc((10/375)*100vw)] min-h-[8px] lg:h-[calc((14/1920)*100vw)] lg:min-h-[10px] overflow-hidden border border-[#2B3B4C] shadow-inner">
+                    <div className="mt-[calc((10/375)*100vw)] lg:mt-[calc((12/1920)*100vw)] pt-0.5">
+                      <div className="w-full bg-[#111A24] rounded-full h-[calc((12/375)*100vw)] min-h-[10px] lg:h-[calc((16/1920)*100vw)] lg:min-h-[12px] overflow-hidden border border-[#2B3B4C] shadow-inner">
                         <div
                           className="h-full rounded-full bg-gradient-to-r from-medical-blue via-[#7EABC5] to-[#A2CEE6] shadow-[0_0_12px_rgba(137,180,206,0.35)]"
                           style={{
@@ -116,16 +116,16 @@ export function PatientsPerDoctorChart({ data = [], isLoading = false }) {
             </div>
 
             {/* Footer Summary Strip */}
-            <div className="pt-2.5 border-t border-line/60 flex items-center justify-between text-xs text-content-secondary">
-              <span className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-muted">
+            <div className="pt-2.5 border-t border-line/60 flex items-center justify-between text-sm text-content-secondary">
+              <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-muted">
                 Showing top 5 specialists by inpatient census
               </span>
               <Link
                 href="/doctors"
-                className="inline-flex items-center gap-1 text-[calc((10/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-semibold text-medical-blue hover:underline cursor-pointer"
+                className="inline-flex items-center gap-1 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold text-medical-blue hover:underline cursor-pointer"
               >
                 <span>All Doctors</span>
-                <ChevronRight className="w-[calc((12/375)*100vw)] h-[calc((12/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)]" />
+                <ChevronRight className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)]" />
               </Link>
             </div>
           </div>

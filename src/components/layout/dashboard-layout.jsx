@@ -28,7 +28,7 @@ export function DashboardLayout({ children, title }) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-canvas text-content-secondary gap-3">
         <div className="w-8 h-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
-        <span className="text-xs font-medium">Verifying authorization...</span>
+        <span className="text-sm font-medium">Verifying authorization...</span>
       </div>
     );
   }
@@ -36,8 +36,8 @@ export function DashboardLayout({ children, title }) {
   return (
     <div className="flex min-h-screen w-full max-w-full overflow-x-hidden bg-canvas text-content-primary no-scrollbar">
       {/* Desktop Sidebar with Fluid Calc Width */}
-      <div className="hidden lg:block lg:w-[calc((260/1920)*100vw)] lg:shrink-0">
-        <div className="fixed inset-y-0 left-0 w-[calc((260/1920)*100vw)] z-30">
+      <div className="hidden lg:block lg:w-[calc((280/1920)*100vw)] lg:shrink-0">
+        <div className="fixed inset-y-0 left-0 w-[calc((280/1920)*100vw)] z-30">
           <Sidebar />
         </div>
       </div>
@@ -64,8 +64,8 @@ export function DashboardLayout({ children, title }) {
           onMenuClick={() => setSidebarOpen(true)}
           title={title}
         />
-        <main className="flex-1 w-full p-[calc((14/375)*100vw)] lg:p-[calc((32/1920)*100vw)] no-scrollbar overflow-x-hidden">
-          <div className="max-w-[1720px] w-full mx-auto space-y-[calc((16/375)*100vw)] lg:space-y-[calc((24/1920)*100vw)] transition-all duration-300 animate-in fade-in-50">
+        <main className="flex-1 w-full p-[calc((16/375)*100vw)] lg:p-[calc((35/1920)*100vw)] no-scrollbar overflow-x-hidden">
+          <div className="max-w-[1720px] w-full mx-auto space-y-[calc((18/375)*100vw)] lg:space-y-[calc((26/1920)*100vw)] transition-all duration-300 animate-in fade-in-50">
             {children}
           </div>
         </main>

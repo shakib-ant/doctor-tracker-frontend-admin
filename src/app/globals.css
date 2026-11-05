@@ -59,7 +59,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    font-size: 16px;
+    font-size: 18px;
     max-width: 100vw;
     overflow-x: hidden !important;
   }
@@ -71,34 +71,40 @@
     background-color: #111923;
     color: #e8eef2;
     transition: background-color 0.15s ease;
-    font-size: 0.9375rem; /* 15px - clean, sharp, comfortable body text */
+    font-size: 1.0625rem; /* 17px - clean, sharp, comfortable body text */
     line-height: 1.5;
     max-width: 100vw;
     overflow-x: hidden !important;
   }
   h1 {
-    font-size: 1.75rem;
+    font-size: 1.875rem;
     line-height: 1.25;
     @apply font-manrope font-bold text-foreground;
   }
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.625rem;
     line-height: 1.3;
     @apply font-manrope font-bold text-foreground;
   }
   h3 {
-    font-size: 1.25rem;
+    font-size: 1.375rem;
     line-height: 1.35;
     @apply font-manrope font-semibold text-foreground;
   }
   h4 {
-    font-size: 1.1rem;
+    font-size: 1.225rem;
     @apply font-manrope font-semibold text-foreground;
   }
   h5,
   h6 {
     @apply font-manrope font-semibold text-foreground;
   }
+}
+
+/* Strict 14px floor */
+.text-xs {
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
 }
 
 /* Shimmer Skeleton Animation */

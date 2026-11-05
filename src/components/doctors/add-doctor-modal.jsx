@@ -127,20 +127,20 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-[calc((12/375)*100vw)] lg:p-[calc((24/1920)*100vw)] bg-black/80 backdrop-blur-md animate-in fade-in duration-150 select-none"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-[calc((14/375)*100vw)] lg:p-[calc((27/1920)*100vw)] bg-black/80 backdrop-blur-md animate-in fade-in duration-150 select-none"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-[calc((350/375)*100vw)] lg:max-w-[calc((650/1920)*100vw)] bg-surface border border-line rounded-[calc((14/375)*100vw)] lg:rounded-[calc((16/1920)*100vw)] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+        className="relative w-full max-w-[calc((365/375)*100vw)] lg:max-w-[calc((700/1920)*100vw)] bg-surface border border-line rounded-[calc((16/375)*100vw)] lg:rounded-[calc((18/1920)*100vw)] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-[calc((16/375)*100vw)] lg:px-[calc((24/1920)*100vw)] py-[calc((14/375)*100vw)] lg:py-[calc((18/1920)*100vw)] border-b border-line shrink-0">
+        <div className="flex items-center justify-between px-[calc((18/375)*100vw)] lg:px-[calc((27/1920)*100vw)] py-[calc((16/375)*100vw)] lg:py-[calc((20/1920)*100vw)] border-b border-line shrink-0">
           <div>
-            <h3 className="font-manrope text-[calc((16/375)*100vw)] lg:text-[calc((20/1920)*100vw)] font-bold text-content-primary">
+            <h3 className="font-manrope text-[calc((18/375)*100vw)] lg:text-[calc((22/1920)*100vw)] font-bold text-content-primary">
               Register New Doctor
             </h3>
-            <p className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] text-content-secondary mt-0.5">
+            <p className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary mt-0.5">
               Add doctor profile to the verified clinical roster.
             </p>
           </div>
@@ -148,22 +148,22 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
             onClick={onClose}
             className="p-1.5 rounded-md text-content-muted hover:text-content-primary hover:bg-surface-hover transition-colors cursor-pointer"
           >
-            <X className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)]" />
+            <X className="w-[calc((20/375)*100vw)] h-[calc((20/375)*100vw)] lg:w-[calc((22/1920)*100vw)] lg:h-[calc((22/1920)*100vw)]" />
           </button>
         </div>
 
         {/* Form Body */}
         <form onSubmit={handleSubmit} className="flex flex-col flex-1 overflow-hidden">
-          <div className="p-[calc((16/375)*100vw)] lg:p-[calc((24/1920)*100vw)] space-y-[calc((12/375)*100vw)] lg:space-y-[calc((16/1920)*100vw)] overflow-y-auto no-scrollbar">
+          <div className="p-[calc((18/375)*100vw)] lg:p-[calc((27/1920)*100vw)] space-y-[calc((14/375)*100vw)] lg:space-y-[calc((18/1920)*100vw)] overflow-y-auto no-scrollbar">
             {apiError && (
-              <div className="p-3 rounded-lg bg-red-950/40 border border-red-800 text-red-200 text-xs flex items-center gap-2">
+              <div className="p-3 rounded-lg bg-red-950/40 border border-red-800 text-red-200 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0 text-red-400" />
                 <span>{apiError}</span>
               </div>
             )}
 
             {successMessage && (
-              <div className="p-3 rounded-lg bg-emerald-950/40 border border-emerald-800 text-emerald-200 text-xs flex items-center gap-2">
+              <div className="p-3 rounded-lg bg-emerald-950/40 border border-emerald-800 text-emerald-200 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400" />
                 <span>{successMessage}</span>
               </div>
@@ -172,7 +172,7 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
             {/* Doctor Name & Specialization */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-medium text-content-secondary mb-1.5">
+                <label className="block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium text-content-secondary mb-1.5">
                   Doctor Name <span className="text-red-400">*</span>
                 </label>
                 <Input
@@ -184,12 +184,12 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
                   className={errors.name ? "border-red-500" : ""}
                 />
                 {errors.name && (
-                  <p className="text-[11px] text-red-400 mt-1">{errors.name}</p>
+                  <p className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-red-400 mt-1">{errors.name}</p>
                 )}
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-content-secondary mb-1.5">
+                <label className="block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium text-content-secondary mb-1.5">
                   Specialization <span className="text-red-400">*</span>
                 </label>
                 <Input
@@ -207,7 +207,7 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
                   ))}
                 </datalist>
                 {errors.specialization && (
-                  <p className="text-[11px] text-red-400 mt-1">
+                  <p className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-red-400 mt-1">
                     {errors.specialization}
                   </p>
                 )}
@@ -217,7 +217,7 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
             {/* Hospital & Department */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-medium text-content-secondary mb-1.5">
+                <label className="block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium text-content-secondary mb-1.5">
                   Hospital / Chamber
                 </label>
                 <Input
@@ -230,7 +230,7 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-content-secondary mb-1.5">
+                <label className="block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium text-content-secondary mb-1.5">
                   Department
                 </label>
                 <Input
@@ -246,7 +246,7 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
             {/* Designation & Qualifications */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-medium text-content-secondary mb-1.5">
+                <label className="block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium text-content-secondary mb-1.5">
                   Designation
                 </label>
                 <Input
@@ -259,7 +259,7 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-content-secondary mb-1.5">
+                <label className="block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium text-content-secondary mb-1.5">
                   Qualifications
                 </label>
                 <Input
@@ -275,7 +275,7 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
             {/* Experience & Fee */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-medium text-content-secondary mb-1.5">
+                <label className="block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium text-content-secondary mb-1.5">
                   Experience (Years)
                 </label>
                 <Input
@@ -290,7 +290,7 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-content-secondary mb-1.5">
+                <label className="block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium text-content-secondary mb-1.5">
                   Consultation Fee ($)
                 </label>
                 <Input
@@ -307,7 +307,7 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
             {/* Phone & Email */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-medium text-content-secondary mb-1.5">
+                <label className="block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium text-content-secondary mb-1.5">
                   Phone Number
                 </label>
                 <Input
@@ -320,7 +320,7 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-content-secondary mb-1.5">
+                <label className="block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium text-content-secondary mb-1.5">
                   Email Address
                 </label>
                 <Input
@@ -335,7 +335,7 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
 
             {/* Available Days */}
             <div>
-              <label className="block text-xs font-medium text-content-secondary mb-1.5">
+              <label className="block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium text-content-secondary mb-1.5">
                 Available Days
               </label>
               <div className="flex flex-wrap gap-2">
@@ -346,7 +346,7 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
                       type="button"
                       key={day}
                       onClick={() => toggleDay(day)}
-                      className={`px-3 py-1 text-xs font-medium rounded-md border transition-colors duration-150 ${
+                      className={`px-3 py-1.5 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium rounded-md border transition-colors duration-150 ${
                         isSelected
                           ? "bg-medical-blue text-canvas border-medical-blue font-semibold"
                           : "bg-surface-elevated text-content-secondary border-line hover:text-content-primary hover:border-line"
@@ -361,7 +361,7 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
 
             {/* About / Clinical Bio */}
             <div>
-              <label className="block text-xs font-medium text-content-secondary mb-1.5">
+              <label className="block text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium text-content-secondary mb-1.5">
                 Clinical Background & Notes
               </label>
               <textarea
@@ -370,20 +370,20 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
                 placeholder="Brief summary of clinical specialties, chamber hours, and affiliations..."
                 value={formData.about}
                 onChange={handleChange}
-                className="w-full rounded-md border border-line bg-surface px-3 py-2 text-xs text-content-primary placeholder:text-content-disabled focus:outline-none focus:ring-2 focus:ring-medical-blue focus:border-medical-blue"
+                className="w-full rounded-md border border-line bg-surface px-3 py-2 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-primary placeholder:text-content-disabled focus:outline-none focus:ring-2 focus:ring-medical-blue focus:border-medical-blue"
               />
             </div>
           </div>
 
           {/* Footer Actions */}
-          <div className="flex items-center justify-end gap-[calc((8/375)*100vw)] lg:gap-[calc((10/1920)*100vw)] px-[calc((16/375)*100vw)] lg:px-[calc((24/1920)*100vw)] py-[calc((12/375)*100vw)] lg:py-[calc((16/1920)*100vw)] border-t border-line bg-surface-elevated/40 shrink-0">
+          <div className="flex items-center justify-end gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] px-[calc((18/375)*100vw)] lg:px-[calc((27/1920)*100vw)] py-[calc((14/375)*100vw)] lg:py-[calc((18/1920)*100vw)] border-t border-line bg-surface-elevated/40 shrink-0">
             <Button
               type="button"
               variant="secondary"
               size="sm"
               onClick={onClose}
               disabled={isSubmitting}
-              className="h-[calc((32/375)*100vw)] lg:h-[calc((36/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] cursor-pointer"
+              className="h-[calc((34/375)*100vw)] lg:h-[calc((38/1920)*100vw)] px-[calc((14/375)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] cursor-pointer"
             >
               Cancel
             </Button>
@@ -392,16 +392,16 @@ export function AddDoctorModal({ isOpen, onClose, onSuccess }) {
               variant="default"
               size="sm"
               disabled={isSubmitting}
-              className="h-[calc((32/375)*100vw)] lg:h-[calc((36/1920)*100vw)] px-[calc((14/375)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] cursor-pointer"
+              className="h-[calc((34/375)*100vw)] lg:h-[calc((38/1920)*100vw)] px-[calc((16/375)*100vw)] lg:px-[calc((18/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] cursor-pointer"
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] animate-spin mr-1.5" />
+                  <Loader2 className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] animate-spin" />
                   Saving...
                 </>
               ) : (
                 <>
-                  <Plus className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] mr-1" />
+                  <Plus className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)]" />
                   Save Doctor
                 </>
               )}

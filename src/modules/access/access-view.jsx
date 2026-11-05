@@ -151,36 +151,36 @@ export function AccessView() {
   const staffCount = users.filter((u) => u.level === "employee").length;
 
   return (
-    <div className="space-y-[calc((16/375)*100vw)] lg:space-y-[calc((24/1920)*100vw)] select-none">
+    <div className="space-y-[calc((18/375)*100vw)] lg:space-y-[calc((26/1920)*100vw)] select-none">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-[calc((12/375)*100vw)] lg:gap-[calc((16/1920)*100vw)] pb-2 border-b border-line/60">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-[calc((14/375)*100vw)] lg:gap-[calc((18/1920)*100vw)] pb-2 border-b border-line/60">
         <div>
-          <div className="flex items-center gap-[calc((8/375)*100vw)] lg:gap-[calc((10/1920)*100vw)]">
-            <h2 className="font-manrope text-[calc((20/375)*100vw)] lg:text-[calc((28/1920)*100vw)] font-extrabold tracking-tight text-content-primary">
+          <div className="flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)]">
+            <h2 className="font-manrope text-[calc((22/375)*100vw)] lg:text-[calc((30/1920)*100vw)] font-extrabold tracking-tight text-content-primary">
               Access Control & Permissions
             </h2>
             {pendingCount > 0 && (
-              <span className="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] font-bold border border-amber-500/40 animate-pulse">
+              <span className="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-bold border border-amber-500/40 animate-pulse">
                 {pendingCount} Pending Approval
               </span>
             )}
           </div>
-          <p className="text-[calc((12/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary mt-1 leading-relaxed">
+          <p className="text-[calc((14/375)*100vw)] lg:text-[calc((16/1920)*100vw)] text-content-secondary mt-1 leading-relaxed">
             Review join requests, grant administrator privileges, and manage authenticated hospital staff credentials.
           </p>
         </div>
 
-        <div className="flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] shrink-0">
+        <div className="flex items-center gap-[calc((12/375)*100vw)] lg:gap-[calc((14/1920)*100vw)] shrink-0">
           <Button
             variant="secondary"
             size="sm"
             onClick={loadData}
             disabled={isLoading}
-            className="h-[calc((34/375)*100vw)] lg:h-[calc((36/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] cursor-pointer"
+            className="h-[calc((36/375)*100vw)] lg:h-[calc((38/1920)*100vw)] px-[calc((14/375)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] cursor-pointer"
           >
             <RefreshCw
               strokeWidth={2.4}
-              className={`w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((19/1920)*100vw)] lg:h-[calc((19/1920)*100vw)] mr-[calc((6/375)*100vw)] lg:mr-[calc((8/1920)*100vw)] shrink-0 ${
+              className={`w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((21/1920)*100vw)] lg:h-[calc((21/1920)*100vw)] shrink-0 ${
                 isLoading ? "animate-spin" : ""
               }`}
             />
@@ -191,11 +191,11 @@ export function AccessView() {
             variant="default"
             size="sm"
             onClick={() => setIsAddModalOpen(true)}
-            className="h-[calc((34/375)*100vw)] lg:h-[calc((36/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] font-semibold cursor-pointer"
+            className="h-[calc((36/375)*100vw)] lg:h-[calc((38/1920)*100vw)] px-[calc((14/375)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] font-semibold cursor-pointer"
           >
             <UserPlus
               strokeWidth={2.4}
-              className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] mr-[calc((6/375)*100vw)] lg:mr-[calc((8/1920)*100vw)] shrink-0"
+              className="w-[calc((20/375)*100vw)] h-[calc((20/375)*100vw)] lg:w-[calc((22/1920)*100vw)] lg:h-[calc((22/1920)*100vw)] shrink-0"
             />
             Direct Add Admin
           </Button>
@@ -204,107 +204,107 @@ export function AccessView() {
 
       {/* Action Banners */}
       {actionSuccess && (
-        <div className="p-3 rounded-lg bg-emerald-950/40 border border-emerald-800 text-emerald-200 text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] flex items-center gap-2 shadow-xs animate-in fade-in">
-          <CheckCircle className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] text-emerald-400 shrink-0" />
+        <div className="p-3 rounded-lg bg-emerald-950/40 border border-emerald-800 text-emerald-200 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] flex items-center gap-2 shadow-xs animate-in fade-in">
+          <CheckCircle className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] text-emerald-400 shrink-0" />
           <span>{actionSuccess}</span>
         </div>
       )}
 
       {error && (
-        <div className="p-3 rounded-lg bg-red-950/40 border border-red-800 text-red-200 text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] flex items-center gap-2 shadow-xs animate-in fade-in">
-          <ShieldAlert className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] text-red-400 shrink-0" />
+        <div className="p-3 rounded-lg bg-red-950/40 border border-red-800 text-red-200 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] flex items-center gap-2 shadow-xs animate-in fade-in">
+          <ShieldAlert className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] text-red-400 shrink-0" />
           <span>{error}</span>
         </div>
       )}
 
       {/* Telemetry Stat Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[calc((10/375)*100vw)] lg:gap-[calc((16/1920)*100vw)]">
-        <div className="p-[calc((14/375)*100vw)] lg:p-[calc((18/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] bg-surface border border-line shadow-xs flex items-center justify-between">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[calc((12/375)*100vw)] lg:gap-[calc((18/1920)*100vw)]">
+        <div className="p-[calc((16/375)*100vw)] lg:p-[calc((20/1920)*100vw)] rounded-[calc((14/375)*100vw)] lg:rounded-[calc((16/1920)*100vw)] bg-surface border border-line shadow-xs flex items-center justify-between">
           <div className="space-y-1">
-            <span className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] font-semibold text-content-secondary uppercase tracking-wider">
+            <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold text-content-secondary uppercase tracking-wider">
               Pending Requests
             </span>
-            <div className="font-manrope text-[calc((20/375)*100vw)] lg:text-[calc((26/1920)*100vw)] font-extrabold text-amber-300">
+            <div className="font-manrope text-[calc((22/375)*100vw)] lg:text-[calc((28/1920)*100vw)] font-extrabold text-amber-300">
               {pendingCount}
             </div>
-            <span className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-muted">
+            <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-muted">
               {pendingCount > 0 ? "Requires SuperAdmin review" : "Queue clear"}
             </span>
           </div>
-          <div className="w-[calc((40/375)*100vw)] h-[calc((40/375)*100vw)] lg:w-[calc((46/1920)*100vw)] lg:h-[calc((46/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-amber-500/15 border border-amber-500/30 text-amber-300 flex items-center justify-center shrink-0">
-            <Clock className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((22/1920)*100vw)] lg:h-[calc((22/1920)*100vw)]" />
+          <div className="w-[calc((42/375)*100vw)] h-[calc((42/375)*100vw)] lg:w-[calc((48/1920)*100vw)] lg:h-[calc((48/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] bg-amber-500/15 border border-amber-500/30 text-amber-300 flex items-center justify-center shrink-0">
+            <Clock className="w-[calc((20/375)*100vw)] h-[calc((20/375)*100vw)] lg:w-[calc((24/1920)*100vw)] lg:h-[calc((24/1920)*100vw)]" />
           </div>
         </div>
 
-        <div className="p-[calc((14/375)*100vw)] lg:p-[calc((18/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] bg-surface border border-line shadow-xs flex items-center justify-between">
+        <div className="p-[calc((16/375)*100vw)] lg:p-[calc((20/1920)*100vw)] rounded-[calc((14/375)*100vw)] lg:rounded-[calc((16/1920)*100vw)] bg-surface border border-line shadow-xs flex items-center justify-between">
           <div className="space-y-1">
-            <span className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] font-semibold text-content-secondary uppercase tracking-wider">
+            <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold text-content-secondary uppercase tracking-wider">
               Active Administrators
             </span>
-            <div className="font-manrope text-[calc((20/375)*100vw)] lg:text-[calc((26/1920)*100vw)] font-extrabold text-medical-blue">
+            <div className="font-manrope text-[calc((22/375)*100vw)] lg:text-[calc((28/1920)*100vw)] font-extrabold text-medical-blue">
               {adminCount}
             </div>
-            <span className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-muted">
+            <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-muted">
               Full system privileges
             </span>
           </div>
-          <div className="w-[calc((40/375)*100vw)] h-[calc((40/375)*100vw)] lg:w-[calc((46/1920)*100vw)] lg:h-[calc((46/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-medical-blue/15 border border-medical-blue/30 text-medical-blue flex items-center justify-center shrink-0">
-            <ShieldCheck className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((22/1920)*100vw)] lg:h-[calc((22/1920)*100vw)]" />
+          <div className="w-[calc((42/375)*100vw)] h-[calc((42/375)*100vw)] lg:w-[calc((48/1920)*100vw)] lg:h-[calc((48/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] bg-medical-blue/15 border border-medical-blue/30 text-medical-blue flex items-center justify-center shrink-0">
+            <ShieldCheck className="w-[calc((20/375)*100vw)] h-[calc((20/375)*100vw)] lg:w-[calc((24/1920)*100vw)] lg:h-[calc((24/1920)*100vw)]" />
           </div>
         </div>
 
-        <div className="p-[calc((14/375)*100vw)] lg:p-[calc((18/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] bg-surface border border-line shadow-xs flex items-center justify-between">
+        <div className="p-[calc((16/375)*100vw)] lg:p-[calc((20/1920)*100vw)] rounded-[calc((14/375)*100vw)] lg:rounded-[calc((16/1920)*100vw)] bg-surface border border-line shadow-xs flex items-center justify-between">
           <div className="space-y-1">
-            <span className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] font-semibold text-content-secondary uppercase tracking-wider">
+            <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold text-content-secondary uppercase tracking-wider">
               Clinical Staff
             </span>
-            <div className="font-manrope text-[calc((20/375)*100vw)] lg:text-[calc((26/1920)*100vw)] font-extrabold text-medical-sage">
+            <div className="font-manrope text-[calc((22/375)*100vw)] lg:text-[calc((28/1920)*100vw)] font-extrabold text-medical-sage">
               {staffCount}
             </div>
-            <span className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-muted">
+            <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-muted">
               Operational roster members
             </span>
           </div>
-          <div className="w-[calc((40/375)*100vw)] h-[calc((40/375)*100vw)] lg:w-[calc((46/1920)*100vw)] lg:h-[calc((46/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-medical-sage/15 border border-medical-sage/30 text-medical-sage flex items-center justify-center shrink-0">
-            <Users className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((22/1920)*100vw)] lg:h-[calc((22/1920)*100vw)]" />
+          <div className="w-[calc((42/375)*100vw)] h-[calc((42/375)*100vw)] lg:w-[calc((48/1920)*100vw)] lg:h-[calc((48/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] bg-medical-sage/15 border border-medical-sage/30 text-medical-sage flex items-center justify-center shrink-0">
+            <Users className="w-[calc((20/375)*100vw)] h-[calc((20/375)*100vw)] lg:w-[calc((24/1920)*100vw)] lg:h-[calc((24/1920)*100vw)]" />
           </div>
         </div>
 
-        <div className="p-[calc((14/375)*100vw)] lg:p-[calc((18/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] bg-surface border border-line shadow-xs flex items-center justify-between">
+        <div className="p-[calc((16/375)*100vw)] lg:p-[calc((20/1920)*100vw)] rounded-[calc((14/375)*100vw)] lg:rounded-[calc((16/1920)*100vw)] bg-surface border border-line shadow-xs flex items-center justify-between">
           <div className="space-y-1">
-            <span className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] font-semibold text-content-secondary uppercase tracking-wider">
+            <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold text-content-secondary uppercase tracking-wider">
               Security Governance
             </span>
-            <div className="font-manrope text-[calc((14/375)*100vw)] lg:text-[calc((16/1920)*100vw)] font-bold text-emerald-400">
+            <div className="font-manrope text-[calc((16/375)*100vw)] lg:text-[calc((18/1920)*100vw)] font-bold text-emerald-400">
               Verified Active
             </div>
-            <span className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-muted">
+            <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-muted">
               SuperAdmin policy enforced
             </span>
           </div>
-          <div className="w-[calc((40/375)*100vw)] h-[calc((40/375)*100vw)] lg:w-[calc((46/1920)*100vw)] lg:h-[calc((46/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
-            <UserCheck className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((22/1920)*100vw)] lg:h-[calc((22/1920)*100vw)]" />
+          <div className="w-[calc((42/375)*100vw)] h-[calc((42/375)*100vw)] lg:w-[calc((48/1920)*100vw)] lg:h-[calc((48/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
+            <UserCheck className="w-[calc((20/375)*100vw)] h-[calc((20/375)*100vw)] lg:w-[calc((24/1920)*100vw)] lg:h-[calc((24/1920)*100vw)]" />
           </div>
         </div>
       </div>
 
       {/* SECTION 1: PENDING ACCESS REQUESTS QUEUE */}
       <Card className="overflow-hidden border-line shadow-sm">
-        <CardHeader className="p-[calc((14/375)*100vw)] lg:p-[calc((20/1920)*100vw)] border-b border-line/60 bg-surface-elevated/20">
+        <CardHeader className="p-[calc((16/375)*100vw)] lg:p-[calc((22/1920)*100vw)] border-b border-line/60 bg-surface-elevated/20">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
               <div className="flex items-center gap-2">
-                <CardTitle className="font-manrope text-[calc((15/375)*100vw)] lg:text-[calc((18/1920)*100vw)] font-bold text-content-primary">
+                <CardTitle className="font-manrope text-[calc((17/375)*100vw)] lg:text-[calc((20/1920)*100vw)] font-bold text-content-primary">
                   Pending Membership Requests
                 </CardTitle>
                 <Badge
                   variant={pendingCount > 0 ? "warning" : "default"}
-                  className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)]"
+                  className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)]"
                 >
                   {pendingCount} in queue
                 </Badge>
               </div>
-              <CardDescription className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] text-content-secondary mt-0.5">
+              <CardDescription className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary mt-0.5">
                 Applicants who submitted a join request from the login portal awaiting SuperAdmin approval.
               </CardDescription>
             </div>
@@ -317,10 +317,10 @@ export function AccessView() {
               <div className="w-10 h-10 rounded-full bg-surface-elevated mx-auto flex items-center justify-center text-content-muted">
                 <CheckCircle className="w-5 h-5 text-emerald-400" />
               </div>
-              <p className="text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)] font-semibold text-content-primary">
+              <p className="text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] font-semibold text-content-primary">
                 All Access Requests Processed
               </p>
-              <p className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-secondary max-w-sm mx-auto">
+              <p className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary max-w-sm mx-auto">
                 There are no pending join requests. When a doctor or staff member applies for portal access, their record will appear here for verification.
               </p>
             </div>
@@ -329,34 +329,34 @@ export function AccessView() {
               {requests.map((req) => (
                 <div
                   key={req._id}
-                  className="p-[calc((14/375)*100vw)] lg:p-[calc((18/1920)*100vw)] flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-surface-elevated/30 transition-colors"
+                  className="p-[calc((16/375)*100vw)] lg:p-[calc((20/1920)*100vw)] flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-surface-elevated/30 transition-colors"
                 >
                   {/* Left: Applicant details */}
                   <div className="flex items-start gap-3 min-w-0">
-                    <div className="w-[calc((38/375)*100vw)] h-[calc((38/375)*100vw)] lg:w-[calc((42/1920)*100vw)] lg:h-[calc((42/1920)*100vw)] rounded-full bg-medical-blue/20 text-medical-blue flex items-center justify-center font-manrope font-bold text-[calc((12/375)*100vw)] lg:text-[calc((14/1920)*100vw)] shrink-0 border border-medical-blue/30">
+                    <div className="w-[calc((40/375)*100vw)] h-[calc((40/375)*100vw)] lg:w-[calc((44/1920)*100vw)] lg:h-[calc((44/1920)*100vw)] rounded-full bg-medical-blue/20 text-medical-blue flex items-center justify-center font-manrope font-bold text-[calc((14/375)*100vw)] lg:text-[calc((16/1920)*100vw)] shrink-0 border border-medical-blue/30">
                       {req.name ? req.name.slice(0, 2).toUpperCase() : "DR"}
                     </div>
                     <div className="space-y-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="font-manrope font-bold text-[calc((13/375)*100vw)] lg:text-[calc((15/1920)*100vw)] text-content-primary leading-tight">
+                        <span className="font-manrope font-bold text-[calc((15/375)*100vw)] lg:text-[calc((17/1920)*100vw)] text-content-primary leading-tight">
                           {req.name}
                         </span>
-                        <Badge variant="outline" className="text-[calc((9/375)*100vw)] lg:text-[calc((10/1920)*100vw)]">
+                        <Badge variant="outline" className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)]">
                           {req.department || "Clinical Staff"}
                         </Badge>
                       </div>
 
-                      <div className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] text-content-secondary">
+                      <div className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary">
                         {req.email}
                       </div>
 
                       {req.requestNote && (
-                        <p className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-muted italic bg-surface-elevated/60 px-2.5 py-1 rounded-md border border-line/40 max-w-md">
+                        <p className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-muted italic bg-surface-elevated/60 px-2.5 py-1 rounded-md border border-line/40 max-w-md">
                           &ldquo;{req.requestNote}&rdquo;
                         </p>
                       )}
 
-                      <div className="flex items-center gap-1.5 text-[calc((9/375)*100vw)] lg:text-[calc((10/1920)*100vw)] text-content-disabled">
+                      <div className="flex items-center gap-1.5 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-disabled">
                         <Clock className="w-3 h-3" />
                         <span>
                           Requested on{" "}
@@ -375,9 +375,9 @@ export function AccessView() {
                       size="sm"
                       disabled={actionLoadingId === req._id}
                       onClick={() => handleApprove(req._id, "admin")}
-                      className="h-[calc((32/375)*100vw)] lg:h-[calc((34/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-semibold rounded-[calc((6/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] cursor-pointer"
+                      className="h-[calc((34/375)*100vw)] lg:h-[calc((36/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] cursor-pointer"
                     >
-                      <ShieldCheck strokeWidth={2.4} className="w-3.5 h-3.5 mr-1 text-canvas" />
+                      <ShieldCheck strokeWidth={2.4} className="w-3.5 h-3.5 text-canvas" />
                       Approve as Admin
                     </Button>
 
@@ -386,7 +386,7 @@ export function AccessView() {
                       size="sm"
                       disabled={actionLoadingId === req._id}
                       onClick={() => handleApprove(req._id, "employee")}
-                      className="h-[calc((32/375)*100vw)] lg:h-[calc((34/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] cursor-pointer"
+                      className="h-[calc((34/375)*100vw)] lg:h-[calc((36/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] cursor-pointer"
                     >
                       Approve as Staff
                     </Button>
@@ -396,7 +396,7 @@ export function AccessView() {
                       size="sm"
                       disabled={actionLoadingId === req._id}
                       onClick={() => handleReject(req._id)}
-                      className="h-[calc((32/375)*100vw)] lg:h-[calc((34/1920)*100vw)] px-[calc((8/375)*100vw)] lg:px-[calc((10/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] cursor-pointer"
+                      className="h-[calc((34/375)*100vw)] lg:h-[calc((36/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] cursor-pointer"
                     >
                       <UserX className="w-3.5 h-3.5" />
                     </Button>
@@ -410,13 +410,13 @@ export function AccessView() {
 
       {/* SECTION 2: ACTIVE ADMINISTRATORS & STAFF DIRECTORY */}
       <Card className="overflow-hidden border-line shadow-sm">
-        <CardHeader className="p-[calc((14/375)*100vw)] lg:p-[calc((20/1920)*100vw)] border-b border-line/60">
+        <CardHeader className="p-[calc((16/375)*100vw)] lg:p-[calc((22/1920)*100vw)] border-b border-line/60">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <CardTitle className="font-manrope text-[calc((15/375)*100vw)] lg:text-[calc((18/1920)*100vw)] font-bold text-content-primary">
+              <CardTitle className="font-manrope text-[calc((17/375)*100vw)] lg:text-[calc((20/1920)*100vw)] font-bold text-content-primary">
                 Authorized Personnel Directory
               </CardTitle>
-              <CardDescription className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] text-content-secondary mt-0.5">
+              <CardDescription className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary mt-0.5">
                 Staff members and administrators with active credentials in the hospital network.
               </CardDescription>
             </div>
@@ -430,14 +430,14 @@ export function AccessView() {
                   placeholder="Search staff or email..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="pl-8 text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] h-[calc((32/375)*100vw)] lg:h-[calc((34/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] w-48 sm:w-56"
+                  className="pl-8 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] h-[calc((34/375)*100vw)] lg:h-[calc((36/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] w-48 sm:w-56"
                 />
               </div>
 
               <select
                 value={roleFilter}
                 onChange={(e) => setRoleFilter(e.target.value)}
-                className="bg-surface-elevated border border-line text-content-primary text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] h-[calc((32/375)*100vw)] lg:h-[calc((34/1920)*100vw)] px-2.5 cursor-pointer"
+                className="bg-surface-elevated border border-line text-content-primary text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] h-[calc((34/375)*100vw)] lg:h-[calc((36/1920)*100vw)] px-2.5 cursor-pointer"
               >
                 <option value="all">All Roles</option>
                 <option value="superAdmin">Super Admins</option>
@@ -453,19 +453,19 @@ export function AccessView() {
             <Table>
               <TableHeader className="bg-surface-elevated/40">
                 <TableRow className="border-line/60">
-                  <TableHead className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)]">
+                  <TableHead className="text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] font-semibold">
                     Name & Email
                   </TableHead>
-                  <TableHead className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)]">
+                  <TableHead className="text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] font-semibold">
                     Department
                   </TableHead>
-                  <TableHead className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)]">
+                  <TableHead className="text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] font-semibold">
                     Role & Authority
                   </TableHead>
-                  <TableHead className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)]">
+                  <TableHead className="text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] font-semibold">
                     Status
                   </TableHead>
-                  <TableHead className="text-right text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] pr-4">
+                  <TableHead className="text-right text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] font-semibold pr-[calc((12/375)*100vw)] lg:pr-[calc((18/1920)*100vw)]">
                     Manage Permissions
                   </TableHead>
                 </TableRow>
@@ -474,7 +474,7 @@ export function AccessView() {
               <TableBody className="divide-y divide-line/40">
                 {users.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={5} className="text-center py-8 text-content-muted">
+                    <TableCell colSpan={5} className="text-center py-8 text-content-muted text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)]">
                       No personnel matching your criteria.
                     </TableCell>
                   </TableRow>
@@ -483,15 +483,15 @@ export function AccessView() {
                     <TableRow key={user._id} className="hover:bg-surface-elevated/20 transition-colors">
                       {/* Name & Email */}
                       <TableCell className="font-medium text-content-primary">
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-full bg-surface-elevated border border-line text-medical-blue flex items-center justify-center font-bold text-xs shrink-0">
+                        <div className="flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)]">
+                          <div className="w-[calc((34/375)*100vw)] h-[calc((34/375)*100vw)] lg:w-[calc((38/1920)*100vw)] lg:h-[calc((38/1920)*100vw)] rounded-full bg-surface-elevated border border-line text-medical-blue flex items-center justify-center font-bold text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] shrink-0">
                             {user.name ? user.name.slice(0, 2).toUpperCase() : "US"}
                           </div>
                           <div className="flex flex-col">
-                            <span className="font-semibold text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)] text-content-primary leading-tight">
+                            <span className="font-semibold text-[calc((14/375)*100vw)] lg:text-[calc((16/1920)*100vw)] text-content-primary leading-tight">
                               {user.name}
                             </span>
-                            <span className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-secondary mt-0.5">
+                            <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary mt-[calc((2/375)*100vw)] lg:mt-[calc((2/1920)*100vw)]">
                               {user.email}
                             </span>
                           </div>
@@ -499,9 +499,9 @@ export function AccessView() {
                       </TableCell>
 
                       {/* Department */}
-                      <TableCell className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] text-content-secondary">
+                      <TableCell className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary">
                         <div className="flex items-center gap-1.5">
-                          <Building2 className="w-3.5 h-3.5 text-content-disabled shrink-0" />
+                          <Building2 className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)] text-content-disabled shrink-0" />
                           <span>{user.department || "General Administration"}</span>
                         </div>
                       </TableCell>
@@ -509,15 +509,15 @@ export function AccessView() {
                       {/* Role */}
                       <TableCell>
                         {user.level === "superAdmin" ? (
-                          <Badge variant="default" className="bg-emerald-500/20 text-emerald-300 border-emerald-500/40 text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)]">
+                          <Badge variant="default" className="bg-emerald-500/20 text-emerald-300 border-emerald-500/40 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] py-0.5">
                             Super Administrator
                           </Badge>
                         ) : user.level === "admin" ? (
-                          <Badge variant="default" className="bg-medical-blue/20 text-medical-blue border-medical-blue/40 text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)]">
+                          <Badge variant="default" className="bg-medical-blue/20 text-medical-blue border-medical-blue/40 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] py-0.5">
                             Administrator
                           </Badge>
                         ) : (
-                          <Badge variant="secondary" className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)]">
+                          <Badge variant="secondary" className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] py-0.5">
                             Clinical Staff
                           </Badge>
                         )}
@@ -527,26 +527,26 @@ export function AccessView() {
                       <TableCell>
                         <Badge
                           variant={user.isActive !== false ? "active" : "archived"}
-                          className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)]"
+                          className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] py-0.5"
                         >
                           {user.isActive !== false ? "Active" : "Suspended"}
                         </Badge>
                       </TableCell>
 
                       {/* Management Actions */}
-                      <TableCell className="text-right pr-4">
+                      <TableCell className="text-right pr-[calc((12/375)*100vw)] lg:pr-[calc((18/1920)*100vw)]">
                         {user.isPermanent || user._id === "admin-default-id" ? (
-                          <span className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-disabled italic">
+                          <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-disabled italic">
                             Permanent SuperAdmin
                           </span>
                         ) : (
-                          <div className="flex items-center justify-end gap-2">
+                          <div className="flex items-center justify-end gap-[calc((8/375)*100vw)] lg:gap-[calc((10/1920)*100vw)]">
                             {/* Role Switcher */}
                             <select
                               value={user.level || "employee"}
                               disabled={actionLoadingId === user._id}
                               onChange={(e) => handleRoleChange(user._id, e.target.value)}
-                              className="bg-surface-elevated border border-line text-content-secondary hover:text-content-primary text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] rounded-[calc((6/375)*100vw)] h-[calc((28/375)*100vw)] lg:h-[calc((30/1920)*100vw)] px-2 cursor-pointer"
+                              className="bg-surface-elevated border border-line text-content-secondary hover:text-content-primary text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] h-[calc((32/375)*100vw)] lg:h-[calc((36/1920)*100vw)] px-2 cursor-pointer"
                             >
                               <option value="admin">Promote to Admin</option>
                               <option value="employee">Set as Staff</option>
@@ -559,7 +559,7 @@ export function AccessView() {
                               size="sm"
                               disabled={actionLoadingId === user._id}
                               onClick={() => handleToggleStatus(user._id, user.isActive !== false)}
-                              className={`h-[calc((28/375)*100vw)] lg:h-[calc((30/1920)*100vw)] px-2 text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] rounded-[calc((6/375)*100vw)] cursor-pointer ${
+                              className={`h-[calc((32/375)*100vw)] lg:h-[calc((36/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] transition-colors cursor-pointer ${
                                 user.isActive !== false
                                   ? "text-amber-400 hover:bg-amber-950/30"
                                   : "text-emerald-400 hover:bg-emerald-950/30"
