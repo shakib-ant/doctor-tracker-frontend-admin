@@ -5,11 +5,6 @@ import RootWrapper from "./root-provider";
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="dark no-scrollbar">
-      <head>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="alternate icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/favicon.svg" />
-      </head>
       <body className={`${fontVariables} no-scrollbar`}>
         <RootWrapper>{children}</RootWrapper>
       </body>
@@ -31,12 +26,7 @@ export const metadata = {
   description:
     "Comprehensive clinical administration and hospital management platform. Track doctor schedules, manage patient appointments, monitor real-time queues, and gain clinical operational insights with enterprise-grade security.",
   icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "any" },
-    ],
-    shortcut: "/favicon.svg",
-    apple: "/favicon.svg",
+    icon: "/favicon.ico",
   },
   openGraph: {
     title: "Doctor Tracker — Healthcare Administration",
@@ -46,7 +36,7 @@ export const metadata = {
     siteName: "Doctor Tracker",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/mataImage.png",
         width: 1200,
         height: 1200,
         alt: "Doctor Tracker — Healthcare Administration Portal",
@@ -59,7 +49,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Doctor Tracker — Healthcare Administration",
     description:
-      "Comprehensive clinical administration and hospital management platform. Track doctor schedules, manage patient appointments, monitor real-time queues, and gain clinical operational insights.",
-    images: ["/og-image.jpg"],
+      "Comprehensive clinical administration and hospital management platform. Track doctor schedules, manage patient appointments, monitor real-time queues, and gain clinical operational insights with enterprise-grade security.",
+    images: ["/mataImage.png"],
   },
 };
