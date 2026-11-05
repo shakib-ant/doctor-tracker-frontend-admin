@@ -11,9 +11,31 @@ const DOCTOR_AVATARS = [
   "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=120&auto=format&fit=crop&q=80",
   "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=120&auto=format&fit=crop&q=80",
   "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=120&auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1594824813576-96b6fbcf2b44?w=120&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
   "https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=120&auto=format&fit=crop&q=80",
 ];
+
+function SafeDoctorAvatar({ src, alt, rankInfo }) {
+  const [error, setError] = React.useState(false);
+
+  return (
+    <div className={`w-[calc((30/375)*100vw)] h-[calc((30/375)*100vw)] lg:w-[calc((38/1920)*100vw)] lg:h-[calc((38/1920)*100vw)] rounded-full overflow-hidden border-2 ${rankInfo.avatarBorder} shadow-xs relative bg-slate-100 shrink-0 flex items-center justify-center`}>
+      {!error && src ? (
+        <img
+          src={src}
+          alt={alt || "Doctor"}
+          className="w-full h-full object-cover"
+          loading="lazy"
+          onError={() => setError(true)}
+        />
+      ) : (
+        <div className="w-full h-full flex items-center justify-center bg-blue-100 text-blue-700 font-bold text-xs uppercase select-none">
+          {alt ? alt.replace(/^Dr\.\s*/i, "").charAt(0) : "D"}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function TopDoctorsChart({ data = [], totalPatients = 0, isLoading = false }) {
   const [containerRef, isInView] = useInView({ threshold: 0.1 });
@@ -107,20 +129,13 @@ export function TopDoctorsChart({ data = [], totalPatients = 0, isLoading = fals
                 >
                   <div className="flex items-center justify-between mb-[calc((6/375)*100vw)] lg:mb-[calc((10/1920)*100vw)]">
                     <div className="flex items-center gap-[calc((8/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] min-w-0 pr-2">
-                      {/* Doctor Avatar with Rank Border & Badge + Guaranteed onError fallback */}
+                      {/* Doctor Avatar with Rank Border & Badge */}
                       <div className="relative shrink-0">
-                        <div className={`w-[calc((30/375)*100vw)] h-[calc((30/375)*100vw)] lg:w-[calc((38/1920)*100vw)] lg:h-[calc((38/1920)*100vw)] rounded-full overflow-hidden border-2 ${rankInfo.avatarBorder} shadow-xs relative bg-slate-100`}>
-                          <img
-                            src={doc.image && doc.image.startsWith("http") ? doc.image : fallbackAvatar}
-                            alt={doc.name}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                            onError={(e) => {
-                              e.currentTarget.onerror = null;
-                              e.currentTarget.src = fallbackAvatar;
-                            }}
-                          />
-                        </div>
+                        <SafeDoctorAvatar
+                          src={doc.image && doc.image.startsWith("http") ? doc.image : fallbackAvatar}
+                          alt={doc.name}
+                          rankInfo={rankInfo}
+                        />
                         <span className={`absolute -bottom-1 -right-1 w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] rounded-full text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] font-extrabold flex items-center justify-center ${rankInfo.badgeBg} text-white shadow-xs font-manrope`}>
                           {idx + 1}
                         </span>

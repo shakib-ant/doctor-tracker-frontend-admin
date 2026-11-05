@@ -1,5 +1,6 @@
 import { Env } from "@/utils/env";
 import { getAuthHeaders } from "@/utils/auth";
+import { getCachedData, setCachedData, clearCache } from "@/utils/apiCache";
 
 const BASE_URL = `${Env.backend_url}/v1/patients`;
 
@@ -13,6 +14,7 @@ export const fetchPatients = async ({
   startDate = "",
   endDate = "",
   archived = "active",
+  forceRefresh = false,
 } = {}) => {
   const query = new URLSearchParams();
   if (page) query.set("page", String(page));
@@ -25,7 +27,15 @@ export const fetchPatients = async ({
   if (endDate) query.set("endDate", endDate);
   if (archived) query.set("archived", archived);
 
-  const res = await fetch(`${BASE_URL}?${query.toString()}`, {
+  const queryString = query.toString();
+  const cacheKey = `patients_${queryString}`;
+
+  if (!forceRefresh) {
+    const cached = getCachedData(cacheKey);
+    if (cached) return cached;
+  }
+
+  const res = await fetch(`${BASE_URL}?${queryString}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -44,6 +54,8 @@ export const fetchPatients = async ({
   if (!res.ok) {
     throw new Error(data.message || `Failed to fetch patients (HTTP ${res.status})`);
   }
+
+  setCachedData(cacheKey, data);
   return data;
 };
 
@@ -80,6 +92,9 @@ export const createPatient = async (patientData) => {
   if (!res.ok) {
     throw new Error(data.message || `Failed to create patient (HTTP ${res.status})`);
   }
+
+  clearCache("patients_");
+  clearCache("dashboard_analytics");
   return data;
 };
 
@@ -99,6 +114,9 @@ export const updatePatient = async (id, patientData) => {
   if (!res.ok) {
     throw new Error(data.message || `Failed to update patient (HTTP ${res.status})`);
   }
+
+  clearCache("patients_");
+  clearCache("dashboard_analytics");
   return data;
 };
 
@@ -118,6 +136,9 @@ export const archivePatient = async (id, isArchived) => {
   if (!res.ok) {
     throw new Error(data.message || `Failed to archive/unarchive patient (HTTP ${res.status})`);
   }
+
+  clearCache("patients_");
+  clearCache("dashboard_analytics");
   return data;
 };
 
@@ -137,6 +158,9 @@ export const deletePatient = async (id, hardDelete = false) => {
   if (!res.ok) {
     throw new Error(data.message || `Failed to delete patient (HTTP ${res.status})`);
   }
+
+  clearCache("patients_");
+  clearCache("dashboard_analytics");
   return data;
 };
 
@@ -148,7 +172,13 @@ export const fetchPatientsByDoctor = async (doctorId, { page = 1, limit = 10, se
   if (limit) query.set("limit", String(limit));
   if (search && search.trim()) query.set("search", search.trim());
 
-  const res = await fetch(`${BASE_URL}/by-doctor/${doctorId}?${query.toString()}`, {
+  const queryString = query.toString();
+  const cacheKey = `patients_doctor_${doctorId}_${queryString}`;
+
+  const cached = getCachedData(cacheKey);
+  if (cached) return cached;
+
+  const res = await fetch(`${BASE_URL}/by-doctor/${doctorId}?${queryString}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -161,6 +191,7 @@ export const fetchPatientsByDoctor = async (doctorId, { page = 1, limit = 10, se
   if (!res.ok) {
     throw new Error(data.message || `Failed to fetch doctor patients (HTTP ${res.status})`);
   }
+
+  setCachedData(cacheKey, data);
   return data;
 };
-

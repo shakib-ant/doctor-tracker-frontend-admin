@@ -19,6 +19,7 @@ import {
   Check,
 } from "lucide-react";
 import { fetchDashboardAnalytics } from "@/services/analyticsService";
+import { getCachedData } from "@/utils/apiCache";
 import { StatCard } from "./components/stat-card";
 import { PatientsPerDoctorChart } from "./components/patients-per-doctor-chart";
 import { AdmissionsTrendChart } from "./components/admissions-trend-chart";
@@ -33,8 +34,13 @@ const TELEMETRY_WINDOWS = [
 ];
 
 export function DashboardView() {
-  const [analytics, setAnalytics] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [analytics, setAnalytics] = useState(() => {
+    const cached = getCachedData("dashboard_analytics");
+    return cached?.data || null;
+  });
+  const [isLoading, setIsLoading] = useState(() => {
+    return !getCachedData("dashboard_analytics");
+  });
   const [error, setError] = useState(null);
 
   // Interactive Telemetry Selector (Fixes: "Today, Live Telemetry aita te click korle data sob same thakche")
@@ -42,19 +48,23 @@ export function DashboardView() {
   const [isWindowDropdownOpen, setIsWindowDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  const loadData = useCallback(async () => {
-    setIsLoading(true);
+  const loadData = useCallback(async (force = false) => {
+    if (!getCachedData("dashboard_analytics") || force) {
+      setIsLoading(true);
+    }
     setError(null);
     try {
-      const response = await fetchDashboardAnalytics();
+      const response = await fetchDashboardAnalytics(force);
       setAnalytics(response.data);
     } catch (err) {
       console.error("Dashboard analytics load error:", err);
-      setError(err.message || "Failed to load dashboard data");
+      if (!analytics) {
+        setError(err.message || "Failed to load dashboard data");
+      }
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [analytics]);
 
   useEffect(() => {
     loadData();
@@ -261,7 +271,7 @@ export function DashboardView() {
           <Button
             variant="secondary"
             size="sm"
-            onClick={loadData}
+            onClick={() => loadData(true)}
             disabled={isLoading}
             className="h-[calc((38/375)*100vw)] sm:h-9 md:h-9 lg:h-[calc((42/1920)*100vw)] px-[calc((14/375)*100vw)] sm:px-3 md:px-3 lg:px-[calc((16/1920)*100vw)] text-[calc((14/375)*100vw)] sm:text-xs md:text-xs lg:text-[calc((14/1920)*100vw)] rounded-xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 cursor-pointer shadow-xs"
           >
@@ -309,7 +319,7 @@ export function DashboardView() {
             <Button
               variant="outline"
               size="sm"
-              onClick={loadData}
+              onClick={() => loadData(true)}
               className="rounded-xl border-red-300 text-red-700 hover:bg-red-100/50 cursor-pointer"
             >
               Retry

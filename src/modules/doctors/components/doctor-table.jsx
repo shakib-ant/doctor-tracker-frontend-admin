@@ -19,12 +19,34 @@ const DOCTOR_AVATARS = [
   "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=150&auto=format&fit=crop&q=80",
   "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&auto=format&fit=crop&q=80",
   "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=150&auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1594824813576-96b6fbcf2b44?w=150&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
   "https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=150&auto=format&fit=crop&q=80",
   "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=150&auto=format&fit=crop&q=80",
   "https://images.unsplash.com/photo-1622902046580-2b47f47f5471?w=150&auto=format&fit=crop&q=80",
   "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=150&auto=format&fit=crop&q=80",
 ];
+
+function DoctorTableAvatar({ src, alt }) {
+  const [error, setError] = React.useState(false);
+
+  return (
+    <div className="w-[calc((32/375)*100vw)] h-[calc((32/375)*100vw)] sm:w-8 sm:h-8 md:w-8 md:h-8 lg:w-[calc((36/1920)*100vw)] lg:h-[calc((36/1920)*100vw)] rounded-full overflow-hidden border border-slate-200/90 shadow-xs relative bg-slate-100 ring-2 ring-slate-100/80 flex items-center justify-center shrink-0">
+      {!error && src ? (
+        <img
+          src={src}
+          alt={alt || "Doctor"}
+          className="w-full h-full object-cover"
+          loading="lazy"
+          onError={() => setError(true)}
+        />
+      ) : (
+        <div className="w-full h-full flex items-center justify-center bg-blue-100 text-blue-700 font-bold text-xs uppercase select-none">
+          {alt ? alt.replace(/^Dr\.\s*/i, "").charAt(0) : "D"}
+        </div>
+      )}
+    </div>
+  );
+}
 
 function getDoctorAvatarUrl(doc, idx) {
   if (doc?.image && doc.image.startsWith("http")) return doc.image;
@@ -139,24 +161,17 @@ export function DoctorTable({
             doctors.map((doc, idx) => (
               <TableRow
                 key={doc._id}
-                className="hover:bg-blue-50/40 transition-colors duration-150 border-b border-slate-100"
+                className="hover:bg-blue-50/40 transition-colors duration-150 border-b border-slate-100 animate-in fade-in slide-in-from-bottom-1"
+                style={{ animationDelay: `${idx * 40}ms` }}
               >
                 {/* Doctor Name & Human Avatar */}
                 <TableCell className="font-medium py-[calc((8/375)*100vw)] px-[calc((8/375)*100vw)] sm:py-2.5 sm:px-3 md:py-2 md:px-2.5 lg:py-[calc((10/1920)*100vw)] lg:px-[calc((12/1920)*100vw)]">
                   <div className="flex items-center gap-[calc((8/375)*100vw)] sm:gap-2.5 md:gap-2 lg:gap-[calc((10/1920)*100vw)]">
                     <div className="relative shrink-0">
-                      <div className="w-[calc((32/375)*100vw)] h-[calc((32/375)*100vw)] sm:w-8 sm:h-8 md:w-8 md:h-8 lg:w-[calc((36/1920)*100vw)] lg:h-[calc((36/1920)*100vw)] rounded-full overflow-hidden border border-slate-200/90 shadow-xs relative bg-slate-100 ring-2 ring-slate-100/80">
-                        <img
-                          src={getDoctorAvatarUrl(doc, idx)}
-                          alt={doc.name}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                          onError={(e) => {
-                            e.currentTarget.onerror = null;
-                            e.currentTarget.src = DOCTOR_AVATARS[0];
-                          }}
-                        />
-                      </div>
+                      <DoctorTableAvatar
+                        src={getDoctorAvatarUrl(doc, idx)}
+                        alt={doc.name}
+                      />
                       <span
                         className={`absolute -bottom-0.5 -right-0.5 w-[calc((9/375)*100vw)] h-[calc((9/375)*100vw)] sm:w-2 sm:h-2 md:w-2 md:h-2 lg:w-[calc((10/1920)*100vw)] lg:h-[calc((10/1920)*100vw)] rounded-full ring-2 ring-white shadow-xs ${
                           doc.isActive ? "bg-emerald-500" : "bg-amber-400"

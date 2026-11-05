@@ -1,5 +1,6 @@
 import { Env } from "@/utils/env";
 import { getAuthHeaders } from "@/utils/auth";
+import { getCachedData, setCachedData, clearCache } from "@/utils/apiCache";
 
 const BASE_URL = `${Env.backend_url}/v1/doctors`;
 
@@ -9,6 +10,7 @@ export const fetchDoctors = async ({
   search = "",
   specialization = "",
   status = "",
+  forceRefresh = false,
 } = {}) => {
   const query = new URLSearchParams();
   if (page) query.set("page", String(page));
@@ -19,7 +21,15 @@ export const fetchDoctors = async ({
   }
   if (status && status !== "all") query.set("status", status);
 
-  const url = `${BASE_URL}?${query.toString()}`;
+  const queryString = query.toString();
+  const cacheKey = `doctors_${queryString}`;
+
+  if (!forceRefresh) {
+    const cached = getCachedData(cacheKey);
+    if (cached) return cached;
+  }
+
+  const url = `${BASE_URL}?${queryString}`;
 
   const res = await fetch(url, {
     method: "GET",
@@ -37,7 +47,9 @@ export const fetchDoctors = async ({
     );
   }
 
-  return res.json();
+  const result = await res.json();
+  setCachedData(cacheKey, result);
+  return result;
 };
 
 export const fetchDoctorById = async (id) => {
@@ -85,6 +97,8 @@ export const createDoctor = async (doctorData) => {
     );
   }
 
+  clearCache("doctors_");
+  clearCache("dashboard_analytics");
   return data;
 };
 
@@ -113,6 +127,8 @@ export const updateDoctor = async (id, doctorData) => {
     );
   }
 
+  clearCache("doctors_");
+  clearCache("dashboard_analytics");
   return data;
 };
 
@@ -136,6 +152,7 @@ export const archiveDoctor = async (id, isActive) => {
     );
   }
 
+  clearCache("doctors_");
+  clearCache("dashboard_analytics");
   return data;
 };
-

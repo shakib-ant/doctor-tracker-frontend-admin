@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Plus, RefreshCw, ChevronLeft, ChevronRight, AlertCircle, CheckCircle2 } from "lucide-react";
 import { fetchDoctors } from "@/services/doctorService";
+import { getCachedData } from "@/utils/apiCache";
 import { DoctorFilterBar } from "./components/doctor-filter-bar";
 import { DoctorTable } from "./components/doctor-table";
 import { DoctorDetailModal } from "@/components/doctors/doctor-detail-modal";
@@ -41,7 +42,29 @@ export function DoctorsView() {
   }, [searchQuery]);
 
   const loadDoctors = useCallback(
-    async (page = 1) => {
+    async (page = 1, force = false) => {
+      const q = new URLSearchParams();
+      if (page) q.set("page", String(page));
+      q.set("limit", "10");
+      if (debouncedSearch && debouncedSearch.trim()) q.set("search", debouncedSearch.trim());
+      if (selectedSpecialty && selectedSpecialty !== "All") q.set("specialization", selectedSpecialty.trim());
+      if (statusFilter && statusFilter !== "all") q.set("status", statusFilter);
+
+      const cached = getCachedData(`doctors_${q.toString()}`);
+      if (cached && !force) {
+        setDoctors(cached.data || []);
+        setPagination(
+          cached.pagination || {
+            total: cached.totalDoctors || 0,
+            page: cached.currentPage || 1,
+            limit: cached.limit || 10,
+            totalPages: cached.totalPages || 1,
+          }
+        );
+        setIsLoading(false);
+        return;
+      }
+
       setIsLoading(true);
       setError(null);
       try {
@@ -51,6 +74,7 @@ export function DoctorsView() {
           search: debouncedSearch,
           specialization: selectedSpecialty,
           status: statusFilter,
+          forceRefresh: force,
         });
 
         setDoctors(response.data || []);
@@ -117,7 +141,7 @@ export function DoctorsView() {
           <Button
             variant="secondary"
             size="sm"
-            onClick={() => loadDoctors(pagination.page)}
+            onClick={() => loadDoctors(pagination.page, true)}
             disabled={isLoading}
             className="h-[calc((36/375)*100vw)] sm:h-9 md:h-9 lg:h-[calc((38/1920)*100vw)] px-[calc((14/375)*100vw)] sm:px-3 md:px-3 lg:px-[calc((16/1920)*100vw)] text-[calc((14/375)*100vw)] sm:text-xs md:text-xs lg:text-[calc((14/1920)*100vw)] rounded-[calc((10/375)*100vw)] sm:rounded-lg md:rounded-lg lg:rounded-[calc((10/1920)*100vw)] cursor-pointer"
           >
@@ -191,7 +215,7 @@ export function DoctorsView() {
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => loadDoctors(pagination.page)}
+                onClick={() => loadDoctors(pagination.page, true)}
                 className="h-8 text-[calc((14/375)*100vw)] sm:text-xs md:text-xs lg:text-[calc((14/1920)*100vw)] border-red-300 text-red-700 hover:bg-red-100/50"
               >
                 Try Again

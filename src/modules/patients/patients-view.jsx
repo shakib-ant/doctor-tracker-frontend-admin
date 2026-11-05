@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Plus, RefreshCw, ChevronLeft, ChevronRight, AlertCircle } from "lucide-react";
 import { fetchPatients, updatePatient } from "@/services/patientService";
+import { getCachedData } from "@/utils/apiCache";
 import { PatientFilterBar } from "./components/patient-filter-bar";
 import { PatientTable } from "./components/patient-table";
 import { PatientModal } from "./components/patient-modal";
@@ -40,7 +41,32 @@ export function PatientsView() {
   }, [searchQuery]);
 
   const loadPatients = useCallback(
-    async (page = 1) => {
+    async (page = 1, force = false) => {
+      const q = new URLSearchParams();
+      if (page) q.set("page", String(page));
+      q.set("limit", "10");
+      if (debouncedSearch && debouncedSearch.trim()) q.set("search", debouncedSearch.trim());
+      if (conditionFilter && conditionFilter !== "All") q.set("condition", conditionFilter.trim());
+      if (statusFilter && statusFilter !== "All") q.set("status", statusFilter.trim());
+      if (startDate) q.set("startDate", startDate);
+      if (endDate) q.set("endDate", endDate);
+      if (archivedFilter) q.set("archived", archivedFilter);
+
+      const cached = getCachedData(`patients_${q.toString()}`);
+      if (cached && !force) {
+        setPatients(cached.data || []);
+        setPagination(
+          cached.pagination || {
+            total: cached.data?.length || 0,
+            page,
+            limit: 10,
+            totalPages: 1,
+          }
+        );
+        setIsLoading(false);
+        return;
+      }
+
       setIsLoading(true);
       setError(null);
       try {
@@ -53,6 +79,7 @@ export function PatientsView() {
           startDate,
           endDate,
           archived: archivedFilter,
+          forceRefresh: force,
         });
 
         setPatients(response.data || []);
@@ -127,7 +154,7 @@ export function PatientsView() {
           <Button
             variant="secondary"
             size="sm"
-            onClick={() => loadPatients(pagination.page)}
+            onClick={() => loadPatients(pagination.page, true)}
             disabled={isLoading}
             className="h-[calc((36/375)*100vw)] lg:h-[calc((38/1920)*100vw)] px-[calc((14/375)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] cursor-pointer"
           >
@@ -191,7 +218,7 @@ export function PatientsView() {
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => loadPatients(pagination.page)}
+                onClick={() => loadPatients(pagination.page, true)}
                 className="h-8 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] border-red-300 text-red-700 hover:bg-red-100/50"
               >
                 Try Again
