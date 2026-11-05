@@ -1,27 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1B2733"/>
-      <stop offset="100%" stop-color="#111923"/>
+      <stop offset="0%" stop-color="#1A2735"/>
+      <stop offset="100%" stop-color="#0E1620"/>
     </linearGradient>
     <linearGradient id="blueGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#A5C8DF"/>
+      <stop offset="0%" stop-color="#A5CBE2"/>
       <stop offset="100%" stop-color="#89B4CE"/>
     </linearGradient>
   </defs>
-  
+
   <!-- Rounded Base Background -->
-  <rect width="48" height="48" rx="12" fill="url(#bg)"/>
-  <rect x="1.5" y="1.5" width="45" height="45" rx="10.5" fill="none" stroke="#324454" stroke-width="2"/>
-  
-  <!-- Stethoscope Medical Icon -->
-  <!-- Upper U-Tube -->
-  <path d="M16 10v9a8 8 0 0 0 16 0v-9" fill="none" stroke="url(#blueGlow)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Lower Connecting Tube -->
-  <path d="M24 27v6a5 5 0 0 0 5 5h3" fill="none" stroke="url(#blueGlow)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Chestpiece (Resonator) -->
-  <circle cx="34" cy="38" r="4.5" fill="#86A8A1" stroke="#89B4CE" stroke-width="2"/>
-  <!-- Earpieces -->
-  <circle cx="16" cy="10" r="2.5" fill="#89B4CE"/>
-  <circle cx="32" cy="10" r="2.5" fill="#89B4CE"/>
+  <rect width="32" height="32" rx="8" fill="url(#bg)"/>
+  <rect x="0.75" y="0.75" width="30.5" height="30.5" rx="7.25" fill="none" stroke="#33475A" stroke-width="1.5"/>
+
+  <!-- Centered Stethoscope Doctors Icon -->
+  <g transform="translate(4, 4)" stroke="url(#blueGlow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M11 2v2"/>
+    <path d="M5 2v2"/>
+    <path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/>
+    <path d="M8 15a6 6 0 0 0 12 0v-3"/>
+    <circle cx="20" cy="10" r="2" fill="#89B4CE" stroke="none"/>
+  </g>
 </svg>

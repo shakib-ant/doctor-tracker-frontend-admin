@@ -1,7 +1,7 @@
 import { Env } from "@/utils/env";
 import { getAuthHeaders } from "@/utils/auth";
 
-const BASE_URL = `${Env.backend_url || "http://localhost:5000/api"}/employeeApp/protected/analytics`;
+const BASE_URL = `${Env.backend_url || "http://localhost:5000/api"}/v1/analytics`;
 
 export const fetchDashboardAnalytics = async () => {
   const res = await fetch(`${BASE_URL}/dashboard`, {

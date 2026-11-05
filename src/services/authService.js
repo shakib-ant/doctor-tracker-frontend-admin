@@ -1,7 +1,7 @@
 import { Env } from "@/utils/env";
 import { setAuthToken, removeAuthToken, getAuthToken } from "@/utils/auth";
 
-const BASE_URL = `${Env.backend_url || "http://localhost:5000/api"}/employeeApp/public/auth`;
+const BASE_URL = `${Env.backend_url || "http://localhost:5000/api"}/v1/auth`;
 
 export const login = async (email, password) => {
   const cleanEmail = email ? email.trim() : "";
