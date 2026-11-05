@@ -24,6 +24,11 @@ const navigationItems = [
     href: "/patients",
     icon: Users,
   },
+  {
+    name: "Access Control",
+    href: "/access",
+    icon: ShieldCheck,
+  },
 ];
 
 export function Sidebar({ className, onClose }) {
@@ -130,7 +135,7 @@ export function Sidebar({ className, onClose }) {
             onClick={logout}
             className="w-full justify-center gap-2 text-[calc((11/375)*100vw)] border-red-900/50 text-red-300 hover:bg-red-950/40 hover:text-red-200 h-[calc((34/375)*100vw)] rounded-[calc((8/375)*100vw)] cursor-pointer"
           >
-            <LogOut className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] stroke-[2.2]" />
+            <LogOut strokeWidth={2.4} className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)]" />
             Sign Out
           </Button>
         </div>

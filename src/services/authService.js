@@ -9,61 +9,23 @@ export const login = async (email, password) => {
   // Clear any existing stale token first
   removeAuthToken();
 
-  try {
-    const res = await fetch(`${BASE_URL}/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: cleanEmail, password }),
-    });
+  const res = await fetch(`${BASE_URL}/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email: cleanEmail, password }),
+  });
 
-    const data = await res.json().catch(() => ({}));
+  const data = await res.json().catch(() => ({}));
 
-    if (res.ok && data.token) {
-      setAuthToken(data.token);
-      if (typeof window !== "undefined" && data.employee) {
-        localStorage.setItem("current_user", JSON.stringify(data.employee));
-      }
-      return data;
+  if (res.ok && data.token) {
+    setAuthToken(data.token);
+    if (typeof window !== "undefined" && data.employee) {
+      localStorage.setItem("current_user", JSON.stringify(data.employee));
     }
-
-    // If backend returned error but credentials are the admin credentials
-    if (
-      cleanEmail.toLowerCase() === "admin@doctortracker.com" &&
-      password === "Password@123"
-    ) {
-      return directAdminLogin();
-    }
-
-    throw new Error(data.message || `Login failed (HTTP ${res.status})`);
-  } catch (err) {
-    if (
-      cleanEmail.toLowerCase() === "admin@doctortracker.com" &&
-      password === "Password@123"
-    ) {
-      return directAdminLogin();
-    }
-    throw err;
+    return data;
   }
-};
 
-export const directAdminLogin = () => {
-  const demoToken = "admin-authenticated-bearer-token-" + Date.now();
-  setAuthToken(demoToken);
-  const adminUser = {
-    _id: "admin-default-id",
-    name: "Clinical Admin",
-    email: "admin@doctortracker.com",
-    level: "superAdmin",
-  };
-  if (typeof window !== "undefined") {
-    localStorage.setItem("current_user", JSON.stringify(adminUser));
-  }
-  return {
-    success: true,
-    message: "Admin authentication verified",
-    token: demoToken,
-    employee: adminUser,
-  };
+  throw new Error(data.message || `Login failed (HTTP ${res.status})`);
 };
 
 export const logout = () => {

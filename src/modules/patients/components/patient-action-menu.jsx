@@ -32,7 +32,7 @@ export function PatientActionMenu({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [showStatusSubmenu, setShowStatusSubmenu] = useState(false);
-  const [menuCoords, setMenuCoords] = useState({ top: 0, left: 0, openUp: false });
+  const [menuCoords, setMenuCoords] = useState({ top: 0, bottom: undefined, right: 0, openUp: false });
   const [isClient, setIsClient] = useState(false);
 
   const buttonRef = useRef(null);
@@ -45,24 +45,23 @@ export function PatientActionMenu({
   const updateCoordinates = useCallback(() => {
     if (!buttonRef.current) return;
     const rect = buttonRef.current.getBoundingClientRect();
-    const menuWidth = 232;
-    const estimatedMenuHeight = 290;
 
     const spaceBelow = window.innerHeight - rect.bottom;
     const spaceAbove = rect.top;
-    const openUp = spaceBelow < estimatedMenuHeight && spaceAbove > spaceBelow;
 
-    const top = openUp
-      ? Math.max(10, rect.top - estimatedMenuHeight - 6)
-      : Math.min(window.innerHeight - estimatedMenuHeight - 10, rect.bottom + 6);
+    // Only flip upwards if there is insufficient space below (< 270px) AND more room above
+    const openUp = spaceBelow < 270 && spaceAbove > spaceBelow;
 
-    let left = rect.right - menuWidth;
-    if (left < 10) left = 10;
-    if (left + menuWidth > window.innerWidth - 10) {
-      left = window.innerWidth - menuWidth - 10;
-    }
+    // Right-align with the right edge of the 3-dot button
+    let right = window.innerWidth - rect.right;
+    if (right < 8) right = 8;
 
-    setMenuCoords({ top, left, openUp });
+    setMenuCoords({
+      top: openUp ? undefined : rect.bottom + 4,
+      bottom: openUp ? window.innerHeight - rect.top + 4 : undefined,
+      right,
+      openUp,
+    });
   }, []);
 
   const handleToggle = (e) => {
@@ -205,8 +204,9 @@ export function PatientActionMenu({
       ref={menuRef}
       style={{
         position: "fixed",
-        top: `${menuCoords.top}px`,
-        left: `${menuCoords.left}px`,
+        top: menuCoords.top !== undefined ? `${menuCoords.top}px` : undefined,
+        bottom: menuCoords.bottom !== undefined ? `${menuCoords.bottom}px` : undefined,
+        right: `${menuCoords.right}px`,
         zIndex: 99999,
       }}
       className={`w-[calc((220/375)*100vw)] lg:w-[calc((240/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] border border-[#384A5C] bg-[#18232F]/98 p-[calc((5/375)*100vw)] lg:p-[calc((6/1920)*100vw)] shadow-[0_16px_48px_rgba(0,0,0,0.7)] backdrop-blur-xl text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] select-none animate-in fade-in zoom-in-95 duration-150 ${

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CustomSelect } from "@/components/ui/custom-select";
@@ -33,10 +34,15 @@ export function PatientModal({ patient, isOpen, onClose, onSuccess }) {
   });
 
   const [doctorsList, setDoctorsList] = useState([]);
+  const [mounted, setMounted] = useState(false);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [apiError, setApiError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const loadDoctorsForSelect = async () => {
@@ -87,7 +93,7 @@ export function PatientModal({ patient, isOpen, onClose, onSuccess }) {
     setSuccessMessage(null);
   }, [patient, isOpen]);
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted) return null;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -159,9 +165,9 @@ export function PatientModal({ patient, isOpen, onClose, onSuccess }) {
     label: s,
   }));
 
-  return (
+  return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-[calc((12/375)*100vw)] lg:p-[calc((24/1920)*100vw)] bg-black/70 backdrop-blur-sm animate-in fade-in duration-150 select-none"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-[calc((12/375)*100vw)] lg:p-[calc((24/1920)*100vw)] bg-black/80 backdrop-blur-md animate-in fade-in duration-150 select-none"
       onClick={onClose}
     >
       <div
@@ -380,6 +386,7 @@ export function PatientModal({ patient, isOpen, onClose, onSuccess }) {
           </div>
         </form>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

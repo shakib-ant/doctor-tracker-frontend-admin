@@ -238,8 +238,11 @@ export function PatientsView() {
                   disabled={pagination.page <= 1 || isLoading}
                   className="h-[calc((30/375)*100vw)] lg:h-[calc((32/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] cursor-pointer"
                 >
-                  <ChevronLeft className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((19/1920)*100vw)] lg:h-[calc((19/1920)*100vw)] stroke-[2.6] mr-[calc((4/375)*100vw)] lg:mr-[calc((6/1920)*100vw)] shrink-0" />
-                  Previous
+                  <ChevronLeft
+                    strokeWidth={2.8}
+                    className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] shrink-0"
+                  />
+                  <span>Previous</span>
                 </Button>
 
                 <span className="px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] py-[calc((4/375)*100vw)] lg:py-[calc((4/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-semibold text-content-primary bg-surface-elevated rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] border border-line">
@@ -253,8 +256,11 @@ export function PatientsView() {
                   disabled={pagination.page >= pagination.totalPages || isLoading}
                   className="h-[calc((30/375)*100vw)] lg:h-[calc((32/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] cursor-pointer"
                 >
-                  Next
-                  <ChevronRight className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((19/1920)*100vw)] lg:h-[calc((19/1920)*100vw)] stroke-[2.6] ml-[calc((4/375)*100vw)] lg:ml-[calc((6/1920)*100vw)] shrink-0" />
+                  <span>Next</span>
+                  <ChevronRight
+                    strokeWidth={2.8}
+                    className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] shrink-0"
+                  />
                 </Button>
               </div>
             </div>

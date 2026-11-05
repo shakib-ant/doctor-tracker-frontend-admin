@@ -197,11 +197,35 @@ export function DoctorTable({
                   </div>
                 </TableCell>
 
-                {/* Status */}
-                <TableCell>
-                  <Badge variant={doc.isActive ? "active" : "archived"} className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] px-[calc((8/375)*100vw)] lg:px-[calc((10/1920)*100vw)] py-0.5">
-                    {doc.isActive ? "Active" : "Archived"}
-                  </Badge>
+                {/* Status with Direct One-Click Toggle */}
+                <TableCell className="whitespace-nowrap">
+                  {onToggleArchive ? (
+                    <button
+                      type="button"
+                      onClick={() => onToggleArchive(doc._id, !doc.isActive)}
+                      className="inline-flex items-center cursor-pointer group focus:outline-none"
+                      title={`Click to change status: currently ${doc.isActive ? "Active (click to Archive)" : "Archived (click to Activate)"}`}
+                    >
+                      <Badge
+                        variant={doc.isActive ? "active" : "archived"}
+                        className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] px-[calc((8/375)*100vw)] lg:px-[calc((10/1920)*100vw)] py-0.5 transition-all group-hover:scale-105 group-hover:ring-1 group-hover:ring-medical-blue/40 flex items-center gap-1.5 cursor-pointer"
+                      >
+                        <span
+                          className={`w-[calc((6/375)*100vw)] h-[calc((6/375)*100vw)] lg:w-[calc((6/1920)*100vw)] lg:h-[calc((6/1920)*100vw)] rounded-full shrink-0 ${
+                            doc.isActive ? "bg-emerald-400" : "bg-amber-400"
+                          }`}
+                        />
+                        <span>{doc.isActive ? "Active" : "Archived"}</span>
+                      </Badge>
+                    </button>
+                  ) : (
+                    <Badge
+                      variant={doc.isActive ? "active" : "archived"}
+                      className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] px-[calc((8/375)*100vw)] lg:px-[calc((10/1920)*100vw)] py-0.5"
+                    >
+                      {doc.isActive ? "Active" : "Archived"}
+                    </Badge>
+                  )}
                 </TableCell>
 
                 {/* Actions */}
@@ -232,17 +256,23 @@ export function DoctorTable({
                         variant="ghost"
                         size="sm"
                         onClick={() => onToggleArchive(doc._id, !doc.isActive)}
-                        className={`h-[calc((28/375)*100vw)] lg:h-[calc((30/1920)*100vw)] w-[calc((28/375)*100vw)] lg:w-[calc((30/1920)*100vw)] p-0 rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] transition-colors cursor-pointer flex items-center justify-center ${
+                        className={`h-[calc((28/375)*100vw)] lg:h-[calc((30/1920)*100vw)] px-[calc((8/375)*100vw)] lg:px-[calc((10/1920)*100vw)] text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] transition-colors cursor-pointer flex items-center justify-center ${
                           doc.isActive
-                            ? "text-content-muted hover:text-amber-400 hover:bg-amber-950/30"
-                            : "text-medical-sage hover:bg-medical-sage/20"
+                            ? "text-content-secondary hover:text-amber-400 hover:bg-amber-950/30"
+                            : "text-medical-sage hover:bg-medical-sage/20 font-semibold"
                         }`}
-                        title={doc.isActive ? "Archive specialist" : "Restore specialist"}
+                        title={doc.isActive ? "Archive specialist" : "Activate specialist"}
                       >
                         {doc.isActive ? (
-                          <Archive className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] stroke-[2.2]" />
+                          <>
+                            <Archive className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] stroke-[2.2] mr-1" />
+                            <span>Archive</span>
+                          </>
                         ) : (
-                          <ArchiveRestore className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] stroke-[2.2]" />
+                          <>
+                            <ArchiveRestore className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] stroke-[2.2] mr-1 text-medical-sage" />
+                            <span>Activate</span>
+                          </>
                         )}
                       </Button>
                     )}

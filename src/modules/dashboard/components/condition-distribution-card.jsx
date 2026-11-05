@@ -83,9 +83,9 @@ export function ConditionDistributionCard({
                       {item.count} ({pct}%)
                     </span>
                   </div>
-                  <div className="w-full bg-surface-elevated rounded-full h-[calc((7/375)*100vw)] lg:h-[calc((8/1920)*100vw)] overflow-hidden border border-line/60">
+                  <div className="w-full bg-[#111A24] rounded-full h-[calc((9/375)*100vw)] min-h-[8px] lg:h-[calc((12/1920)*100vw)] lg:min-h-[9px] overflow-hidden border border-[#2B3B4C]">
                     <div
-                      className="h-full rounded-full transition-all duration-[2000ms] cubic-bezier(0.22,1,0.36,1)"
+                      className="h-full rounded-full transition-all duration-700 ease-out shadow-xs"
                       style={{
                         width: `${Math.max(pct, 4)}%`,
                         backgroundColor: color,

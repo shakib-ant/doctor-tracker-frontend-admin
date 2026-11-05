@@ -1,15 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { Archive, ArchiveRestore, Loader2 } from "lucide-react";
 import { archivePatient } from "@/services/patientService";
 
 export function PatientDeleteDialog({ patient, isOpen, onClose, onSuccess }) {
+  const [mounted, setMounted] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState(null);
 
-  if (!isOpen || !patient) return null;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!isOpen || !patient || !mounted) return null;
 
   const isCurrentlyArchived = !!patient.isArchived;
 
@@ -28,9 +34,9 @@ export function PatientDeleteDialog({ patient, isOpen, onClose, onSuccess }) {
     }
   };
 
-  return (
+  return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-[calc((12/375)*100vw)] lg:p-[calc((24/1920)*100vw)] bg-black/70 backdrop-blur-sm animate-in fade-in duration-150 select-none"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-[calc((12/375)*100vw)] lg:p-[calc((24/1920)*100vw)] bg-black/80 backdrop-blur-md animate-in fade-in duration-150 select-none"
       onClick={onClose}
     >
       <div
@@ -117,6 +123,7 @@ export function PatientDeleteDialog({ patient, isOpen, onClose, onSuccess }) {
           </Button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

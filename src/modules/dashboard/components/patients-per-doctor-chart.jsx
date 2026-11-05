@@ -100,9 +100,9 @@ export function PatientsPerDoctorChart({ data = [], isLoading = false }) {
 
                     {/* Smooth Growing Progress Bar */}
                     <div className="mt-[calc((8/375)*100vw)] lg:mt-[calc((10/1920)*100vw)] pt-0.5">
-                      <div className="w-full bg-canvas/90 rounded-full h-[calc((8/375)*100vw)] lg:h-[calc((9/1920)*100vw)] overflow-hidden border border-line/60 p-0.5 shadow-inner">
+                      <div className="w-full bg-[#111A24] rounded-full h-[calc((10/375)*100vw)] min-h-[8px] lg:h-[calc((14/1920)*100vw)] lg:min-h-[10px] overflow-hidden border border-[#2B3B4C] shadow-inner">
                         <div
-                          className="h-full rounded-full bg-gradient-to-r from-[#244254] via-medical-blue to-[#3E6D87] shadow-xs"
+                          className="h-full rounded-full bg-gradient-to-r from-medical-blue via-[#7EABC5] to-[#A2CEE6] shadow-[0_0_12px_rgba(137,180,206,0.35)]"
                           style={{
                             width: isMounted ? `${Math.max(pct, 8)}%` : "0%",
                             transition: `width 2.6s cubic-bezier(0.16, 1, 0.3, 1) ${120 + index * 160}ms`,

@@ -8,6 +8,11 @@ import { logout } from "@/services/authService";
 export function Navbar({ onMenuClick, title = "Dashboard" }) {
   // Determine appropriate clinical icon based on section title
   const getHeaderIcon = () => {
+    if (title.includes("Access")) {
+      return (
+        <ShieldCheck className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] stroke-[2.2]" />
+      );
+    }
     if (title.includes("Doctor")) {
       return (
         <Stethoscope className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] stroke-[2.2]" />
@@ -24,6 +29,9 @@ export function Navbar({ onMenuClick, title = "Dashboard" }) {
   };
 
   const getHeaderSubtitle = () => {
+    if (title.includes("Access")) {
+      return "SuperAdmin Security & Permissions";
+    }
     if (title.includes("Doctor")) {
       return "Specialist Directory & Roster";
     }
@@ -102,7 +110,10 @@ export function Navbar({ onMenuClick, title = "Dashboard" }) {
           className="h-[calc((38/1920)*100vw)] w-[calc((38/1920)*100vw)] rounded-full border border-white/[0.1] bg-white/[0.04] backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] text-content-muted hover:text-red-300 hover:bg-red-950/40 hover:border-red-500/40 shrink-0 transition-all cursor-pointer flex items-center justify-center"
           title="Sign out of administration portal"
         >
-          <LogOut className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] stroke-[2.2]" />
+          <LogOut
+            strokeWidth={2.4}
+            className="w-[calc((20/375)*100vw)] h-[calc((20/375)*100vw)] lg:w-[calc((22/1920)*100vw)] lg:h-[calc((22/1920)*100vw)]"
+          />
         </Button>
       </div>
     </header>

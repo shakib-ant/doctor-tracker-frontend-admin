@@ -205,7 +205,7 @@ export function CustomDatePicker({
               className="p-1 rounded-md text-content-secondary hover:text-content-primary hover:bg-surface-hover cursor-pointer transition-colors"
               title="Previous month"
             >
-              <ChevronLeft className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((15/1920)*100vw)] lg:h-[calc((15/1920)*100vw)]" />
+              <ChevronLeft strokeWidth={2.6} className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)]" />
             </button>
             <span className="font-manrope text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)] font-bold text-content-primary tracking-wide">
               {MONTHS[viewMonth]} {viewYear}
@@ -216,7 +216,7 @@ export function CustomDatePicker({
               className="p-1 rounded-md text-content-secondary hover:text-content-primary hover:bg-surface-hover cursor-pointer transition-colors"
               title="Next month"
             >
-              <ChevronRight className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((15/1920)*100vw)] lg:h-[calc((15/1920)*100vw)]" />
+              <ChevronRight strokeWidth={2.6} className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)]" />
             </button>
           </div>
 
