@@ -83,7 +83,7 @@ export function CustomSelect({
   return (
     <div
       ref={containerRef}
-      className={cn("relative inline-block w-full select-none", className)}
+      className={cn("relative inline-block w-full select-none", isOpen ? "z-[300]" : "z-10", className)}
     >
       <button
         type="button"
@@ -111,7 +111,7 @@ export function CustomSelect({
       {isOpen && (
         <div
           className={cn(
-            "absolute z-[100] max-h-[calc((240/375)*100vw)] lg:max-h-[calc((280/1920)*100vw)] w-full overflow-y-auto no-scrollbar rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] border border-line bg-surface/98 p-[calc((5/375)*100vw)] lg:p-[calc((6/1920)*100vw)] shadow-2xl backdrop-blur-md animate-in fade-in-50 zoom-in-95 duration-100 flex flex-col gap-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
+            "absolute z-[999] max-h-[calc((240/375)*100vw)] lg:max-h-[calc((280/1920)*100vw)] w-full overflow-y-auto no-scrollbar rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] border border-line bg-surface/98 p-[calc((5/375)*100vw)] lg:p-[calc((6/1920)*100vw)] shadow-2xl backdrop-blur-md animate-in fade-in-50 zoom-in-95 duration-100 flex flex-col gap-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
             openUpward ? "bottom-full mb-1.5" : "top-full mt-1.5",
             menuClassName
           )}

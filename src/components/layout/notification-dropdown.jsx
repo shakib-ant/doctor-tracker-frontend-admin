@@ -135,9 +135,16 @@ export function NotificationDropdown() {
         )}
       </button>
 
-      {/* Floating Notification Panel with Fluid Calc Width & Tablet Protection */}
+      {/* Centered Notification Panel on Mobile & Tablet, Anchored Dropdown on Desktop */}
       {isOpen && (
-        <div className="absolute right-0 top-full mt-2 w-[calc((320/375)*100vw)] sm:w-96 md:w-[420px] lg:w-[calc((420/1920)*100vw)] bg-white rounded-2xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.22),0_10px_20px_-5px_rgba(0,0,0,0.1)] border border-slate-200 z-50 overflow-hidden animate-in fade-in-0 zoom-in-95 duration-200">
+        <>
+          {/* Mobile/Tablet Dim Backdrop for easy tap-to-dismiss */}
+          <div
+            className="fixed inset-0 bg-slate-900/25 backdrop-blur-2xs z-40 lg:hidden"
+            onClick={() => setIsOpen(false)}
+          />
+
+          <div className="fixed left-1/2 -translate-x-1/2 top-[calc((62/375)*100vw)] w-[calc(100vw-24px)] max-w-[360px] sm:fixed sm:left-1/2 sm:-translate-x-1/2 sm:top-[70px] sm:w-[410px] sm:max-w-[92vw] lg:absolute lg:inset-x-auto lg:left-auto lg:right-0 lg:top-full lg:translate-x-0 lg:mt-2 lg:w-[calc((420/1920)*100vw)] bg-white rounded-2xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.22),0_10px_20px_-5px_rgba(0,0,0,0.1)] border border-slate-200 z-50 overflow-hidden animate-in fade-in-0 zoom-in-95 duration-200">
           {/* Header */}
           <div className="flex items-center justify-between px-3.5 sm:px-4 py-2.5 sm:py-3 border-b border-slate-100 bg-slate-50/80">
             <div className="flex items-center gap-2">
@@ -281,6 +288,7 @@ export function NotificationDropdown() {
             </Link>
           </div>
         </div>
+        </>
       )}
     </div>
   );

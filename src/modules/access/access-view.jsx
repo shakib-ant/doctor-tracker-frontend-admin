@@ -462,8 +462,8 @@ export function AccessView() {
           </div>
         </CardHeader>
 
-        <CardContent className="p-0">
-          <div className="overflow-x-auto no-scrollbar">
+        <CardContent className="p-0 overflow-visible">
+          <div className="overflow-x-auto sm:overflow-visible no-scrollbar">
             <Table>
               <TableHeader className="bg-surface-elevated/40 border-b border-line/60">
                 <TableRow className="border-line/60 hover:bg-transparent">
@@ -558,8 +558,8 @@ export function AccessView() {
                           </span>
                         ) : (
                           <div className="flex items-center justify-end gap-[calc((6/375)*100vw)] lg:gap-[calc((8/1920)*100vw)]">
-                            {/* Role Switcher with Upward Dropdown (Fixes: "r tebile je dropdawnache oita nicher dike open howar jonno kete jacche") */}
-                            <div className="w-24 sm:w-28 text-left">
+                            {/* Role Switcher with Upward Dropdown and High Stacking */}
+                            <div className="w-24 sm:w-28 text-left relative z-20">
                               <CustomSelect
                                 value={user.level || "employee"}
                                 disabled={actionLoadingId === user._id}
