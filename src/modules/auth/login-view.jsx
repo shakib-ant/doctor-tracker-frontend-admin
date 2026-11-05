@@ -1,10 +1,19 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { LoginForm } from "./components/login-form";
 import { Stethoscope, ShieldCheck, HeartPulse } from "lucide-react";
+import { getAuthToken } from "@/utils/auth";
 
 export function LoginView() {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (getAuthToken()) {
+      router.replace("/");
+    }
+  }, [router]);
   return (
     <div className="min-h-screen w-full relative flex items-center justify-center p-[calc((14/375)*100vw)] sm:p-6 lg:p-[calc((30/1920)*100vw)] bg-canvas overflow-hidden">
       {/* Ambient background glows */}

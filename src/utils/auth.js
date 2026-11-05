@@ -5,7 +5,6 @@ export const getAuthToken = () => {
   return (
     localStorage.getItem(TOKEN_KEY) ||
     localStorage.getItem("token") ||
-    process.env.NEXT_PUBLIC_DEV_AUTH_TOKEN ||
     null
   );
 };
@@ -33,4 +32,3 @@ export const getAuthHeaders = () => {
   }
   return headers;
 };
-

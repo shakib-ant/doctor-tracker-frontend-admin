@@ -8,15 +8,12 @@ import { getAuthToken } from "@/utils/auth";
 
 export function DashboardLayout({ children, title }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [isAuthorized, setIsAuthorized] = useState(() => {
-    if (typeof window === "undefined") return true;
-    return !!getAuthToken();
-  });
+  const [isAuthorized, setIsAuthorized] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
     const token = getAuthToken();
-    if (!token && typeof window !== "undefined") {
+    if (!token) {
       setIsAuthorized(false);
       router.replace("/login");
     } else {
