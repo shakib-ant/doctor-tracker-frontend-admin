@@ -27,34 +27,34 @@ export function PatientDetailModal({ patient, isOpen, onClose, onEdit, onArchive
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-150 select-none"
+      className="fixed inset-0 z-50 flex items-center justify-center p-[calc((12/375)*100vw)] lg:p-[calc((24/1920)*100vw)] bg-black/75 backdrop-blur-sm animate-in fade-in duration-150 select-none"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-2xl bg-surface border border-line rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-150"
+        className="relative w-full max-w-[calc((350/375)*100vw)] lg:max-w-[calc((650/1920)*100vw)] bg-surface border border-line rounded-[calc((14/375)*100vw)] lg:rounded-[calc((16/1920)*100vw)] shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-150"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-line bg-surface-elevated/40 shrink-0">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-medical-blue/20 text-medical-blue border border-medical-blue/30 shrink-0 font-manrope font-bold text-sm">
-              <User className="w-5 h-5" />
+        <div className="flex items-center justify-between px-[calc((16/375)*100vw)] lg:px-[calc((24/1920)*100vw)] py-[calc((14/375)*100vw)] lg:py-[calc((16/1920)*100vw)] border-b border-line bg-surface-elevated/40 shrink-0">
+          <div className="flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)]">
+            <div className="flex items-center justify-center w-[calc((36/375)*100vw)] h-[calc((36/375)*100vw)] lg:w-[calc((40/1920)*100vw)] lg:h-[calc((40/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-medical-blue/20 text-medical-blue border border-medical-blue/30 shrink-0 font-manrope font-bold text-sm">
+              <User className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)]" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-manrope text-base sm:text-lg font-bold text-content-primary">
+                <h3 className="font-manrope text-[calc((15/375)*100vw)] lg:text-[calc((18/1920)*100vw)] font-bold text-content-primary">
                   {patient.name}
                 </h3>
-                <Badge variant={getStatusBadgeVariant(patient.status)}>
+                <Badge variant={getStatusBadgeVariant(patient.status)} className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)]">
                   {patient.status}
                 </Badge>
                 {patient.isArchived && (
-                  <Badge variant="warning" className="text-[10px]">
+                  <Badge variant="warning" className="text-[calc((9/375)*100vw)] lg:text-[calc((10/1920)*100vw)]">
                     Archived
                   </Badge>
                 )}
               </div>
-              <p className="text-xs text-content-secondary mt-0.5">
+              <p className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-secondary mt-0.5">
                 Patient ID: <span className="font-mono text-content-primary">{patient._id}</span>
               </p>
             </div>
@@ -63,9 +63,9 @@ export function PatientDetailModal({ patient, isOpen, onClose, onEdit, onArchive
             variant="ghost"
             size="icon"
             onClick={onClose}
-            className="text-content-secondary hover:text-content-primary shrink-0"
+            className="text-content-secondary hover:text-content-primary shrink-0 h-[calc((32/375)*100vw)] w-[calc((32/375)*100vw)] rounded-lg cursor-pointer"
           >
-            <X className="w-5 h-5" />
+            <X className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)]" />
           </Button>
         </div>
 
@@ -182,15 +182,15 @@ export function PatientDetailModal({ patient, isOpen, onClose, onEdit, onArchive
         </div>
 
         {/* Footer Actions */}
-        <div className="px-5 sm:px-6 py-3.5 border-t border-line bg-surface-elevated/40 flex flex-wrap items-center justify-between gap-2 shrink-0">
-          <div className="flex items-center gap-2">
+        <div className="px-[calc((16/375)*100vw)] lg:px-[calc((24/1920)*100vw)] py-[calc((12/375)*100vw)] lg:py-[calc((14/1920)*100vw)] border-t border-line bg-surface-elevated/40 flex flex-wrap items-center justify-between gap-[calc((8/375)*100vw)] shrink-0">
+          <div className="flex items-center gap-[calc((8/375)*100vw)]">
             <Button
               variant="outline"
               size="sm"
               onClick={handlePrint}
-              className="text-xs gap-1.5"
+              className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] h-[calc((32/375)*100vw)] lg:h-[calc((34/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] gap-1.5 cursor-pointer rounded-[calc((6/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)]"
             >
-              <Printer className="w-3.5 h-3.5" />
+              <Printer className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)]" />
               Print Chart
             </Button>
             {onArchive && (
@@ -201,17 +201,17 @@ export function PatientDetailModal({ patient, isOpen, onClose, onEdit, onArchive
                   onArchive(patient);
                   onClose();
                 }}
-                className={`text-xs gap-1.5 ${
+                className={`text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] h-[calc((32/375)*100vw)] lg:h-[calc((34/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] gap-1.5 rounded-[calc((6/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] cursor-pointer ${
                   patient.isArchived ? "text-medical-sage" : "text-amber-400 border-amber-900/50"
                 }`}
               >
-                <Archive className="w-3.5 h-3.5" />
+                <Archive className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)]" />
                 {patient.isArchived ? "Restore Patient" : "Archive Patient"}
               </Button>
             )}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-[calc((8/375)*100vw)]">
             {onEdit && (
               <Button
                 variant="default"
@@ -220,12 +220,17 @@ export function PatientDetailModal({ patient, isOpen, onClose, onEdit, onArchive
                   onClose();
                   onEdit(patient);
                 }}
-                className="text-xs"
+                className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] h-[calc((32/375)*100vw)] lg:h-[calc((34/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] cursor-pointer"
               >
                 Edit Record
               </Button>
             )}
-            <Button variant="secondary" size="sm" onClick={onClose} className="text-xs">
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={onClose}
+              className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] h-[calc((32/375)*100vw)] lg:h-[calc((34/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] cursor-pointer"
+            >
               Close
             </Button>
           </div>

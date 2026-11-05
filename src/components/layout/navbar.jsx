@@ -41,26 +41,36 @@ export function Navbar({ onMenuClick, title = "Dashboard" }) {
           variant="ghost"
           size="icon"
           onClick={onMenuClick}
-          className="lg:hidden text-content-secondary hover:text-content-primary -ml-1 h-[calc((34/375)*100vw)] w-[calc((34/375)*100vw)] shrink-0"
+          className="lg:hidden text-content-secondary hover:text-content-primary -ml-1 h-[calc((40/375)*100vw)] w-[calc((40/375)*100vw)] rounded-[calc((8/375)*100vw)] shrink-0 cursor-pointer flex items-center justify-center"
           aria-label="Open navigation menu"
         >
-          <Menu className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)]" />
+          <Menu className="w-[calc((24/375)*100vw)] h-[calc((24/375)*100vw)] stroke-[2.3]" />
         </Button>
 
-        {/* Section title aligned with exact calc proportions */}
-        <div className="flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] min-w-0">
-          <div className="hidden lg:flex items-center justify-center w-[calc((36/1920)*100vw)] h-[calc((36/1920)*100vw)] rounded-[calc((10/1920)*100vw)] bg-medical-blue/15 border border-medical-blue/30 text-medical-blue shrink-0">
+        {/* Section title on desktop */}
+        <div className="hidden lg:flex items-center gap-[calc((12/1920)*100vw)] min-w-0">
+          <div className="flex items-center justify-center w-[calc((38/1920)*100vw)] h-[calc((38/1920)*100vw)] rounded-[calc((10/1920)*100vw)] bg-medical-blue/15 border border-medical-blue/30 text-medical-blue shrink-0 shadow-[0_0_12px_rgba(137,180,206,0.15)]">
             {getHeaderIcon()}
           </div>
           <div className="flex flex-col truncate">
-            <h1 className="font-manrope text-[calc((14/375)*100vw)] lg:text-[calc((16/1920)*100vw)] font-bold tracking-tight text-content-primary leading-tight truncate">
+            <h1 className="font-manrope text-[calc((16/1920)*100vw)] font-bold tracking-tight text-content-primary leading-tight truncate">
               {title}
             </h1>
-            <span className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] font-medium text-content-secondary tracking-wider uppercase leading-tight mt-0.5 truncate">
+            <span className="text-[calc((11/1920)*100vw)] font-medium text-content-secondary tracking-wider uppercase leading-tight mt-0.5 truncate">
               {getHeaderSubtitle()}
             </span>
           </div>
         </div>
+      </div>
+
+      {/* On mobile: Text placed on the right side */}
+      <div className="flex flex-col text-right items-end truncate min-w-0 lg:hidden">
+        <h1 className="font-manrope text-[calc((14/375)*100vw)] font-bold tracking-tight text-content-primary leading-tight truncate">
+          {title}
+        </h1>
+        <span className="text-[calc((10/375)*100vw)] font-medium text-content-secondary tracking-wider uppercase leading-tight mt-0.5 truncate">
+          {getHeaderSubtitle()}
+        </span>
       </div>
 
       {/* User Status Glass Pill & Matching Logout Button */}

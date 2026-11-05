@@ -355,14 +355,14 @@ export function PatientActionMenu({
         variant="ghost"
         size="sm"
         onClick={handleToggle}
-        className={`h-7 w-7 p-0 rounded-lg transition-colors ${
+        className={`h-[calc((28/375)*100vw)] w-[calc((28/375)*100vw)] lg:h-[calc((30/1920)*100vw)] lg:w-[calc((30/1920)*100vw)] p-0 rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] transition-colors cursor-pointer flex items-center justify-center ${
           isOpen
             ? "bg-surface-elevated text-content-primary ring-1 ring-medical-blue"
             : "text-content-secondary hover:text-content-primary hover:bg-surface-elevated/80"
         }`}
         title="More clinical actions"
       >
-        <MoreHorizontal className="w-4 h-4" />
+        <MoreHorizontal className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)]" />
       </Button>
 
       {isClient && typeof document !== "undefined" && createPortal(menuContent, document.body)}

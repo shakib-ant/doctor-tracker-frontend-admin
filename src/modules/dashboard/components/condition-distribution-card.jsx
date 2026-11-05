@@ -42,7 +42,7 @@ export function ConditionDistributionCard({
         <div className="space-y-1">
           <div className="flex items-center gap-[calc((8/375)*100vw)] lg:gap-[calc((10/1920)*100vw)]">
             <div className="p-1.5 rounded-md bg-medical-blue/15 text-medical-blue shrink-0">
-              <Activity className="w-4 h-4" />
+              <Activity className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)]" />
             </div>
             <CardTitle className="text-[calc((16/375)*100vw)] lg:text-[calc((20/1920)*100vw)]">Clinical Condition Distribution</CardTitle>
           </div>

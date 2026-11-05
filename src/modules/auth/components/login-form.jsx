@@ -59,20 +59,20 @@ export function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-[clamp(280px,calc(100vw-2rem),440px)] mx-auto bg-surface border border-line rounded-2xl shadow-2xl overflow-hidden">
+    <div className="w-full bg-surface border border-line rounded-[calc((14/375)*100vw)] lg:rounded-[calc((18/1920)*100vw)] shadow-2xl overflow-hidden select-none">
       {/* Decorative Gradient Bar */}
-      <div className="h-1.5 w-full bg-gradient-to-r from-medical-blue via-medical-sage to-medical-blue" />
+      <div className="h-[calc((4/375)*100vw)] lg:h-[calc((5/1920)*100vw)] w-full bg-gradient-to-r from-medical-blue via-medical-sage to-medical-blue" />
 
-      <div className="p-[clamp(1.25rem,calc(1rem+1.2vw),2.25rem)] space-y-6">
+      <div className="p-[calc((18/375)*100vw)] lg:p-[calc((28/1920)*100vw)] space-y-[calc((14/375)*100vw)] lg:space-y-[calc((18/1920)*100vw)]">
         {/* Header */}
-        <div className="text-center space-y-2">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-medical-blue/15 border border-medical-blue/30 text-medical-blue mb-1 shadow-xs">
-            <Activity className="w-6 h-6 stroke-[2.5]" />
+        <div className="text-center space-y-[calc((6/375)*100vw)] lg:space-y-[calc((8/1920)*100vw)]">
+          <div className="inline-flex items-center justify-center w-[calc((42/375)*100vw)] h-[calc((42/375)*100vw)] lg:w-[calc((48/1920)*100vw)] lg:h-[calc((48/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-medical-blue/15 border border-medical-blue/30 text-medical-blue mb-1 shadow-xs">
+            <Activity className="w-[calc((20/375)*100vw)] h-[calc((20/375)*100vw)] lg:w-[calc((24/1920)*100vw)] lg:h-[calc((24/1920)*100vw)] stroke-[2.5]" />
           </div>
-          <h1 className="font-manrope text-[clamp(1.35rem,calc(1.15rem+0.8vw),1.85rem)] font-extrabold text-content-primary tracking-tight">
+          <h1 className="font-manrope text-[calc((18/375)*100vw)] lg:text-[calc((24/1920)*100vw)] font-extrabold text-content-primary tracking-tight">
             Administrator Sign In
           </h1>
-          <p className="text-[clamp(0.725rem,calc(0.7rem+0.15vw),0.8rem)] text-content-secondary leading-relaxed max-w-xs mx-auto">
+          <p className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] text-content-secondary leading-relaxed max-w-xs mx-auto">
             Access hospital operations, clinical rosters, and patient records.
           </p>
         </div>
@@ -84,37 +84,37 @@ export function LoginForm() {
           size="default"
           onClick={handleQuickLogin}
           disabled={isSubmitting}
-          className="w-full h-10 border-medical-sage/40 hover:border-medical-sage text-content-primary bg-surface-elevated/70 hover:bg-surface-elevated text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-xs"
+          className="w-full h-[calc((38/375)*100vw)] lg:h-[calc((42/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] border-medical-sage/40 hover:border-medical-sage text-content-primary bg-surface-elevated/70 hover:bg-surface-elevated text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-semibold flex items-center justify-center gap-2 transition-all shadow-xs cursor-pointer"
         >
-          <Zap className="w-4 h-4 text-medical-sage fill-medical-sage/20 shrink-0" />
+          <Zap className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] text-medical-sage fill-medical-sage/20 shrink-0" />
           <span>Instant 1-Click Admin Access</span>
         </Button>
 
         {/* Divider */}
         <div className="relative flex items-center justify-center">
           <div className="border-t border-line/80 w-full" />
-          <span className="bg-surface px-3 text-[11px] font-medium text-content-muted uppercase tracking-wider relative">
+          <span className="bg-surface px-3 text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] font-medium text-content-muted uppercase tracking-wider relative">
             Or credentials
           </span>
         </div>
 
         {/* Error banner */}
         {apiError && (
-          <div className="p-3.5 rounded-lg bg-red-950/40 border border-red-800 text-red-200 text-xs flex items-center gap-2.5 shadow-xs">
-            <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+          <div className="p-3 rounded-lg bg-red-950/40 border border-red-800 text-red-200 text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] flex items-center gap-2.5 shadow-xs">
+            <AlertCircle className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] text-red-400 shrink-0" />
             <span className="leading-tight">{apiError}</span>
           </div>
         )}
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-[calc((12/375)*100vw)] lg:space-y-[calc((14/1920)*100vw)]">
           {/* Email */}
-          <div className="space-y-1.5">
-            <label className="block text-xs font-semibold text-content-secondary">
+          <div className="space-y-1">
+            <label className="block text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-semibold text-content-secondary">
               Email Address
             </label>
             <div className="relative">
-              <Mail className="absolute left-3 top-2.5 h-4 w-4 text-content-disabled" />
+              <Mail className="absolute left-[calc((10/375)*100vw)] lg:left-[calc((12/1920)*100vw)] top-1/2 -translate-y-1/2 w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] text-content-disabled" />
               <Input
                 type="email"
                 placeholder="admin@doctortracker.com"
@@ -123,39 +123,39 @@ export function LoginForm() {
                   setEmail(e.target.value);
                   if (errors.email) setErrors((prev) => ({ ...prev, email: null }));
                 }}
-                className={`pl-9 pr-3 text-xs h-9 ${errors.email ? "border-red-500" : ""}`}
+                className={`pl-[calc((30/375)*100vw)] lg:pl-[calc((36/1920)*100vw)] pr-3 text-[calc((11/375)*100vw)] lg:text-[calc((13/1920)*100vw)] h-[calc((36/375)*100vw)] lg:h-[calc((40/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] ${errors.email ? "border-red-500" : ""}`}
                 autoComplete="email"
               />
             </div>
             {errors.email && (
-              <p className="text-[11px] text-red-400">{errors.email}</p>
+              <p className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-red-400">{errors.email}</p>
             )}
           </div>
 
           {/* Password */}
-          <div className="space-y-1.5">
+          <div className="space-y-1">
             <div className="flex items-center justify-between">
-              <label className="block text-xs font-semibold text-content-secondary">
+              <label className="block text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-semibold text-content-secondary">
                 Password
               </label>
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="text-[11px] text-medical-blue hover:underline inline-flex items-center gap-1 font-medium"
+                className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-medical-blue hover:underline inline-flex items-center gap-1 font-medium cursor-pointer"
               >
                 {showPassword ? (
                   <>
-                    <EyeOff className="w-3 h-3" /> Hide
+                    <EyeOff className="w-[calc((11/375)*100vw)] h-[calc((11/375)*100vw)] lg:w-[calc((13/1920)*100vw)] lg:h-[calc((13/1920)*100vw)]" /> Hide
                   </>
                 ) : (
                   <>
-                    <Eye className="w-3 h-3" /> Show
+                    <Eye className="w-[calc((11/375)*100vw)] h-[calc((11/375)*100vw)] lg:w-[calc((13/1920)*100vw)] lg:h-[calc((13/1920)*100vw)]" /> Show
                   </>
                 )}
               </button>
             </div>
             <div className="relative">
-              <Lock className="absolute left-3 top-2.5 h-4 w-4 text-content-disabled" />
+              <Lock className="absolute left-[calc((10/375)*100vw)] lg:left-[calc((12/1920)*100vw)] top-1/2 -translate-y-1/2 w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] text-content-disabled" />
               <Input
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
@@ -164,12 +164,12 @@ export function LoginForm() {
                   setPassword(e.target.value);
                   if (errors.password) setErrors((prev) => ({ ...prev, password: null }));
                 }}
-                className={`pl-9 pr-9 text-xs h-9 ${errors.password ? "border-red-500" : ""}`}
+                className={`pl-[calc((30/375)*100vw)] lg:pl-[calc((36/1920)*100vw)] pr-9 text-[calc((11/375)*100vw)] lg:text-[calc((13/1920)*100vw)] h-[calc((36/375)*100vw)] lg:h-[calc((40/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] ${errors.password ? "border-red-500" : ""}`}
                 autoComplete="current-password"
               />
             </div>
             {errors.password && (
-              <p className="text-[11px] text-red-400">{errors.password}</p>
+              <p className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-red-400">{errors.password}</p>
             )}
           </div>
 
@@ -179,24 +179,24 @@ export function LoginForm() {
             variant="default"
             size="default"
             disabled={isSubmitting}
-            className="w-full text-xs font-bold h-10 mt-3 shadow-md"
+            className="w-full text-[calc((11/375)*100vw)] lg:text-[calc((13/1920)*100vw)] font-bold h-[calc((40/375)*100vw)] lg:h-[calc((44/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] mt-2 shadow-md cursor-pointer"
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                <Loader2 className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] animate-spin mr-2" />
                 Signing In...
               </>
             ) : (
               <>
                 Sign In with Credentials
-                <ArrowRight className="w-4 h-4 ml-1.5" />
+                <ArrowRight className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] ml-1.5" />
               </>
             )}
           </Button>
         </form>
 
         {/* Credentials hint */}
-        <div className="p-3 rounded-lg bg-surface-elevated/50 border border-line/70 text-[11px] text-content-muted space-y-0.5 font-mono text-center">
+        <div className="p-[calc((8/375)*100vw)] lg:p-[calc((10/1920)*100vw)] rounded-lg bg-surface-elevated/50 border border-line/70 text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-muted space-y-0.5 font-mono text-center">
           <div>admin@doctortracker.com &bull; Password@123</div>
         </div>
       </div>

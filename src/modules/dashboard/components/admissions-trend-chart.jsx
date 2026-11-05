@@ -73,7 +73,7 @@ export function AdmissionsTrendChart({ data = [], isLoading = false }) {
           <div className="space-y-1">
             <div className="flex items-center gap-[calc((8/375)*100vw)] lg:gap-[calc((10/1920)*100vw)]">
               <div className="p-1.5 rounded-md bg-medical-sage/15 text-medical-sage shrink-0">
-                <Calendar className="w-4 h-4" />
+                <Calendar className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)]" />
               </div>
               <CardTitle className="text-[calc((16/375)*100vw)] lg:text-[calc((20/1920)*100vw)]">Date-Based Patient Activity</CardTitle>
             </div>
@@ -238,7 +238,7 @@ export function AdmissionsTrendChart({ data = [], isLoading = false }) {
                 <div className="p-[calc((10/375)*100vw)] lg:p-[calc((12/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-surface-elevated/40 border border-line/50 flex items-center justify-between hover:border-medical-sage/40 transition-colors">
                   <div className="flex items-center gap-2.5">
                     <div className="w-[calc((28/375)*100vw)] h-[calc((28/375)*100vw)] lg:w-[calc((32/1920)*100vw)] lg:h-[calc((32/1920)*100vw)] rounded-lg bg-medical-sage/15 border border-medical-sage/30 flex items-center justify-center text-medical-sage shrink-0">
-                      <ArrowUpRight className="w-4 h-4" />
+                      <ArrowUpRight className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)]" />
                     </div>
                     <div className="min-w-0">
                       <span className="text-[calc((9/375)*100vw)] lg:text-[calc((10/1920)*100vw)] font-semibold text-content-muted uppercase tracking-wider block">
@@ -258,7 +258,7 @@ export function AdmissionsTrendChart({ data = [], isLoading = false }) {
                 <div className="p-[calc((10/375)*100vw)] lg:p-[calc((12/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-surface-elevated/40 border border-line/50 flex items-center justify-between hover:border-medical-blue/40 transition-colors">
                   <div className="flex items-center gap-2.5">
                     <div className="w-[calc((28/375)*100vw)] h-[calc((28/375)*100vw)] lg:w-[calc((32/1920)*100vw)] lg:h-[calc((32/1920)*100vw)] rounded-lg bg-medical-blue/15 border border-medical-blue/30 flex items-center justify-center text-medical-blue shrink-0">
-                      <Activity className="w-4 h-4" />
+                      <Activity className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)]" />
                     </div>
                     <div className="min-w-0">
                       <span className="text-[calc((9/375)*100vw)] lg:text-[calc((10/1920)*100vw)] font-semibold text-content-muted uppercase tracking-wider block">
@@ -278,7 +278,7 @@ export function AdmissionsTrendChart({ data = [], isLoading = false }) {
                 <div className="p-[calc((10/375)*100vw)] lg:p-[calc((12/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-surface-elevated/40 border border-line/50 flex items-center justify-between hover:border-emerald-500/40 transition-colors">
                   <div className="flex items-center gap-2.5">
                     <div className="w-[calc((28/375)*100vw)] h-[calc((28/375)*100vw)] lg:w-[calc((32/1920)*100vw)] lg:h-[calc((32/1920)*100vw)] rounded-lg bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
-                      <TrendingUp className="w-4 h-4" />
+                      <TrendingUp className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)]" />
                     </div>
                     <div className="min-w-0">
                       <span className="text-[calc((9/375)*100vw)] lg:text-[calc((10/1920)*100vw)] font-semibold text-content-muted uppercase tracking-wider block">
@@ -304,7 +304,7 @@ export function AdmissionsTrendChart({ data = [], isLoading = false }) {
               {/* Recent Daily Intake Log Stream */}
               <div className="p-2.5 rounded-xl bg-surface-elevated/20 border border-line/40 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
                 <div className="flex items-center gap-2 text-content-secondary">
-                  <Clock className="w-3.5 h-3.5 text-medical-sage shrink-0" />
+                  <Clock className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] text-medical-sage shrink-0" />
                   <span className="font-semibold text-content-primary text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)]">
                     Recent Inflow Stream:
                   </span>

@@ -110,9 +110,10 @@ export function DoctorsView() {
             size="sm"
             onClick={() => loadDoctors(pagination.page)}
             disabled={isLoading}
+            className="h-[calc((34/375)*100vw)] lg:h-[calc((36/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] cursor-pointer"
           >
             <RefreshCw
-              className={`w-3.5 h-3.5 mr-1.5 ${isLoading ? "animate-spin" : ""}`}
+              className={`w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] mr-[calc((6/375)*100vw)] lg:mr-[calc((6/1920)*100vw)] ${isLoading ? "animate-spin" : ""}`}
             />
             Refresh
           </Button>
@@ -120,8 +121,9 @@ export function DoctorsView() {
             variant="default"
             size="sm"
             onClick={() => setIsAddModalOpen(true)}
+            className="h-[calc((34/375)*100vw)] lg:h-[calc((36/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] cursor-pointer"
           >
-            <Plus className="w-4 h-4 mr-1.5" />
+            <Plus className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] mr-[calc((6/375)*100vw)] lg:mr-[calc((6/1920)*100vw)]" />
             Add New Doctor
           </Button>
         </div>
@@ -205,18 +207,19 @@ export function DoctorsView() {
                 doctors
               </div>
 
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-[calc((6/375)*100vw)] lg:gap-[calc((8/1920)*100vw)]">
                 <Button
                   variant="secondary"
                   size="sm"
                   onClick={() => handlePageChange(pagination.page - 1)}
                   disabled={pagination.page <= 1 || isLoading}
+                  className="h-[calc((30/375)*100vw)] lg:h-[calc((32/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] cursor-pointer"
                 >
-                  <ChevronLeft className="w-3.5 h-3.5 mr-1" />
+                  <ChevronLeft className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] mr-[calc((4/375)*100vw)] lg:mr-[calc((4/1920)*100vw)]" />
                   Previous
                 </Button>
 
-                <span className="px-3 py-1 text-xs font-semibold text-content-primary bg-surface-elevated rounded-md border border-line">
+                <span className="px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] py-[calc((4/375)*100vw)] lg:py-[calc((4/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-semibold text-content-primary bg-surface-elevated rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] border border-line">
                   {pagination.page} / {pagination.totalPages}
                 </span>
 
@@ -225,9 +228,10 @@ export function DoctorsView() {
                   size="sm"
                   onClick={() => handlePageChange(pagination.page + 1)}
                   disabled={pagination.page >= pagination.totalPages || isLoading}
+                  className="h-[calc((30/375)*100vw)] lg:h-[calc((32/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] cursor-pointer"
                 >
                   Next
-                  <ChevronRight className="w-3.5 h-3.5 ml-1" />
+                  <ChevronRight className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] ml-[calc((4/375)*100vw)] lg:mr-[calc((4/1920)*100vw)]" />
                 </Button>
               </div>
             </div>

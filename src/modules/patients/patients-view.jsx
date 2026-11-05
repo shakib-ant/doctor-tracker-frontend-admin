@@ -112,26 +112,27 @@ export function PatientsView() {
     archivedFilter !== "active";
 
   return (
-    <div className="space-y-4 sm:space-y-6">
+    <div className="space-y-[calc((16/375)*100vw)] lg:space-y-[calc((24/1920)*100vw)]">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-line/60">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-[calc((12/375)*100vw)] lg:gap-[calc((16/1920)*100vw)] pb-2 border-b border-line/60">
         <div>
-          <h2 className="font-manrope text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-content-primary">
+          <h2 className="font-manrope text-[calc((20/375)*100vw)] lg:text-[calc((28/1920)*100vw)] font-extrabold tracking-tight text-content-primary">
             Patient Management
           </h2>
-          <p className="text-xs sm:text-sm text-content-secondary mt-1 leading-relaxed">
+          <p className="text-[calc((12/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary mt-1 leading-relaxed">
             Track patient admissions, medical diagnoses, and assigned clinical specialists across hospital wards.
           </p>
         </div>
-        <div className="flex items-center gap-2.5 shrink-0">
+        <div className="flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] shrink-0">
           <Button
             variant="secondary"
             size="sm"
             onClick={() => loadPatients(pagination.page)}
             disabled={isLoading}
+            className="h-[calc((34/375)*100vw)] lg:h-[calc((36/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] cursor-pointer"
           >
             <RefreshCw
-              className={`w-3.5 h-3.5 mr-1.5 ${isLoading ? "animate-spin" : ""}`}
+              className={`w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] mr-[calc((6/375)*100vw)] lg:mr-[calc((6/1920)*100vw)] ${isLoading ? "animate-spin" : ""}`}
             />
             Refresh
           </Button>
@@ -139,8 +140,9 @@ export function PatientsView() {
             variant="default"
             size="sm"
             onClick={() => setModalState({ isOpen: true, patient: null })}
+            className="h-[calc((34/375)*100vw)] lg:h-[calc((36/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] cursor-pointer"
           >
-            <Plus className="w-4 h-4 mr-1.5" />
+            <Plus className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] mr-[calc((6/375)*100vw)] lg:mr-[calc((6/1920)*100vw)]" />
             Register Patient
           </Button>
         </div>
@@ -149,17 +151,17 @@ export function PatientsView() {
       {/* Main Container Card */}
       <Card className="overflow-hidden">
         {/* Title Header */}
-        <CardHeader className="p-4 sm:p-5 lg:p-6 pb-3 border-b border-line/60">
+        <CardHeader className="p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pb-4 border-b border-line/60">
           <div className="space-y-1">
-            <CardTitle className="text-base sm:text-lg">Registered Patient Records</CardTitle>
-            <CardDescription className="text-xs sm:text-sm">
+            <CardTitle className="text-[calc((16/375)*100vw)] lg:text-[calc((18/1920)*100vw)]">Registered Patient Records</CardTitle>
+            <CardDescription className="text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)]">
               Search by patient name or condition, filter by date range, and update clinical status.
             </CardDescription>
           </div>
         </CardHeader>
 
         {/* Filter Toolbar Section */}
-        <div className="p-4 sm:p-5 lg:p-6 py-3.5 border-b border-line/60 bg-surface-elevated/20">
+        <div className="p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] py-3.5 border-b border-line/60 bg-surface-elevated/20">
           <PatientFilterBar
             searchQuery={searchQuery}
             onSearchChange={setSearchQuery}
@@ -179,7 +181,7 @@ export function PatientsView() {
         </div>
 
         {/* Content Section */}
-        <CardContent className="p-4 sm:p-5 lg:p-6 pt-0">
+        <CardContent className="p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pt-0">
           {error && (
             <div className="my-4 p-4 rounded-xl bg-red-950/40 border border-red-800 text-red-200 text-xs flex items-center justify-between shadow-xs">
               <div className="flex items-center gap-2">
@@ -228,18 +230,19 @@ export function PatientsView() {
                 patients
               </div>
 
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-[calc((6/375)*100vw)] lg:gap-[calc((8/1920)*100vw)]">
                 <Button
                   variant="secondary"
                   size="sm"
                   onClick={() => handlePageChange(pagination.page - 1)}
                   disabled={pagination.page <= 1 || isLoading}
+                  className="h-[calc((30/375)*100vw)] lg:h-[calc((32/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] cursor-pointer"
                 >
-                  <ChevronLeft className="w-3.5 h-3.5 mr-1" />
+                  <ChevronLeft className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] mr-[calc((4/375)*100vw)] lg:mr-[calc((4/1920)*100vw)]" />
                   Previous
                 </Button>
 
-                <span className="px-3 py-1 text-xs font-semibold text-content-primary bg-surface-elevated rounded-md border border-line">
+                <span className="px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] py-[calc((4/375)*100vw)] lg:py-[calc((4/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-semibold text-content-primary bg-surface-elevated rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] border border-line">
                   {pagination.page} / {pagination.totalPages}
                 </span>
 
@@ -248,9 +251,10 @@ export function PatientsView() {
                   size="sm"
                   onClick={() => handlePageChange(pagination.page + 1)}
                   disabled={pagination.page >= pagination.totalPages || isLoading}
+                  className="h-[calc((30/375)*100vw)] lg:h-[calc((32/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] cursor-pointer"
                 >
                   Next
-                  <ChevronRight className="w-3.5 h-3.5 ml-1" />
+                  <ChevronRight className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] ml-[calc((4/375)*100vw)] lg:mr-[calc((4/1920)*100vw)]" />
                 </Button>
               </div>
             </div>

@@ -58,8 +58,8 @@ export function CustomSelect({
 
   const heightClass =
     size === "sm"
-      ? "h-8 text-xs"
-      : "h-10 text-xs sm:text-sm";
+      ? "h-[calc((28/375)*100vw)] lg:h-[calc((32/1920)*100vw)] text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] px-[calc((8/375)*100vw)] lg:px-[calc((10/1920)*100vw)]"
+      : "h-[calc((36/375)*100vw)] lg:h-[calc((40/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((13/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)]";
 
   return (
     <div
@@ -71,7 +71,7 @@ export function CustomSelect({
         disabled={disabled}
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          "w-full flex items-center justify-between rounded-lg border border-line bg-surface px-3 text-content-primary shadow-xs transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-medical-blue hover:border-[#384A5C]",
+          "w-full flex items-center justify-between rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] border border-line bg-surface text-content-primary shadow-xs transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-medical-blue hover:border-[#384A5C] cursor-pointer",
           heightClass,
           disabled && "opacity-50 cursor-not-allowed",
           isOpen && "border-medical-blue ring-1 ring-medical-blue",
@@ -83,7 +83,7 @@ export function CustomSelect({
         </span>
         <ChevronDown
           className={cn(
-            "w-3.5 h-3.5 text-content-muted shrink-0 transition-transform duration-200 ml-2",
+            "w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((15/1920)*100vw)] lg:h-[calc((15/1920)*100vw)] text-content-muted shrink-0 transition-transform duration-200 ml-2",
             isOpen && "rotate-180 text-medical-blue"
           )}
         />
@@ -92,12 +92,12 @@ export function CustomSelect({
       {isOpen && (
         <div
           className={cn(
-            "absolute z-50 mt-1.5 max-h-60 w-full overflow-y-auto no-scrollbar rounded-lg border border-line bg-surface/98 p-1.5 shadow-2xl backdrop-blur-md animate-in fade-in-50 zoom-in-95 duration-100 flex flex-col gap-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
+            "absolute z-50 mt-1.5 max-h-[calc((240/375)*100vw)] lg:max-h-[calc((280/1920)*100vw)] w-full overflow-y-auto no-scrollbar rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] border border-line bg-surface/98 p-[calc((4/375)*100vw)] lg:p-[calc((6/1920)*100vw)] shadow-2xl backdrop-blur-md animate-in fade-in-50 zoom-in-95 duration-100 flex flex-col gap-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
             menuClassName
           )}
         >
           {normalizedOptions.length === 0 ? (
-            <div className="p-2.5 text-center text-xs text-content-muted">
+            <div className="p-2.5 text-center text-[calc((10/375)*100vw)] lg:text-[calc((12/1920)*100vw)] text-content-muted">
               No options available
             </div>
           ) : (
@@ -109,7 +109,7 @@ export function CustomSelect({
                   type="button"
                   onClick={() => handleSelect(opt.value)}
                   className={cn(
-                    "flex w-full items-center justify-between rounded-md px-3 py-2 text-xs font-medium transition-all duration-150 text-left cursor-pointer",
+                    "flex w-full items-center justify-between rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] py-[calc((6/375)*100vw)] lg:py-[calc((7/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-medium transition-all duration-150 text-left cursor-pointer",
                     isSelected
                       ? "bg-medical-blue/20 text-medical-blue font-semibold ring-1 ring-medical-blue/30 shadow-xs"
                       : "text-content-secondary hover:bg-surface-hover hover:text-content-primary"
@@ -117,7 +117,7 @@ export function CustomSelect({
                 >
                   <span className="truncate">{opt.label}</span>
                   {isSelected && (
-                    <Check className="w-3.5 h-3.5 text-medical-blue shrink-0 ml-2" />
+                    <Check className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] text-medical-blue shrink-0 ml-2" />
                   )}
                 </button>
               );

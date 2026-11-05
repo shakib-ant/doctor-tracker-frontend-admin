@@ -102,10 +102,10 @@ export function PatientsPerDoctorChart({ data = [], isLoading = false }) {
                     <div className="mt-[calc((8/375)*100vw)] lg:mt-[calc((10/1920)*100vw)] pt-0.5">
                       <div className="w-full bg-canvas/90 rounded-full h-[calc((8/375)*100vw)] lg:h-[calc((9/1920)*100vw)] overflow-hidden border border-line/60 p-0.5 shadow-inner">
                         <div
-                          className="h-full rounded-full bg-gradient-to-r from-[#4E778E] via-medical-blue to-[#89B4CE] shadow-xs"
+                          className="h-full rounded-full bg-gradient-to-r from-[#244254] via-medical-blue to-[#3E6D87] shadow-xs"
                           style={{
                             width: isMounted ? `${Math.max(pct, 8)}%` : "0%",
-                            transition: `width 2.2s cubic-bezier(0.22, 1, 0.36, 1) ${100 + index * 140}ms`,
+                            transition: `width 2.6s cubic-bezier(0.16, 1, 0.3, 1) ${120 + index * 160}ms`,
                           }}
                         />
                       </div>
@@ -125,7 +125,7 @@ export function PatientsPerDoctorChart({ data = [], isLoading = false }) {
                 className="inline-flex items-center gap-1 text-[calc((10/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-semibold text-medical-blue hover:underline cursor-pointer"
               >
                 <span>All Doctors</span>
-                <ChevronRight className="w-3.5 h-3.5" />
+                <ChevronRight className="w-[calc((12/375)*100vw)] h-[calc((12/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)]" />
               </Link>
             </div>
           </div>

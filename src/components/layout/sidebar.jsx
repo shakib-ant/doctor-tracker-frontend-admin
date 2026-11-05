@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Stethoscope, Users, Activity, X, ShieldCheck, LogOut } from "lucide-react";
+import { LayoutDashboard, Stethoscope, Users, Activity, X, ShieldCheck, LogOut, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { logout } from "@/services/authService";
@@ -57,17 +57,17 @@ export function Sidebar({ className, onClose }) {
             variant="ghost"
             size="icon"
             onClick={onClose}
-            className="text-content-secondary hover:text-content-primary lg:hidden h-8 w-8"
+            className="text-content-secondary hover:text-content-primary lg:hidden h-[calc((36/375)*100vw)] w-[calc((36/375)*100vw)] rounded-[calc((8/375)*100vw)] flex items-center justify-center cursor-pointer"
             aria-label="Close navigation menu"
           >
-            <X className="w-5 h-5" />
+            <X className="w-[calc((20/375)*100vw)] h-[calc((20/375)*100vw)]" />
           </Button>
         )}
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-[calc((12/375)*100vw)] lg:px-[calc((16/1920)*100vw)] py-[calc((14/375)*100vw)] lg:py-[calc((18/1920)*100vw)] space-y-[calc((4/375)*100vw)] lg:space-y-[calc((6/1920)*100vw)] overflow-y-auto no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-        <div className="px-3 pb-2 text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] font-semibold text-content-disabled uppercase tracking-wider">
+      <nav className="flex-1 px-[calc((12/375)*100vw)] lg:px-[calc((16/1920)*100vw)] py-[calc((14/375)*100vw)] lg:py-[calc((18/1920)*100vw)] space-y-[calc((8/375)*100vw)] lg:space-y-[calc((6/1920)*100vw)] overflow-y-auto no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+        <div className="px-3 pb-1 text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] font-semibold text-content-disabled uppercase tracking-wider">
           Main Navigation
         </div>
         {navigationItems.map((item) => {
@@ -82,24 +82,27 @@ export function Sidebar({ className, onClose }) {
               href={item.href}
               onClick={onClose}
               className={cn(
-                "group relative flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] py-[calc((10/375)*100vw)] lg:py-[calc((12/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] text-[calc((13/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium transition-all duration-200",
+                "group relative flex items-center justify-between gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] px-[calc((14/375)*100vw)] lg:px-[calc((14/1920)*100vw)] py-[calc((12/375)*100vw)] lg:py-[calc((12/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium transition-all duration-200 cursor-pointer",
                 isActive
-                  ? "bg-surface-selected text-content-primary font-semibold"
-                  : "text-content-secondary hover:bg-surface-hover hover:text-content-primary"
+                  ? "bg-medical-blue/20 text-medical-blue font-semibold border border-medical-blue/40 shadow-xs lg:bg-surface-selected lg:text-content-primary lg:border-transparent"
+                  : "bg-surface-elevated/70 lg:bg-transparent border border-line/60 lg:border-transparent text-content-secondary hover:bg-surface-hover hover:text-content-primary active:bg-surface-hover active:scale-[0.99]"
               )}
             >
               {isActive && (
                 <span className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-medical-blue transition-all duration-200" />
               )}
-              <Icon
-                className={cn(
-                  "w-4 h-4 shrink-0 transition-colors duration-150",
-                  isActive
-                    ? "text-medical-blue"
-                    : "text-content-secondary group-hover:text-content-primary"
-                )}
-              />
-              <span className="truncate">{item.name}</span>
+              <div className="flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] min-w-0">
+                <Icon
+                  className={cn(
+                    "w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] shrink-0 transition-colors duration-150",
+                    isActive
+                      ? "text-medical-blue"
+                      : "text-content-secondary group-hover:text-content-primary"
+                  )}
+                />
+                <span className="truncate">{item.name}</span>
+              </div>
+              <ChevronRight className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] text-content-muted lg:hidden shrink-0" />
             </Link>
           );
         })}
@@ -107,16 +110,16 @@ export function Sidebar({ className, onClose }) {
 
       {/* Mobile User Profile & Logout Action */}
       {onClose && (
-        <div className="p-3 mx-3 mb-3 rounded-xl border border-line bg-surface-elevated/40 space-y-2.5 shrink-0 lg:hidden">
-          <div className="flex items-center gap-2.5">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-medical-blue/20 text-medical-blue shrink-0">
-              <ShieldCheck className="w-4 h-4" />
+        <div className="p-[calc((12/375)*100vw)] mx-[calc((12/375)*100vw)] mb-[calc((12/375)*100vw)] rounded-[calc((12/375)*100vw)] border border-line bg-surface-elevated/50 space-y-[calc((10/375)*100vw)] shrink-0 lg:hidden">
+          <div className="flex items-center gap-[calc((10/375)*100vw)]">
+            <div className="flex items-center justify-center w-[calc((32/375)*100vw)] h-[calc((32/375)*100vw)] rounded-full bg-medical-blue/20 text-medical-blue shrink-0">
+              <ShieldCheck className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)]" />
             </div>
             <div className="flex flex-col flex-1 min-w-0">
-              <span className="text-xs font-semibold text-content-primary truncate">
+              <span className="text-[calc((12/375)*100vw)] font-semibold text-content-primary truncate">
                 Clinical Administrator
               </span>
-              <span className="text-[10px] text-content-secondary truncate">
+              <span className="text-[calc((10/375)*100vw)] text-content-secondary truncate">
                 Central Hospital Network
               </span>
             </div>
@@ -125,9 +128,9 @@ export function Sidebar({ className, onClose }) {
             variant="outline"
             size="sm"
             onClick={logout}
-            className="w-full justify-center gap-2 text-xs border-red-900/50 text-red-300 hover:bg-red-950/40 hover:text-red-200 h-8"
+            className="w-full justify-center gap-2 text-[calc((11/375)*100vw)] border-red-900/50 text-red-300 hover:bg-red-950/40 hover:text-red-200 h-[calc((34/375)*100vw)] rounded-[calc((8/375)*100vw)] cursor-pointer"
           >
-            <LogOut className="w-3.5 h-3.5" />
+            <LogOut className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)]" />
             Sign Out
           </Button>
         </div>

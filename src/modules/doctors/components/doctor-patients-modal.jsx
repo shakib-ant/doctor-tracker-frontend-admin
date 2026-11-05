@@ -110,33 +110,33 @@ export function DoctorPatientsModal({ doctor, isOpen, onClose, onPatientCountCha
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 flex items-center justify-center p-[calc((12/375)*100vw)] lg:p-[calc((24/1920)*100vw)] bg-black/70 backdrop-blur-sm animate-in fade-in duration-150 select-none"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-2xl bg-surface border border-line rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+        className="relative w-full max-w-[calc((350/375)*100vw)] lg:max-w-[calc((650/1920)*100vw)] bg-surface border border-line rounded-[calc((14/375)*100vw)] lg:rounded-[calc((16/1920)*100vw)] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-line">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-medical-sage/15 text-medical-sage flex items-center justify-center">
-              <Users className="w-4 h-4" />
+        <div className="flex items-center justify-between px-[calc((16/375)*100vw)] lg:px-[calc((24/1920)*100vw)] py-[calc((14/375)*100vw)] lg:py-[calc((16/1920)*100vw)] border-b border-line shrink-0">
+          <div className="flex items-center gap-[calc((8/375)*100vw)] lg:gap-[calc((10/1920)*100vw)]">
+            <div className="w-[calc((32/375)*100vw)] h-[calc((32/375)*100vw)] lg:w-[calc((36/1920)*100vw)] lg:h-[calc((36/1920)*100vw)] rounded-lg bg-medical-sage/15 text-medical-sage flex items-center justify-center shrink-0">
+              <Users className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)]" />
             </div>
             <div>
-              <h3 className="font-manrope text-base font-bold text-content-primary">
+              <h3 className="font-manrope text-[calc((15/375)*100vw)] lg:text-[calc((18/1920)*100vw)] font-bold text-content-primary">
                 Assigned Patients &mdash; {doctor.name}
               </h3>
-              <p className="text-xs text-content-secondary">
+              <p className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] text-content-secondary">
                 {doctor.specialization} &bull; {doctor.hospital || "General Practice"}
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-md text-content-muted hover:text-content-primary hover:bg-surface-hover transition-colors"
+            className="p-1 rounded-md text-content-muted hover:text-content-primary hover:bg-surface-hover transition-colors cursor-pointer"
           >
-            <X className="w-5 h-5" />
+            <X className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)]" />
           </button>
         </div>
 
@@ -316,9 +316,14 @@ export function DoctorPatientsModal({ doctor, isOpen, onClose, onPatientCountCha
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between px-6 py-3 border-t border-line bg-surface-elevated/40 text-xs text-content-secondary">
+        <div className="flex items-center justify-between px-[calc((16/375)*100vw)] lg:px-[calc((24/1920)*100vw)] py-[calc((10/375)*100vw)] lg:py-[calc((14/1920)*100vw)] border-t border-line bg-surface-elevated/40 text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] text-content-secondary shrink-0">
           <span>Total Assigned: {patients.length} patients</span>
-          <Button variant="secondary" size="sm" onClick={onClose} className="h-7 text-xs">
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={onClose}
+            className="h-[calc((28/375)*100vw)] lg:h-[calc((32/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] cursor-pointer"
+          >
             Close
           </Button>
         </div>

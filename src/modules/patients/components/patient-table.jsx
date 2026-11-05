@@ -30,13 +30,13 @@ export function PatientTable({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="text-xs sm:text-sm font-semibold">Patient Name</TableHead>
-            <TableHead className="text-xs sm:text-sm font-semibold">Age / Gender</TableHead>
-            <TableHead className="text-xs sm:text-sm font-semibold">Condition</TableHead>
-            <TableHead className="text-xs sm:text-sm font-semibold">Assigned Doctor</TableHead>
-            <TableHead className="text-xs sm:text-sm font-semibold">Admission Date</TableHead>
-            <TableHead className="text-xs sm:text-sm font-semibold">Status</TableHead>
-            <TableHead className="text-right text-xs sm:text-sm font-semibold">Actions</TableHead>
+            <TableHead className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-semibold">Patient Name</TableHead>
+            <TableHead className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-semibold">Age / Gender</TableHead>
+            <TableHead className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-semibold">Condition</TableHead>
+            <TableHead className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-semibold">Assigned Doctor</TableHead>
+            <TableHead className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-semibold">Admission Date</TableHead>
+            <TableHead className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-semibold">Status</TableHead>
+            <TableHead className="text-right text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-semibold">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -80,19 +80,24 @@ export function PatientTable({
               <TableCell colSpan={7} className="text-center py-14">
                 <div className="flex flex-col items-center justify-center max-w-sm mx-auto space-y-3">
                   <div className="p-3.5 rounded-full bg-surface-elevated text-content-muted border border-line shadow-xs">
-                    <Users className="w-6 h-6" />
+                    <Users className="w-[calc((20/375)*100vw)] h-[calc((20/375)*100vw)] lg:w-[calc((24/1920)*100vw)] lg:h-[calc((24/1920)*100vw)]" />
                   </div>
                   <div className="space-y-1">
-                    <p className="font-manrope text-base sm:text-lg font-bold text-content-primary">
+                    <p className="font-manrope text-[calc((15/375)*100vw)] lg:text-[calc((17/1920)*100vw)] font-bold text-content-primary">
                       No patient records found
                     </p>
-                    <p className="text-xs sm:text-sm text-content-secondary">
+                    <p className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] text-content-secondary">
                       No patients match your current filter or date range.
                     </p>
                   </div>
                   {onAddNew && (
-                    <Button variant="default" size="sm" onClick={onAddNew} className="mt-2">
-                      <Plus className="w-3.5 h-3.5 mr-1.5" />
+                    <Button
+                      variant="default"
+                      size="sm"
+                      onClick={onAddNew}
+                      className="mt-2 h-[calc((32/375)*100vw)] lg:h-[calc((34/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] cursor-pointer"
+                    >
+                      <Plus className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] mr-1.5" />
                       Register Patient
                     </Button>
                   )}
@@ -105,11 +110,11 @@ export function PatientTable({
                 {/* Patient Name & Contact */}
                 <TableCell className="font-medium text-content-primary">
                   <div>
-                    <div className="text-xs sm:text-sm font-semibold text-content-primary whitespace-nowrap">
+                    <div className="text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)] font-semibold text-content-primary whitespace-nowrap">
                       {p.name}
                     </div>
                     {p.phone && (
-                      <div className="text-[11px] sm:text-xs text-content-muted whitespace-nowrap mt-0.5">
+                      <div className="text-[10px] lg:text-[calc((11/1920)*100vw)] text-content-muted whitespace-nowrap mt-0.5">
                         {p.phone}
                       </div>
                     )}
@@ -117,37 +122,37 @@ export function PatientTable({
                 </TableCell>
 
                 {/* Age & Gender */}
-                <TableCell className="text-xs sm:text-sm text-content-secondary whitespace-nowrap">
+                <TableCell className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] text-content-secondary whitespace-nowrap">
                   {p.age} yrs &bull; {p.gender}
                 </TableCell>
 
                 {/* Condition */}
                 <TableCell className="whitespace-nowrap">
-                  <Badge variant="default" className="text-xs font-normal px-2 py-0.5">
+                  <Badge variant="default" className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] font-normal px-[calc((8/375)*100vw)] lg:px-[calc((10/1920)*100vw)] py-0.5">
                     {p.condition}
                   </Badge>
                 </TableCell>
 
                 {/* Assigned Doctor */}
-                <TableCell className="text-xs sm:text-sm text-content-secondary whitespace-nowrap">
+                <TableCell className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] text-content-secondary whitespace-nowrap">
                   {p.doctor ? (
                     <div>
-                      <div className="font-medium text-content-primary text-xs sm:text-sm">
+                      <div className="font-medium text-content-primary text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)]">
                         {p.doctor.name}
                       </div>
-                      <div className="text-[11px] sm:text-xs text-content-muted mt-0.5">
+                      <div className="text-[10px] lg:text-[calc((11/1920)*100vw)] text-content-muted mt-0.5">
                         {p.doctor.specialization} &bull; {p.doctor.hospital || "Clinic"}
                       </div>
                     </div>
                   ) : (
-                    <span className="text-content-muted text-xs">Unassigned</span>
+                    <span className="text-content-muted text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)]">Unassigned</span>
                   )}
                 </TableCell>
 
                 {/* Admission Date */}
-                <TableCell className="text-xs sm:text-sm text-content-secondary whitespace-nowrap">
+                <TableCell className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] text-content-secondary whitespace-nowrap">
                   <div className="flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-medical-sage shrink-0" />
+                    <Calendar className="w-[calc((12/375)*100vw)] h-[calc((12/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] text-medical-sage shrink-0" />
                     <span>{formatDate(p.admissionDate || p.createdAt)}</span>
                   </div>
                 </TableCell>
@@ -155,11 +160,11 @@ export function PatientTable({
                 {/* Status */}
                 <TableCell className="whitespace-nowrap">
                   <div className="flex items-center gap-1.5">
-                    <Badge variant={getStatusBadgeVariant(p.status)} className="text-xs px-2 py-0.5">
+                    <Badge variant={getStatusBadgeVariant(p.status)} className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] px-[calc((8/375)*100vw)] lg:px-[calc((10/1920)*100vw)] py-0.5">
                       {p.status}
                     </Badge>
                     {p.isArchived && (
-                      <Badge variant="warning" className="text-xs px-2 py-0.5">
+                      <Badge variant="warning" className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] px-[calc((8/375)*100vw)] lg:px-[calc((10/1920)*100vw)] py-0.5">
                         Archived
                       </Badge>
                     )}
@@ -167,16 +172,16 @@ export function PatientTable({
                 </TableCell>
 
                 {/* Actions: Direct Quick Actions + Real-world Clinical Action Menu */}
-                <TableCell className="text-right whitespace-nowrap pr-3 sm:pr-4">
-                  <div className="flex items-center justify-end gap-2 sm:gap-2.5">
+                <TableCell className="text-right whitespace-nowrap pr-[calc((10/375)*100vw)] lg:pr-[calc((16/1920)*100vw)]">
+                  <div className="flex items-center justify-end gap-[calc((6/375)*100vw)] lg:gap-[calc((8/1920)*100vw)]">
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => onViewDetails && onViewDetails(p)}
-                      className="h-7 px-2.5 text-xs text-medical-blue hover:bg-surface-hover"
+                      className="h-[calc((28/375)*100vw)] lg:h-[calc((30/1920)*100vw)] px-[calc((8/375)*100vw)] lg:px-[calc((10/1920)*100vw)] text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-medical-blue hover:bg-surface-hover rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] cursor-pointer"
                       title="View clinical chart"
                     >
-                      <Eye className="w-3.5 h-3.5 mr-1" />
+                      <Eye className="w-[calc((12/375)*100vw)] h-[calc((12/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] mr-1" />
                       Chart
                     </Button>
                     <PatientActionMenu
