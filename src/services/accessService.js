@@ -1,8 +1,8 @@
 import { Env } from "@/utils/env";
 import { getAuthHeaders } from "@/utils/auth";
 
-const PUBLIC_BASE_URL = `${Env.backend_url || "https://shakib-ant-doctor-tracker-server.vercel.app/api"}/v1/auth`;
-const PROTECTED_BASE_URL = `${Env.backend_url || "https://shakib-ant-doctor-tracker-server.vercel.app/api"}/v1/access`;
+const PUBLIC_BASE_URL = `${Env.backend_url}/v1/auth`;
+const PROTECTED_BASE_URL = `${Env.backend_url}/v1/access`;
 
 // Submit a join / access request (Public)
 export const submitAccessRequest = async (payload) => {

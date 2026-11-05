@@ -1,7 +1,7 @@
 import { Env } from "@/utils/env";
 import { getAuthHeaders } from "@/utils/auth";
 
-const BASE_URL = `${Env.backend_url || "https://shakib-ant-doctor-tracker-server.vercel.app/api"}/v1/analytics`;
+const BASE_URL = `${Env.backend_url}/v1/analytics`;
 
 export const fetchDashboardAnalytics = async () => {
   const res = await fetch(`${BASE_URL}/dashboard`, {
