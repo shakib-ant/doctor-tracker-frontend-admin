@@ -135,11 +135,11 @@ export function DoctorTable({
                         {getDoctorInitials(doc.name)}
                       </div>
                     )}
-                    <div>
-                      <div className="text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)] font-semibold text-content-primary whitespace-nowrap">
+                    <div className="flex flex-col justify-center">
+                      <div className="text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)] font-semibold text-content-primary whitespace-nowrap leading-tight">
                         {doc.name}
                       </div>
-                      <div className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-muted truncate max-w-[calc((140/375)*100vw)] lg:max-w-[calc((180/1920)*100vw)] mt-0.5">
+                      <div className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-muted truncate max-w-[calc((140/375)*100vw)] lg:max-w-[calc((180/1920)*100vw)] leading-tight mt-[calc((2/375)*100vw)] lg:mt-[calc((2/1920)*100vw)]">
                         {doc.qualifications || doc.designation || "Physician"}
                       </div>
                     </div>
@@ -160,9 +160,11 @@ export function DoctorTable({
 
                 {/* Contact */}
                 <TableCell className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] text-content-secondary whitespace-nowrap">
-                  <div>{doc.phone || "--"}</div>
-                  <div className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-muted truncate max-w-[calc((120/375)*100vw)] lg:max-w-[calc((150/1920)*100vw)] mt-0.5">
-                    {doc.email || ""}
+                  <div className="flex flex-col justify-center">
+                    <div className="leading-tight">{doc.phone || "--"}</div>
+                    <div className="text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-content-muted truncate max-w-[calc((120/375)*100vw)] lg:max-w-[calc((150/1920)*100vw)] leading-tight mt-[calc((2/375)*100vw)] lg:mt-[calc((2/1920)*100vw)]">
+                      {doc.email || ""}
+                    </div>
                   </div>
                 </TableCell>
 
@@ -212,7 +214,7 @@ export function DoctorTable({
                       className="h-[calc((28/375)*100vw)] lg:h-[calc((30/1920)*100vw)] px-[calc((8/375)*100vw)] lg:px-[calc((10/1920)*100vw)] text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] cursor-pointer"
                       title="View & manage assigned patients"
                     >
-                      <Users className="w-[calc((12/375)*100vw)] h-[calc((12/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] mr-1 text-medical-sage" />
+                      <Users className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((15/1920)*100vw)] lg:h-[calc((15/1920)*100vw)] stroke-[2.2] mr-1 text-medical-sage" />
                       Patients
                     </Button>
                     <Button
@@ -222,7 +224,7 @@ export function DoctorTable({
                       className="h-[calc((28/375)*100vw)] lg:h-[calc((30/1920)*100vw)] px-[calc((8/375)*100vw)] lg:px-[calc((10/1920)*100vw)] text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-medical-blue hover:bg-surface-hover rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] cursor-pointer"
                       title="View doctor profile"
                     >
-                      <Eye className="w-[calc((12/375)*100vw)] h-[calc((12/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] mr-1" />
+                      <Eye className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((15/1920)*100vw)] lg:h-[calc((15/1920)*100vw)] stroke-[2.2] mr-1" />
                       Profile
                     </Button>
                     {onToggleArchive && (
@@ -238,9 +240,9 @@ export function DoctorTable({
                         title={doc.isActive ? "Archive specialist" : "Restore specialist"}
                       >
                         {doc.isActive ? (
-                          <Archive className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)]" />
+                          <Archive className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] stroke-[2.2]" />
                         ) : (
-                          <ArchiveRestore className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)]" />
+                          <ArchiveRestore className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] stroke-[2.2]" />
                         )}
                       </Button>
                     )}

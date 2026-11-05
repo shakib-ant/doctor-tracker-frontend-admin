@@ -40,7 +40,7 @@ export function Sidebar({ className, onClose }) {
       <div className="flex items-center justify-between h-[calc((56/375)*100vw)] lg:h-[calc((64/1920)*100vw)] px-[calc((16/375)*100vw)] lg:px-[calc((20/1920)*100vw)] border-b border-line shrink-0">
         <div className="flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)]">
           <div className="flex items-center justify-center w-[calc((32/375)*100vw)] h-[calc((32/375)*100vw)] lg:w-[calc((36/1920)*100vw)] lg:h-[calc((36/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] bg-medical-blue/15 border border-medical-blue/30 text-medical-blue shrink-0">
-            <Activity className="w-4 h-4 stroke-[2.5]" />
+            <Activity className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] stroke-[2.5]" />
           </div>
           <div className="flex flex-col">
             <span className="font-manrope font-bold text-[calc((14/375)*100vw)] lg:text-[calc((16/1920)*100vw)] tracking-tight text-content-primary leading-tight">
@@ -130,7 +130,7 @@ export function Sidebar({ className, onClose }) {
             onClick={logout}
             className="w-full justify-center gap-2 text-[calc((11/375)*100vw)] border-red-900/50 text-red-300 hover:bg-red-950/40 hover:text-red-200 h-[calc((34/375)*100vw)] rounded-[calc((8/375)*100vw)] cursor-pointer"
           >
-            <LogOut className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)]" />
+            <LogOut className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] stroke-[2.2]" />
             Sign Out
           </Button>
         </div>

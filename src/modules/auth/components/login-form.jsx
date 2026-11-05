@@ -67,7 +67,7 @@ export function LoginForm() {
         {/* Header */}
         <div className="text-center space-y-[calc((6/375)*100vw)] lg:space-y-[calc((8/1920)*100vw)]">
           <div className="inline-flex items-center justify-center w-[calc((42/375)*100vw)] h-[calc((42/375)*100vw)] lg:w-[calc((48/1920)*100vw)] lg:h-[calc((48/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-medical-blue/15 border border-medical-blue/30 text-medical-blue mb-1 shadow-xs">
-            <Activity className="w-[calc((20/375)*100vw)] h-[calc((20/375)*100vw)] lg:w-[calc((24/1920)*100vw)] lg:h-[calc((24/1920)*100vw)] stroke-[2.5]" />
+            <Activity className="w-[calc((22/375)*100vw)] h-[calc((22/375)*100vw)] lg:w-[calc((26/1920)*100vw)] lg:h-[calc((26/1920)*100vw)] stroke-[2.5]" />
           </div>
           <h1 className="font-manrope text-[calc((18/375)*100vw)] lg:text-[calc((24/1920)*100vw)] font-extrabold text-content-primary tracking-tight">
             Administrator Sign In
@@ -86,7 +86,7 @@ export function LoginForm() {
           disabled={isSubmitting}
           className="w-full h-[calc((38/375)*100vw)] lg:h-[calc((42/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] border-medical-sage/40 hover:border-medical-sage text-content-primary bg-surface-elevated/70 hover:bg-surface-elevated text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] font-semibold flex items-center justify-center gap-2 transition-all shadow-xs cursor-pointer"
         >
-          <Zap className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] text-medical-sage fill-medical-sage/20 shrink-0" />
+          <Zap className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] stroke-[2.2] text-medical-sage fill-medical-sage/20 shrink-0" />
           <span>Instant 1-Click Admin Access</span>
         </Button>
 
@@ -101,7 +101,7 @@ export function LoginForm() {
         {/* Error banner */}
         {apiError && (
           <div className="p-3 rounded-lg bg-red-950/40 border border-red-800 text-red-200 text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] flex items-center gap-2.5 shadow-xs">
-            <AlertCircle className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] text-red-400 shrink-0" />
+            <AlertCircle className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] stroke-[2.2] text-red-400 shrink-0" />
             <span className="leading-tight">{apiError}</span>
           </div>
         )}
@@ -114,7 +114,7 @@ export function LoginForm() {
               Email Address
             </label>
             <div className="relative">
-              <Mail className="absolute left-[calc((10/375)*100vw)] lg:left-[calc((12/1920)*100vw)] top-1/2 -translate-y-1/2 w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] text-content-disabled" />
+              <Mail className="absolute left-[calc((10/375)*100vw)] lg:left-[calc((12/1920)*100vw)] top-1/2 -translate-y-1/2 w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] stroke-[2.2] text-content-disabled" />
               <Input
                 type="email"
                 placeholder="admin@doctortracker.com"
@@ -145,17 +145,17 @@ export function LoginForm() {
               >
                 {showPassword ? (
                   <>
-                    <EyeOff className="w-[calc((11/375)*100vw)] h-[calc((11/375)*100vw)] lg:w-[calc((13/1920)*100vw)] lg:h-[calc((13/1920)*100vw)]" /> Hide
+                    <EyeOff className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((15/1920)*100vw)] lg:h-[calc((15/1920)*100vw)] stroke-[2.2]" /> Hide
                   </>
                 ) : (
                   <>
-                    <Eye className="w-[calc((11/375)*100vw)] h-[calc((11/375)*100vw)] lg:w-[calc((13/1920)*100vw)] lg:h-[calc((13/1920)*100vw)]" /> Show
+                    <Eye className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((15/1920)*100vw)] lg:h-[calc((15/1920)*100vw)] stroke-[2.2]" /> Show
                   </>
                 )}
               </button>
             </div>
             <div className="relative">
-              <Lock className="absolute left-[calc((10/375)*100vw)] lg:left-[calc((12/1920)*100vw)] top-1/2 -translate-y-1/2 w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] text-content-disabled" />
+              <Lock className="absolute left-[calc((10/375)*100vw)] lg:left-[calc((12/1920)*100vw)] top-1/2 -translate-y-1/2 w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] stroke-[2.2] text-content-disabled" />
               <Input
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
@@ -183,13 +183,13 @@ export function LoginForm() {
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] animate-spin mr-2" />
+                <Loader2 className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] stroke-[2.4] animate-spin mr-2" />
                 Signing In...
               </>
             ) : (
               <>
                 Sign In with Credentials
-                <ArrowRight className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] ml-1.5" />
+                <ArrowRight className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] stroke-[2.4] ml-1.5" />
               </>
             )}
           </Button>

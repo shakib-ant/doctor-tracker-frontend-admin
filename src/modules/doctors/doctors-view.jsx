@@ -113,7 +113,7 @@ export function DoctorsView() {
             className="h-[calc((34/375)*100vw)] lg:h-[calc((36/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] cursor-pointer"
           >
             <RefreshCw
-              className={`w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] mr-[calc((6/375)*100vw)] lg:mr-[calc((6/1920)*100vw)] ${isLoading ? "animate-spin" : ""}`}
+              className={`w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((19/1920)*100vw)] lg:h-[calc((19/1920)*100vw)] stroke-[2.4] mr-[calc((6/375)*100vw)] lg:mr-[calc((8/1920)*100vw)] shrink-0 ${isLoading ? "animate-spin" : ""}`}
             />
             Refresh
           </Button>
@@ -123,7 +123,7 @@ export function DoctorsView() {
             onClick={() => setIsAddModalOpen(true)}
             className="h-[calc((34/375)*100vw)] lg:h-[calc((36/1920)*100vw)] px-[calc((12/375)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] cursor-pointer"
           >
-            <Plus className="w-[calc((14/375)*100vw)] h-[calc((14/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)] mr-[calc((6/375)*100vw)] lg:mr-[calc((6/1920)*100vw)]" />
+            <Plus className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] stroke-[2.6] mr-[calc((6/375)*100vw)] lg:mr-[calc((8/1920)*100vw)] shrink-0" />
             Add New Doctor
           </Button>
         </div>
@@ -215,7 +215,7 @@ export function DoctorsView() {
                   disabled={pagination.page <= 1 || isLoading}
                   className="h-[calc((30/375)*100vw)] lg:h-[calc((32/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] cursor-pointer"
                 >
-                  <ChevronLeft className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] mr-[calc((4/375)*100vw)] lg:mr-[calc((4/1920)*100vw)]" />
+                  <ChevronLeft className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((19/1920)*100vw)] lg:h-[calc((19/1920)*100vw)] stroke-[2.6] mr-[calc((4/375)*100vw)] lg:mr-[calc((6/1920)*100vw)] shrink-0" />
                   Previous
                 </Button>
 
@@ -231,7 +231,7 @@ export function DoctorsView() {
                   className="h-[calc((30/375)*100vw)] lg:h-[calc((32/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] cursor-pointer"
                 >
                   Next
-                  <ChevronRight className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] ml-[calc((4/375)*100vw)] lg:mr-[calc((4/1920)*100vw)]" />
+                  <ChevronRight className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((19/1920)*100vw)] lg:h-[calc((19/1920)*100vw)] stroke-[2.6] ml-[calc((4/375)*100vw)] lg:ml-[calc((6/1920)*100vw)] shrink-0" />
                 </Button>
               </div>
             </div>

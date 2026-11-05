@@ -105,18 +105,18 @@ export function DashboardView() {
 
       {/* Error state */}
       {error && (
-        <div className="p-4 rounded-xl bg-red-950/40 border border-red-800 text-red-200 text-xs flex items-center justify-between shadow-xs">
-          <div className="flex items-center gap-2">
-            <ShieldAlert className="w-4 h-4 text-red-400 shrink-0" />
+        <div className="p-[calc((12/375)*100vw)] lg:p-[calc((16/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-red-950/40 border border-red-800 text-red-200 text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] flex items-center justify-between shadow-xs">
+          <div className="flex items-center gap-[calc((8/375)*100vw)] lg:gap-[calc((10/1920)*100vw)]">
+            <ShieldAlert className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] text-red-400 shrink-0" />
             <span>{error}</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-[calc((8/375)*100vw)]">
             {error.includes("401") && (
               <Link href="/login">
                 <Button
                   variant="default"
                   size="sm"
-                  className="h-7 text-xs bg-red-700 hover:bg-red-600 text-white cursor-pointer"
+                  className="h-[calc((30/375)*100vw)] lg:h-[calc((32/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] bg-red-700 hover:bg-red-600 text-white cursor-pointer"
                 >
                   Log In
                 </Button>
@@ -126,7 +126,7 @@ export function DashboardView() {
               variant="outline"
               size="sm"
               onClick={loadData}
-              className="h-7 text-xs border-red-700 text-red-200 hover:bg-red-900/30 cursor-pointer"
+              className="h-[calc((30/375)*100vw)] lg:h-[calc((32/1920)*100vw)] px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] border-red-700 text-red-200 hover:bg-red-900/30 cursor-pointer"
             >
               Retry
             </Button>

@@ -109,12 +109,12 @@ export function PatientTable({
               <TableRow key={p._id}>
                 {/* Patient Name & Contact */}
                 <TableCell className="font-medium text-content-primary">
-                  <div>
-                    <div className="text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)] font-semibold text-content-primary whitespace-nowrap">
+                  <div className="flex flex-col justify-center">
+                    <div className="text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)] font-semibold text-content-primary whitespace-nowrap leading-tight">
                       {p.name}
                     </div>
                     {p.phone && (
-                      <div className="text-[10px] lg:text-[calc((11/1920)*100vw)] text-content-muted whitespace-nowrap mt-0.5">
+                      <div className="text-[10px] lg:text-[calc((11/1920)*100vw)] text-content-muted whitespace-nowrap leading-tight mt-[calc((2/375)*100vw)] lg:mt-[calc((2/1920)*100vw)]">
                         {p.phone}
                       </div>
                     )}
@@ -136,11 +136,11 @@ export function PatientTable({
                 {/* Assigned Doctor */}
                 <TableCell className="text-[calc((11/375)*100vw)] lg:text-[calc((12/1920)*100vw)] text-content-secondary whitespace-nowrap">
                   {p.doctor ? (
-                    <div>
-                      <div className="font-medium text-content-primary text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)]">
+                    <div className="flex flex-col justify-center">
+                      <div className="font-medium text-content-primary text-[calc((12/375)*100vw)] lg:text-[calc((13/1920)*100vw)] leading-tight">
                         {p.doctor.name}
                       </div>
-                      <div className="text-[10px] lg:text-[calc((11/1920)*100vw)] text-content-muted mt-0.5">
+                      <div className="text-[10px] lg:text-[calc((11/1920)*100vw)] text-content-muted leading-tight mt-[calc((2/375)*100vw)] lg:mt-[calc((2/1920)*100vw)]">
                         {p.doctor.specialization} &bull; {p.doctor.hospital || "Clinic"}
                       </div>
                     </div>
@@ -181,7 +181,7 @@ export function PatientTable({
                       className="h-[calc((28/375)*100vw)] lg:h-[calc((30/1920)*100vw)] px-[calc((8/375)*100vw)] lg:px-[calc((10/1920)*100vw)] text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] text-medical-blue hover:bg-surface-hover rounded-[calc((6/375)*100vw)] lg:rounded-[calc((6/1920)*100vw)] cursor-pointer"
                       title="View clinical chart"
                     >
-                      <Eye className="w-[calc((12/375)*100vw)] h-[calc((12/375)*100vw)] lg:w-[calc((14/1920)*100vw)] lg:h-[calc((14/1920)*100vw)] mr-1" />
+                      <Eye className="w-[calc((13/375)*100vw)] h-[calc((13/375)*100vw)] lg:w-[calc((15/1920)*100vw)] lg:h-[calc((15/1920)*100vw)] stroke-[2.2] mr-1" />
                       Chart
                     </Button>
                     <PatientActionMenu

@@ -10,16 +10,16 @@ export function Navbar({ onMenuClick, title = "Dashboard" }) {
   const getHeaderIcon = () => {
     if (title.includes("Doctor")) {
       return (
-        <Stethoscope className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] stroke-[2.2]" />
+        <Stethoscope className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] stroke-[2.2]" />
       );
     }
     if (title.includes("Patient")) {
       return (
-        <Users className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] stroke-[2.2]" />
+        <Users className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] stroke-[2.2]" />
       );
     }
     return (
-      <Activity className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] stroke-[2.2]" />
+      <Activity className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] stroke-[2.2]" />
     );
   };
 
@@ -77,7 +77,7 @@ export function Navbar({ onMenuClick, title = "Dashboard" }) {
       <div className="hidden lg:flex items-center gap-[calc((10/1920)*100vw)] shrink-0">
         <div className="flex items-center gap-[calc((10/1920)*100vw)] h-[calc((38/1920)*100vw)] px-[calc((14/1920)*100vw)] rounded-full border border-white/[0.15] bg-gradient-to-r from-white/[0.08] via-white/[0.03] to-white/[0.08] backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.37),inset_0_1px_1px_0_rgba(255,255,255,0.2)] shrink-0 hover:border-medical-blue/40 transition-all duration-300">
           <div className="flex items-center justify-center w-[calc((26/1920)*100vw)] h-[calc((26/1920)*100vw)] rounded-full bg-medical-blue/20 text-medical-blue shrink-0 border border-medical-blue/35 shadow-[0_0_10px_rgba(137,180,206,0.35)]">
-            <ShieldCheck className="w-[calc((14/1920)*100vw)] h-[calc((14/1920)*100vw)] shrink-0" />
+            <ShieldCheck className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((17/1920)*100vw)] lg:h-[calc((17/1920)*100vw)] stroke-[2.2] shrink-0" />
           </div>
           <div className="flex flex-col text-left shrink-0">
             <div className="flex items-center gap-1.5">
@@ -102,7 +102,7 @@ export function Navbar({ onMenuClick, title = "Dashboard" }) {
           className="h-[calc((38/1920)*100vw)] w-[calc((38/1920)*100vw)] rounded-full border border-white/[0.1] bg-white/[0.04] backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] text-content-muted hover:text-red-300 hover:bg-red-950/40 hover:border-red-500/40 shrink-0 transition-all cursor-pointer flex items-center justify-center"
           title="Sign out of administration portal"
         >
-          <LogOut className="w-[calc((15/1920)*100vw)] h-[calc((15/1920)*100vw)]" />
+          <LogOut className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] stroke-[2.2]" />
         </Button>
       </div>
     </header>
