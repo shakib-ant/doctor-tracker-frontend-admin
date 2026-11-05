@@ -30,13 +30,13 @@ export function PatientTable({
       <Table>
         <TableHeader>
           <TableRow className="bg-slate-50/70 border-b border-slate-200/80 hover:bg-slate-50/70">
-            <TableHead className="py-[calc((10/375)*100vw)] px-[calc((10/375)*100vw)] sm:py-3.5 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Patient Name</TableHead>
-            <TableHead className="py-[calc((10/375)*100vw)] px-[calc((10/375)*100vw)] sm:py-3.5 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Age / Gender</TableHead>
-            <TableHead className="py-[calc((10/375)*100vw)] px-[calc((10/375)*100vw)] sm:py-3.5 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Condition</TableHead>
-            <TableHead className="py-[calc((10/375)*100vw)] px-[calc((10/375)*100vw)] sm:py-3.5 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Assigned Doctor</TableHead>
-            <TableHead className="py-[calc((10/375)*100vw)] px-[calc((10/375)*100vw)] sm:py-3.5 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Admission Date</TableHead>
-            <TableHead className="py-[calc((10/375)*100vw)] px-[calc((10/375)*100vw)] sm:py-3.5 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Status</TableHead>
-            <TableHead className="text-right py-[calc((10/375)*100vw)] px-[calc((10/375)*100vw)] sm:py-3.5 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Actions</TableHead>
+            <TableHead className="py-[calc((8/375)*100vw)] px-[calc((8/375)*100vw)] sm:py-3 sm:px-3.5 lg:py-[calc((10/1920)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((12.5/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Patient Name</TableHead>
+            <TableHead className="py-[calc((8/375)*100vw)] px-[calc((8/375)*100vw)] sm:py-3 sm:px-3.5 lg:py-[calc((10/1920)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((12.5/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Age / Gender</TableHead>
+            <TableHead className="py-[calc((8/375)*100vw)] px-[calc((8/375)*100vw)] sm:py-3 sm:px-3.5 lg:py-[calc((10/1920)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((12.5/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Condition</TableHead>
+            <TableHead className="py-[calc((8/375)*100vw)] px-[calc((8/375)*100vw)] sm:py-3 sm:px-3.5 lg:py-[calc((10/1920)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((12.5/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Assigned Doctor</TableHead>
+            <TableHead className="py-[calc((8/375)*100vw)] px-[calc((8/375)*100vw)] sm:py-3 sm:px-3.5 lg:py-[calc((10/1920)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((12.5/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Admission Date</TableHead>
+            <TableHead className="py-[calc((8/375)*100vw)] px-[calc((8/375)*100vw)] sm:py-3 sm:px-3.5 lg:py-[calc((10/1920)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((12.5/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Status</TableHead>
+            <TableHead className="text-right py-[calc((8/375)*100vw)] px-[calc((8/375)*100vw)] sm:py-3 sm:px-3.5 lg:py-[calc((10/1920)*100vw)] lg:px-[calc((14/1920)*100vw)] text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((12.5/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -118,11 +118,11 @@ export function PatientTable({
                       {p.name?.split(" ").map(n => n[0]).slice(0, 2).join("") || "PT"}
                     </div>
                     <div className="flex flex-col justify-center">
-                      <div className="text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((15/1920)*100vw)] font-bold text-slate-900 whitespace-nowrap leading-tight">
+                      <div className="text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((14.5/1920)*100vw)] font-bold text-slate-900 whitespace-nowrap leading-tight">
                         {p.name}
                       </div>
                       {p.phone && (
-                        <div className="text-[calc((11/375)*100vw)] sm:text-xs text-slate-400 whitespace-nowrap leading-tight mt-0.5">
+                        <div className="text-[calc((10.5/375)*100vw)] sm:text-xs lg:text-[calc((12.5/1920)*100vw)] text-slate-400 whitespace-nowrap leading-tight mt-0.5">
                           {p.phone}
                         </div>
                       )}
@@ -131,35 +131,35 @@ export function PatientTable({
                 </TableCell>
 
                 {/* Age & Gender */}
-                <TableCell className="py-2.5 sm:py-3.5 px-3 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((14/1920)*100vw)] text-content-secondary whitespace-nowrap">
+                <TableCell className="py-2.5 sm:py-3.5 px-3 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((11.5/375)*100vw)] sm:text-sm lg:text-[calc((13.5/1920)*100vw)] text-content-secondary whitespace-nowrap">
                   {p.age} yrs &bull; {p.gender}
                 </TableCell>
 
                 {/* Condition */}
                 <TableCell className="py-2.5 sm:py-3.5 px-3 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] whitespace-nowrap">
-                  <Badge variant="default" className="text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((13/1920)*100vw)] font-normal px-2.5 py-0.5 rounded-full leading-none">
+                  <Badge variant="default" className="text-[calc((10.5/375)*100vw)] sm:text-xs lg:text-[calc((12.5/1920)*100vw)] font-normal px-2.5 py-0.5 rounded-full leading-none">
                     {p.condition}
                   </Badge>
                 </TableCell>
 
                 {/* Assigned Doctor */}
-                <TableCell className="py-2.5 sm:py-3.5 px-3 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((14/1920)*100vw)] text-content-secondary whitespace-nowrap">
+                <TableCell className="py-2.5 sm:py-3.5 px-3 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((11.5/375)*100vw)] sm:text-sm lg:text-[calc((13.5/1920)*100vw)] text-content-secondary whitespace-nowrap">
                   {p.doctor ? (
                     <div className="flex flex-col justify-center">
-                      <div className="font-medium text-content-primary text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((15/1920)*100vw)] leading-tight">
+                      <div className="font-medium text-content-primary text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((14.5/1920)*100vw)] leading-tight">
                         {p.doctor.name}
                       </div>
-                      <div className="text-[calc((11/375)*100vw)] sm:text-xs text-content-muted leading-tight mt-0.5">
+                      <div className="text-[calc((10.5/375)*100vw)] sm:text-xs lg:text-[calc((12.5/1920)*100vw)] text-content-muted leading-tight mt-0.5">
                         {p.doctor.specialization} &bull; {p.doctor.hospital || "Clinic"}
                       </div>
                     </div>
                   ) : (
-                    <span className="text-content-muted text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((14/1920)*100vw)]">Unassigned</span>
+                    <span className="text-content-muted text-[calc((11.5/375)*100vw)] sm:text-sm lg:text-[calc((13.5/1920)*100vw)]">Unassigned</span>
                   )}
                 </TableCell>
 
                 {/* Admission Date */}
-                <TableCell className="py-2.5 sm:py-3.5 px-3 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((14/1920)*100vw)] text-content-secondary whitespace-nowrap">
+                <TableCell className="py-2.5 sm:py-3.5 px-3 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((11.5/375)*100vw)] sm:text-sm lg:text-[calc((13.5/1920)*100vw)] text-content-secondary whitespace-nowrap">
                   <div className="flex items-center gap-1.5">
                     <Calendar className="w-4 h-4 text-medical-sage shrink-0" />
                     <span>{formatDate(p.admissionDate || p.createdAt)}</span>
@@ -169,11 +169,11 @@ export function PatientTable({
                 {/* Status */}
                 <TableCell className="py-2.5 sm:py-3.5 px-3 sm:px-4 lg:py-[calc((14/1920)*100vw)] lg:px-[calc((16/1920)*100vw)] whitespace-nowrap">
                   <div className="flex items-center gap-1.5">
-                    <Badge variant={getStatusBadgeVariant(p.status)} className="text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((13/1920)*100vw)] px-2.5 py-0.5 rounded-full leading-none">
+                    <Badge variant={getStatusBadgeVariant(p.status)} className="text-[calc((10.5/375)*100vw)] sm:text-xs lg:text-[calc((12.5/1920)*100vw)] px-2.5 py-0.5 rounded-full leading-none">
                       {p.status}
                     </Badge>
                     {p.isArchived && (
-                      <Badge variant="warning" className="text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((13/1920)*100vw)] px-2.5 py-0.5 rounded-full leading-none">
+                      <Badge variant="warning" className="text-[calc((10.5/375)*100vw)] sm:text-xs lg:text-[calc((12.5/1920)*100vw)] px-2.5 py-0.5 rounded-full leading-none">
                         Archived
                       </Badge>
                     )}

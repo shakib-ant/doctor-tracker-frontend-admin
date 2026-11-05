@@ -49,20 +49,20 @@ export function DoctorDetailModal({
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-[calc((365/375)*100vw)] lg:max-w-[calc((700/1920)*100vw)] bg-white border border-slate-200/90 rounded-[calc((18/375)*100vw)] lg:rounded-[calc((22/1920)*100vw)] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in-0 zoom-in-95 slide-in-from-bottom-4 duration-300 ease-out"
+        className="relative w-full max-w-[calc((365/375)*100vw)] sm:max-w-lg md:max-w-xl lg:max-w-[calc((680/1920)*100vw)] bg-white border border-slate-200/90 rounded-[calc((18/375)*100vw)] sm:rounded-2xl lg:rounded-[calc((22/1920)*100vw)] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in-0 zoom-in-95 slide-in-from-bottom-4 duration-300 ease-out"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-[calc((18/375)*100vw)] lg:px-[calc((27/1920)*100vw)] py-[calc((16/375)*100vw)] lg:py-[calc((20/1920)*100vw)] border-b border-line shrink-0">
-          <div className="flex items-center gap-[calc((12/375)*100vw)] lg:gap-[calc((14/1920)*100vw)]">
-            <div className="w-[calc((38/375)*100vw)] h-[calc((38/375)*100vw)] lg:w-[calc((44/1920)*100vw)] lg:h-[calc((44/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-medical-blue/15 text-medical-blue flex items-center justify-center font-manrope font-bold text-[calc((16/375)*100vw)] lg:text-[calc((18/1920)*100vw)] shrink-0">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-line shrink-0">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-medical-blue/15 text-medical-blue flex items-center justify-center font-manrope font-bold text-base sm:text-lg shrink-0">
               {doctor.name ? doctor.name.replace("Dr. ", "").charAt(0) : "D"}
             </div>
             <div>
-              <h3 className="font-manrope text-[calc((17/375)*100vw)] lg:text-[calc((20/1920)*100vw)] font-bold text-content-primary">
+              <h3 className="font-manrope text-base sm:text-lg lg:text-[calc((19/1920)*100vw)] font-bold text-content-primary">
                 {doctor.name}
               </h3>
-              <p className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary">
+              <p className="text-xs sm:text-sm lg:text-[calc((13.5/1920)*100vw)] text-content-secondary mt-0.5">
                 {doctor.designation || "Medical Specialist"} &bull;{" "}
                 {doctor.specialization}
               </p>
@@ -72,52 +72,52 @@ export function DoctorDetailModal({
             onClick={onClose}
             className="p-1.5 rounded-md text-content-muted hover:text-content-primary hover:bg-surface-hover transition-colors cursor-pointer"
           >
-            <X className="w-[calc((20/375)*100vw)] h-[calc((20/375)*100vw)] lg:w-[calc((22/1920)*100vw)] lg:h-[calc((22/1920)*100vw)]" />
+            <X className="w-5 h-5 text-content-muted" />
           </button>
         </div>
 
         {/* Content Body */}
-        <div className="p-6 space-y-6 overflow-y-auto">
+        <div className="p-4 sm:p-6 space-y-5 sm:space-y-6 overflow-y-auto">
           {/* Quick Metrics */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div className="p-3 rounded-lg bg-surface-elevated border border-line">
-              <div className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-muted flex items-center gap-1.5 mb-1">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+            <div className="p-2.5 sm:p-3 rounded-lg bg-surface-elevated border border-line">
+              <div className="text-xs sm:text-xs text-content-muted flex items-center gap-1.5 mb-1">
                 <Clock className="w-3.5 h-3.5 text-medical-blue" />
                 Experience
               </div>
-              <div className="font-manrope text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold text-content-primary">
+              <div className="font-manrope text-xs sm:text-sm font-semibold text-content-primary">
                 {doctor.experienceYears
                   ? `${doctor.experienceYears} Years`
                   : "N/A"}
               </div>
             </div>
 
-            <div className="p-3 rounded-lg bg-surface-elevated border border-line">
-              <div className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-muted flex items-center gap-1.5 mb-1">
+            <div className="p-2.5 sm:p-3 rounded-lg bg-surface-elevated border border-line">
+              <div className="text-xs sm:text-xs text-content-muted flex items-center gap-1.5 mb-1">
                 <DollarSign className="w-3.5 h-3.5 text-medical-sage" />
                 Consultation Fee
               </div>
-              <div className="font-manrope text-sm font-semibold text-content-primary">
+              <div className="font-manrope text-xs sm:text-sm font-semibold text-content-primary">
                 {doctor.consultationFee !== undefined
                   ? `$${doctor.consultationFee}`
                   : "N/A"}
               </div>
             </div>
 
-            <div className="p-3 rounded-lg bg-surface-elevated border border-line">
-              <div className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-muted flex items-center gap-1.5 mb-1">
+            <div className="p-2.5 sm:p-3 rounded-lg bg-surface-elevated border border-line">
+              <div className="text-xs sm:text-xs text-content-muted flex items-center gap-1.5 mb-1">
                 <Building2 className="w-3.5 h-3.5 text-medical-blue" />
                 Department
               </div>
-              <div className="font-manrope text-sm font-semibold text-content-primary truncate">
+              <div className="font-manrope text-xs sm:text-sm font-semibold text-content-primary truncate">
                 {doctor.department || "General"}
               </div>
             </div>
 
-            <div className="p-3 rounded-lg bg-surface-elevated border border-line">
-              <div className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-muted mb-1">Status</div>
+            <div className="p-2.5 sm:p-3 rounded-lg bg-surface-elevated border border-line">
+              <div className="text-xs sm:text-xs text-content-muted mb-1">Status</div>
               <div>
-                <Badge variant={doctor.isActive ? "active" : "archived"}>
+                <Badge variant={doctor.isActive ? "active" : "archived"} className="text-xs px-2 py-0.5">
                   {doctor.isActive ? "Active" : "Archived"}
                 </Badge>
               </div>
@@ -213,7 +213,7 @@ export function DoctorDetailModal({
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between px-[calc((18/375)*100vw)] lg:px-[calc((27/1920)*100vw)] py-[calc((14/375)*100vw)] lg:py-[calc((18/1920)*100vw)] border-t border-line bg-surface-elevated/40 shrink-0">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-3.5 border-t border-line bg-surface-elevated/40 shrink-0">
           <div>
             {onToggleStatus && (
               <Button
@@ -221,16 +221,16 @@ export function DoctorDetailModal({
                 size="sm"
                 onClick={() => onToggleStatus(doctor._id, !doctor.isActive)}
                 disabled={isToggling}
-                className="h-[calc((34/375)*100vw)] lg:h-[calc((36/1920)*100vw)] px-[calc((14/375)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] cursor-pointer"
+                className="h-8 sm:h-9 px-3 sm:px-4 text-xs sm:text-sm rounded-lg cursor-pointer"
               >
                 {doctor.isActive ? (
                   <>
-                    <UserX className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)]" />
+                    <UserX className="w-4 h-4 mr-1.5" />
                     Archive Doctor
                   </>
                 ) : (
                   <>
-                    <UserCheck className="w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((16/1920)*100vw)] lg:h-[calc((16/1920)*100vw)]" />
+                    <UserCheck className="w-4 h-4 mr-1.5" />
                     Activate Doctor
                   </>
                 )}
@@ -241,7 +241,7 @@ export function DoctorDetailModal({
             variant="secondary"
             size="sm"
             onClick={onClose}
-            className="h-[calc((34/375)*100vw)] lg:h-[calc((36/1920)*100vw)] px-[calc((14/375)*100vw)] lg:px-[calc((16/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] cursor-pointer"
+            className="h-8 sm:h-9 px-3.5 sm:px-4 text-xs sm:text-sm rounded-lg cursor-pointer"
           >
             Close
           </Button>

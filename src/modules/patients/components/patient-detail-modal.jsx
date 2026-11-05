@@ -34,34 +34,34 @@ export function PatientDetailModal({ patient, isOpen, onClose, onEdit, onArchive
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-[calc((14/375)*100vw)] lg:p-[calc((27/1920)*100vw)] bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200 select-none"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-5 lg:p-[calc((27/1920)*100vw)] bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200 select-none"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-[calc((365/375)*100vw)] lg:max-w-[calc((700/1920)*100vw)] bg-white border border-slate-200/90 rounded-[calc((18/375)*100vw)] lg:rounded-[calc((22/1920)*100vw)] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in-0 zoom-in-95 slide-in-from-bottom-4 duration-300 ease-out"
+        className="relative w-full max-w-[calc((365/375)*100vw)] sm:max-w-lg md:max-w-xl lg:max-w-[calc((700/1920)*100vw)] bg-white border border-slate-200/90 rounded-[calc((18/375)*100vw)] sm:rounded-2xl lg:rounded-[calc((22/1920)*100vw)] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in-0 zoom-in-95 slide-in-from-bottom-4 duration-300 ease-out"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-[calc((18/375)*100vw)] lg:px-[calc((27/1920)*100vw)] py-[calc((16/375)*100vw)] lg:py-[calc((18/1920)*100vw)] border-b border-line bg-surface-elevated/40 shrink-0">
-          <div className="flex items-center gap-[calc((12/375)*100vw)] lg:gap-[calc((14/1920)*100vw)]">
-            <div className="flex items-center justify-center w-[calc((38/375)*100vw)] h-[calc((38/375)*100vw)] lg:w-[calc((42/1920)*100vw)] lg:h-[calc((42/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] bg-medical-blue/20 text-medical-blue border border-medical-blue/30 shrink-0 font-manrope font-bold text-sm">
-              <User className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)]" />
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4 border-b border-line bg-surface-elevated/40 shrink-0">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-medical-blue/20 text-medical-blue border border-medical-blue/30 shrink-0 font-manrope font-bold text-sm">
+              <User className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-manrope text-[calc((17/375)*100vw)] lg:text-[calc((20/1920)*100vw)] font-bold text-content-primary">
+                <h3 className="font-manrope text-sm sm:text-base md:text-lg font-bold text-content-primary">
                   {patient.name}
                 </h3>
-                <Badge variant={getStatusBadgeVariant(patient.status)} className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)]">
+                <Badge variant={getStatusBadgeVariant(patient.status)} className="text-xs px-2 py-0.5">
                   {patient.status}
                 </Badge>
                 {patient.isArchived && (
-                  <Badge variant="warning" className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)]">
+                  <Badge variant="warning" className="text-xs px-2 py-0.5">
                     Archived
                   </Badge>
                 )}
               </div>
-              <p className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-content-secondary mt-0.5">
+              <p className="text-xs sm:text-xs md:text-sm text-content-secondary mt-0.5">
                 Patient ID: <span className="font-mono text-content-primary">{patient._id}</span>
               </p>
             </div>

@@ -34,7 +34,7 @@ export function DashboardLayout({ children, title }) {
   }
 
   return (
-    <div className="flex min-h-screen w-full max-w-full overflow-x-hidden bg-canvas text-content-primary no-scrollbar">
+    <div className="flex min-h-screen w-full max-w-full overflow-x-clip bg-canvas text-content-primary no-scrollbar">
       {/* Desktop Sidebar with Compact Sleek Width */}
       <div className="hidden lg:block lg:w-[calc((230/1920)*100vw)] lg:min-w-[200px] lg:max-w-[240px] lg:shrink-0">
         <div className="fixed inset-y-0 left-0 w-[calc((230/1920)*100vw)] min-w-[200px] max-w-[240px] z-30">
@@ -58,13 +58,13 @@ export function DashboardLayout({ children, title }) {
         </div>
       )}
 
-      {/* Main Content Area - Strictly constrained to prevent any horizontal scrolling */}
-      <div className="flex flex-col flex-1 min-w-0 overflow-x-hidden no-scrollbar">
+      {/* Main Content Area - Strictly constrained to prevent any horizontal scrolling while preserving sticky navbar */}
+      <div className="flex flex-col flex-1 min-w-0 overflow-x-clip no-scrollbar">
         <Navbar
           onMenuClick={() => setSidebarOpen(true)}
           title={title}
         />
-        <main className="flex-1 w-full p-[calc((16/375)*100vw)] lg:p-[calc((35/1920)*100vw)] no-scrollbar overflow-x-hidden">
+        <main className="flex-1 w-full p-[calc((16/375)*100vw)] lg:p-[calc((35/1920)*100vw)] no-scrollbar overflow-x-clip">
           <div className="max-w-[1720px] w-full mx-auto space-y-[calc((18/375)*100vw)] lg:space-y-[calc((26/1920)*100vw)] transition-all duration-300 animate-in fade-in-50">
             {children}
           </div>

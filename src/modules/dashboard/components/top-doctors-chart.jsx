@@ -53,27 +53,27 @@ export function TopDoctorsChart({ data = [], totalPatients = 0, isLoading = fals
       className="h-full flex flex-col rounded-[calc((18/375)*100vw)] lg:rounded-[calc((22/1920)*100vw)] bg-white border border-slate-200/80 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.06),0_8px_10px_-6px_rgba(0,0,0,0.04)] hover:shadow-[0_14px_30px_rgba(0,0,0,0.08)] transition-all duration-300 overflow-hidden"
     >
       {/* Header */}
-      <div className="p-[calc((16/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pb-[calc((12/375)*100vw)] lg:pb-[calc((14/1920)*100vw)] border-b border-slate-100 flex items-center justify-between">
-        <div className="flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)]">
-          <div className="w-[calc((36/375)*100vw)] h-[calc((36/375)*100vw)] lg:w-[calc((40/1920)*100vw)] lg:h-[calc((40/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-amber-50 text-amber-600 border border-amber-200 flex items-center justify-center shrink-0 shadow-xs">
-            <Trophy className="w-[calc((18/375)*100vw)] h-[calc((18/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] text-amber-500" />
+      <div className="p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pb-[calc((10/375)*100vw)] lg:pb-[calc((14/1920)*100vw)] border-b border-slate-100 flex items-center justify-between">
+        <div className="flex items-center gap-[calc((8/375)*100vw)] lg:gap-[calc((12/1920)*100vw)]">
+          <div className="w-[calc((32/375)*100vw)] h-[calc((32/375)*100vw)] lg:w-[calc((40/1920)*100vw)] lg:h-[calc((40/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-amber-50 text-amber-600 border border-amber-200 flex items-center justify-center shrink-0 shadow-xs">
+            <Trophy className="w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((20/1920)*100vw)] lg:h-[calc((20/1920)*100vw)] text-amber-500" />
           </div>
           <div>
-            <h3 className="font-manrope text-[calc((18/375)*100vw)] lg:text-[calc((20/1920)*100vw)] font-extrabold text-slate-900 tracking-tight leading-tight">
+            <h3 className="font-manrope text-[calc((15/375)*100vw)] sm:text-base lg:text-[calc((20/1920)*100vw)] font-extrabold text-slate-900 tracking-tight leading-tight">
               Top 5 Attending Specialists
             </h3>
-            <p className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-slate-500 mt-0.5 leading-tight">
+            <p className="text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] text-slate-500 mt-0.5 leading-tight">
               Ranked by assigned inpatient caseload volume
             </p>
           </div>
         </div>
 
-        <span className="hidden sm:inline-flex text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold px-[calc((10/375)*100vw)] lg:px-[calc((12/1920)*100vw)] py-[calc((4/375)*100vw)] lg:py-[calc((5/1920)*100vw)] rounded-xl bg-blue-50 text-blue-700 border border-blue-200 shadow-xs">
+        <span className="hidden sm:inline-flex text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-semibold px-[calc((8/375)*100vw)] lg:px-[calc((12/1920)*100vw)] py-[calc((3/375)*100vw)] lg:py-[calc((5/1920)*100vw)] rounded-xl bg-blue-50 text-blue-700 border border-blue-200 shadow-xs">
           Clinical Leaders
         </span>
       </div>
 
-      <div className="p-[calc((16/375)*100vw)] lg:p-[calc((24/1920)*100vw)] flex-1 flex flex-col justify-between space-y-[calc((12/375)*100vw)] lg:space-y-[calc((16/1920)*100vw)]">
+      <div className="p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] flex-1 flex flex-col justify-between space-y-[calc((10/375)*100vw)] lg:space-y-[calc((16/1920)*100vw)]">
         {isLoading ? (
           <div className="space-y-4 py-4">
             {Array.from({ length: 5 }).map((_, i) => (
@@ -87,11 +87,11 @@ export function TopDoctorsChart({ data = [], totalPatients = 0, isLoading = fals
             ))}
           </div>
         ) : topDoctors.length === 0 ? (
-          <div className="py-12 text-center text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-slate-400">
+          <div className="py-12 text-center text-[calc((12/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] text-slate-400">
             No specialist workload records available.
           </div>
         ) : (
-          <div className="space-y-[calc((10/375)*100vw)] lg:space-y-[calc((12/1920)*100vw)] flex-1 flex flex-col justify-between">
+          <div className="space-y-[calc((8/375)*100vw)] lg:space-y-[calc((12/1920)*100vw)] flex-1 flex flex-col justify-between">
             {topDoctors.map((doc, idx) => {
               const rankInfo = rankBadges[idx] || rankBadges[4];
               // Staggered caseload benchmark around 70% to 80% (Fixes: "motamoti 70 theke80 hobe")
@@ -103,13 +103,13 @@ export function TopDoctorsChart({ data = [], totalPatients = 0, isLoading = fals
               return (
                 <div
                   key={doc.doctorId || doc.name}
-                  className="p-[calc((10/375)*100vw)] lg:p-[calc((12/1920)*100vw)] rounded-[calc((12/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] bg-slate-50/80 border border-slate-200/80 hover:bg-slate-50 hover:border-blue-300 transition-all duration-300 group"
+                  className="p-[calc((8/375)*100vw)] lg:p-[calc((12/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((14/1920)*100vw)] bg-slate-50/80 border border-slate-200/80 hover:bg-slate-50 hover:border-blue-300 transition-all duration-300 group"
                 >
-                  <div className="flex items-center justify-between mb-[calc((8/375)*100vw)] lg:mb-[calc((10/1920)*100vw)]">
-                    <div className="flex items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] min-w-0 pr-2">
+                  <div className="flex items-center justify-between mb-[calc((6/375)*100vw)] lg:mb-[calc((10/1920)*100vw)]">
+                    <div className="flex items-center gap-[calc((8/375)*100vw)] lg:gap-[calc((12/1920)*100vw)] min-w-0 pr-2">
                       {/* Doctor Avatar with Rank Border & Badge + Guaranteed onError fallback */}
                       <div className="relative shrink-0">
-                        <div className={`w-[calc((34/375)*100vw)] h-[calc((34/375)*100vw)] lg:w-[calc((38/1920)*100vw)] lg:h-[calc((38/1920)*100vw)] rounded-full overflow-hidden border-2 ${rankInfo.avatarBorder} shadow-xs relative bg-slate-100`}>
+                        <div className={`w-[calc((30/375)*100vw)] h-[calc((30/375)*100vw)] lg:w-[calc((38/1920)*100vw)] lg:h-[calc((38/1920)*100vw)] rounded-full overflow-hidden border-2 ${rankInfo.avatarBorder} shadow-xs relative bg-slate-100`}>
                           <img
                             src={doc.image && doc.image.startsWith("http") ? doc.image : fallbackAvatar}
                             alt={doc.name}
@@ -121,33 +121,33 @@ export function TopDoctorsChart({ data = [], totalPatients = 0, isLoading = fals
                             }}
                           />
                         </div>
-                        <span className={`absolute -bottom-1 -right-1 w-[calc((16/375)*100vw)] h-[calc((16/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] rounded-full text-[calc((11/375)*100vw)] lg:text-[calc((11/1920)*100vw)] font-extrabold flex items-center justify-center ${rankInfo.badgeBg} text-white shadow-xs font-manrope`}>
+                        <span className={`absolute -bottom-1 -right-1 w-[calc((15/375)*100vw)] h-[calc((15/375)*100vw)] lg:w-[calc((18/1920)*100vw)] lg:h-[calc((18/1920)*100vw)] rounded-full text-[calc((10/375)*100vw)] lg:text-[calc((11/1920)*100vw)] font-extrabold flex items-center justify-center ${rankInfo.badgeBg} text-white shadow-xs font-manrope`}>
                           {idx + 1}
                         </span>
                       </div>
 
                       <div className="min-w-0 truncate">
-                        <span className="font-bold text-slate-900 text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] truncate block group-hover:text-blue-600 transition-colors leading-tight">
+                        <span className="font-bold text-slate-900 text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((15/1920)*100vw)] truncate block group-hover:text-blue-600 transition-colors leading-tight">
                           {doc.name}
                         </span>
-                        <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-slate-500 truncate block leading-tight mt-0.5">
+                        <span className="text-[calc((10.5/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] text-slate-500 truncate block leading-tight mt-0.5">
                           {doc.specialization} &bull; {doc.hospital}
                         </span>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-[calc((6/375)*100vw)] lg:gap-[calc((8/1920)*100vw)] shrink-0">
-                      <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] px-[calc((8/375)*100vw)] py-[calc((2/375)*100vw)] lg:px-[calc((10/1920)*100vw)] lg:py-[calc((2.5/1920)*100vw)] rounded-full bg-slate-200/70 text-slate-600 font-medium hidden sm:inline leading-none">
+                      <span className="text-[calc((10.5/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] px-[calc((8/375)*100vw)] py-[calc((2/375)*100vw)] lg:px-[calc((10/1920)*100vw)] lg:py-[calc((2.5/1920)*100vw)] rounded-full bg-slate-200/70 text-slate-600 font-medium hidden sm:inline leading-none">
                         {pctOfTotal}% of total census
                       </span>
-                      <span className="font-extrabold text-blue-600 text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] font-manrope px-[calc((8/375)*100vw)] lg:px-[calc((10/1920)*100vw)] py-[calc((2/375)*100vw)] lg:py-[calc((3/1920)*100vw)] rounded-lg bg-blue-50 border border-blue-200 shadow-xs leading-none">
+                      <span className="font-extrabold text-blue-600 text-[calc((11.5/375)*100vw)] sm:text-xs lg:text-[calc((15/1920)*100vw)] font-manrope px-[calc((8/375)*100vw)] lg:px-[calc((10/1920)*100vw)] py-[calc((2/375)*100vw)] lg:py-[calc((3/1920)*100vw)] rounded-lg bg-blue-50 border border-blue-200 shadow-xs leading-none">
                         {doc.patientCount} Patients
                       </span>
                     </div>
                   </div>
 
                   {/* Horizontal animated growth progress track with smooth 2.2s glide */}
-                  <div className="w-full bg-slate-200/70 rounded-full h-[calc((8/375)*100vw)] lg:h-[calc((9/1920)*100vw)] overflow-hidden">
+                  <div className="w-full bg-slate-200/70 rounded-full h-[calc((7/375)*100vw)] lg:h-[calc((9/1920)*100vw)] overflow-hidden">
                     <div
                       className={`h-full rounded-full ${rankInfo.bar} shadow-xs`}
                       style={{
@@ -161,7 +161,7 @@ export function TopDoctorsChart({ data = [], totalPatients = 0, isLoading = fals
             })}
 
             {/* Footer */}
-            <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)]">
+            <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)]">
               <span className="text-slate-400">Total verified specialists: 60</span>
               <Link
                 href="/doctors"

@@ -131,22 +131,22 @@ export function ConditionDistributionCard({
       className="h-full flex flex-col rounded-[calc((18/375)*100vw)] lg:rounded-[calc((22/1920)*100vw)] bg-white border border-slate-200/80 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.06),0_8px_10px_-6px_rgba(0,0,0,0.04)] hover:shadow-[0_14px_30px_rgba(0,0,0,0.08)] transition-all duration-300 overflow-hidden"
     >
       {/* Header */}
-      <div className="p-[calc((16/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pb-3 border-b border-slate-100 flex items-center justify-between">
+      <div className="p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] pb-3 border-b border-slate-100 flex items-center justify-between">
         <div>
-          <h3 className="font-manrope text-[calc((18/375)*100vw)] lg:text-[calc((20/1920)*100vw)] font-extrabold text-slate-900 tracking-tight">
+          <h3 className="font-manrope text-[calc((15/375)*100vw)] sm:text-base lg:text-[calc((20/1920)*100vw)] font-extrabold text-slate-900 tracking-tight">
             Condition Distribution & Pathology
           </h3>
-          <p className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-slate-500 mt-0.5">
+          <p className="text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] text-slate-500 mt-0.5">
             Multi-color pathological breakdown across registered inpatient diagnoses
           </p>
         </div>
 
-        <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold px-[calc((10/375)*100vw)] py-[calc((4/375)*100vw)] lg:px-[calc((12/1920)*100vw)] lg:py-[calc((5/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-slate-100 text-slate-600 border border-slate-200 shadow-2xs">
+        <span className="text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-semibold px-[calc((8/375)*100vw)] py-[calc((3/375)*100vw)] lg:px-[calc((12/1920)*100vw)] lg:py-[calc((5/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] bg-slate-100 text-slate-600 border border-slate-200 shadow-2xs">
           This Week
         </span>
       </div>
 
-      <div className="p-[calc((16/375)*100vw)] lg:p-[calc((24/1920)*100vw)] flex-1 flex flex-col justify-between space-y-[calc((12/375)*100vw)] lg:space-y-[calc((16/1920)*100vw)]">
+      <div className="p-[calc((14/375)*100vw)] lg:p-[calc((24/1920)*100vw)] flex-1 flex flex-col justify-between space-y-[calc((10/375)*100vw)] lg:space-y-[calc((16/1920)*100vw)]">
         {isLoading ? (
           <div className="space-y-4 py-6">
             <Skeleton className="h-32 w-32 rounded-full mx-auto" />
@@ -156,8 +156,8 @@ export function ConditionDistributionCard({
           <>
             {/* Signature Multi-Color Semi-Circle Half-Donut Gauge with fluid calc */}
             <div className="flex flex-col items-center justify-center pt-1">
-              <div className="relative w-[calc((240/375)*100vw)] h-[calc((135/375)*100vw)] lg:w-[calc((260/1920)*100vw)] lg:h-[calc((145/1920)*100vw)] flex items-center justify-center">
-                <svg viewBox="0 0 180 100" className="w-[calc((240/375)*100vw)] h-[calc((135/375)*100vw)] lg:w-[calc((260/1920)*100vw)] lg:h-[calc((145/1920)*100vw)] overflow-visible">
+              <div className="relative w-[calc((220/375)*100vw)] h-[calc((125/375)*100vw)] lg:w-[calc((260/1920)*100vw)] lg:h-[calc((145/1920)*100vw)] flex items-center justify-center">
+                <svg viewBox="0 0 180 100" className="w-[calc((220/375)*100vw)] h-[calc((125/375)*100vw)] lg:w-[calc((260/1920)*100vw)] lg:h-[calc((145/1920)*100vw)] overflow-visible">
                   {/* Background Track Arc */}
                   <path
                     d="M 20 90 A 70 70 0 0 1 160 90"
@@ -190,17 +190,17 @@ export function ConditionDistributionCard({
 
                 {/* Center Value Text with Count Up Animation */}
                 <div className="absolute bottom-2 flex flex-col items-center text-center">
-                  <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium text-slate-400 uppercase tracking-wider">
+                  <span className="text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-medium text-slate-400 uppercase tracking-wider">
                     Total Patients
                   </span>
-                  <span className="font-manrope text-[calc((28/375)*100vw)] lg:text-[calc((32/1920)*100vw)] font-extrabold text-slate-900 leading-tight">
+                  <span className="font-manrope text-[calc((22/375)*100vw)] sm:text-2xl lg:text-[calc((32/1920)*100vw)] font-extrabold text-slate-900 leading-tight">
                     <AnimatedCounter value={totalPatients} trigger={isInView} />
                   </span>
                 </div>
               </div>
 
               {/* Multi-Color Legend Pills with fluid calc */}
-              <div className="flex flex-wrap items-center justify-center gap-x-[calc((12/375)*100vw)] gap-y-[calc((6/375)*100vw)] lg:gap-x-[calc((14/1920)*100vw)] lg:gap-y-[calc((8/1920)*100vw)] mt-3 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-semibold text-slate-600">
+              <div className="flex flex-wrap items-center justify-center gap-x-[calc((10/375)*100vw)] gap-y-[calc((4/375)*100vw)] lg:gap-x-[calc((14/1920)*100vw)] lg:gap-y-[calc((8/1920)*100vw)] mt-3 text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-semibold text-slate-600">
                 {segments.map((seg, idx) => (
                   <div key={idx} className="flex items-center gap-1.5">
                     <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: seg.color }} />
@@ -212,16 +212,16 @@ export function ConditionDistributionCard({
             </div>
 
             {/* Condition List Progress with Multi-Color Bars */}
-            <div className="space-y-[calc((10/375)*100vw)] lg:space-y-[calc((12/1920)*100vw)] pt-[calc((10/375)*100vw)] lg:pt-[calc((12/1920)*100vw)] border-t border-slate-100">
+            <div className="space-y-[calc((8/375)*100vw)] lg:space-y-[calc((12/1920)*100vw)] pt-[calc((8/375)*100vw)] lg:pt-[calc((12/1920)*100vw)] border-t border-slate-100">
               {segments.slice(0, 4).map((item, idx) => (
                 <div key={idx} className="space-y-1">
-                  <div className="flex justify-between items-center text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)]">
+                  <div className="flex justify-between items-center text-[calc((11.5/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)]">
                     <span className="font-semibold text-slate-800">{item.label}</span>
                     <span className="text-slate-500 font-medium">
                       {item.count} patients ({item.pct}%)
                     </span>
                   </div>
-                  <div className="w-full bg-slate-100 rounded-full h-[calc((7/375)*100vw)] lg:h-[calc((8/1920)*100vw)] overflow-hidden">
+                  <div className="w-full bg-slate-100 rounded-full h-[calc((6/375)*100vw)] lg:h-[calc((8/1920)*100vw)] overflow-hidden">
                     <div
                       className="h-full rounded-full transition-all duration-1500 ease-out"
                       style={{
@@ -238,7 +238,7 @@ export function ConditionDistributionCard({
             {/* Triage Urgency Status Pills */}
             {statuses.length > 0 && (
               <div className="pt-2 border-t border-slate-100">
-                <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider block mb-2">
+                <span className="text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-bold text-slate-500 uppercase tracking-wider block mb-2">
                   Triage Caseload
                 </span>
                 <div className="flex flex-wrap gap-[calc((6/375)*100vw)] lg:gap-[calc((8/1920)*100vw)]">
@@ -250,7 +250,7 @@ export function ConditionDistributionCard({
                     return (
                       <div
                         key={s.status}
-                        className={`px-[calc((10/375)*100vw)] py-[calc((4/375)*100vw)] lg:px-[calc((12/1920)*100vw)] lg:py-[calc((5/1920)*100vw)] rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium border flex items-center gap-2 ${conf.box}`}
+                        className={`px-[calc((8/375)*100vw)] py-[calc((3/375)*100vw)] lg:px-[calc((12/1920)*100vw)] lg:py-[calc((5/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((14/1920)*100vw)] font-medium border flex items-center gap-1.5 ${conf.box}`}
                       >
                         <span className={`w-2 h-2 rounded-full shrink-0 ${conf.dot}`} />
                         <span>{s.status}:</span>

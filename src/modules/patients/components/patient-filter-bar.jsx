@@ -104,29 +104,33 @@ export function PatientFilterBar({
         </div>
       </div>
 
-      {/* Registry Archive / Active Toggle View */}
+      {/* Registry Archive / Active Toggle View - Matches Doctor Page Tab Styling with Full-width mobile layout */}
       {onArchivedChange && (
-        <div className="flex flex-wrap items-center gap-[calc((10/375)*100vw)] lg:gap-[calc((14/1920)*100vw)] pt-[calc((10/375)*100vw)] lg:pt-[calc((12/1920)*100vw)] border-t border-line/40 text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)]">
-          <span className="font-semibold text-content-secondary shrink-0">Registry View:</span>
-          <div className="inline-flex rounded-[calc((10/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] border border-line bg-surface p-[calc((5/375)*100vw)] lg:p-[calc((6/1920)*100vw)]">
-            {[
-              { value: "active", label: "Active Inpatients" },
-              { value: "archived", label: "Archived Records" },
-              { value: "all", label: "All Patient History" },
-            ].map((tab) => (
-              <button
-                key={tab.value}
-                type="button"
-                onClick={() => onArchivedChange(tab.value)}
-                className={`px-[calc((12/375)*100vw)] lg:px-[calc((16/1920)*100vw)] py-[calc((7/375)*100vw)] lg:py-[calc((8/1920)*100vw)] rounded-[calc((8/375)*100vw)] lg:rounded-[calc((8/1920)*100vw)] text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] font-medium transition-colors cursor-pointer ${
-                  archivedFilter === tab.value
-                    ? "bg-medical-blue text-canvas font-semibold shadow-xs"
-                    : "text-content-secondary hover:text-content-primary hover:bg-surface-hover"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-[calc((6/375)*100vw)] sm:gap-2.5 pt-[calc((8/375)*100vw)] lg:pt-[calc((10/1920)*100vw)] border-t border-line/40">
+          <span className="text-[calc((11/375)*100vw)] sm:text-xs lg:text-[calc((12.5/1920)*100vw)] font-semibold text-content-secondary shrink-0">
+            Registry View:
+          </span>
+          <div className="w-full sm:w-auto py-0.5">
+            <div className="flex w-full sm:w-auto sm:inline-flex rounded-[calc((8/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] border border-line bg-surface p-[calc((2.5/375)*100vw)] sm:p-[calc((3/375)*100vw)] lg:p-[calc((3.5/1920)*100vw)] shadow-2xs">
+              {[
+                { value: "active", label: "Active Inpatients" },
+                { value: "archived", label: "Archived Records" },
+                { value: "all", label: "All Patient History" },
+              ].map((tab) => (
+                <button
+                  key={tab.value}
+                  type="button"
+                  onClick={() => onArchivedChange(tab.value)}
+                  className={`flex-1 sm:flex-initial text-center justify-center px-[calc((4/375)*100vw)] py-[calc((5/375)*100vw)] sm:px-3 sm:py-1 lg:px-[calc((12/1920)*100vw)] lg:py-[calc((4.5/1920)*100vw)] rounded-[calc((6/375)*100vw)] lg:rounded-[calc((7/1920)*100vw)] text-[calc((9.8/375)*100vw)] sm:text-xs lg:text-[calc((12/1920)*100vw)] font-semibold transition-colors cursor-pointer whitespace-nowrap leading-tight ${
+                    archivedFilter === tab.value
+                      ? "bg-blue-600 text-white shadow-xs"
+                      : "text-content-secondary hover:text-content-primary hover:bg-surface-hover"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       )}

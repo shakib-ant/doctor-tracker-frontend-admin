@@ -14,9 +14,28 @@ export function CustomSelect({
   menuClassName,
   disabled = false,
   size = "default",
+  direction = "auto", // "auto" | "up" | "down"
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [openUpward, setOpenUpward] = useState(false);
   const containerRef = useRef(null);
+
+  const toggleOpen = () => {
+    if (disabled) return;
+    if (!isOpen && containerRef.current) {
+      if (direction === "up") {
+        setOpenUpward(true);
+      } else if (direction === "down") {
+        setOpenUpward(false);
+      } else {
+        const rect = containerRef.current.getBoundingClientRect();
+        const spaceBelow = window.innerHeight - rect.bottom;
+        // If less than 220px below or near the bottom, open upwards so it never gets cut off!
+        setOpenUpward(spaceBelow < 220);
+      }
+    }
+    setIsOpen(!isOpen);
+  };
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -69,7 +88,7 @@ export function CustomSelect({
       <button
         type="button"
         disabled={disabled}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={toggleOpen}
         className={cn(
           "w-full flex items-center justify-between rounded-[calc((10/375)*100vw)] lg:rounded-[calc((10/1920)*100vw)] border border-line bg-surface text-content-primary shadow-xs transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-medical-blue hover:border-[#384A5C] cursor-pointer",
           heightClass,
@@ -92,7 +111,8 @@ export function CustomSelect({
       {isOpen && (
         <div
           className={cn(
-            "absolute z-50 mt-1.5 max-h-[calc((259/375)*100vw)] lg:max-h-[calc((302/1920)*100vw)] w-full overflow-y-auto no-scrollbar rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] border border-line bg-surface/98 p-[calc((6/375)*100vw)] lg:p-[calc((8/1920)*100vw)] shadow-2xl backdrop-blur-md animate-in fade-in-50 zoom-in-95 duration-100 flex flex-col gap-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
+            "absolute z-[100] max-h-[calc((240/375)*100vw)] lg:max-h-[calc((280/1920)*100vw)] w-full overflow-y-auto no-scrollbar rounded-[calc((10/375)*100vw)] lg:rounded-[calc((12/1920)*100vw)] border border-line bg-surface/98 p-[calc((5/375)*100vw)] lg:p-[calc((6/1920)*100vw)] shadow-2xl backdrop-blur-md animate-in fade-in-50 zoom-in-95 duration-100 flex flex-col gap-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
+            openUpward ? "bottom-full mb-1.5" : "top-full mt-1.5",
             menuClassName
           )}
         >

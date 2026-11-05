@@ -58,9 +58,9 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    font-size: 18px;
+    font-size: 16px;
     max-width: 100vw;
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
   }
   * {
     @apply border-border;
@@ -73,7 +73,7 @@
     font-size: 1.0625rem;
     line-height: 1.5;
     max-width: 100vw;
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
   }
   h1 {
     font-size: 1.875rem;
@@ -100,10 +100,84 @@
   }
 }
 
-/* Strict 14px floor */
-.text-xs {
-  font-size: 0.875rem !important;
-  line-height: 1.25rem !important;
+/* Tablet & Mobile responsive typography safeguards */
+@media (max-width: 639px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* ========================================================
+   TABLET / MD (640px to 1023px) TYPOGRAPHY & LAYOUT REFINEMENT
+   Fixes: "md mane tablet a font onnek boro choto koro"
+   Prevents mobile 375vw fluid calc classes from blowing up 2x on tablet screens
+   ======================================================== */
+@media (min-width: 640px) and (max-width: 1023px) {
+  html {
+    font-size: 15px !important;
+  }
+
+  body {
+    font-size: 0.95rem !important;
+  }
+
+  /* Root Text Size Ceiling for Tablet */
+  .text-xs {
+    font-size: 0.75rem !important;
+    line-height: 1rem !important;
+  }
+
+  /* Tablet Clamps for All text-[calc((X/375)*100vw)] Classes */
+  [class*="text-[calc((10.5/375)"], .text-\[calc\(\(10\.5\/375\)\*100vw\)\] { font-size: 11px !important; line-height: 1.35 !important; }
+  [class*="text-[calc((11/375)"], .text-\[calc\(\(11\/375\)\*100vw\)\] { font-size: 11px !important; line-height: 1.35 !important; }
+  [class*="text-[calc((11.5/375)"], .text-\[calc\(\(11\.5\/375\)\*100vw\)\] { font-size: 11.5px !important; line-height: 1.35 !important; }
+  [class*="text-[calc((12/375)"], .text-\[calc\(\(12\/375\)\*100vw\)\] { font-size: 12px !important; line-height: 1.4 !important; }
+  [class*="text-[calc((12.5/375)"], .text-\[calc\(\(12\.5\/375\)\*100vw\)\] { font-size: 12.5px !important; line-height: 1.4 !important; }
+  [class*="text-[calc((13/375)"], .text-\[calc\(\(13\/375\)\*100vw\)\] { font-size: 13px !important; line-height: 1.4 !important; }
+  [class*="text-[calc((14/375)"], .text-\[calc\(\(14\/375\)\*100vw\)\] { font-size: 13.5px !important; line-height: 1.4 !important; }
+  [class*="text-[calc((15/375)"], .text-\[calc\(\(15\/375\)\*100vw\)\] { font-size: 14px !important; line-height: 1.4 !important; }
+  [class*="text-[calc((16/375)"], .text-\[calc\(\(16\/375\)\*100vw\)\] { font-size: 14.5px !important; line-height: 1.4 !important; }
+  [class*="text-[calc((17/375)"], .text-\[calc\(\(17\/375\)\*100vw\)\] { font-size: 15.5px !important; line-height: 1.35 !important; }
+  [class*="text-[calc((18/375)"], .text-\[calc\(\(18\/375\)\*100vw\)\] { font-size: 16.5px !important; line-height: 1.35 !important; }
+  [class*="text-[calc((22/375)"], .text-\[calc\(\(22\/375\)\*100vw\)\] { font-size: 19px !important; line-height: 1.3 !important; }
+  [class*="text-[calc((28/375)"], .text-\[calc\(\(28\/375\)\*100vw\)\] { font-size: 22px !important; line-height: 1.25 !important; }
+
+  /* Tablet Clamps for Icon Dimensions */
+  [class*="w-[calc((14/375)"], .w-\[calc\(\(14\/375\)\*100vw\)\] { width: 14px !important; }
+  [class*="h-[calc((14/375)"], .h-\[calc\(\(14\/375\)\*100vw\)\] { height: 14px !important; }
+  [class*="w-[calc((15/375)"], .w-\[calc\(\(15\/375\)\*100vw\)\] { width: 15px !important; }
+  [class*="h-[calc((15/375)"], .h-\[calc\(\(15\/375\)\*100vw\)\] { height: 15px !important; }
+  [class*="w-[calc((16/375)"], .w-\[calc\(\(16\/375\)\*100vw\)\] { width: 16px !important; }
+  [class*="h-[calc((16/375)"], .h-\[calc\(\(16\/375\)\*100vw\)\] { height: 16px !important; }
+  [class*="w-[calc((17/375)"], .w-\[calc\(\(17\/375\)\*100vw\)\] { width: 17px !important; }
+  [class*="h-[calc((17/375)"], .h-\[calc\(\(17\/375\)\*100vw\)\] { height: 17px !important; }
+  [class*="w-[calc((18/375)"], .w-\[calc\(\(18\/375\)\*100vw\)\] { width: 18px !important; }
+  [class*="h-[calc((18/375)"], .h-\[calc\(\(18\/375\)\*100vw\)\] { height: 18px !important; }
+  [class*="w-[calc((20/375)"], .w-\[calc\(\(20\/375\)\*100vw\)\] { width: 19px !important; }
+  [class*="h-[calc((20/375)"], .h-\[calc\(\(20\/375\)\*100vw\)\] { height: 19px !important; }
+  [class*="w-[calc((22/375)"], .w-\[calc\(\(22\/375\)\*100vw\)\] { width: 20px !important; }
+  [class*="h-[calc((22/375)"], .h-\[calc\(\(22\/375\)\*100vw\)\] { height: 20px !important; }
+  [class*="w-[calc((24/375)"], .w-\[calc\(\(24\/375\)\*100vw\)\] { width: 22px !important; }
+  [class*="h-[calc((24/375)"], .h-\[calc\(\(24\/375\)\*100vw\)\] { height: 22px !important; }
+
+  /* Tablet Clamps for Avatars & Small Badges */
+  [class*="w-[calc((32/375)"], .w-\[calc\(\(32\/375\)\*100vw\)\] { width: 34px !important; }
+  [class*="h-[calc((32/375)"], .h-\[calc\(\(32\/375\)\*100vw\)\] { height: 34px !important; }
+  [class*="w-[calc((34/375)"], .w-\[calc\(\(34\/375\)\*100vw\)\] { width: 36px !important; }
+  [class*="h-[calc((34/375)"], .h-\[calc\(\(34\/375\)\*100vw\)\] { height: 36px !important; }
+  [class*="w-[calc((38/375)"], .w-\[calc\(\(38\/375\)\*100vw\)\] { width: 38px !important; }
+  [class*="h-[calc((38/375)"], .h-\[calc\(\(38\/375\)\*100vw\)\] { height: 38px !important; }
+
+  /* Tablet Clamps for Button / Input Heights */
+  [class*="h-[calc((28/375)"], .h-\[calc\(\(28\/375\)\*100vw\)\] { height: 30px !important; }
+  [class*="h-[calc((30/375)"], .h-\[calc\(\(30\/375\)\*100vw\)\] { height: 32px !important; }
+  [class*="h-[calc((34/375)"], .h-\[calc\(\(34\/375\)\*100vw\)\] { height: 36px !important; }
+  [class*="h-[calc((36/375)"], .h-\[calc\(\(36\/375\)\*100vw\)\] { height: 38px !important; }
+  [class*="h-[calc((38/375)"], .h-\[calc\(\(38\/375\)\*100vw\)\] { height: 40px !important; }
+  [class*="h-[calc((42/375)"], .h-\[calc\(\(42\/375\)\*100vw\)\] { height: 42px !important; }
+
+  /* Tablet Clamps for Modal Max Widths */
+  [class*="max-w-[calc((365/375)"], .max-w-\[calc\(\(365\/375\)\*100vw\)\] { max-width: 580px !important; }
 }
 
 /* Shimmer Skeleton Animation with 2-Tone Light Blend (Clean Slate + Soft Sky Blue) */

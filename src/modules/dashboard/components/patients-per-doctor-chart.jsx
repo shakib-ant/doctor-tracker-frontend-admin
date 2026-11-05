@@ -137,36 +137,36 @@ export function PatientsPerDoctorChart({ data = [], isLoading = false }) {
               })}
             </div>
 
-            {/* Active Specialist Clinical Detail Card */}
+            {/* Active Specialist Clinical Detail Card with Unclipped Top Roster Badge */}
             {activeDoctor && (
-              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/90 flex items-center justify-between transition-all duration-300 shadow-xs hover:border-blue-300">
-                <div className="flex items-center gap-3 min-w-0 pr-2">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center shrink-0 shadow-sm font-bold text-sm">
+              <div className="p-3 sm:p-3.5 rounded-xl bg-slate-50 border border-slate-200/90 flex items-center justify-between transition-all duration-300 shadow-xs hover:border-blue-300 gap-2">
+                <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 pr-1 flex-1">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center shrink-0 shadow-sm font-bold text-sm">
                     {activeIndex === 0 ? <Award className="w-5 h-5 text-amber-300" /> : <Stethoscope className="w-5 h-5" />}
                   </div>
-                  <div className="min-w-0 truncate">
-                    <div className="flex items-center gap-2">
-                      <span className="font-bold text-slate-900 text-[calc((14/375)*100vw)] lg:text-[calc((15/1920)*100vw)] truncate block">
-                        {activeDoctor.name}
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+                      <span className="font-bold text-slate-900 text-[calc((12/375)*100vw)] sm:text-sm lg:text-[calc((15/1920)*100vw)] truncate min-w-0">
+                        {activeDoctor.name || "Specialist Physician"}
                       </span>
                       {activeIndex === 0 && (
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-bold border border-amber-200">
+                        <span className="text-[calc((9.5/375)*100vw)] sm:text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-bold border border-amber-200 shrink-0 whitespace-nowrap inline-flex items-center leading-none">
                           Top Roster
                         </span>
                       )}
                     </div>
-                    <span className="text-[calc((14/375)*100vw)] lg:text-[calc((14/1920)*100vw)] text-slate-500 truncate block mt-0.5">
-                      {activeDoctor.specialization} &bull; {activeDoctor.hospital}
+                    <span className="text-[calc((10.5/375)*100vw)] sm:text-xs text-slate-500 truncate block mt-0.5">
+                      {activeDoctor.specialization || "Clinical Practice"} {activeDoctor.hospital ? `• ${activeDoctor.hospital}` : ""}
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2 shrink-0">
                   <div className="text-right">
-                    <span className="font-extrabold text-blue-600 text-[calc((16/375)*100vw)] lg:text-[calc((18/1920)*100vw)] font-manrope block leading-tight">
+                    <span className="font-extrabold text-blue-600 text-[calc((15/375)*100vw)] sm:text-base lg:text-[calc((18/1920)*100vw)] font-manrope block leading-tight">
                       {activeCount}
                     </span>
-                    <span className="text-xs text-slate-400 font-medium block">
+                    <span className="text-[10px] sm:text-xs text-slate-400 font-medium block whitespace-nowrap">
                       patients active
                     </span>
                   </div>
